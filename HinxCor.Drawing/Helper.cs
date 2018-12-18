@@ -60,7 +60,6 @@ namespace HinxCor.Drawing
                 graphics.Flush();
                 font.Dispose();
                 graphics.Dispose();
-
             }
             return bmp;
         }
