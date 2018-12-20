@@ -27,7 +27,17 @@ namespace DemoApp
             //        g.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
 
             //    bitmap.Save(GetPath(), ImageFormat.Png);
-            //}
+            //}\
+            //ColorDialog color = new ColorDialog();
+            //ColorDialog
+            //ColorPicker color = new ColorPicker();
+            //color.ShowDialog();
+            var f = new ColorDialog();
+            f.ShowDialog();
+        }
+
+        public static void DemoMethodTestMousePos()
+        {
             int t = 5;
             while (t-- > 0)
             {
@@ -39,8 +49,6 @@ namespace DemoApp
             Console.ReadKey();
         }
 
-
-
         private static void DemoMethod546ad2()
         {
             ScreenCapture sc = new ScreenCapture();
@@ -49,6 +57,8 @@ namespace DemoApp
             sav.Filter = "png(图片)|*.png";
             if (sav.ShowDialog() == DialogResult.OK)
                 img.Save(sav.FileName);
+
+            
             // capture entire screen, and save it to a file
             // display image in a Picture control named imageDisplay
             ////this.imageDisplay.Image = img;
