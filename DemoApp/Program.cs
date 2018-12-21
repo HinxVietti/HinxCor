@@ -10,6 +10,7 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Security.Cryptography;
 
 namespace DemoApp
 {
@@ -30,10 +31,12 @@ namespace DemoApp
             //}\
             //ColorDialog color = new ColorDialog();
             //ColorDialog
-            //ColorPicker color = new ColorPicker();
-            //color.ShowDialog();
-            var f = new ColorDialog();
-            f.ShowDialog();
+            System.Windows.Forms.ColorDialog c = new System.Windows.Forms.ColorDialog();
+            c.ShowDialog();
+            //f.ShowDialog();
+
+            //RC2 rC2 = RC2.Create();
+
         }
 
         public static void DemoMethodTestMousePos()
@@ -58,7 +61,7 @@ namespace DemoApp
             if (sav.ShowDialog() == DialogResult.OK)
                 img.Save(sav.FileName);
 
-            
+
             // capture entire screen, and save it to a file
             // display image in a Picture control named imageDisplay
             ////this.imageDisplay.Image = img;
