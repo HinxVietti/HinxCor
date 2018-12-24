@@ -55,7 +55,7 @@ namespace DemoApp
         {
             comboBox1_SelectedIndexChanged();
             RC6 RC = new RC6(round);
-            this.label6.Text = RC.Decrypt(this.textBox2.Text, this.textBox3.Text);
+            this.label6.Text = RC.Decrypt(this.textBox2.Text, this.textBox3.Text+"123");
             comboBox1.Enabled = true; comboBox1.ForeColor = System.Drawing.SystemColors.WindowText;
             textBox2.Enabled = true; textBox2.ForeColor = System.Drawing.SystemColors.WindowText;
             textBox3.Enabled = true; textBox3.ForeColor = System.Drawing.SystemColors.WindowText;

@@ -184,6 +184,8 @@ namespace HinxCor.CryptoSer
         /// <returns></returns>
         public string Encrypt(string str, string prssword)
         {
+            
+
             //验证明文长度不能小开32,
             str = (str.Length % 32 != 0 ? str.PadRight(str.Length + (32 - (str.Length % 32)), '\0') : str);//不足补空字符串
             KEY = prssword;                                        //Key属性返回m_sEncryptionKey方法

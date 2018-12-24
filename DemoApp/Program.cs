@@ -19,24 +19,20 @@ namespace DemoApp
         [STAThread]
         static void Main(string[] args)
         {
-            //DemoMethod5d3f();
-            //DemoMethod546ad2();
-            //Rectangle bounds = Screen.GetBounds(Point.Empty);
-            //using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
-            //{
-            //    using (Graphics g = Graphics.FromImage(bitmap))
-            //        g.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
+            DemoColorPicker();
 
-            //    bitmap.Save(GetPath(), ImageFormat.Png);
-            //}\
-            //ColorDialog color = new ColorDialog();
-            //ColorDialog
-            System.Windows.Forms.ColorDialog c = new System.Windows.Forms.ColorDialog();
-            c.ShowDialog();
-            //f.ShowDialog();
+        }
 
-            //RC2 rC2 = RC2.Create();
 
+        public static void DemoColorPicker()
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            while (open.ShowDialog() != DialogResult.OK) ;
+            var fname = open.FileName;
+            HinxCor.Drawing.ColorPickerDisplayer pp = new HinxCor.Drawing.ColorPickerDisplayer();
+            pp.ShowPicker(fname);
+            Console.WriteLine(pp.color);
+            Console.ReadKey();
         }
 
         public static void DemoMethodTestMousePos()
