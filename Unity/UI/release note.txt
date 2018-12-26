@@ -1,0 +1,6 @@
+v 1.0.0 
+	first release
+v 1.1.0
+	add insert item function.
+	fixed bug binding to much.
+	fixed bug item was disabled.

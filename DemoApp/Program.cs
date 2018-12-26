@@ -19,10 +19,37 @@ namespace DemoApp
         [STAThread]
         static void Main(string[] args)
         {
-            DemoColorPicker();
-
+            //DemoColorPicker();
+            DemoFontTxt();
         }
 
+
+        public static void DemoFontTxt()
+        {
+            FontDialog f = new FontDialog();
+            f.ShowDialog();
+            var font = f.Font;
+            font.
+            Console.WriteLine("writeImage");
+            var str = Console.ReadLine();
+            var bmp = Helper.CreateBitmapImage(str,font);
+            var save = new SaveFileDialog();
+            save.Filter = ".png|*.png";
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                string ph = save.FileName;
+                bmp.Save(ph, ImageFormat.Png);
+                Console.WriteLine("OK");
+                ShowInExplorer(ph);
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("Abort.");
+                Console.ReadKey();
+            }
+
+        }
 
         public static void DemoColorPicker()
         {

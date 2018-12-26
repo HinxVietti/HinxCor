@@ -17,8 +17,10 @@ namespace HinxCor.Unity.UI.InfinityScrollList
     {
         public T data;
         public Vector2 position;
+        public bool HasDisplay;
+        public InfinityScrollList<T> Primer;
     }
-    
+
     public class ArrayItemData<T> /*: ListItemData*//*<ItemData>*/
     {
         public ItemData<T>[] Array;

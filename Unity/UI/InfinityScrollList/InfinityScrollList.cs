@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace HinxCor.Unity.UI.InfinityScrollList
@@ -8,7 +9,7 @@ namespace HinxCor.Unity.UI.InfinityScrollList
     public class InfinityScrollList<T> : UIComponent
     {
 #pragma warning disable
-        protected ArrayItemData<T> BindingData;
+        protected ArrayItemData<T> m_BindingData;
         protected DataBinder[] Binders;
         protected RectTransform rect;
         protected Vector2 rectSize
@@ -32,13 +33,21 @@ namespace HinxCor.Unity.UI.InfinityScrollList
             }
         }
         [SerializeField] private DataBinder prefab;
-        [SerializeField] private Vector2 ItemSize;
+        //[SerializeField] private Vector2 ItemSize;
+        [SerializeField] private Vector2 ItemSize { get { return (prefab.transform as RectTransform).sizeDelta; } }
         [SerializeField] private float Spacing;
         [SerializeField] private Vector2 sizeOffset;
         [SerializeField] private float MouseSensitive = 25;
         private int maxContain;
-        private float PyOffset;
-        private float maxLength { get { return (BindingData.Array.Length * (ItemSize.y + Spacing) - rectSize.y); } }
+        public float PyOffset { get; protected set; }
+        public ArrayItemData<T> BindingData { get { return m_BindingData; } protected set { m_BindingData = value; } }
+        private float maxLength
+        {
+            get
+            {
+                return Mathf.Clamp((BindingData.Array.Length * (ItemSize.y + Spacing) - rectSize.y), 1, 9999);
+            }
+        }
         //[SerializeField] private Vector4 Padding; //mid center
 #pragma warning restore
         [SerializeField] private MovementType m_MovementType;
@@ -55,10 +64,14 @@ namespace HinxCor.Unity.UI.InfinityScrollList
             maxContain = (int)(size.y / (ItemSize.y + Spacing)) + 2;
             Binders = new DataBinder[maxContain];
             Binders[0] = prefab;
+            prefab.gameObject.SetActive(false);
             for (int i = 1; i < maxContain; i++)
                 Binders[i] = Instantiate(prefab.gameObject, transform).GetComponent<DataBinder>();
             for (int i = 0; i < data.Array.Length; i++)
+            {
                 data.Array[i].position = -((i + 0.5f) * (new Vector2(0, ItemSize.y + Spacing)));
+                data.Array[i].Primer = this;
+            }
 
             for (int i = 1; i < maxContain; i++)
             {
@@ -68,6 +81,23 @@ namespace HinxCor.Unity.UI.InfinityScrollList
             }
         }
 
+
+        public void AppendItem(ItemData<T> item)
+        {
+            var copy = BindingData.Array;
+            int count = BindingData.Array.Length;
+            BindingData.Array = new ItemData<T>[count + 1];
+            for (int i = 0; i < count; i++)
+                BindingData.Array[i] = copy[i];
+            BindingData.Array[count] = item;
+            NewInstanceItem(item);
+        }
+
+        private void NewInstanceItem(ItemData<T> item)
+        {
+            item.position = -(BindingData.Array.Length - 1 + 0.5f) * (new Vector2(0, ItemSize.y + Spacing));
+            item.Primer = this;
+        }
 
         private void Update()
         {
@@ -98,27 +128,51 @@ namespace HinxCor.Unity.UI.InfinityScrollList
             {
                 for (int i = 0; i < Binders.Length; i++)
                 {
-                    var y = Binders[i].transform.localPosition.y;
-                    if (y > 0.5f * Spacing || y < rect.sizeDelta.y + 0.5f * Spacing)
-                        Binders[i].gameObject.SetActive(false);
+                    if (Binders[i].gameObject.activeInHierarchy)
+                    {
+                        var blan = Binders[i].IsInVisible(ItemSize.y);
+                        if (blan)
+                        {
+                            Binders[i].gameObject.SetActive(false);
+
+                            Binders[i].GetBinderData<ItemData<T>>().HasDisplay = false;
+                        }
+                    }
+                    //if (Binders[i].gameObject.activeInHierarchy
+                    //    && !Binders[i].IsInVisible())
+                    //    Binders[i].gameObject.SetActive(false);
+                    //var y = Binders[i].transform.GetRect().anchoredPosition.y;
+                    //if ((y > 0.5f * Spacing || y < -rect.sizeDelta.y - 0.5f * Spacing))//范围之外设为false 没毛病
+                    //{
+                    //    Binders[i].gameObject.SetActive(false);
+                    //}
                 }
                 does = false;
                 for (int i = 0; i < BindingData.Array.Length; i++)
                     if (inDisplay(BindingData.Array[i]))
                         doDisplay(BindingData.Array[i]);
+                    else BindingData.Array[i].HasDisplay = false;
 
             }
             else does = true;
+            //-- for test interrupt.
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    int a = 0;
+            //}
         }
 
         private void doDisplay(ItemData<T> itemData)
         {
             var binder = GetBinder();
             if (!binder) return;
+            if (itemData.HasDisplay) return;
             binder.gameObject.SetActive(true);
-            binder.BindData(itemData, PyOffset);
+            binder.BindData(itemData);
+            itemData.HasDisplay = true;
         }
 
+        //判定
         private bool inDisplay(ItemData<T> itemData)
         {
             var py = itemData.position.y + PyOffset;

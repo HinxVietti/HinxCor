@@ -9,9 +9,9 @@ namespace HinxCor.demo.ui
         public Text Name, Price, Discount;
 
         //you must overide this method.
-        public override void BindData<T>(ItemData<T> obj, float offset)
+        public override void BindData<T>(ItemData<T> obj)
         {
-            base.BindData(obj, offset);//and you must super this method.
+            base.BindData(obj);//and you must super this method.
             //your initial
             var fruit = obj as FruitData;
             Name.text = fruit.Name;
