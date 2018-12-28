@@ -1,196 +1,178 @@
-﻿using System.Drawing;
-using System.Drawing.Text;
-using System.Drawing.Drawing2D;
+﻿using SharpFont;
+using SharpFont.Gdi;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
-using System.Runtime;
-using SharpFont;
-using SharpFont.Gdi;
 
 namespace HinxCor.Drawing
 {
-    public static class Helper
+    internal class FontFormat
     {
-        public static Bitmap GetImage()
+        /// <summary>
+        /// Gets the name for the format.
+        /// </summary>
+        public string Name { get; private set; }
+
+        /// <summary>
+        /// Gets the typical file extension for this format (lowercase).
+        /// </summary>
+        public string FileExtension { get; private set; }
+
+        // ...
+
+        public FontFormat(string name, string ext)
         {
-            return default(Bitmap);
+            if (!ext.StartsWith(".")) ext = "." + ext;
+            this.Name = name; this.FileExtension = ext;
         }
 
-        public static Bitmap CreateBitmapImage()
+    }
+
+
+    internal class FontFormatCollection : Dictionary<string, FontFormat>
+    {
+
+        public void Add(string name, string ext)
         {
-            string infoString = "";  // enough space for one line of output
-            int ascent;             // font family ascent in design units
-            float ascentPixel;      // ascent converted to pixels
-            int descent;            // font family descent in design units
-            float descentPixel;     // descent converted to pixels
-            int lineSpacing;        // font family line spacing in design units
-            float lineSpacingPixel; // line spacing converted to pixels
-
-            FontFamily fontFamily = new FontFamily("Arial");
-            Font font = new Font(
-               fontFamily,
-               16, FontStyle.Regular,
-               GraphicsUnit.Pixel);
-            PointF pointF = new PointF(10, 10);
-            SolidBrush solidBrush = new SolidBrush(Color.Black);
-
-            // Display the font size in pixels.
-            infoString = "font.Size returns " + font.Size + ".";
-            // e.Graphics.DrawString(infoString, font, solidBrush, pointF);
-
-            // Move down one line.
-            pointF.Y += font.Height;
-
-            // Display the font family em height in design units.
-            infoString = "fontFamily.GetEmHeight() returns " +
-               fontFamily.GetEmHeight(FontStyle.Regular) + ".";
-            // e.Graphics.DrawString(infoString, font, solidBrush, pointF);
-
-            // Move down two lines.
-            pointF.Y += 2 * font.Height;
-
-            // Display the ascent in design units and pixels.
-            ascent = fontFamily.GetCellAscent(FontStyle.Regular);
-
-            // 14.484375 = 16.0 * 1854 / 2048
-            ascentPixel =
-               font.Size * ascent / fontFamily.GetEmHeight(FontStyle.Regular);
-            infoString = "The ascent is " + ascent + " design units, " + ascentPixel +
-               " pixels.";
-            //e.Graphics.DrawString(infoString, font, solidBrush, pointF);
-
-            // Move down one line.
-            pointF.Y += font.Height;
-
-            // Display the descent in design units and pixels.
-            descent = fontFamily.GetCellDescent(FontStyle.Regular);
-
-            // 3.390625 = 16.0 * 434 / 2048
-            descentPixel =
-               font.Size * descent / fontFamily.GetEmHeight(FontStyle.Regular);
-            infoString = "The descent is " + descent + " design units, " +
-               descentPixel + " pixels.";
-            //e.Graphics.DrawString(infoString, font, solidBrush, pointF);
-
-            // Move down one line.
-            pointF.Y += font.Height;
-
-            // Display the line spacing in design units and pixels.
-            lineSpacing = fontFamily.GetLineSpacing(FontStyle.Regular);
-
-            // 18.398438 = 16.0 * 2355 / 2048
-            lineSpacingPixel =
-            font.Size * lineSpacing / fontFamily.GetEmHeight(FontStyle.Regular);
-            infoString = "The line spacing is " + lineSpacing + " design units, " +
-               lineSpacingPixel + " pixels.";
-
-            Bitmap bmp = new Bitmap(1, 1);
-            var bmpGraphic = Graphics.FromImage(bmp);
-            int intWidth = (int)bmpGraphic.MeasureString(infoString, font).Width;
-            int intHeight = (int)bmpGraphic.MeasureString(infoString, font).Height;
-
-            bmp = new Bitmap(bmp, new Size(intWidth, intHeight));
-            bmpGraphic.DrawString(infoString, font, solidBrush, pointF);
-            // Create the bmpImage again with the correct size for the text and font.
-            return bmp;
+            if (!ext.StartsWith(".")) ext = "." + ext;
+            this.Add(ext, new FontFormat(name, ext));
         }
 
-        public static Bitmap CreateBitmapImage(string sImageText, Font objFont)
+        public bool ContainsExt(string ext)
         {
-            Bitmap objBmpImage = new Bitmap(1, 1);
-
-            int intWidth = 0;
-            int intHeight = 0;
-
-            // Create a graphics object to measure the text's width and height.
-            Graphics objGraphics = Graphics.FromImage(objBmpImage);
-            //
-            // This is where the bitmap size is determined.
-            intWidth = (int)objGraphics.MeasureString(sImageText, objFont).Width;
-            intHeight = (int)objGraphics.MeasureString(sImageText, objFont).Height;
-            intWidth *= 20;
-            intHeight *= 20;
-            // Create the bmpImage again with the correct size for the text and font.
-            objBmpImage = new Bitmap(objBmpImage, new Size(intWidth, intHeight));
-
-            // Add the colors to the new bitmap.
-            objGraphics = Graphics.FromImage(objBmpImage);
-
-            // Set Background color
-            objGraphics.Clear(Color.White);
-            objGraphics.SmoothingMode = SmoothingMode.AntiAlias;
-            objGraphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-            objGraphics.DrawString(sImageText, objFont, new SolidBrush(Color.FromArgb(102, 102, 102)), 20, 20);
-            objGraphics.Flush();
-            return (objBmpImage);
+            return this.ContainsKey(ext);
         }
 
-        public static Bitmap CreateBitmapImage(string sImageText)
+    }
+
+    internal class FontService : IDisposable
+    {
+        private Library lib;
+
+        #region Properties
+
+        internal Face FontFace { get { return _fontFace; } set { SetFont(value); } }
+        private Face _fontFace;
+
+        internal float Size { get { return _size; } set { SetSize(value); } }
+        private float _size;
+
+        internal FontFormatCollection SupportedFormats { get; private set; }
+
+        #endregion // Properties
+
+        #region Constructor
+
+        /// <summary>
+        /// If multithreading, each thread should have its own FontService.
+        /// </summary>
+        internal FontService()
         {
-            Font objFont = new Font("Arial", 20, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            return CreateBitmapImage(sImageText, objFont);
-            //Bitmap objBmpImage = new Bitmap(1, 1);
-
-            //int intWidth = 0;
-            //int intHeight = 0;
-
-            //// Create the Font object for the image text drawing.
-
-            //// Create a graphics object to measure the text's width and height.
-            //Graphics objGraphics = Graphics.FromImage(objBmpImage);
-
-            //// This is where the bitmap size is determined.
-            //intWidth = (int)objGraphics.MeasureString(sImageText, objFont).Width;
-            //intHeight = (int)objGraphics.MeasureString(sImageText, objFont).Height;
-
-            //// Create the bmpImage again with the correct size for the text and font.
-            //objBmpImage = new Bitmap(objBmpImage, new Size(intWidth, intHeight));
-
-            //// Add the colors to the new bitmap.
-            //objGraphics = Graphics.FromImage(objBmpImage);
-
-            //// Set Background color
-            //objGraphics.Clear(Color.White);
-            //objGraphics.SmoothingMode = SmoothingMode.AntiAlias;
-            //objGraphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-            //objGraphics.DrawString(sImageText, objFont, new SolidBrush(Color.FromArgb(102, 102, 102)), 0, 0);
-            //objGraphics.Flush();
-            //return (objBmpImage);
+            lib = new Library();
+            _size = 8.25f;
+            SupportedFormats = new FontFormatCollection();
+            AddFormat("TrueType", "ttf");
+            AddFormat("OpenType", "otf");
+            // Not so sure about these...
+            //AddFormat("TrueType Collection", "ttc");
+            //AddFormat("Type 1", "pfa"); // pfb?
+            //AddFormat("PostScript", "pfm"); // ext?
+            //AddFormat("FNT", "fnt");
+            //AddFormat("X11 PCF", "pcf");
+            //AddFormat("BDF", "bdf");
+            //AddFormat("Type 42", "");
         }
 
-        public static void DrawString(string str, int x, int y)
+        private void AddFormat(string name, string ext)
         {
-
+            SupportedFormats.Add(name, ext);
         }
 
-        public static void DrawChar(ref Bitmap bmp, char c, Font f, Brush b)
+        #endregion
+
+        #region Setters
+
+        internal void SetFont(Face face)
         {
-            string s = c.ToString();
-            Graphics g = Graphics.FromImage(bmp);
-            var sf = g.MeasureString(s, f);
-            g.DrawString(s, f, b, 5, 5);
-            g.Flush();
-            //return bmp;
+            _fontFace = face;
+            SetSize(this.Size);
         }
 
-        public static Bitmap ConvertTextToImage(string txt, string fontname, int fontsize, Color bgcolor, Color fcolor, int width, int Height)
+        internal void SetFont(string filename)
         {
-            Bitmap bmp = new Bitmap(width, Height);
-            using (Graphics graphics = Graphics.FromImage(bmp))
+            FontFace = new Face(lib, filename);
+            SetSize(this.Size);
+        }
+
+        internal void SetSize(float size)
+        {
+            _size = size;
+            if (FontFace != null)
+                FontFace.SetCharSize(0, size, 0, 96);
+        }
+
+        #endregion // Setters
+
+        #region FileEnumeration
+
+        internal IEnumerable<FileInfo> GetFontFiles(DirectoryInfo folder, bool recurse)
+        {
+            var files = new List<FileInfo>();
+            var option = recurse ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+            foreach (var file in folder.GetFiles("*.*", option))
             {
-
-                Font font = new Font(fontname, fontsize);
-                graphics.FillRectangle(new SolidBrush(bgcolor), 0, 0, bmp.Width, bmp.Height);
-                graphics.DrawString(txt, font, new SolidBrush(fcolor), 0, 0);
-                graphics.Flush();
-                font.Dispose();
-                graphics.Dispose();
+                if (SupportedFormats.ContainsExt(file.Extension))
+                {
+                    //yield return file;
+                    files.Add(file);
+                }
             }
-            return bmp;
+            return files;
         }
 
+        #endregion // FileEnumeration
+
+        #region RenderString
+
+        /// <summary>
+        /// Render the string into a bitmap with <see cref="SystemColors.ControlText"/> text color and a transparent background.
+        /// </summary>
+        /// <param name="text">The string to render.</param>
+        internal virtual Bitmap RenderString(string text)
+        {
+            try
+            {
+                return RenderString(this.lib, this.FontFace, text, SystemColors.ControlText, Color.Transparent);
+            }
+            catch { }
+            return null;
+        }
+
+        /// <summary>
+        /// Render the string into a bitmap with a transparent background.
+        /// </summary>
+        /// <param name="text">The string to render.</param>
+        /// <param name="foreColor">The color of the text.</param>
+        /// <returns></returns>
+        internal virtual Bitmap RenderString(string text, Color foreColor)
+        {
+            return RenderString(this.lib, this.FontFace, text, foreColor, Color.Transparent);
+        }
+
+        /// <summary>
+        /// Render the string into a bitmap with an opaque background.
+        /// </summary>
+        /// <param name="text">The string to render.</param>
+        /// <param name="foreColor">The color of the text.</param>
+        /// <param name="backColor">The color of the background behind the text.</param>
+        /// <returns></returns>
+        internal virtual Bitmap RenderString(string text, Color foreColor, Color backColor)
+        {
+            return RenderString(this.lib, this.FontFace, text, foreColor, backColor);
+        }
 
         internal static Bitmap RenderString(Library library, Face face, string text, Color foreColor, Color backColor)
         {
@@ -443,6 +425,48 @@ namespace HinxCor.Drawing
             return bmp;
         }
 
+        #endregion // RenderString
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    if (this.FontFace != null && !FontFace.IsDisposed)
+                        try
+                        {
+                            FontFace.Dispose();
+                        }
+                        catch { }
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~FontService() {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
+
         #region class DebugChar
 
         private class DebugChar
@@ -474,5 +498,7 @@ namespace HinxCor.Drawing
         }
 
         #endregion
+
     }
+
 }

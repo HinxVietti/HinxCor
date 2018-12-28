@@ -74,7 +74,8 @@ namespace _fullscpicdisplayer
             if (followSize)
             {
                 this.Size = img.Size;
-                this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+                this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+                //this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             }
             this.pictureBox1.Image = img;
         }
