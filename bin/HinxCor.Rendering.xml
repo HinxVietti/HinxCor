@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HinxCor.Rendering</name>
+    </assembly>
+    <members>
+        <member name="T:HinxCor.Rendering.BitmapGenerator">
+            <summary>
+            BITMAP 生成工具
+            </summary>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.GetBitmap(System.String)">
+            <summary>
+            绘制bitmap 文本
+            </summary>
+            <param name="text">文本内容</param>
+            <returns>绘制结果</returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.GetBitmap(System.String,System.Drawing.StringFormat)">
+            <summary>
+            绘制bitmap 文本
+            </summary>
+            <param name="text">文本内容</param>
+            <param name="format">文本格式</param>
+            <returns>绘制结果</returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.GetBitmap(System.String,System.Drawing.Font)">
+            <summary>
+            绘制bitmap 文本
+            </summary>
+            <param name="text">文本内容</param>
+            <param name="font">文本字体</param>
+            <returns>绘制结果</returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.GetBitmap(System.String,System.Drawing.Font,System.Drawing.StringFormat)">
+            <summary>
+            绘制bitmap 文本
+            </summary>
+            <param name="text">文本内容</param>
+            <param name="font">文本字体</param>
+            <param name="format">文本格式</param>
+            <returns>绘制结果</returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.GetBitmap(System.String,System.Drawing.Font,System.Drawing.Color)">
+            <summary>
+            绘制bitmap 文本
+            </summary>
+            <param name="text">文本内容</param>
+            <param name="font">文本字体</param>
+            <param name="fontColor">字体颜色</param>
+            <returns>绘制结果</returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.GetBitmap(System.String,System.Drawing.Font,System.Drawing.Color,System.Drawing.StringFormat)">
+            <summary>
+            绘制bitmap 文本
+            </summary>
+            <param name="text">文本内容</param>
+            <param name="font">文本字体</param>
+            <param name="fontColor">字体颜色</param>
+            <param name="format">文本格式</param>
+            <returns>绘制结果</returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.GetBitmap(System.String,System.Drawing.Font,System.Drawing.Color,System.Drawing.Color)">
+            <summary>
+            绘制bitmap 文本
+            </summary>
+            <param name="text">文本内容</param>
+            <param name="font">文本字体</param>
+            <param name="fontColor">字体颜色</param>
+            <param name="backColor">背景色</param>
+            <returns>绘制结果</returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.GetBitmap(System.String,System.Drawing.Font,System.Drawing.Color,System.Drawing.Color,System.Drawing.StringFormat)">
+            <summary>
+            绘制bitmap 文本
+            </summary>
+            <param name="text">文本内容</param>
+            <param name="font">文本字体</param>
+            <param name="fontColor">字体颜色</param>
+            <param name="backColor">背景色</param>
+            <param name="format">文本格式</param>
+            <returns>绘制结果</returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.GetBitmap(System.String,System.Drawing.Font,System.Drawing.Rectangle,System.Drawing.Color)">
+            <summary>
+            绘制bitmap 文本
+            </summary>
+            <param name="text">文本内容</param>
+            <param name="font">文本字体</param>
+            <param name="rect">绘制区域</param>
+            <param name="fontColor">字体颜色</param>
+            <returns>绘制结果</returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.GetBitmap(System.String,System.Drawing.Font,System.Drawing.Rectangle,System.Drawing.Color,System.Drawing.StringFormat)">
+            <summary>
+            绘制bitmap 文本
+            </summary>
+            <param name="text">文本内容</param>
+            <param name="font">文本字体</param>
+            <param name="rect">绘制区域</param>
+            <param name="fontColor">字体颜色</param>
+            <param name="format">文本格式</param>
+            <returns>绘制结果</returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.GetBitmap(System.String,System.Drawing.Font,System.Drawing.Rectangle,System.Drawing.Color,System.Drawing.Color,System.Drawing.StringFormat)">
+            <summary>
+            绘制bitmap 文本
+            </summary>
+            <param name="text">文本内容</param>
+            <param name="font">文本字体</param>
+            <param name="rect">绘制区域</param>
+            <param name="fontColor">字体颜色</param>
+            <param name="backColor">背景色</param>
+            <param name="format">文本格式</param>
+            <returns>绘制结果</returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.GetBitmap(System.String,System.Drawing.Font,System.Drawing.Rectangle,System.Drawing.Color,System.Drawing.Color,System.Drawing.StringFormat,System.Drawing.Text.TextRenderingHint)">
+            <summary>
+            绘制bitmap 文本
+            </summary>
+            <param name="text">文本内容</param>
+            <param name="font">文本字体</param>
+            <param name="rect">绘制区域</param>
+            <param name="fontColor">字体颜色</param>
+            <param name="backColor">背景色</param>
+            <param name="format">文本格式</param>
+            <param name="renderingHint">渲染标签</param>
+            <returns>绘制结果</returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.GetBitmap(System.String,System.Drawing.Font,System.Drawing.Rectangle,System.Drawing.Color,System.Drawing.Color)">
+            <summary>
+            绘制bitmap 文本
+            </summary>
+            <param name="text">文本内容</param>
+            <param name="font">文本字体</param>
+            <param name="rect">绘制区域</param>
+            <param name="fontColor">字体颜色</param>
+            <param name="backColor">背景色</param>
+            <returns>绘制结果</returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawChar(System.Drawing.Graphics@,System.Char,System.Drawing.Font,System.Drawing.Rectangle@,System.Single,System.Drawing.Brush,System.Drawing.StringFormat,System.Drawing.Text.TextRenderingHint)">
+            <summary>
+            在Graphic 中绘制 字符串,此处控制 TXT spacing
+            </summary>
+            <param name="g"></param>
+            <param name="c"></param>
+            <param name="font">文本字体</param>
+            <param name="rect">文本区域</param>
+            <param name="charSpacing">字符间距</param>
+            <param name="brush">字体笔刷</param>
+            <param name="format">文本格式</param>
+            <param name="renderingHint">渲染格式标签</param>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String)">
+            <summary>
+            绘制bitmap文本;可以使用行距
+            </summary>
+            <param name="str">文本内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String,System.Drawing.StringFormat)">
+            <summary>
+            绘制bitmap文本;可以使用行距
+            </summary>
+            <param name="str">文本内容</param>
+            <param name="format">文本格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String,System.Drawing.Color,System.Drawing.StringFormat)">
+            <summary>
+            绘制bitmap文本;可以使用行距
+            </summary>
+            <param name="str">文本内容</param>
+            <param name="fontColor">字体颜色</param>
+            <param name="format">文本格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String,System.Single,System.Drawing.StringFormat)">
+            <summary>
+            绘制bitmap文本;可以使用行距
+            </summary>
+            <param name="str">文本内容</param>
+            <param name="lineSpacing">行距</param>
+            <param name="format">文本格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String,System.Single,System.Drawing.Color,System.Drawing.StringFormat)">
+            <summary>
+            绘制bitmap文本;可以使用行距
+            </summary>
+            <param name="str">文本内容</param>
+            <param name="lineSpacing">行距</param>
+            <param name="fontColor">字体颜色</param>
+            <param name="format">文本格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String,System.Single,System.Single,System.Drawing.Color,System.Drawing.StringFormat)">
+            <summary>
+            绘制bitmap文本;可以使用行距
+            </summary>
+            <param name="str">文本内容</param>
+            <param name="lineSpacing">行距</param>
+            <param name="charSpacing">字间距</param>
+            <param name="fontColor">字体颜色</param>
+            <param name="format">文本格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String,System.Drawing.Font,System.Single,System.Single,System.Drawing.Color,System.Drawing.StringFormat)">
+            <summary>
+            绘制bitmap文本;可以使用行距
+            </summary>
+            <param name="str">文本内容</param>
+            <param name="font">文本字体</param>
+            <param name="lineSpacing">行距</param>
+            <param name="charSpacing">字间距</param>
+            <param name="fontColor">字体颜色</param>
+            <param name="format">文本格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String,System.Drawing.Font,System.Single,System.Single,System.Drawing.Color,System.Drawing.Color,System.Drawing.StringFormat)">
+            <summary>
+            绘制bitmap文本;可以使用行距
+            </summary>
+            <param name="str">文本内容</param>
+            <param name="font">文本字体</param>
+            <param name="lineSpacing">行距</param>
+            <param name="charSpacing">字间距</param>
+            <param name="fontColor">字体颜色</param>
+            <param name="backColor">背景色</param>
+            <param name="format">文本格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String,System.Drawing.Font,System.Drawing.Rectangle,System.Single,System.Single,System.Drawing.Color,System.Drawing.Color,System.Drawing.StringFormat)">
+            <summary>
+            绘制bitmap文本;可以使用行距
+            </summary>
+            <param name="str">文本内容</param>
+            <param name="font">文本字体</param>
+            <param name="rect">文本区域</param>
+            <param name="lineSpacing">行距</param>
+            <param name="charSpacing">字间距</param>
+            <param name="fontColor">字体颜色</param>
+            <param name="backColor">背景色</param>
+            <param name="format">文本格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String,System.Drawing.Font,System.Drawing.Rectangle,System.Single,System.Single,System.Drawing.Color,System.Drawing.Color,System.Drawing.StringFormat,System.Drawing.Text.TextRenderingHint)">
+            <summary>
+            绘制bitmap文本;可以使用行距
+            </summary>
+            <param name="str">文本内容</param>
+            <param name="font">文本字体</param>
+            <param name="rect">文本区域</param>
+            <param name="lineSpacing">行距</param>
+            <param name="charSpacing">字间距</param>
+            <param name="fontColor">字体颜色</param>
+            <param name="backColor">背景色</param>
+            <param name="format">文本格式</param>
+            <param name="renderingHint">渲染格式标签</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.SplitAsLine(System.String)">
+            <summary>
+            不同情况下切割成多行文本
+            </summary>
+            <param name="str">原文本</param>
+            <returns>行文本数组</returns>
+        </member>
+    </members>
+</doc>

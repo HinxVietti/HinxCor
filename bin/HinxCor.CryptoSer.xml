@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HinxCor.CryptoSer</name>
+    </assembly>
+    <members>
+        <member name="F:HinxCor.CryptoSer.WindowsApplication1.RC6.m_sEncryptionKey">
+            <summary>
+            对称加解密算法RC6的C#实现
+            公开维普网_朱明海先生未公布的源码
+            程序完善设计者:四川威远_老耙子 先生
+            2010-11-28
+            本程序只提供了明文长度32的算法。
+            如有需要，请与本人联系。
+            Mail:chscwyyg@163.com 电话:0832-8229211
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.WindowsApplication1.RC6.ROTL(System.UInt32,System.UInt32,System.Int32)">
+             <summary>
+             左位移运算函数
+             </summary>
+             <param name="x"></param>
+             <param name="y"></param>
+             <param name="w"></param>
+             <returns></returns>
+            
+        </member>
+        <member name="M:HinxCor.CryptoSer.WindowsApplication1.RC6.ROTR(System.UInt32,System.UInt32,System.Int32)">
+            <summary>
+            右位移运算函数
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="w"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.WindowsApplication1.RC6.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.WindowsApplication1.RC6.#ctor(System.Int32)">
+            <summary>
+            构造函数可输入加密向量
+            </summary>
+            <param name="iv"></param>
+        </member>
+        <member name="P:HinxCor.CryptoSer.WindowsApplication1.RC6.KEY">
+            <summary>
+            定义一个属性，通过属性输入用户密钥并返回
+            存储到m_sEncryptionKey
+            </summary>
+        </member>
+        <member name="P:HinxCor.CryptoSer.WindowsApplication1.RC6.IV">
+            <summary>
+            加密向量选择
+            128方式IV=16
+            192方法IV=24
+            256方法IV=32
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.WindowsApplication1.RC6._IV">
+            <summary>
+            加密向量验证函数
+            有错误返回最小或最大的向量设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.WindowsApplication1.RC6.String_Unicode">
+            <summary>
+            string类型Unicode字符集转为字节流char[];
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.WindowsApplication1.RC6.KeySteup">
+             <summary>
+             初始化函数用户密钥
+             通过KeySteup函数扩展并混合密钥
+             </summary>
+            
+        </member>
+        <member name="M:HinxCor.CryptoSer.WindowsApplication1.RC6.Encrypt(System.String,System.String)">
+            <summary>
+            加密函数
+            </summary>
+            <param name="str">加密的明文</param>
+            <param name="prssword">返回的密文</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.WindowsApplication1.RC6.Decrypt(System.String,System.String)">
+            <summary>
+            解密函数
+            </summary>
+            <param name="str">解密的密文</param>
+            <param name="prssword">解密后的明文</param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.RC6">
+            <summary>
+            山寨rc6 算法
+            </summary>
+        </member>
+        <member name="F:HinxCor.CryptoSer.RC6.m_sEncryptionKey">
+            <summary>
+            对称加解密算法RC6的C#实现
+            公开维普网_朱明海先生未公布的源码
+            程序完善设计者:四川威远_老耙子 先生
+            2010-11-28
+            本程序只提供了明文长度32的算法。
+            如有需要，请与本人联系。
+            Mail:chscwyyg@163.com 电话:0832-8229211
+            </summary>
+        </member>
+        <member name="F:HinxCor.CryptoSer.RC6.m_sCryptedText">
+            <summary>
+            加密解密字符串返回值
+            </summary>
+        </member>
+        <member name="F:HinxCor.CryptoSer.RC6.Enc_default">
+            <summary>
+            编码方式
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.ROTL(System.UInt32,System.UInt32,System.Int32)">
+             <summary>
+             左位移运算函数
+             </summary>
+             <param name="x"></param>
+             <param name="y"></param>
+             <param name="w"></param>
+             <returns></returns>
+            
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.ROTR(System.UInt32,System.UInt32,System.Int32)">
+            <summary>
+            右位移运算函数
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="w"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.#ctor(System.Int32)">
+            <summary>
+            构造函数可输入加密向量
+            </summary>
+            <param name="iv"></param>
+        </member>
+        <member name="P:HinxCor.CryptoSer.RC6.KEY">
+            <summary>
+            定义一个属性，通过属性输入用户密钥并返回
+            存储到m_sEncryptionKey
+            </summary>
+        </member>
+        <member name="P:HinxCor.CryptoSer.RC6.IV">
+            <summary>
+            加密向量选择
+            128方式IV=16
+            192方法IV=24
+            256方法IV=32
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6._IV">
+            <summary>
+            加密向量验证函数
+            有错误返回最小或最大的向量设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.String_Unicode">
+            <summary>
+            string类型Unicode字符集转为字节流char[];
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.KeySteup">
+             <summary>
+             初始化函数用户密钥
+             通过KeySteup函数扩展并混合密钥
+             </summary>
+            
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.Encrypt(System.String,System.String)">
+            <summary>
+            加密函数
+            </summary>
+            <param name="str">加密的明文</param>
+            <param name="prssword">返回的密文</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.Decrypt(System.String,System.String)">
+            <summary>
+            解密函数
+            </summary>
+            <param name="str">解密的密文</param>
+            <param name="prssword">解密后的明文</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HinxCor.Drawing</name>
+    </assembly>
+    <members>
+        <member name="T:HinxCor.Drawing.ColorPickerDisplayer">
+            <summary>
+            拾取色彩展示窗口
+            </summary>
+        </member>
+        <member name="M:HinxCor.Drawing.ColorPickerDisplayer.#ctor">
+            <summary>
+            构造
+            </summary>
+        </member>
+        <member name="F:HinxCor.Drawing.ColorPickerDisplayer.color">
+            <summary>
+            拾色器当前的颜色
+            </summary>
+        </member>
+        <member name="M:HinxCor.Drawing.ColorPickerDisplayer.ShowPicker(System.String)">
+            <summary>
+            显示
+            </summary>
+            <param name="fname"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Drawing.ColorPickerDisplayer.SetColor(System.Drawing.Color)">
+            <summary>
+            设置当前颜色
+            </summary>
+            <param name="c"></param>
+        </member>
+        <member name="M:HinxCor.Drawing.ColorPickerDisplayer.StartTimer">
+            <summary>
+            开始计时器
+            </summary>
+        </member>
+        <member name="M:HinxCor.Drawing.ColorPickerDisplayer.EndTimer">
+            <summary>
+            关闭计时器
+            </summary>
+        </member>
+        <member name="F:HinxCor.Drawing.ColorPickerDisplayer.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HinxCor.Drawing.ColorPickerDisplayer.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HinxCor.Drawing.ColorPickerDisplayer.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:HinxCor.Drawing.FontFormat.Name">
+            <summary>
+            Gets the name for the format.
+            </summary>
+        </member>
+        <member name="P:HinxCor.Drawing.FontFormat.FileExtension">
+            <summary>
+            Gets the typical file extension for this format (lowercase).
+            </summary>
+        </member>
+        <member name="M:HinxCor.Drawing.FontService.#ctor">
+            <summary>
+            If multithreading, each thread should have its own FontService.
+            </summary>
+        </member>
+        <member name="M:HinxCor.Drawing.FontService.RenderString(System.String)">
+            <summary>
+            Render the string into a bitmap with <see cref="P:System.Drawing.SystemColors.ControlText"/> text color and a transparent background.
+            </summary>
+            <param name="text">The string to render.</param>
+        </member>
+        <member name="M:HinxCor.Drawing.FontService.RenderString(System.String,System.Drawing.Color)">
+            <summary>
+            Render the string into a bitmap with a transparent background.
+            </summary>
+            <param name="text">The string to render.</param>
+            <param name="foreColor">The color of the text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Drawing.FontService.RenderString(System.String,System.Drawing.Color,System.Drawing.Color)">
+            <summary>
+            Render the string into a bitmap with an opaque background.
+            </summary>
+            <param name="text">The string to render.</param>
+            <param name="foreColor">The color of the text.</param>
+            <param name="backColor">The color of the background behind the text.</param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.Drawing.Helper">
+            <summary>
+            fz
+            </summary>
+        </member>
+        <member name="M:HinxCor.Drawing.Helper.GetImage">
+            <summary>
+            获取一个默认的bmp
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Drawing.Helper.CreateBitmapImage">
+            <summary>
+            创建bmp
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Drawing.Helper.CreateBitmapImage(System.String,System.Drawing.Font)">
+            <summary>
+            创建bmp
+            </summary>
+            <param name="sImageText"></param>
+            <param name="objFont"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Drawing.Helper.CreateBitmapImage(System.String)">
+            <summary>
+            创建bmp
+            </summary>
+            <param name="sImageText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Drawing.Helper.DrawString(System.String,System.Int32,System.Int32)">
+            <summary>
+            创建bmp
+            </summary>
+            <param name="str"></param>
+            <param name="x"></param>
+            <param name="y"></param>
+        </member>
+        <member name="M:HinxCor.Drawing.Helper.DrawChar(System.Drawing.Bitmap@,System.Char,System.Drawing.Font,System.Drawing.Brush)">
+            <summary>
+            创建bmp
+            </summary>
+            <param name="bmp"></param>
+            <param name="c"></param>
+            <param name="f"></param>
+            <param name="b"></param>
+        </member>
+        <member name="M:HinxCor.Drawing.Helper.ConvertTextToImage(System.String,System.String,System.Int32,System.Drawing.Color,System.Drawing.Color,System.Int32,System.Int32)">
+            <summary>
+            创建bmp
+            </summary>
+            <param name="txt"></param>
+            <param name="fontname"></param>
+            <param name="fontsize"></param>
+            <param name="bgcolor"></param>
+            <param name="fcolor"></param>
+            <param name="width"></param>
+            <param name="Height"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
