@@ -138,7 +138,7 @@
             <param name="backColor">背景色</param>
             <returns>绘制结果</returns>
         </member>
-        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawChar(System.Drawing.Graphics@,System.Char,System.Drawing.Font,System.Drawing.Rectangle@,System.Single,System.Drawing.Brush,System.Drawing.StringFormat,System.Drawing.Text.TextRenderingHint)">
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawChar(System.Drawing.Graphics@,System.Char,System.Drawing.Font,System.Drawing.Rectangle@,System.Single,System.Drawing.Brush,System.Drawing.StringFormat)">
             <summary>
             在Graphic 中绘制 字符串,此处控制 TXT spacing
             </summary>
@@ -149,7 +149,6 @@
             <param name="charSpacing">字符间距</param>
             <param name="brush">字体笔刷</param>
             <param name="format">文本格式</param>
-            <param name="renderingHint">渲染格式标签</param>
         </member>
         <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String)">
             <summary>
@@ -164,6 +163,14 @@
             </summary>
             <param name="str">文本内容</param>
             <param name="format">文本格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String,System.Drawing.Font)">
+            <summary>
+            绘制bitmap文本;可以使用行距
+            </summary>
+            <param name="text">文本内容</param>
+            <param name="font">文本字体</param>
             <returns></returns>
         </member>
         <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String,System.Drawing.Color,System.Drawing.StringFormat)">
@@ -244,6 +251,43 @@
             <param name="format">文本格式</param>
             <returns></returns>
         </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String,System.Drawing.Font,System.Drawing.Rectangle,System.Drawing.Text.TextRenderingHint)">
+            <summary>
+            绘制bitmap文本;
+            </summary>
+            <param name="str"></param>
+            <param name="font"></param>
+            <param name="rect"></param>
+            <param name="renderingHint"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.Drawing.Bitmap,System.String,System.Drawing.Font,System.Drawing.Rectangle,System.Drawing.Text.TextRenderingHint)">
+            <summary>
+            
+            </summary>
+            <param name="bmp"></param>
+            <param name="str"></param>
+            <param name="font"></param>
+            <param name="rect"></param>
+            <param name="renderingHint"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.Drawing.Bitmap,System.String,System.Drawing.Font,System.Drawing.Rectangle,System.Single,System.Single,System.Drawing.Color,System.Drawing.Color,System.Drawing.StringFormat,System.Drawing.Text.TextRenderingHint)">
+            <summary>
+            
+            </summary>
+            <param name="bmp"></param>
+            <param name="str"></param>
+            <param name="font"></param>
+            <param name="rect"></param>
+            <param name="lineSpacing"></param>
+            <param name="charSpacing"></param>
+            <param name="fontColor"></param>
+            <param name="backColor"></param>
+            <param name="format"></param>
+            <param name="renderingHint"></param>
+            <returns></returns>
+        </member>
         <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String,System.Drawing.Font,System.Drawing.Rectangle,System.Single,System.Single,System.Drawing.Color,System.Drawing.Color,System.Drawing.StringFormat,System.Drawing.Text.TextRenderingHint)">
             <summary>
             绘制bitmap文本;可以使用行距
@@ -265,6 +309,183 @@
             </summary>
             <param name="str">原文本</param>
             <returns>行文本数组</returns>
+        </member>
+        <member name="T:HinxCor.Rendering.FontFactory">
+            <summary>
+            字体工厂
+            </summary>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.#ctor">
+            <summary>
+            ~构造
+            </summary>
+        </member>
+        <member name="P:HinxCor.Rendering.FontFactory.UserFontCollection">
+            <summary>
+            用户字体集合
+            </summary>
+        </member>
+        <member name="P:HinxCor.Rendering.FontFactory.LocalFontMap">
+            <summary>
+            用户字体表
+            </summary>
+        </member>
+        <member name="P:HinxCor.Rendering.FontFactory.SystemFontMap">
+            <summary>
+            系统字体表
+            </summary>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.Init">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.GeneratePrivateFontCollection(System.String)">
+            <summary>
+            刷新本地字体列表
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.GetFont(System.String,System.Single,System.Drawing.FontStyle,System.Drawing.GraphicsUnit,System.Byte,System.Boolean)">
+            <summary>
+            获取字体
+            </summary>
+            <param name="familyName">字体名称</param>
+            <param name="emSize">字体大小</param>
+            <param name="style">字体样式</param>
+            <param name="unit">绘制样式</param>
+            <param name="gdiCharSet">gdi char set</param>
+            <param name="gdiVerticalFont">是否垂直排版</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.GetFont(System.Drawing.FontFamily,System.Single,System.Drawing.FontStyle,System.Drawing.GraphicsUnit,System.Byte,System.Boolean)">
+            <summary>
+            获取字体
+            </summary>
+            <param name="family">字体名称</param>
+            <param name="emSize">字体大小</param>
+            <param name="style">字体样式</param>
+            <param name="unit">绘制样式</param>
+            <param name="gdiCharSet">gdi char set</param>
+            <param name="gdiVerticalFont">是否垂直排版</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.GetFont(System.Drawing.FontFamily,System.Single,System.Drawing.FontStyle,System.Drawing.GraphicsUnit,System.Byte)">
+            <summary>
+            获取字体
+            </summary>
+            <param name="family">字体名称</param>
+            <param name="emSize">字体大小</param>
+            <param name="style">字体样式</param>
+            <param name="unit">绘制样式</param>
+            <param name="gdiCharSet">gdi char set</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.GetFont(System.String,System.Single,System.Drawing.FontStyle,System.Drawing.GraphicsUnit,System.Byte)">
+            <summary>
+            获取字体
+            </summary>
+            <param name="familyName">字体名称</param>
+            <param name="emSize">字体大小</param>
+            <param name="style">字体样式</param>
+            <param name="unit">绘制样式</param>
+            <param name="gdiCharSet">gdi char set</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.GetFont(System.Drawing.FontFamily,System.Single,System.Drawing.FontStyle,System.Drawing.GraphicsUnit)">
+            <summary>
+            获取字体
+            </summary>
+            <param name="family">字体名称</param>
+            <param name="emSize">字体大小</param>
+            <param name="style">字体样式</param>
+            <param name="unit">绘制样式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.GetFont(System.Drawing.FontFamily,System.Single,System.Drawing.FontStyle)">
+            <summary>
+            获取字体
+            </summary> 
+            <param name="family">字体名称</param>
+            <param name="emSize">字体大小</param>
+            <param name="style">字体样式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.GetFont(System.Drawing.FontFamily,System.Single,System.Drawing.GraphicsUnit)">
+            <summary>
+            获取字体
+            </summary>
+            <param name="family">字体名称</param>
+            <param name="emSize">字体大小</param>
+            <param name="unit">绘制样式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.GetFont(System.String,System.Single,System.Drawing.FontStyle)">
+            <summary>
+            获取字体
+            </summary>
+            <param name="familyName">字体名称</param>
+            <param name="emSize">字体大小</param>
+            <param name="style">字体样式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.GetFont(System.String,System.Single,System.Drawing.GraphicsUnit)">
+            <summary>
+            获取字体
+            </summary>
+            <param name="familyName">字体名称</param>
+            <param name="emSize">字体大小</param>
+            <param name="unit">绘制样式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.GetFont(System.Drawing.FontFamily,System.Single)">
+            <summary>
+            获取字体
+            </summary>
+            <param name="family">字体名称</param>
+            <param name="emSize">字体大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.GetFont(System.Drawing.Font,System.Drawing.FontStyle)">
+            <summary>
+            获取字体
+            </summary>
+            <param name="prototype">原有字体</param>
+            <param name="newStyle">新样式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.GetFont(System.String,System.Int32)">
+            <summary>
+            获取字体
+            </summary>
+            <param name="fontName">字体名称</param>
+            <param name="fontSize">字体大小</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.GetFont(System.String,System.Single,System.Drawing.FontStyle,System.Drawing.GraphicsUnit)">
+            <summary>
+            获取字体
+            </summary>
+            <param name="familyName">字体名称</param>
+            <param name="emSize">字体大小</param>
+            <param name="style">字体样式</param>
+            <param name="unit">绘制样式</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.GetFontDialogResult(System.Object@,System.Boolean)">
+            <summary>
+            获取字体文件
+            </summary>
+            <param name="arg"></param>
+            <param name="multipleSelect"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.FontFactory.ImportFont(System.Boolean)">
+            <summary>
+            导入字体
+            </summary>
+            <param name="multipleSelect"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

@@ -38,6 +38,8 @@ namespace HinxCor.Rendering
             Font f = new Font("微软雅黑", 24);
             return GetBitmap(text, f, format);
         }
+
+
         /// <summary>
         /// 绘制bitmap 文本
         /// </summary>
@@ -215,8 +217,7 @@ namespace HinxCor.Rendering
         /// <param name="charSpacing">字符间距</param>
         /// <param name="brush">字体笔刷</param>
         /// <param name="format">文本格式</param>
-        /// <param name="renderingHint">渲染格式标签</param>
-        public static void DrawChar(ref Graphics g, char c, Font font, ref Rectangle rect, float charSpacing, Brush brush, StringFormat format, TextRenderingHint renderingHint)
+        public static void DrawChar(ref Graphics g, char c, Font font, ref Rectangle rect, float charSpacing, Brush brush, StringFormat format)
         {
             //string sc = c.ToString();
             //float wid = g.MeasureString(sc, font).Width;
@@ -253,6 +254,18 @@ namespace HinxCor.Rendering
         {
             return DrawString(str, 0, format);
         }
+
+        /// <summary>
+        /// 绘制bitmap文本;可以使用行距
+        /// </summary>
+        /// <param name="text">文本内容</param>
+        /// <param name="font">文本字体</param>
+        /// <returns></returns>
+        public static Bitmap DrawString(string text, Font font)
+        {
+            return DrawString(text, font, 0, 0, Color.Gray, StringFormat.GenericTypographic);
+        }
+
         /// <summary>
         /// 绘制bitmap文本;可以使用行距
         /// </summary>
@@ -350,6 +363,72 @@ namespace HinxCor.Rendering
         }
 
         /// <summary>
+        /// 绘制bitmap文本;
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="font"></param>
+        /// <param name="rect"></param>
+        /// <param name="renderingHint"></param>
+        /// <returns></returns>
+        public static Bitmap DrawString(string str, Font font, Rectangle rect, TextRenderingHint renderingHint)
+        {
+            return DrawString(str, font, rect, 0, 0, Color.Gray, Color.Transparent, StringFormat.GenericDefault, renderingHint);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bmp"></param>
+        /// <param name="str"></param>
+        /// <param name="font"></param>
+        /// <param name="rect"></param>
+        /// <param name="renderingHint"></param>
+        /// <returns></returns>
+        public static Bitmap DrawString(Bitmap bmp, string str, Font font, Rectangle rect, TextRenderingHint renderingHint)
+        {
+
+            return DrawString(bmp, str, font, rect, 0, 0, Color.Gray, Color.Transparent, StringFormat.GenericDefault, renderingHint);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bmp"></param>
+        /// <param name="str"></param>
+        /// <param name="font"></param>
+        /// <param name="rect"></param>
+        /// <param name="lineSpacing"></param>
+        /// <param name="charSpacing"></param>
+        /// <param name="fontColor"></param>
+        /// <param name="backColor"></param>
+        /// <param name="format"></param>
+        /// <param name="renderingHint"></param>
+        /// <returns></returns>
+        public static Bitmap DrawString(Bitmap bmp, string str, Font font, Rectangle rect, float lineSpacing, float charSpacing, Color fontColor, Color backColor, StringFormat format, TextRenderingHint renderingHint)
+        {
+            str = str.Replace('\r', ' ');
+            Graphics g = Graphics.FromImage(bmp);
+            var lines = SplitAsLine(str);
+
+            var brush = new SolidBrush(fontColor);
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+            defspacing = g.MeasureString(" ", font).Width;
+            int prest = rect.X;
+            g.TextRenderingHint = renderingHint;
+            for (int i = 0; i < lines.Length; i++)
+            {
+                rect.Y += (int)((lineSpacing + font.Height));
+                rect.X = prest;
+                for (int j = 0; j < lines[i].Length; j++)
+                    DrawChar(ref g, lines[i][j], font, ref rect, charSpacing, brush, format);
+                g.Flush();
+            }
+            g.Flush();
+            return bmp;
+        }
+        /// <summary>
         /// 绘制bitmap文本;可以使用行距
         /// </summary>
         /// <param name="str">文本内容</param>
@@ -399,14 +478,14 @@ namespace HinxCor.Rendering
             //};
 
             defspacing = g.MeasureString(" ", font).Width;
-
+            g.TextRenderingHint = renderingHint;
             for (int i = 0; i < lines.Length; i++)
             {
                 rect.Y = (int)((lineSpacing + font.Height) * i);//光标移到下一行
                 rect.X = 0;
                 for (int j = 0; j < lines[i].Length; j++)
                     //drawc(lines[i][j]); //-->改用 本地函数 :181229 10.10
-                    DrawChar(ref g, lines[i][j], font, ref rect, charSpacing, brush, format, renderingHint);
+                    DrawChar(ref g, lines[i][j], font, ref rect, charSpacing, brush, format);
                 g.Flush();//每一行写入一次
             }
             g.Flush();

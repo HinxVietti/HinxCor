@@ -9,6 +9,7 @@ using System.Threading;
 using System.Drawing.Text;
 using System.Drawing.Drawing2D;
 using HinxCor.Rendering;
+using System.Text;
 
 namespace DemoApp
 {
@@ -23,7 +24,52 @@ namespace DemoApp
             //DemoMethod564a6c();
             //DemoMethodsd453();
             //DemoMethod2d5f8a();
+            //DemoMethodsd453();
+            //DemoMethodf4a65f153e();
+            DemoFunc84as6f4as354f();
+        }
 
+
+        private static void DemoFunc84as6f4as354f()
+        {
+            //Font font = GetFont();
+            //Console.WriteLine(font.GdiCharSet);
+            //Console.ReadKey();
+
+            var pth = GetPath();
+            Console.WriteLine(new FileInfo(pth).Extension);
+            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// 测试默认字体微软雅黑的属性
+        /// </summary>
+        private static void DemoMethodf4a65f153e()
+        {
+            Font f = GetFont();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(string.Format("FontName:{0}", f.Name));
+            sb.AppendLine(string.Format("OriginFN:{0}", f.OriginalFontName));
+            sb.AppendLine(string.Format("SystemFN:{0}", f.SystemFontName));
+            sb.AppendLine(string.Format("FFamilyN:{0}", f.FontFamily.Name));
+
+            StringFormat format = new StringFormat();
+            int a = 2;
+            Bitmap bitmap;
+            if (a == 1)
+                bitmap = BitmapGenerator.GetBitmap(sb.ToString(), f, default(Rectangle), Color.Gray, Color.Transparent, StringFormat.GenericDefault, TextRenderingHint.AntiAlias);
+            else bitmap = BitmapGenerator.DrawString(sb.ToString(), f, default(Rectangle), 5, 3, Color.Gray, Color.Transparent, format, TextRenderingHint.AntiAlias);
+            //string pth = GetPath();
+            string folder = /*GetFolder();*/ "D:\\Demo Output";
+            bitmap.Save(folder + "/" + f.Name + a + "_" + f.Size + ".png", ImageFormat.Png);
+            OpenInExplorer(folder);
+        }
+
+        /// <summary>
+        /// 测试字符绘制的长度
+        /// </summary>
+        private static void DemoTestCharLength()
+        {
             Bitmap bitmap = new Bitmap(1, 1);
             Font f = GetFont();
             Graphics g = Graphics.FromImage(bitmap);
@@ -41,7 +87,6 @@ namespace DemoApp
             float a5 = g.MeasureString("\n\r", f).Width;
             string str = System.Environment.NewLine;
             Console.ReadKey();
-
         }
 
         /// <summary>
@@ -107,19 +152,26 @@ namespace DemoApp
         private static void DemoMethodsd453()
         {
             var font = GetFont();
-            string folder = GetFolder();
+            string folder = /*GetFolder()*/"D:\\Demo Output";
 
             Rectangle rect = new Rectangle();
             int lh = (int)(font.Size + font.Height);
-            Bitmap bmp = new Bitmap(1550, lh * 6);
+            Bitmap bmp = new Bitmap(550, lh * 6);
             Graphics.FromImage(bmp).Clear(bgColor);
+
+            StringBuilder sb = new StringBuilder();
+
             for (int i = 0; i < 6; i++)
             {
                 var hint = (TextRenderingHint)i;
-                rect.Y = i * lh;
-                bmp = GetBitmap(bmp, font, rect, hint);
+                sb.AppendLine("中文支持" + hint);
+                //rect.Y = i * lh;
+                //bmp = GetBitmap(bmp, font, rect, hint);
             }
-            var pth = GetPath();
+            //rect.Y = 6 * lh;
+            //bmp = GetBitmap(bmp, "中文支持", font, rect, fontColor, bgColor, format, TextRenderingHint.AntiAlias);
+            //var pth = GetPath();
+            var pth = folder + "/" + font.Name + "_property.png";
             bmp.Save(pth, ImageFormat.Png);
             OpenFileInExplorer(pth);
 
@@ -132,7 +184,8 @@ namespace DemoApp
 
         private static Bitmap GetBitmap(Bitmap bmp, Font font, Rectangle rect, TextRenderingHint renderinghint)
         {
-            string text = renderinghint.ToString();
+            string text = "中文支持:" + renderinghint.ToString();
+            //return BitmapGenerator.DrawString(bmp, text, font, rect, renderinghint);
             return GetBitmap(bmp, text, font, rect, fontColor, bgColor, format, renderinghint);
         }
 
