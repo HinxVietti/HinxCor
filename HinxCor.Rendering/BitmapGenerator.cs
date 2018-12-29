@@ -20,9 +20,11 @@ namespace HinxCor.Rendering
         /// <returns>绘制结果</returns>
         public static Bitmap GetBitmap(string text)
         {
-            StringFormat format = new StringFormat();
-            format.Alignment = StringAlignment.Center;
-            format.LineAlignment = StringAlignment.Center;
+            StringFormat format = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
             return GetBitmap(text, format);
         }
         /// <summary>
@@ -210,17 +212,23 @@ namespace HinxCor.Rendering
         /// <param name="c"></param>
         /// <param name="font">文本字体</param>
         /// <param name="rect">文本区域</param>
-        /// <param name="textSpacing"></param>
-        /// <param name="fontColor">字体颜色</param>
+        /// <param name="charSpacing">字符间距</param>
+        /// <param name="brush">字体笔刷</param>
         /// <param name="format">文本格式</param>
         /// <param name="renderingHint">渲染格式标签</param>
-        public static void DrawChar(ref Graphics g, char c, Font font, ref Rectangle rect, float textSpacing, Color fontColor, StringFormat format, TextRenderingHint renderingHint)
+        public static void DrawChar(ref Graphics g, char c, Font font, ref Rectangle rect, float charSpacing, Brush brush, StringFormat format, TextRenderingHint renderingHint)
         {
+            //string sc = c.ToString();
+            //float wid = g.MeasureString(sc, font).Width;
+            //g.DrawString(sc, font, new SolidBrush(fontColor), rect, format);
+            //g.Flush();
+            //rect.X += (int)(wid + textSpacing);
+
             string sc = c.ToString();
-            float wid = g.MeasureString(sc, font).Width;
-            g.DrawString(sc, font, new SolidBrush(fontColor), rect, format);
-            g.Flush();
-            rect.X += (int)(wid + textSpacing);
+            float wid = g.MeasureString(sc.Replace(' ', 'B'), font).Width;
+            g.DrawString(sc, font, brush, rect.X, rect.Y, format);
+            //g.Flush();
+            rect.X += (int)(wid - defspacing + charSpacing);
         }
 
 
@@ -356,6 +364,7 @@ namespace HinxCor.Rendering
         /// <returns></returns>
         public static Bitmap DrawString(string str, Font font, Rectangle rect, float lineSpacing, float charSpacing, Color fontColor, Color backColor, StringFormat format, TextRenderingHint renderingHint)
         {
+            str = str.Replace('\r', ' ');
             Bitmap bmp = new Bitmap(1, 1);
             Graphics g = Graphics.FromImage(bmp);
             var sizef = rect.Width == 0 ? g.MeasureString(str, font) : g.MeasureString(str, font, rect.Width, format);
@@ -365,39 +374,46 @@ namespace HinxCor.Rendering
             for (int i = 0; i < lines.Length; i++)
                 maxCharset = lines[i].Length > maxCharset ? lines[i].Length : maxCharset;
 
-            sizef.Width += charSpacing * maxCharset;
-            sizef.Height += lineSpacing * lines.Length;
+            //末尾 不用添加空白
+            sizef.Width += charSpacing * (maxCharset - 1);
+            sizef.Height += lineSpacing * (lines.Length - 1);
 
             bmp = new Bitmap(bmp, (int)sizef.Width, (int)sizef.Height);
             g = Graphics.FromImage(bmp);
+
+            var brush = new SolidBrush(fontColor);
 
             g.Clear(backColor);
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-            Action<char> drawc = c =>
-            {
-                string sc = c.ToString();
-                float wid = g.MeasureString(sc, font).Width;
-                g.DrawString(sc, font, new SolidBrush(fontColor), rect.X, rect.Y, format);
+            //-->弃用匿名函数 :181229 10.10
+            //Action<char> drawc = c =>
+            //{
+            //    string sc = c.ToString();
+            //    float wid = g.MeasureString(sc.Replace(' ', 'B'), font).Width;
+            //    g.DrawString(sc, font, brush, rect.X, rect.Y, format);
+            //    //g.Flush();
+            //    rect.X += (int)(wid - defspacing + charSpacing);
+            //};
 
-                g.Flush();
-                rect.X += (int)(wid - 7 + charSpacing);
-            };
+            defspacing = g.MeasureString(" ", font).Width;
 
             for (int i = 0; i < lines.Length; i++)
             {
                 rect.Y = (int)((lineSpacing + font.Height) * i);//光标移到下一行
                 rect.X = 0;
                 for (int j = 0; j < lines[i].Length; j++)
-                    drawc(lines[i][j]);
-                //DrawChar(ref g, lines[i][j], font, ref rect, charSpacing, fontColor, format, renderingHint);
+                    //drawc(lines[i][j]); //-->改用 本地函数 :181229 10.10
+                    DrawChar(ref g, lines[i][j], font, ref rect, charSpacing, brush, format, renderingHint);
                 g.Flush();//每一行写入一次
             }
             g.Flush();
             return bmp;
         }
+
+        private static float defspacing;
 
         /// <summary>
         /// 不同情况下切割成多行文本
@@ -406,10 +422,14 @@ namespace HinxCor.Rendering
         /// <returns>行文本数组</returns>
         public static string[] SplitAsLine(string str)
         {
-            var args = str.Split('\n', '\r');// \n \r 和 \n\r
+            var args = Regex.Split(str, System.Environment.NewLine);
             List<string> array = new List<string>();
             for (int i = 0; i < args.Length; i++)
-                array.AddRange(Regex.Split(args[i], Environment.NewLine));
+                array.AddRange(args[i].Split('\n'/*, '\r'*/)); // not linux
+
+            //var args = str.Split('\n', '\r');// \n \r 和 \n\r
+            //for (int i = 0; i < args.Length; i++)
+            //    array.AddRange(Regex.Split(args[i], Environment.NewLine));
             return array.ToArray();
         }
     }
