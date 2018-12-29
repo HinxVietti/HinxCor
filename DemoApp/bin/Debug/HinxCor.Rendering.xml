@@ -138,7 +138,7 @@
             <param name="backColor">背景色</param>
             <returns>绘制结果</returns>
         </member>
-        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawChar(System.Drawing.Graphics@,System.Char,System.Drawing.Font,System.Drawing.Rectangle@,System.Single,System.Drawing.Color,System.Drawing.StringFormat,System.Drawing.Text.TextRenderingHint)">
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawChar(System.Drawing.Graphics@,System.Char,System.Drawing.Font,System.Drawing.Rectangle@,System.Single,System.Drawing.Brush,System.Drawing.StringFormat,System.Drawing.Text.TextRenderingHint)">
             <summary>
             在Graphic 中绘制 字符串,此处控制 TXT spacing
             </summary>
@@ -146,8 +146,8 @@
             <param name="c"></param>
             <param name="font">文本字体</param>
             <param name="rect">文本区域</param>
-            <param name="textSpacing"></param>
-            <param name="fontColor">字体颜色</param>
+            <param name="charSpacing">字符间距</param>
+            <param name="brush">字体笔刷</param>
             <param name="format">文本格式</param>
             <param name="renderingHint">渲染格式标签</param>
         </member>

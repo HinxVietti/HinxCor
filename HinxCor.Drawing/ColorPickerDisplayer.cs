@@ -4,8 +4,14 @@ using System.Windows.Forms;
 
 namespace HinxCor.Drawing
 {
+    /// <summary>
+    /// 拾取色彩展示窗口
+    /// </summary>
     public partial class ColorPickerDisplayer : Form
     {
+        /// <summary>
+        /// 构造
+        /// </summary>
         public ColorPickerDisplayer()
         {
             InitializeComponent();
@@ -14,6 +20,9 @@ namespace HinxCor.Drawing
             this.WindowState = FormWindowState.Maximized;
         }
         private Color pixColor = Color.Green;
+        /// <summary>
+        /// 拾色器当前的颜色
+        /// </summary>
         public Color color;
         const int magnification = 3;//倍率，调节放大倍数,可由TrackBar控制调节  
         const int imgWidth = 120;//放大后图片的宽度
@@ -21,6 +30,11 @@ namespace HinxCor.Drawing
         Point offset = new Point(25, 25);
         Point startPosition = new Point(Cursor.Position.X - imgWidth / (2 * magnification), Cursor.Position.Y - imgHeight / (2 * magnification));
 
+        /// <summary>
+        /// 显示
+        /// </summary>
+        /// <param name="fname"></param>
+        /// <returns></returns>
         public DialogResult ShowPicker(string fname)
         {
             Image img = Image.FromFile(fname);
@@ -29,16 +43,26 @@ namespace HinxCor.Drawing
             return this.ShowDialog();
         }
 
+        /// <summary>
+        /// 设置当前颜色
+        /// </summary>
+        /// <param name="c"></param>
         public void SetColor(Color c)
         {
             this.pixColor = c;
         }
 
+        /// <summary>
+        /// 开始计时器
+        /// </summary>
         public void StartTimer()
         {
             timer1.Start();
         }
 
+        /// <summary>
+        /// 关闭计时器
+        /// </summary>
         public void EndTimer()
         {
             timer1.Stop();

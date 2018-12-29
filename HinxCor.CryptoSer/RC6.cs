@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace HinxCor.CryptoSer
 {
+    /// <summary>
+    /// 山寨rc6 算法
+    /// </summary>
     public class RC6
     {
         /// <summary>
@@ -18,13 +21,19 @@ namespace HinxCor.CryptoSer
         /// Mail:chscwyyg@163.com 电话:0832-8229211
         /// </summary>
         private string m_sEncryptionKey;                                             //密码方法通过KEY属性返回值
-        public string m_sCryptedText;                                                //加密解密字符串返回值
+        /// <summary>
+        /// 加密解密字符串返回值
+        /// </summary>
+        public string m_sCryptedText;                                                //
         private int m_nChipherlen;                                                   //密码字节数，控制加密最低为128,最好256,间192，有三种选择种16,24,32
         private const int m_nWord = 32;
         private const int r = 20;
         private const int c = 4;
         private uint[] m_nKeyExpandBox;                                              //系统密钥数组
         uint[] n_WordBox;                                                            //用户私有密钥
+        /// <summary>
+        /// 编码方式
+        /// </summary>
         public Encoding Enc_default = Encoding.Unicode;
 
         /// <summary>
@@ -184,7 +193,7 @@ namespace HinxCor.CryptoSer
         /// <returns></returns>
         public string Encrypt(string str, string prssword)
         {
-            
+
 
             //验证明文长度不能小开32,
             str = (str.Length % 32 != 0 ? str.PadRight(str.Length + (32 - (str.Length % 32)), '\0') : str);//不足补空字符串

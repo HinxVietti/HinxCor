@@ -11,13 +11,24 @@ using SharpFont.Gdi;
 
 namespace HinxCor.Drawing
 {
+    /// <summary>
+    /// fz
+    /// </summary>
     public static class Helper
     {
+        /// <summary>
+        /// 获取一个默认的bmp
+        /// </summary>
+        /// <returns></returns>
         public static Bitmap GetImage()
         {
             return default(Bitmap);
         }
 
+        /// <summary>
+        /// 创建bmp
+        /// </summary>
+        /// <returns></returns>
         public static Bitmap CreateBitmapImage()
         {
             string infoString = "";  // enough space for one line of output
@@ -97,6 +108,12 @@ namespace HinxCor.Drawing
             return bmp;
         }
 
+        /// <summary>
+        /// 创建bmp
+        /// </summary>
+        /// <param name="sImageText"></param>
+        /// <param name="objFont"></param>
+        /// <returns></returns>
         public static Bitmap CreateBitmapImage(string sImageText, Font objFont)
         {
             Bitmap objBmpImage = new Bitmap(1, 1);
@@ -126,7 +143,11 @@ namespace HinxCor.Drawing
             objGraphics.Flush();
             return (objBmpImage);
         }
-
+        /// <summary>
+        /// 创建bmp
+        /// </summary>
+        /// <param name="sImageText"></param>
+        /// <returns></returns>
         public static Bitmap CreateBitmapImage(string sImageText)
         {
             Font objFont = new Font("Arial", 20, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
@@ -160,11 +181,24 @@ namespace HinxCor.Drawing
             //return (objBmpImage);
         }
 
+        /// <summary>
+        /// 创建bmp
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public static void DrawString(string str, int x, int y)
         {
 
         }
 
+        /// <summary>
+        /// 创建bmp
+        /// </summary>
+        /// <param name="bmp"></param>
+        /// <param name="c"></param>
+        /// <param name="f"></param>
+        /// <param name="b"></param>
         public static void DrawChar(ref Bitmap bmp, char c, Font f, Brush b)
         {
             string s = c.ToString();
@@ -175,6 +209,17 @@ namespace HinxCor.Drawing
             //return bmp;
         }
 
+        /// <summary>
+        /// 创建bmp
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <param name="fontname"></param>
+        /// <param name="fontsize"></param>
+        /// <param name="bgcolor"></param>
+        /// <param name="fcolor"></param>
+        /// <param name="width"></param>
+        /// <param name="Height"></param>
+        /// <returns></returns>
         public static Bitmap ConvertTextToImage(string txt, string fontname, int fontsize, Color bgcolor, Color fcolor, int width, int Height)
         {
             Bitmap bmp = new Bitmap(width, Height);

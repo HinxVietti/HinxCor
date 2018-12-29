@@ -12,6 +12,7 @@ using HinxCor.Rendering;
 
 namespace DemoApp
 {
+#pragma warning disable
     class Program
     {
         [STAThread]
@@ -21,17 +22,25 @@ namespace DemoApp
             //DemoFontTxt();
             //DemoMethod564a6c();
             //DemoMethodsd453();
-            DemoMethod2d5f8a();
+            //DemoMethod2d5f8a();
 
-            //Bitmap bitmap = new Bitmap(1, 1);
-            //Font f = GetFont();
-            //Graphics g = Graphics.FromImage(bitmap);
-            //float a1 = g.MeasureString(" ", f).Width;
-            //float a2 = g.MeasureString("\r", f).Width;
-            //float a3 = g.MeasureString("\n", f).Width;
-            //float a4 = g.MeasureString("\t", f).Width;
-            //float a5 = g.MeasureString("\n\r", f).Width;
-            //Console.ReadKey();
+            Bitmap bitmap = new Bitmap(1, 1);
+            Font f = GetFont();
+            Graphics g = Graphics.FromImage(bitmap);
+            float a11 = g.MeasureString(" ", f).Width;
+            float a21 = g.MeasureString("  ", f).Width;
+            float a31 = g.MeasureString("   ", f).Width;
+            float a41 = g.MeasureString("    ", f).Width;
+            float b1 = g.MeasureString("x", f).Width;
+            float b2 = g.MeasureString("xx", f).Width;
+            float b3 = g.MeasureString("xxx", f).Width;
+            float b4 = g.MeasureString("xxxx", f).Width;
+            float a2 = g.MeasureString("\r", f).Width;
+            float a3 = g.MeasureString("\n", f).Width;
+            float a4 = g.MeasureString("\t", f).Width;
+            float a5 = g.MeasureString("\n\r", f).Width;
+            string str = System.Environment.NewLine;
+            Console.ReadKey();
 
         }
 
@@ -41,12 +50,12 @@ namespace DemoApp
         private static void DemoMethod2d5f8a()
         {
             string str = "你好,中国" + "\n" +
-                "这是新的内容哦" + "\n" +
+                "这是新的内容哦,卡卡卡卡卡卡卡卡" + "\n" +
                 "hello world" + "\n" +
-                "GG bold" + "\r" +
-                "狗狗狗" + "\n\r" +
-                "TTTTTTTTTTT" + "\r\n"
-                +"H啊哈哈哈";
+                "GG bold&#03;" +
+                "狗狗狗" + "\n" +
+                "1234567890" + "\r\n"
+                + "H啊哈哈哈";
 
 
             Console.WriteLine("请输入段落文本,输入Q + Enter 结束");
@@ -62,7 +71,7 @@ namespace DemoApp
 
             Func<string, Bitmap> drawStr = mstr =>
              {
-                 return BitmapGenerator.DrawString(str, font, default(Rectangle), 0, 0, Color.Gray, Color.White, format, TextRenderingHint.AntiAlias);
+                 return BitmapGenerator.DrawString(str, font, default(Rectangle), 25, 20, Color.Gray, Color.White, format, TextRenderingHint.AntiAlias);
              };
             Func<string, Bitmap> getBmp = mstr =>
            {
@@ -88,7 +97,7 @@ namespace DemoApp
             bmp.Save(pth, ImageFormat.Png);
             OpenFileInExplorer(pth);
             Console.WriteLine("OK");
-            Console.ReadKey();
+            //Console.ReadKey();
         }
 
 
