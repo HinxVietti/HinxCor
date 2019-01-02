@@ -19,16 +19,21 @@ namespace DemoApp
         [STAThread]
         static void Main(string[] args)
         {
-            //DemoColorPicker();
-            //DemoFontTxt();
-            //DemoMethod564a6c();
-            //DemoMethodsd453();
-            //DemoMethod2d5f8a();
-            //DemoMethodsd453();
-            //DemoMethodf4a65f153e();
-            DemoFunc84as6f4as354f();
+
+            //DemoFunc84as6f4as354f();
+            DemoFunc4d65af4864f867();
         }
 
+
+        /// <summary>
+        /// 测试写入bitmap
+        /// </summary>
+        private static void DemoFunc4d65af4864f867()
+        {
+            Form2 test = new Form2();
+            test.ShowDialog();
+
+        }
 
         private static void DemoFunc84as6f4as354f()
         {
