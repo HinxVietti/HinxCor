@@ -42,28 +42,27 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.DrawstringBox);
             this.panel1.Controls.Add(this.GetBmpBox);
             this.panel1.Location = new System.Drawing.Point(12, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(619, 436);
+            this.panel1.Size = new System.Drawing.Size(619, 666);
             this.panel1.TabIndex = 0;
             // 
             // DrawstringBox
             // 
             this.DrawstringBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.DrawstringBox.Location = new System.Drawing.Point(3, 193);
+            this.DrawstringBox.Location = new System.Drawing.Point(12, 280);
             this.DrawstringBox.Name = "DrawstringBox";
-            this.DrawstringBox.Size = new System.Drawing.Size(613, 240);
+            this.DrawstringBox.Size = new System.Drawing.Size(616, 370);
             this.DrawstringBox.TabIndex = 0;
             this.DrawstringBox.TabStop = false;
             // 
             // GetBmpBox
             // 
             this.GetBmpBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.GetBmpBox.Location = new System.Drawing.Point(0, 0);
+            this.GetBmpBox.Location = new System.Drawing.Point(-3, 0);
             this.GetBmpBox.Name = "GetBmpBox";
-            this.GetBmpBox.Size = new System.Drawing.Size(616, 187);
+            this.GetBmpBox.Size = new System.Drawing.Size(619, 272);
             this.GetBmpBox.TabIndex = 0;
             this.GetBmpBox.TabStop = false;
             // 
@@ -109,7 +108,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(949, 662);
+            this.Controls.Add(this.DrawstringBox);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox1);

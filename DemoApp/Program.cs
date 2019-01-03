@@ -21,7 +21,56 @@ namespace DemoApp
         {
 
             //DemoFunc84as6f4as354f();
-            DemoFunc4d65af4864f867();
+            //DemoFunc4d65af4864f867();
+            DemoFun1d56as1f5641w6();
+        }
+
+
+        /// <summary>
+        /// 测试两种不同的绘制方法的耗时量
+        /// A 计算 DrawText 可以设置行距和字距, B 计算是常规计算
+        /// 绘制结果相同;比较时差
+        /// </summary>
+        private static void DemoFun1d56as1f5641w6()
+        {
+            Console.WriteLine("开始测试");
+            string str = "das4f5a6s4f156qw41f56s1a65f41qw641f6a5x1f65qw1561f65q1\n" +
+                "ashfui坏事发生发安分俺师傅\n好发顺丰哈是否" +
+                "/方便";
+            Font font = new Font("微软雅黑", 24);
+            StringFormat ffffff = StringFormat.GenericDefault;
+            int testcount = 1000;
+            DateTime t;
+            double ta = 0, tb = 0;
+            int c2 = 20;
+            Console.WriteLine("[                    ] 000%");//18 14
+            for (int j = 0; j < c2; j++)
+            {
+                t = System.DateTime.Now;
+                for (int i = 0; i < testcount; i++)
+                    BitmapGenerator.DrawText(str, font, Rectangle.Empty, ffffff, 5, 5, new SolidBrush(Color.Gray), Color.Transparent, System.Drawing.Text.TextRenderingHint.AntiAlias);
+                ta += (System.DateTime.Now - t).TotalMilliseconds;
+                t = System.DateTime.Now;
+                for (int i = 0; i < testcount; i++)
+                    BitmapGenerator.GetBitmap(str, font, Rectangle.Empty, Color.Gray, Color.Transparent, ffffff, System.Drawing.Text.TextRenderingHint.AntiAlias);
+                tb += (System.DateTime.Now - t).TotalMilliseconds;
+                Console.SetCursorPosition(j + 1, 1);
+                Console.Write("#");
+                Console.SetCursorPosition(23, 1);
+                Console.Write((j >= 0 && j < c2 ? "0" : "") + (j < 1 ? "0" : "") + (j + 1) * 100 / c2 + "%");
+            }
+            Console.WriteLine();
+            Console.WriteLine("测试结束,次数:" + testcount * c2);
+            Console.WriteLine(string.Format("A测试总共耗时:{0},平均耗时:{1} ms", ta.ToString("F"), (ta / c2 / testcount).ToString("F")));
+            Console.WriteLine(string.Format("B测试总共耗时:{0},平均耗时:{1} ms", tb.ToString("F"), (tb / c2 / testcount).ToString("F")));
+            var timespy = ta - tb;
+            Console.WriteLine(string.Format("测试总共时差:{0},平均时差:{1} ms", timespy.ToString("F"), (timespy / c2 / testcount).ToString("F")));
+            var bmp = BitmapGenerator.DrawText(str, font, Rectangle.Empty, ffffff, 0, 0, new SolidBrush(Color.Gray), Color.Transparent, System.Drawing.Text.TextRenderingHint.AntiAlias);
+            Console.WriteLine(string.Format("A绘制尺寸{0}x{1},共计{2} pix", bmp.Width, bmp.Height, bmp.Width * bmp.Height));
+            bmp = BitmapGenerator.GetBitmap(str, font, Rectangle.Empty, Color.Gray, Color.Transparent, ffffff, System.Drawing.Text.TextRenderingHint.AntiAlias);
+            Console.WriteLine(string.Format("B绘制尺寸{0}x{1},共计{2} pix", bmp.Width, bmp.Height, bmp.Width * bmp.Height));
+            Console.ReadKey();
+
         }
 
 
