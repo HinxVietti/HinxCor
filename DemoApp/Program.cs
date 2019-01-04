@@ -22,7 +22,7 @@ namespace DemoApp
 
             //DemoFunc84as6f4as354f();
             //DemoFunc4d65af4864f867();
-            DemoFun1d56as1f5641w6();
+            //DemoFun1d56as1f5641w6();
         }
 
 
@@ -39,7 +39,7 @@ namespace DemoApp
                 "/方便";
             Font font = new Font("微软雅黑", 24);
             StringFormat ffffff = StringFormat.GenericDefault;
-            int testcount = 1000;
+            int testcount = 100;
             DateTime t;
             double ta = 0, tb = 0;
             int c2 = 20;
@@ -60,7 +60,7 @@ namespace DemoApp
                 Console.Write((j >= 0 && j < c2 ? "0" : "") + (j < 1 ? "0" : "") + (j + 1) * 100 / c2 + "%");
             }
             Console.WriteLine();
-            Console.WriteLine("测试结束,次数:" + testcount * c2);
+            Console.WriteLine("测试结束,测试次数:" + testcount * c2);
             Console.WriteLine(string.Format("A测试总共耗时:{0},平均耗时:{1} ms", ta.ToString("F"), (ta / c2 / testcount).ToString("F")));
             Console.WriteLine(string.Format("B测试总共耗时:{0},平均耗时:{1} ms", tb.ToString("F"), (tb / c2 / testcount).ToString("F")));
             var timespy = ta - tb;
