@@ -10,6 +10,8 @@ using System.Drawing.Text;
 using System.Drawing.Drawing2D;
 using HinxCor.Rendering;
 using System.Text;
+using LitJson;
+using HinxCor.Rendering.Text;
 
 namespace DemoApp
 {
@@ -23,6 +25,70 @@ namespace DemoApp
             //DemoFunc84as6f4as354f();
             //DemoFunc4d65af4864f867();
             //DemoFun1d56as1f5641w6();
+
+            //TextObject obj = new TextObject();
+
+            ImporterFunc<string, Single> importer = delegate (string fl)
+            {
+                return Single.Parse(fl);
+            };
+            ExporterFunc<Single> exporter = delegate (Single num, JsonWriter writer)
+            {
+                writer.Write(num.ToString());
+            };
+
+            ImporterFunc<string, Color> importerc = delegate (string fl)
+            {
+                Console.WriteLine("from Pareset:" + fl);
+                return Color.White;
+            };
+            ExporterFunc<Color> exporterc = delegate (Color num, JsonWriter writer)
+            {
+                writer.WriteArrayStart();
+                writer.WriteObjectStart();
+                writer.WritePropertyName("A");
+                writer.Write(num.A);
+                writer.WritePropertyName("R");
+                writer.Write(num.R);
+                writer.WritePropertyName("G");
+                writer.Write(num.G);
+                writer.WritePropertyName("B");
+                writer.Write(num.B);
+                writer.WriteObjectEnd();
+                writer.WriteArrayEnd();
+            };
+
+            JsonMapper.RegisterExporter(exporter);
+            JsonMapper.RegisterImporter(importer);
+            JsonMapper.RegisterExporter(exporterc);
+            JsonMapper.RegisterImporter(importerc);
+
+
+            txtobj obj = new txtobj();
+            string json = LitJson.JsonMapper.ToJson(obj);
+            var go = JsonMapper.ToObject<txtobj>(json);
+
+            JsonMapper.UnregisterExporters();
+            JsonMapper.UnregisterImporters();
+            Console.WriteLine(json);
+            Console.ReadKey();
+        }
+
+        [System.Serializable]
+        public class txtobj
+        {
+            public TextRenderingHint renderingHint;
+            //public Rectangle rect;
+            public float LineSpacing;
+            public int CharSpacing;
+            //public System.Drawing.Color bgColor;
+            public StringFormat stringFormat;
+            public string FontName;
+            public int FontSize;
+            public System.Drawing.Color fontColor;
+            public string Text;
+            public System.Drawing.FontStyle fontStyle;
+            public bool verticalF;
         }
 
 
