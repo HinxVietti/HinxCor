@@ -573,7 +573,8 @@ namespace HinxCor.Rendering
         /// <returns></returns>
         public static Bitmap DrawText(string str, Font font, Rectangle rect, StringFormat format, float lineSpacing, float charSpacing, Brush brush, Color backColor, TextRenderingHint renderingHint)//
         {
-            str = str.Replace('\r', ' ');//防止为本不和谐,/r置空
+            str = Regex.Replace(str, "\r", string.Empty);
+            //str = str.Replace('\r', ' ');//防止为本不和谐,/r置空
             Bitmap bmp = new Bitmap(1, 1);
             Graphics g = Graphics.FromImage(bmp);
             var lines = SplitAsLine(str);
@@ -647,6 +648,8 @@ namespace HinxCor.Rendering
             return bmp;
         }
 
+
+
         private static float getLineLength(Graphics g, string str, Font f, float charSpacing)
         {
             return g.MeasureString(str, f).Width + charSpacing * (str.Length - 1);
@@ -678,13 +681,39 @@ namespace HinxCor.Rendering
         /// <param name="charSpacing"></param>
         public static void DrawLine(ref Graphics g, Font f, Brush brush, string text, PointF point, float charSpacing)
         {
-            for (int i = 0; i < text.Length; i++)
+            float wid = 0;
+            int spaceCount = 0;
+            for (int j = 0; j < text.Length; j++)
+                if (text[j] == ' ') spaceCount++;
+            if (spaceCount > 0)
             {
-                string c = text[i].ToString();
-                DrawChar(ref g, c, point, brush, f);
-                float wid = g.MeasureString(c == " " ? "a" : c, f).Width + charSpacing;
-                point.X += wid;
+                float awid = g.MeasureString(text, f).Width;
+                var txt2 = Regex.Replace(text, " ", string.Empty);
+                awid = awid - g.MeasureString(txt2, f).Width;
+
+                awid /= spaceCount;
+
+                for (int i = 0; i < text.Length; i++)
+                {
+                    string c = text[i].ToString();
+                    if (text[i] == ' ')
+                        wid = awid /*+ charSpacing*/;
+                    else
+                    {
+                        DrawChar(ref g, c, point, brush, f);
+                        wid = g.MeasureString(c, f).Width + charSpacing;
+                    }
+                    point.X += wid;
+                }
             }
+            else
+                for (int i = 0; i < text.Length; i++)
+                {
+                    string c = text[i].ToString();
+                    DrawChar(ref g, c, point, brush, f);
+                    wid = g.MeasureString(c, f).Width + charSpacing;
+                    point.X += wid;
+                }
         }
 
         /// <summary>

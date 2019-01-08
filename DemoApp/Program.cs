@@ -21,18 +21,22 @@ namespace DemoApp
         [STAThread]
         static void Main(string[] args)
         {
+            //Font f = GetFont();
+            //Bitmap bmp = new Bitmap(1, 1);
+            //Graphics g = Graphics.FromImage(bmp);
+            //float a1 = g.MeasureString("aaa", f).Width;
+            //float a2 = g.MeasureString("a", f).Width;
+            //float a4 = g.MeasureString(" ", f).Width;
+            //float a3 = g.MeasureString("a a", f).Width;
+            //float a6 = g.MeasureString("   ", f).Width;
+            //Console.WriteLine(a1 - a3);
+            //float a5 = g.MeasureString("   ", f).Width;
 
-            string str = "          ";
-            string str2 = "1234567890";
-            string str3 = "1 2 3 4 5 ";
-            var array1 = str.ToCharArray();
-            var array2 = str2.ToCharArray();
-            var array3 = str3.ToCharArray();
-            Console.WriteLine(str.Length);
-            Console.WriteLine(str2.Length);
-            Console.WriteLine(str3.Length);
+            //string str = "a a";
+            //string str1 = "aaa";
+            //string str2 = "aa";
 
-            Console.ReadKey();
+            DemoFun1d56as1f5641w6();
             //DemoFunc4d65af4864f867();
         }
 
@@ -111,10 +115,10 @@ namespace DemoApp
         private static void DemoFun1d56as1f5641w6()
         {
             Console.WriteLine("开始测试");
-            string str = "das4f5a6s4f156qw41f56s1a65f41qw641f6a5x1f65qw1561f65q1\n" +
+            string str = "das4f5a6s4f156qw41f5\n6s1a65f4\n1qw641f6a5x1f65qw1561f65q1\n" +
                 "ashfui坏事发生发安分俺师傅\n好发顺丰哈是否" +
                 "/方便";
-            Font font = new Font("微软雅黑", 24);
+            Font font = new Font("微软雅黑", 80);
             StringFormat ffffff = StringFormat.GenericDefault;
             int testcount = 100;
             DateTime t;
@@ -131,6 +135,7 @@ namespace DemoApp
                 for (int i = 0; i < testcount; i++)
                     BitmapGenerator.GetBitmap(str, font, Rectangle.Empty, Color.Gray, Color.Transparent, ffffff, System.Drawing.Text.TextRenderingHint.AntiAlias);
                 tb += (System.DateTime.Now - t).TotalMilliseconds;
+                GC.Collect();
                 Console.SetCursorPosition(j + 1, 1);
                 Console.Write("#");
                 Console.SetCursorPosition(23, 1);
