@@ -22,12 +22,23 @@ namespace DemoApp
         static void Main(string[] args)
         {
 
-            //DemoFunc84as6f4as354f();
+            string str = "          ";
+            string str2 = "1234567890";
+            string str3 = "1 2 3 4 5 ";
+            var array1 = str.ToCharArray();
+            var array2 = str2.ToCharArray();
+            var array3 = str3.ToCharArray();
+            Console.WriteLine(str.Length);
+            Console.WriteLine(str2.Length);
+            Console.WriteLine(str3.Length);
+
+            Console.ReadKey();
             //DemoFunc4d65af4864f867();
-            //DemoFun1d56as1f5641w6();
+        }
 
-            //TextObject obj = new TextObject();
 
+        private void fff()
+        {
             ImporterFunc<string, Single> importer = delegate (string fl)
             {
                 return Single.Parse(fl);

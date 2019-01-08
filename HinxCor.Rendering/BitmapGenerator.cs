@@ -682,7 +682,7 @@ namespace HinxCor.Rendering
             {
                 string c = text[i].ToString();
                 DrawChar(ref g, c, point, brush, f);
-                float wid = g.MeasureString(c, f).Width + charSpacing;
+                float wid = g.MeasureString(c == " " ? "r" : c, f).Width + charSpacing;
                 point.X += wid;
             }
         }
