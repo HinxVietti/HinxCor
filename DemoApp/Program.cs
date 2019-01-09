@@ -36,8 +36,12 @@ namespace DemoApp
             //string str1 = "aaa";
             //string str2 = "aa";
 
-            DemoFun1d56as1f5641w6();
+
+            //DemoFun1d56as1f5641w6();
             //DemoFunc4d65af4864f867();
+
+            Form3 f = new Form3();
+            f.ShowDialog();
         }
 
 
@@ -199,6 +203,7 @@ namespace DemoApp
             string folder = /*GetFolder();*/ "D:\\Demo Output";
             bitmap.Save(folder + "/" + f.Name + a + "_" + f.Size + ".png", ImageFormat.Png);
             OpenInExplorer(folder);
+
         }
 
         /// <summary>
