@@ -573,6 +573,9 @@ namespace HinxCor.Rendering
         /// <returns></returns>
         public static Bitmap DrawText(string str, Font font, Rectangle rect, StringFormat format, float lineSpacing, float charSpacing, Brush brush, Color backColor, TextRenderingHint renderingHint)//
         {
+            if (string.IsNullOrEmpty(str))
+                return new Bitmap(5, font.Height);
+
             str = Regex.Replace(str, "\r", string.Empty);
             //str = str.Replace('\r', ' ');//防止为本不和谐,/r置空
             Bitmap bmp = new Bitmap(1, 1);
