@@ -269,6 +269,17 @@ namespace HinxCor.Rendering.Text
             };
         }
 
+        /// <summary>
+        /// 设置字体属性
+        /// </summary>
+        /// <param name="font"></param>
+        public void SetFont(Font font)
+        {
+            this.fontName = font.Name;
+            this.FontSize = font.Size;
+            this.FontStyle = font.Style;
+        }
+
 
     }
 }

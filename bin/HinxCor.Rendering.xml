@@ -746,5 +746,11 @@
             <param name="linesp">行距</param>
             <param name="charsp">字间距</param>
         </member>
+        <member name="M:HinxCor.Rendering.Text.TextObject.SetFont(System.Drawing.Font)">
+            <summary>
+            设置字体属性
+            </summary>
+            <param name="font"></param>
+        </member>
     </members>
 </doc>
