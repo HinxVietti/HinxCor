@@ -40,8 +40,7 @@ namespace DemoApp
             //DemoFun1d56as1f5641w6();
             //DemoFunc4d65af4864f867();
 
-            Form3 f = new Form3();
-            f.ShowDialog();
+            DemoFun1d56as1f5641w6();
         }
 
 

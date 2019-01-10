@@ -48,7 +48,7 @@ this.webBrowser1.Document.All;
         private Image GetWebImage(WebBrowser WebCtl, HtmlElement ImgeTag)
         {
             //ImgeTag.
-            
+            return new Bitmap(1, 1);
             //HTMLDocument doc = (HTMLDocument)WebCtl.Document.DomDocument;
             //HTMLBody body = (HTMLBody)doc.body;
             //IHTMLControlRange rang = (IHTMLControlRange)body.createControlRange();

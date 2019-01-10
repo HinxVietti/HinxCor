@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace HinxCor.Network
 {
@@ -34,7 +35,7 @@ namespace HinxCor.Network
             //}
             //Console.WriteLine("Over..");
             //Console.ReadKey();
-          
+          //OpenFileDialog 
 
         }
 
