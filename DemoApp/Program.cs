@@ -21,26 +21,14 @@ namespace DemoApp
         [STAThread]
         static void Main(string[] args)
         {
-            //Font f = GetFont();
-            //Bitmap bmp = new Bitmap(1, 1);
-            //Graphics g = Graphics.FromImage(bmp);
-            //float a1 = g.MeasureString("aaa", f).Width;
-            //float a2 = g.MeasureString("a", f).Width;
-            //float a4 = g.MeasureString(" ", f).Width;
-            //float a3 = g.MeasureString("a a", f).Width;
-            //float a6 = g.MeasureString("   ", f).Width;
-            //Console.WriteLine(a1 - a3);
-            //float a5 = g.MeasureString("   ", f).Width;
 
-            //string str = "a a";
-            //string str1 = "aaa";
-            //string str2 = "aa";
-
+            //wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
+            //chmod +x shadowsocks.sh
+            //./shadowsocks.sh 2>&1 | tee shadowsocks.log
 
             //DemoFun1d56as1f5641w6();
-            //DemoFunc4d65af4864f867();
-
-            DemoFun1d56as1f5641w6();
+            Form4 form = new Form4();
+            form.ShowDialog();
         }
 
 

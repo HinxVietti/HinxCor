@@ -748,7 +748,10 @@
         </member>
         <member name="M:HinxCor.Rendering.Text.TextObject.SetFont(System.Drawing.Font)">
             <summary>
-            设置字体属性
+            设置字体属性;
+            FName;
+            FSize;
+            FStyle
             </summary>
             <param name="font"></param>
         </member>

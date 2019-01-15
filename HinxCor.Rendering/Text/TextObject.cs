@@ -69,7 +69,13 @@ namespace HinxCor.Rendering.Text
         /// <summary>
         /// 文本的字体
         /// </summary>
-        public Font font { get; private set; }
+        public Font font
+        {
+            get
+            {
+                return new Font(this.fontName, this.FontSize, this.FontStyle);
+            }
+        }
         /// <summary>
         /// 绘制提示
         /// </summary>
@@ -258,7 +264,7 @@ namespace HinxCor.Rendering.Text
             this.Rect = Rectangle.Empty;
             this.renderingHint = TextRenderingHint.AntiAlias;
             this.VerticalFont = false;
-            this.font = new Font(this.fontName, this.FontSize, this.FontStyle);
+            //this.font = new Font(this.fontName, this.FontSize, this.FontStyle);
             this.Drawer = txtobj =>
             {
                 return BitmapGenerator.DrawText(txtobj.text, txtobj.font, txtobj.Rect, txtobj.format, txtobj.LineSpacing,
@@ -270,7 +276,10 @@ namespace HinxCor.Rendering.Text
         }
 
         /// <summary>
-        /// 设置字体属性
+        /// 设置字体属性;
+        /// FName;
+        /// FSize;
+        /// FStyle
         /// </summary>
         /// <param name="font"></param>
         public void SetFont(Font font)
