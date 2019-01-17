@@ -42,9 +42,14 @@ namespace DemoApp
             SizeF size = g.MeasureString("囖", f);
             bmp = new Bitmap(bmp, (int)size.Width, (int)size.Height);
             g = Graphics.FromImage(bmp);
-            Image img = Image.FromFile("D:\\1.jpg");
-            TextureBrush brush = new TextureBrush(img);
-            g.DrawString("囖", f, brush, 0, 0);
+
+            Bitmap image1 = (Bitmap)Image.FromFile(@"D:\2.jpg", true);
+            TextureBrush texture = new TextureBrush(image1);
+            texture.WrapMode = WrapMode.Tile;
+
+            //Image img = Image.FromFile("D:\\1.jpg");
+            //TextureBrush brush = new TextureBrush(img, WrapMode.Tile);
+            g.DrawString("囖", f, texture, 0, 0);
             g.Flush();
             this.pictureBox.Image = bmp;
         }
@@ -58,7 +63,8 @@ namespace DemoApp
             g = Graphics.FromImage(bmp);
             Image img = Image.FromFile("D:\\1.jpg");
 
-            HatchBrush brush = new HatchBrush(HatchStyle.Cross, Color.Blue);
+            HatchBrush brush = new HatchBrush(HatchStyle.DarkUpwardDiagonal, Color.Blue, Color.Orange);
+
             g.DrawString("囖", f, brush, 0, 0);
             g.Flush();
             this.pictureBox.Image = bmp;
@@ -73,7 +79,7 @@ namespace DemoApp
             g = Graphics.FromImage(bmp);
             Image img = Image.FromFile("D:\\1.jpg");
 
-            LinearGradientBrush brush = new LinearGradientBrush(new PointF(0, 0.5f), new PointF(0.5f, 1), Color.Green, Color.Yellow);
+            LinearGradientBrush brush = new LinearGradientBrush(new PointF(0, 0), new PointF(1f, 1), Color.Green, Color.Yellow);
             g.DrawString("囖", f, brush, 0, 0);
             g.Flush();
             this.pictureBox.Image = bmp;
