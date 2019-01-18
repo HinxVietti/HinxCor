@@ -30,9 +30,7 @@ namespace DemoApp
             //Form4 form = new Form4();
             //form.ShowDialog();
 
-            Form1 f = new Form1();
-            f.ShowDialog();
-
+            测试加密RC4();
 
         }
 

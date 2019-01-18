@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace HinxCor.CryptoSer
 {
@@ -12,7 +11,7 @@ namespace HinxCor.CryptoSer
     using System.Text;
 
 
-    namespace WindowsApplication1
+    namespace demo
     {
 
         class RC6
