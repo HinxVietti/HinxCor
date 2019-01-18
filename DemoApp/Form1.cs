@@ -20,19 +20,7 @@ namespace DemoApp
             Form1_Load();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (this.textBox1.Text == "") { MessageBox.Show("请输入加密的明文"); this.textBox1.Focus(); return; }
-            if (this.textBox3.Text == "") { MessageBox.Show("请输入加密的密钥"); this.textBox3.Focus(); return; }
-            comboBox1_SelectedIndexChanged();
-            RC6 RC = new RC6(round);
-            //如果手动输入加密向量RC.IV = -1;请使用RC._IV():函数进行验证。
 
-            textBox2.Text = RC.Encrypt(this.textBox1.Text, this.textBox3.Text);
-            comboBox1.Enabled = false; comboBox1.ForeColor = System.Drawing.SystemColors.WindowText;
-            textBox2.Enabled = false; textBox2.ForeColor = System.Drawing.SystemColors.WindowText;
-            textBox3.Enabled = false; textBox3.ForeColor = System.Drawing.SystemColors.WindowText;
-        }
 
         private void comboBox1_SelectedIndexChanged()
         {
@@ -54,11 +42,25 @@ namespace DemoApp
         private void button2_Click(object sender, EventArgs e)
         {
             comboBox1_SelectedIndexChanged();
+            if (round == 0) round = 16;
             RC6 RC = new RC6(round);
-            this.label6.Text = RC.Decrypt(this.textBox2.Text, this.textBox3.Text+"123");
-            comboBox1.Enabled = true; comboBox1.ForeColor = System.Drawing.SystemColors.WindowText;
-            textBox2.Enabled = true; textBox2.ForeColor = System.Drawing.SystemColors.WindowText;
-            textBox3.Enabled = true; textBox3.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.label6.Text = RC.Decrypt(this.textBox2.Text, this.textBox3.Text);
+            comboBox1.Enabled = true; comboBox1.ForeColor = SystemColors.WindowText;
+            textBox2.Enabled = true; textBox2.ForeColor = SystemColors.WindowText;
+            textBox3.Enabled = true; textBox3.ForeColor = SystemColors.WindowText;
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (this.textBox1.Text == "") { MessageBox.Show("请输入加密的明文"); this.textBox1.Focus(); return; }
+            if (this.textBox3.Text == "") { MessageBox.Show("请输入加密的密钥"); this.textBox3.Focus(); return; }
+            comboBox1_SelectedIndexChanged();
+            RC6 RC = new RC6(round);
+            //如果手动输入加密向量RC.IV = -1;请使用RC._IV():函数进行验证。
+
+            textBox2.Text = RC.Encrypt(this.textBox1.Text, this.textBox3.Text);
+            comboBox1.Enabled = false; comboBox1.ForeColor = SystemColors.WindowText;
+            textBox2.Enabled = false; textBox2.ForeColor = SystemColors.WindowText;
+            textBox3.Enabled = false; textBox3.ForeColor = SystemColors.WindowText;
         }
 
         private void button2_Click_1(object sender, EventArgs e)

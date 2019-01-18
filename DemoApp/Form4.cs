@@ -67,7 +67,7 @@ namespace DemoApp
 
             g.DrawString("囖", f, brush, 0, 0);
             g.Flush();
-            this.pictureBox.Image = bmp;
+            pictureBox.Image = bmp;
         }
 
         private void LinearGradientBrush_Click(object sender, EventArgs e)

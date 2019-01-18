@@ -11,7 +11,7 @@ using System.Drawing.Drawing2D;
 using HinxCor.Rendering;
 using System.Text;
 using LitJson;
-using HinxCor.Rendering.Text;
+using HinxCor.Security;
 
 namespace DemoApp
 {
@@ -27,8 +27,39 @@ namespace DemoApp
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log
 
             //DemoFun1d56as1f5641w6();
-            Form4 form = new Form4();
-            form.ShowDialog();
+            //Form4 form = new Form4();
+            //form.ShowDialog();
+
+            Form1 f = new Form1();
+            f.ShowDialog();
+
+
+        }
+
+        static void 测试加密RC4()
+        {
+            string key = "HinxCor.EncrytoPass";
+            string codePass = "你好,世界. From HinxCor.Cryto";
+            byte[] array = Encoding.UTF8.GetBytes(key);
+            byte[] message = Encoding.UTF8.GetBytes(codePass);
+            using (RC4 rC4 = new RC4(array))
+            {
+                Console.WriteLine("原文:" + codePass);
+                var cd = rC4.encrypt(message);
+                Console.WriteLine("密文:" + Encoding.UTF8.GetString(cd));
+                var dr = rC4.Decrypt((RC4.ByteArray)cd);
+                Console.WriteLine("明文:" + Encoding.UTF8.GetString(dr));
+                Console.ReadKey();
+            }
+
+        }
+
+        static void clcintarray(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = 0;
+            }
         }
 
 

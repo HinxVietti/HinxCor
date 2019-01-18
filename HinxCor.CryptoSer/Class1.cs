@@ -34,7 +34,7 @@ namespace HinxCor.CryptoSer
             private const int c = 4;
             private uint[] m_nKeyExpandBox;                                              //系统密钥数组
             uint[] n_WordBox;                                                            //用户私有密钥
-            public Encoding Enc_default = Encoding.Unicode;
+            public Encoding Enc_default = Encoding.UTF8;
 
             /// <summary>
             /// 左位移运算函数

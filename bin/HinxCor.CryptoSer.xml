@@ -1,9 +1,123 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>HinxCor.CryptoSer</name>
+        <name>HinxCor.Security</name>
     </assembly>
     <members>
+        <member name="T:HinxCor.Security.RC4">
+             <summary>
+            RC4加密算法;
+            Please enter your massage supported Encoring. Default is UTF-8
+             </summary>
+        </member>
+        <member name="M:HinxCor.Security.RC4.#ctor">
+            <summary>
+             实例化
+            </summary>
+        </member>
+        <member name="M:HinxCor.Security.RC4.#ctor(System.Text.Encoding)">
+            <summary>
+             实例化
+            </summary>
+            <param name="encoding">编码</param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.#ctor(System.String)">
+            <summary>
+             实例化
+            </summary>
+            <param name="keyg">秘钥</param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.#ctor(System.Text.Encoding,System.String)">
+            <summary>
+             实例化
+            </summary>
+            <param name="encoding">编码</param>
+            <param name="keyg">秘钥</param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.Encrypt(System.String)">
+            <summary>
+            加密字符串
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Security.RC4.Decrypt(System.Byte[])">
+            <summary>
+            解密为字符串
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Security.RC4.#ctor(HinxCor.Security.RC4.ByteArray)">
+            <summary>
+            Construct
+            </summary>
+            <param name="key">Keygen</param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.getPoolSize">
+            <summary>
+            PSize
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Security.RC4.init(HinxCor.Security.RC4.ByteArray)">
+            <summary>
+            INIT
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.next">
+            <summary>
+            NEXT
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Security.RC4.getBlockSize">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Security.RC4.encrypt(HinxCor.Security.RC4.ByteArray)">
+            <summary>
+            加密C2C
+            </summary>
+            <param name="block"></param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.Decrypt(HinxCor.Security.RC4.ByteArray)">
+            <summary>
+            解密C2C
+            </summary>
+            <param name="block"></param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.toString">
+            <summary>
+            STR
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Security.RC4.Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:HinxCor.Security.RC4.ByteArray">
+            <summary>
+            诡异的字节数组
+            </summary>
+        </member>
+        <member name="M:HinxCor.Security.RC4.ByteArray.op_Implicit(System.Byte[])~HinxCor.Security.RC4.ByteArray">
+            <summary>
+            隐式转换byte[]为ByteArray
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.ByteArray.op_Implicit(HinxCor.Security.RC4.ByteArray)~System.Byte[]">
+            <summary>
+            隐式转换ByteArray为byte[]
+            </summary>
+            <param name="array"></param>
+        </member>
         <member name="F:HinxCor.CryptoSer.WindowsApplication1.RC6.m_sEncryptionKey">
             <summary>
             对称加解密算法RC6的C#实现
