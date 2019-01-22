@@ -617,6 +617,16 @@
             文本的字体
             </summary>
         </member>
+        <member name="P:HinxCor.Rendering.Text.TextObject.graphics">
+            <summary>
+            虚拟的Graphic
+            </summary>
+        </member>
+        <member name="P:HinxCor.Rendering.Text.TextObject.wordSpacing">
+            <summary>
+            空格的间距
+            </summary>
+        </member>
         <member name="P:HinxCor.Rendering.Text.TextObject.renderingHint">
             <summary>
             绘制提示

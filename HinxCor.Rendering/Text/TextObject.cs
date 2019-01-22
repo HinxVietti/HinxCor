@@ -76,6 +76,22 @@ namespace HinxCor.Rendering.Text
                 return new Font(this.fontName, this.FontSize, this.FontStyle);
             }
         }
+        private Bitmap bmp;
+        /// <summary>
+        /// 虚拟的Graphic
+        /// </summary>
+        public Graphics graphics
+        {
+            get
+            {
+                if (bmp == null) bmp = new Bitmap(1, 1);
+                return Graphics.FromImage(bmp);
+            }
+        }
+        /// <summary>
+        /// 空格的间距
+        /// </summary>
+        public float wordSpacing { get { return graphics.MeasureString(" ", font).Width; } }
         /// <summary>
         /// 绘制提示
         /// </summary>
