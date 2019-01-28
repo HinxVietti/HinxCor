@@ -255,37 +255,37 @@
             <summary>
             绘制bitmap文本;
             </summary>
-            <param name="str"></param>
-            <param name="font"></param>
-            <param name="rect"></param>
-            <param name="renderingHint"></param>
+            <param name="str">需要绘制的文本</param>
+            <param name="font">字体</param>
+            <param name="rect">绘制矩形框</param>
+            <param name="renderingHint">绘制筛选</param>
             <returns></returns>
         </member>
         <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.Drawing.Bitmap,System.String,System.Drawing.Font,System.Drawing.Rectangle,System.Drawing.Text.TextRenderingHint)">
             <summary>
             
             </summary>
-            <param name="bmp"></param>
-            <param name="str"></param>
-            <param name="font"></param>
-            <param name="rect"></param>
-            <param name="renderingHint"></param>
+            <param name="bmp">需要绘制的Bitmap</param>
+            <param name="str">需要绘制的文本</param>
+            <param name="font">字体</param>
+            <param name="rect">绘制矩形框</param>
+            <param name="renderingHint">绘制筛选</param>
             <returns></returns>
         </member>
         <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.Drawing.Bitmap,System.String,System.Drawing.Font,System.Drawing.Rectangle,System.Single,System.Single,System.Drawing.Color,System.Drawing.Color,System.Drawing.StringFormat,System.Drawing.Text.TextRenderingHint)">
             <summary>
             
             </summary>
-            <param name="bmp"></param>
-            <param name="str"></param>
-            <param name="font"></param>
-            <param name="rect"></param>
-            <param name="lineSpacing"></param>
-            <param name="charSpacing"></param>
-            <param name="fontColor"></param>
-            <param name="backColor"></param>
-            <param name="format"></param>
-            <param name="renderingHint"></param>
+            <param name="bmp">需要绘制的Bitmap</param>
+            <param name="str">需要绘制的文本</param>
+            <param name="font">字体</param>
+            <param name="rect">绘制矩形框</param>
+            <param name="lineSpacing">行距</param>
+            <param name="charSpacing">字间距</param>
+            <param name="fontColor">字体颜色</param>
+            <param name="backColor">背景颜色</param>
+            <param name="format">格式</param>
+            <param name="renderingHint">绘制筛选</param>
             <returns></returns>
         </member>
         <member name="M:HinxCor.Rendering.BitmapGenerator.DrawString(System.String,System.Drawing.Font,System.Drawing.Rectangle,System.Single,System.Single,System.Drawing.Color,System.Drawing.Color,System.Drawing.StringFormat,System.Drawing.Text.TextRenderingHint)">
@@ -328,15 +328,64 @@
             <summary>
             
             </summary>
-            <param name="str"></param>
-            <param name="font"></param>
-            <param name="rect"></param>
-            <param name="format"></param>
-            <param name="lineSpacing"></param>
-            <param name="charSpacing"></param>
+            <param name="str">需要绘制的文本</param>
+            <param name="font">字体</param>
+            <param name="rect">绘制矩形框</param>
+            <param name="format">格式</param>
+            <param name="lineSpacing">行距</param>
+            <param name="charSpacing">字间距</param>
             <param name="brush"></param>
-            <param name="backColor"></param>
-            <param name="renderingHint"></param>
+            <param name="backColor">背景颜色</param>
+            <param name="renderingHint">绘制筛选</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.GetSize(System.Drawing.Graphics,System.String,System.Drawing.Font,System.Single,System.Single)">
+            <summary>
+            获取大小
+            </summary>
+            <param name="g">用来衡量字符的图形</param>
+            <param name="str">字符</param>
+            <param name="font">字体</param>
+            <param name="lineSpacing">行距</param>
+            <param name="charSpacing">字间距</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawText(System.String,System.Drawing.Font,System.Drawing.SizeF,System.Drawing.StringFormat,System.Single,System.Single,System.Drawing.Brush,System.Drawing.Color,System.Drawing.Text.TextRenderingHint)">
+            <summary>
+            绘制文本
+            </summary>
+            <param name="str">需要绘制的文本</param>
+            <param name="font">字体</param>
+            <param name="size">大小</param>
+            <param name="format">格式</param>
+            <param name="lineSpacing">行距</param>
+            <param name="charSpacing">字间距</param>
+            <param name="brush"></param>
+            <param name="backColor">背景颜色</param>
+            <param name="renderingHint">绘制筛选</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.ClearBack(System.Drawing.Bitmap,System.Drawing.Color)">
+            <summary>
+            清空背景
+            </summary>
+            <param name="bmp">需要绘制的Bitmap</param>
+            <param name="backColor">背景颜色</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Rendering.BitmapGenerator.DrawText(System.Drawing.Bitmap,System.String,System.Drawing.Font,System.Drawing.SizeF,System.Drawing.StringFormat,System.Single,System.Single,System.Drawing.Brush,System.Drawing.Text.TextRenderingHint)">
+            <summary>
+            绘制文本
+            </summary>
+            <param name="bmp">需要绘制的Bitmap</param>
+            <param name="str">需要绘制的文本</param>
+            <param name="font">字体</param>
+            <param name="size">大小</param>
+            <param name="format">格式</param>
+            <param name="lineSpacing">行距</param>
+            <param name="charSpacing">字间距</param>
+            <param name="brush"></param>
+            <param name="renderingHint">绘制筛选</param>
             <returns></returns>
         </member>
         <member name="M:HinxCor.Rendering.BitmapGenerator.DrawLine(System.Drawing.Graphics@,System.Drawing.Font,System.Drawing.Brush,System.String,System.Drawing.PointF,System.Single)">
@@ -348,7 +397,7 @@
             <param name="brush"></param>
             <param name="text"></param>
             <param name="point"></param>
-            <param name="charSpacing"></param>
+            <param name="charSpacing">字间距</param>
         </member>
         <member name="M:HinxCor.Rendering.BitmapGenerator.DrawChar(System.Drawing.Graphics@,System.String,System.Drawing.PointF,System.Drawing.Brush,System.Drawing.Font)">
             <summary>
@@ -615,6 +664,21 @@
         <member name="P:HinxCor.Rendering.Text.TextObject.font">
             <summary>
             文本的字体
+            </summary>
+        </member>
+        <member name="P:HinxCor.Rendering.Text.TextObject.graphics">
+            <summary>
+            虚拟的Graphic
+            </summary>
+        </member>
+        <member name="P:HinxCor.Rendering.Text.TextObject.Size">
+            <summary>
+            文字BMP的size
+            </summary>
+        </member>
+        <member name="P:HinxCor.Rendering.Text.TextObject.wordSpacing">
+            <summary>
+            空格的间距
             </summary>
         </member>
         <member name="P:HinxCor.Rendering.Text.TextObject.renderingHint">

@@ -88,6 +88,12 @@ namespace HinxCor.Rendering.Text
                 return Graphics.FromImage(bmp);
             }
         }
+
+        /// <summary>
+        /// 文字BMP的size
+        /// </summary>
+        public SizeF Size { get { return BitmapGenerator.GetSize(graphics, text, font, LineSpacing, CharSpacing); } }
+
         /// <summary>
         /// 空格的间距
         /// </summary>
@@ -285,9 +291,6 @@ namespace HinxCor.Rendering.Text
             {
                 return BitmapGenerator.DrawText(txtobj.text, txtobj.font, txtobj.Rect, txtobj.format, txtobj.LineSpacing,
                     txtobj.CharSpacing, txtobj.Brush, txtobj.bgColor, txtobj.renderingHint);
-                ////TODO: 修复,该绘制方法有点bug fixed. 2019年1月3日15:59:05
-                //return BitmapGenerator.DrawString(txtobj.text, txtobj.font, txtobj.Rect, txtobj.LineSpacing,
-                //    txtobj.CharSpacing, txtobj.fontColor, txtobj.bgColor, txtobj.format, txtobj.renderingHint);
             };
         }
 

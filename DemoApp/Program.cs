@@ -12,6 +12,8 @@ using HinxCor.Rendering;
 using System.Text;
 using LitJson;
 using HinxCor.Security;
+using GDIPlus;
+using HinxCor.Rendering.Text;
 
 namespace DemoApp
 {
@@ -26,12 +28,9 @@ namespace DemoApp
             //chmod +x shadowsocks.sh
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log
 
-            //DemoFun1d56as1f5641w6();
-            //Form4 form = new Form4();
-            //form.ShowDialog();
+            DemoFun计算高次绘制Bitmap耗时();
 
-            测试加密RC4();
-
+            //测试加密RC4();
         }
 
         static void 测试加密RC4()
@@ -132,17 +131,42 @@ namespace DemoApp
         /// A 计算 DrawText 可以设置行距和字距, B 计算是常规计算
         /// 绘制结果相同;比较时差
         /// </summary>
-        private static void DemoFun1d56as1f5641w6()
+        private static void DemoFun计算高次绘制Bitmap耗时()
         {
             Console.WriteLine("开始测试");
-            string str = "das4f5a6s4f156qw41f5\n6s1a65f4\n1qw641f6a5x1f65qw1561f65q1\n" +
-                "ashfui坏事发生发安分俺师傅\n好发顺丰哈是否" +
-                "/方便";
-            Font font = new Font("微软雅黑", 80);
+            string str =
+@"---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+";
+
+            Font font = new Font("微软雅黑", 48);
             StringFormat ffffff = StringFormat.GenericDefault;
-            int testcount = 100;
+            int testcount = 2;
             DateTime t;
-            double ta = 0, tb = 0;
+            double ta = 0, tb = 0, tc = 0, td = 0;
             int c2 = 20;
             Console.WriteLine("[                    ] 000%");//18 14
             for (int j = 0; j < c2; j++)
@@ -159,18 +183,70 @@ namespace DemoApp
                 Console.SetCursorPosition(j + 1, 1);
                 Console.Write("#");
                 Console.SetCursorPosition(23, 1);
-                Console.Write((j >= 0 && j < c2 ? "0" : "") + (j < 1 ? "0" : "") + (j + 1) * 100 / c2 + "%");
+                Console.Write((j >= 0 && j < c2 - 1 ? "-" : "") + (j < 1 ? "0" : "") + (j + 1) * 100 / c2 + "%");
             }
             Console.WriteLine();
             Console.WriteLine("测试结束,测试次数:" + testcount * c2);
-            Console.WriteLine(string.Format("A测试总共耗时:{0},平均耗时:{1} ms", ta.ToString("F"), (ta / c2 / testcount).ToString("F")));
-            Console.WriteLine(string.Format("B测试总共耗时:{0},平均耗时:{1} ms", tb.ToString("F"), (tb / c2 / testcount).ToString("F")));
+            Console.WriteLine(string.Format("A测试(遍历)总共耗时:{0},平均耗时:{1} ms", ta.ToString("F"), (ta / c2 / testcount).ToString("F")));
+            Console.WriteLine(string.Format("B测试(顺序)总共耗时:{0},平均耗时:{1} ms", tb.ToString("F"), (tb / c2 / testcount).ToString("F")));
             var timespy = ta - tb;
             Console.WriteLine(string.Format("测试总共时差:{0},平均时差:{1} ms", timespy.ToString("F"), (timespy / c2 / testcount).ToString("F")));
             var bmp = BitmapGenerator.DrawText(str, font, Rectangle.Empty, ffffff, 0, 0, new SolidBrush(Color.Gray), Color.Transparent, System.Drawing.Text.TextRenderingHint.AntiAlias);
             Console.WriteLine(string.Format("A绘制尺寸{0}x{1},共计{2} pix", bmp.Width, bmp.Height, bmp.Width * bmp.Height));
             bmp = BitmapGenerator.GetBitmap(str, font, Rectangle.Empty, Color.Gray, Color.Transparent, ffffff, System.Drawing.Text.TextRenderingHint.AntiAlias);
             Console.WriteLine(string.Format("B绘制尺寸{0}x{1},共计{2} pix", bmp.Width, bmp.Height, bmp.Width * bmp.Height));
+
+
+            testcount = 1;
+            Console.WriteLine("[                    ] 000%");//24 14
+            for (int j = 0; j < c2; j++)
+            {
+
+                t = System.DateTime.Now;
+                FastBitmap fbmp = new FastBitmap(bmp);
+                fbmp.Lock();
+                for (int i = 0; i < testcount; i++)
+                    for (int w = 0; w < bmp.Width; w++)
+                        for (int h = 0; h < bmp.Height; h++)
+                        {
+                            var c = fbmp.GetPixel(1, 1);//t = 1???
+                            fbmp.SetPixel(w, h, c);
+                        }
+                fbmp.Unlock();
+                tc += (System.DateTime.Now - t).TotalMilliseconds;
+                TextObject obj = new TextObject();
+                t = System.DateTime.Now;
+                for (int i = 0; i < testcount; i++)
+                {
+                    var size = obj.Size;
+                }
+                //for (int w = 0; w < bmp.Width; w++)
+                //    for (int h = 0; h < bmp.Height; h++)
+                //    {
+                //        int index = 0;
+                //        //bmp.SetPixel(w, h, bmp.GetPixel(w, h));
+                //    }
+                td += (System.DateTime.Now - t).TotalMilliseconds;
+                GC.Collect();
+
+                Console.SetCursorPosition(j + 1, 8);
+                Console.Write("#");
+                Console.SetCursorPosition(23, 8);
+                Console.Write((j >= 0 && j < c2 - 1 ? "-" : "") + (j < 1 ? "0" : "") + (j + 1) * 100 / c2 + "%");
+
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("像素克隆测试结束,测试次数:" + testcount * c2);
+            Console.WriteLine(string.Format("FastBitmap总共耗时:{0},平均耗时:{1} ms", ta.ToString("F"), (tc / c2 / testcount).ToString("F")));
+            Console.WriteLine(string.Format("getSize耗时:{0},平均耗时:{1} ms", tb.ToString("F"), (td / c2 / testcount).ToString("F")));
+            timespy = td - tc;
+            Console.WriteLine(string.Format("测试总共时差:{0},平均时差:{1} ms", timespy.ToString("F"), (timespy / c2 / testcount).ToString("F")));
+            Console.WriteLine(string.Format("FBMP尺寸{0}x{1},共计{2} pix", bmp.Width, bmp.Height, bmp.Width * bmp.Height));
+            //bmp = BitmapGenerator.GetBitmap(str, font, Rectangle.Empty, Color.Gray, Color.Transparent, ffffff, System.Drawing.Text.TextRenderingHint.AntiAlias);
+            //Console.WriteLine(string.Format("BMP尺寸{0}x{1},共计{2} pix", bmp.Width, bmp.Height, bmp.Width * bmp.Height));
+
+
             Console.ReadKey();
 
         }

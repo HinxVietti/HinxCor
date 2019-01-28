@@ -377,10 +377,10 @@ namespace HinxCor.Rendering
         /// <summary>
         /// 绘制bitmap文本;
         /// </summary>
-        /// <param name="str"></param>
-        /// <param name="font"></param>
-        /// <param name="rect"></param>
-        /// <param name="renderingHint"></param>
+        /// <param name="str">需要绘制的文本</param>
+        /// <param name="font">字体</param>
+        /// <param name="rect">绘制矩形框</param>
+        /// <param name="renderingHint">绘制筛选</param>
         /// <returns></returns>
         public static Bitmap DrawString(string str, Font font, Rectangle rect, TextRenderingHint renderingHint)
         {
@@ -389,11 +389,11 @@ namespace HinxCor.Rendering
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="bmp"></param>
-        /// <param name="str"></param>
-        /// <param name="font"></param>
-        /// <param name="rect"></param>
-        /// <param name="renderingHint"></param>
+        /// <param name="bmp">需要绘制的Bitmap</param>
+        /// <param name="str">需要绘制的文本</param>
+        /// <param name="font">字体</param>
+        /// <param name="rect">绘制矩形框</param>
+        /// <param name="renderingHint">绘制筛选</param>
         /// <returns></returns>
         public static Bitmap DrawString(Bitmap bmp, string str, Font font, Rectangle rect, TextRenderingHint renderingHint)
         {
@@ -403,16 +403,16 @@ namespace HinxCor.Rendering
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="bmp"></param>
-        /// <param name="str"></param>
-        /// <param name="font"></param>
-        /// <param name="rect"></param>
-        /// <param name="lineSpacing"></param>
-        /// <param name="charSpacing"></param>
-        /// <param name="fontColor"></param>
-        /// <param name="backColor"></param>
-        /// <param name="format"></param>
-        /// <param name="renderingHint"></param>
+        /// <param name="bmp">需要绘制的Bitmap</param>
+        /// <param name="str">需要绘制的文本</param>
+        /// <param name="font">字体</param>
+        /// <param name="rect">绘制矩形框</param>
+        /// <param name="lineSpacing">行距</param>
+        /// <param name="charSpacing">字间距</param>
+        /// <param name="fontColor">字体颜色</param>
+        /// <param name="backColor">背景颜色</param>
+        /// <param name="format">格式</param>
+        /// <param name="renderingHint">绘制筛选</param>
         /// <returns></returns>
         public static Bitmap DrawString(Bitmap bmp, string str, Font font, Rectangle rect, float lineSpacing, float charSpacing, Color fontColor, Color backColor, StringFormat format, TextRenderingHint renderingHint)
         {
@@ -561,15 +561,15 @@ namespace HinxCor.Rendering
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="str"></param>
-        /// <param name="font"></param>
-        /// <param name="rect"></param>
-        /// <param name="format"></param>
-        /// <param name="lineSpacing"></param>
-        /// <param name="charSpacing"></param>
+        /// <param name="str">需要绘制的文本</param>
+        /// <param name="font">字体</param>
+        /// <param name="rect">绘制矩形框</param>
+        /// <param name="format">格式</param>
+        /// <param name="lineSpacing">行距</param>
+        /// <param name="charSpacing">字间距</param>
         /// <param name="brush"></param>
-        /// <param name="backColor"></param>
-        /// <param name="renderingHint"></param>
+        /// <param name="backColor">背景颜色</param>
+        /// <param name="renderingHint">绘制筛选</param>
         /// <returns></returns>
         public static Bitmap DrawText(string str, Font font, Rectangle rect, StringFormat format, float lineSpacing, float charSpacing, Brush brush, Color backColor, TextRenderingHint renderingHint)//
         {
@@ -651,6 +651,169 @@ namespace HinxCor.Rendering
             return bmp;
         }
 
+        /// <summary>
+        /// 获取大小
+        /// </summary>
+        /// <param name="g">用来衡量字符的图形</param>
+        /// <param name="str">字符</param>
+        /// <param name="font">字体</param>
+        /// <param name="lineSpacing">行距</param>
+        /// <param name="charSpacing">字间距</param>
+        /// <returns></returns>
+        public static SizeF GetSize(Graphics g, string str, Font font, float lineSpacing, float charSpacing)
+        {
+            var lines = SplitAsLine(str);
+
+            int maxCharset = 0;
+            for (int i = 0; i < lines.Length; i++)
+                maxCharset = lines[i].Length > maxCharset ? lines[i].Length : maxCharset;
+
+            var sizef = g.MeasureString(str, font);
+            sizef.Width += charSpacing * (maxCharset - 1);
+            sizef.Height += lineSpacing * (lines.Length - 1);
+
+            return sizef;
+        }
+
+        /// <summary>
+        /// 绘制文本
+        /// </summary>
+        /// <param name="str">需要绘制的文本</param>
+        /// <param name="font">字体</param>
+        /// <param name="size">大小</param>
+        /// <param name="format">格式</param>
+        /// <param name="lineSpacing">行距</param>
+        /// <param name="charSpacing">字间距</param>
+        /// <param name="brush"></param>
+        /// <param name="backColor">背景颜色</param>
+        /// <param name="renderingHint">绘制筛选</param>
+        /// <returns></returns>
+        public static Bitmap DrawText(string str, Font font, SizeF size, StringFormat format, float lineSpacing, float charSpacing, Brush brush, Color backColor, TextRenderingHint renderingHint)//
+        {
+            if (string.IsNullOrEmpty(str))
+                return new Bitmap(5, font.Height);
+
+            str = Regex.Replace(str, "\r", string.Empty);
+            Bitmap bmp = new Bitmap(1, 1);
+            Graphics g = Graphics.FromImage(bmp);
+            var lines = SplitAsLine(str);
+
+            bmp = new Bitmap(bmp, (int)size.Width, (int)size.Height);
+
+            g = Graphics.FromImage(bmp);
+            //charSpacing -= 
+            var kk = g.MeasureString("a", font).Width + g.MeasureString("a", font).Width - g.MeasureString("aa", font).Width;
+
+            //graphic 设置
+            g.Clear(backColor);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            g.TextRenderingHint = renderingHint;
+
+            var lineHei = (font.Height + lineSpacing) * 0.98f;//行距微调
+            var align = Totxtalignment(format.Alignment);
+            //不限制大小绘制
+            PointF p = new PointF(0, 0);//开始位置
+            for (int i = 0; i < lines.Length; i++)
+            {
+                //都是从左到右遍历,但是起始位置不一样
+                //var lwid = g.MeasureString(lines[i], font).Width + (lines.Length - 1) * (charSpacing) + g.MeasureString(lines[i][0].ToString(), font).Width;
+                var lwid = getLineLength(g, lines[i], font, charSpacing);
+                switch (align)
+                {
+                    case TextAlignment.Left:
+                        p.X = 0;
+                        break;
+                    case TextAlignment.Center:
+                        p.X = (bmp.Width - lwid) / 2;
+                        break;
+                    case TextAlignment.Right:
+                        p.X = (bmp.Width - lwid);
+                        break;
+                    default:
+                        throw new Exception("对齐方式有问题,不能为空");
+                }
+                p.Y = i * (lineHei);
+                DrawLine(ref g, font, brush, lines[i], p, charSpacing - kk);
+                g.Flush();
+            }
+
+            return bmp;
+        }
+
+        /// <summary>
+        /// 清空背景
+        /// </summary>
+        /// <param name="bmp">需要绘制的Bitmap</param>
+        /// <param name="backColor">背景颜色</param>
+        /// <returns></returns>
+        public static Bitmap ClearBack(Bitmap bmp, Color backColor)
+        {
+            Graphics g = Graphics.FromImage(bmp);
+            g.Clear(backColor);
+            g.Flush();
+            return bmp;
+        }
+
+        /// <summary>
+        /// 绘制文本
+        /// </summary>
+        /// <param name="bmp">需要绘制的Bitmap</param>
+        /// <param name="str">需要绘制的文本</param>
+        /// <param name="font">字体</param>
+        /// <param name="size">大小</param>
+        /// <param name="format">格式</param>
+        /// <param name="lineSpacing">行距</param>
+        /// <param name="charSpacing">字间距</param>
+        /// <param name="brush"></param>
+        /// <param name="renderingHint">绘制筛选</param>
+        /// <returns></returns>
+        public static Bitmap DrawText(Bitmap bmp, string str, Font font, SizeF size, StringFormat format, float lineSpacing, float charSpacing, Brush brush, TextRenderingHint renderingHint)//
+        {
+            str = Regex.Replace(str, "\r", string.Empty);
+
+            Graphics g = Graphics.FromImage(bmp);
+            var lines = SplitAsLine(str);
+
+            var kk = g.MeasureString("a", font).Width + g.MeasureString("a", font).Width - g.MeasureString("aa", font).Width;
+
+            //graphic 设置
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            g.TextRenderingHint = renderingHint;
+
+            var lineHei = (font.Height + lineSpacing) * 0.98f;//行距微调
+            var align = Totxtalignment(format.Alignment);
+            //不限制大小绘制
+            PointF p = new PointF(0, 0);//开始位置
+            for (int i = 0; i < lines.Length; i++)
+            {
+                //都是从左到右遍历,但是起始位置不一样
+                var lwid = getLineLength(g, lines[i], font, charSpacing);
+                switch (align)
+                {
+                    case TextAlignment.Left:
+                        p.X = 0;
+                        break;
+                    case TextAlignment.Center:
+                        p.X = (bmp.Width - lwid) / 2;
+                        break;
+                    case TextAlignment.Right:
+                        p.X = (bmp.Width - lwid);
+                        break;
+                    default:
+                        throw new Exception("对齐方式有问题,不能为空");
+                }
+                p.Y = i * (lineHei);
+                DrawLine(ref g, font, brush, lines[i], p, charSpacing - kk);
+                g.Flush();
+            }
+
+            return bmp;
+        }
+
 
 
         private static float getLineLength(Graphics g, string str, Font f, float charSpacing)
@@ -681,7 +844,7 @@ namespace HinxCor.Rendering
         /// <param name="brush"></param>
         /// <param name="text"></param>
         /// <param name="point"></param>
-        /// <param name="charSpacing"></param>
+        /// <param name="charSpacing">字间距</param>
         public static void DrawLine(ref Graphics g, Font f, Brush brush, string text, PointF point, float charSpacing)
         {
             float wid = 0;
