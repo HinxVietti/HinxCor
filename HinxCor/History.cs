@@ -4,6 +4,8 @@ using System.Linq;
 
 public class History
 {
+    public bool Redoable { get { return !(CurrentState != null && CurrentState.NextState != null); } }
+    public bool Undoable { get { return !(CurrentState != null && CurrentState.PrevState != null); } }
 
     #region Declarations
 
@@ -173,7 +175,7 @@ public class History
             var prev = CurrentState.PrevState;
             if (prev == null)
             {
-                Console.WriteLine("Invalid operation.");
+                //Console.WriteLine("Invalid operation.");
                 return;
             }
 
@@ -181,6 +183,7 @@ public class History
             CurrentStateIndex = States.IndexOf(prev);
         }
     }
+
 
     /// <summary>
     /// Redo the last action
@@ -192,7 +195,7 @@ public class History
             var next = CurrentState.NextState;
             if (next == null)
             {
-                Console.WriteLine("Invalid operation.");
+                //Console.WriteLine("Invalid operation.");
                 return;
             }
 
