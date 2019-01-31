@@ -27,10 +27,12 @@ namespace DemoApp
             //wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
             //chmod +x shadowsocks.sh
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log
+            
 
-            DemoFun计算高次绘制Bitmap耗时();
-
-            //测试加密RC4();
+            Func<bool> GetFunc = () => { return false; };
+            GetFunc += () => { return true; };
+            var res = GetFunc();
+            
         }
 
         static void 测试加密RC4()

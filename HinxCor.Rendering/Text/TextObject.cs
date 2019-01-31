@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace HinxCor.Rendering.Text
 {
@@ -92,7 +93,7 @@ namespace HinxCor.Rendering.Text
         /// <summary>
         /// 文字BMP的size
         /// </summary>
-        public SizeF Size { get { return BitmapGenerator.GetSize(graphics, text, font, LineSpacing, CharSpacing); } }
+        public SizeF Size { get { return BitmapGenerator.GetSize(graphics, Regex.Replace(text, "\n", "\n\r"), font, LineSpacing, CharSpacing); } }
 
         /// <summary>
         /// 空格的间距
