@@ -14,6 +14,7 @@ using LitJson;
 using HinxCor.Security;
 using GDIPlus;
 using HinxCor.Rendering.Text;
+using System.Text.RegularExpressions;
 
 namespace DemoApp
 {
@@ -27,13 +28,11 @@ namespace DemoApp
             //wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
             //chmod +x shadowsocks.sh
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log
-            
 
-            Func<bool> GetFunc = () => { return false; };
-            GetFunc += () => { return true; };
-            var res = GetFunc();
-            
+            Console.WriteLine(Convert.ToInt32("Ff", 16));
+
         }
+
 
         static void 测试加密RC4()
         {
