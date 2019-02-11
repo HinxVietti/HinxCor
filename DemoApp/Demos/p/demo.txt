@@ -1,0 +1,12 @@
+using System;
+using System.IO;
+
+class Program{
+	static void Main(string[] args){
+		string str = @"\\\\";
+		string str2 = "\\\\\\\\";
+		Console.WriteLine(str == str2);
+		Console.WriteLine(str2.Remove(0,2));
+		Console.ReadKey();
+	}
+}

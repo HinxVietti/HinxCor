@@ -15,6 +15,7 @@ using HinxCor.Security;
 using GDIPlus;
 using HinxCor.Rendering.Text;
 using System.Text.RegularExpressions;
+using HinxCor.Compression.net45;
 
 namespace DemoApp
 {
@@ -29,8 +30,22 @@ namespace DemoApp
             //chmod +x shadowsocks.sh
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log
 
-            Console.WriteLine(Convert.ToInt32("Ff", 16));
+            ZipHelper.Demo();
 
+            //string fname = "a\\1\\2\\3\\4.txt";
+            //FileInfo f = new FileInfo(fname);
+            //if (!f.Exists)
+            //    f.Directory.Create();
+            //f.Create();
+            //File.Create();
+
+        }
+
+        private static void ChechDir(DirectoryInfo dir)
+        {
+            if (dir.Exists) return;
+            ChechDir(dir.Parent);
+            dir.Create();
         }
 
 
