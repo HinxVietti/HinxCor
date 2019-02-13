@@ -16,6 +16,8 @@ using GDIPlus;
 using HinxCor.Rendering.Text;
 using System.Text.RegularExpressions;
 using HinxCor.Compression.net45;
+using System.Diagnostics;
+using HinxCor;
 
 namespace DemoApp
 {
@@ -23,21 +25,68 @@ namespace DemoApp
     class Program
     {
         [STAThread]
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
 
             //wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
             //chmod +x shadowsocks.sh
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log
 
-            ZipHelper.Demo();
+            string key = "HinxCor.EncrytoPass";
 
-            //string fname = "a\\1\\2\\3\\4.txt";
-            //FileInfo f = new FileInfo(fname);
-            //if (!f.Exists)
-            //    f.Directory.Create();
-            //f.Create();
-            //File.Create();
+            using (var coder = new RC4(Encoding.UTF8.GetBytes(key)))
+            {
+                OpenFileDialog open = new OpenFileDialog();
+                open.ShowDialog();
+                SaveFileDialog save = new SaveFileDialog();
+                save.ShowDialog();
+
+                var source = File.ReadAllText(open.FileName);
+                var codeddata = coder.Encrypt(source);
+                File.WriteAllBytes(save.FileName, codeddata);
+
+                string res = coder.Decrypt(File.ReadAllBytes(save.FileName));
+
+            }
+
+
+            return -3;
+            //Console.ReadKey();
+
+        }
+
+
+        private static void 测试加密文件()
+        {
+
+            OpenFileDialog open = new OpenFileDialog();
+            open.Filter = "脚本|SELFEXTRACTING.cs";
+            open.ShowDialog();
+            var data = File.ReadAllText(open.FileName);
+            string key = "HinxCor.EncrytoPass";
+
+            string saveName = "";
+            using (var coder = new RC4(Encoding.UTF8.GetBytes(key)))
+            {
+                var buff = coder.Encrypt(data);
+                SaveFileDialog save = new SaveFileDialog();
+                save.Filter = "密文|code.depub";
+                save.ShowDialog();
+                saveName = save.FileName;
+                File.WriteAllBytes(save.FileName, buff);
+            }
+            Thread.Sleep(100);
+            Console.WriteLine("加密完成. 尝试解密");
+            var encryptData = File.ReadAllBytes(saveName);
+            using (var coder = new RC4(Encoding.UTF8.GetBytes(key)))
+            {
+                var csdetail = coder.Decrypt(encryptData);
+                Console.WriteLine(csdetail);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("################finished#######################");
+            Console.ReadKey();
 
         }
 

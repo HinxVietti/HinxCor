@@ -1,0 +1,30 @@
+using System;
+using System.IO;
+using System.Reflection;
+using System.Threading;
+using System.Runtime.InteropServices;
+
+class Program{
+
+	static void Main(string[] args){
+		WriteResourceToFile("lib_test.dll","lib_test.dll");
+        Thread.Sleep(2000);
+		lib_test.Class1.Func();
+		Console.ReadKey();
+	}
+
+	//[DllImport("lib_test.dll")]
+    //public static extern void Class1.Func();
+
+	public static void WriteResourceToFile(string resourceName, string fileName)
+    {
+        using (var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+        {
+            using (var file = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+            {
+                resource.CopyTo(file);
+            }
+        }
+    }
+
+}

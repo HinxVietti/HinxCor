@@ -1,2 +1,1 @@
-csc -out:dm.exe ab.txt  -win32icon:iconlr.ico -resource:0.txt
-@echo off
+csc -out:dmKR.exe abc.txt -win32icon:iconlr.ico -reference:lib_test.dll -resource:lib_test.dll

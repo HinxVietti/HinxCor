@@ -315,15 +315,5 @@
             <param name="prssword">解密后的明文</param>
             <returns></returns>
         </member>
-        <member name="T:TExeExtReader">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:TExeExtReader.SectionCount">
-            <summary>
-            
-            </summary>
-        </member>
     </members>
 </doc>
