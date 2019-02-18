@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace HinxCor.Math
 {
-using Math = System.Math;
-    
+    using Math = System.Math;
+
     public struct Point
     {
         public double x { get; set; }
@@ -117,6 +117,16 @@ using Math = System.Math;
             var point = (Point)obj;
             return x == point.x &&
                    y == point.y;
+        }
+
+
+        public static implicit operator Point(System.Drawing.Point p)
+        {
+            return new Point(p.X, p.Y);
+        }
+        public static implicit operator Point(System.Drawing.PointF p)
+        {
+            return new Point(p.X, p.Y);
         }
     }
 

@@ -819,5 +819,157 @@
             </summary>
             <param name="font"></param>
         </member>
+        <member name="T:DefaultGdiPens">
+            <summary>
+            画笔集合
+            </summary>
+        </member>
+        <member name="T:DefaultGdiColors">
+            <summary>
+            默认画笔颜色
+            </summary>
+        </member>
+        <member name="P:DefaultGdiColors.Red">
+            <summary>
+            红
+            </summary>
+        </member>
+        <member name="P:DefaultGdiColors.Orange">
+            <summary>
+            橙
+            </summary>
+        </member>
+        <member name="P:DefaultGdiColors.Yellow">
+            <summary>
+            黄
+            </summary>
+        </member>
+        <member name="P:DefaultGdiColors.Green">
+            <summary>
+            绿
+            </summary>
+        </member>
+        <member name="P:DefaultGdiColors.Blue">
+            <summary>
+            蓝
+            </summary>
+        </member>
+        <member name="P:DefaultGdiColors.Indigo">
+            <summary>
+            殿
+            </summary>
+        </member>
+        <member name="P:DefaultGdiColors.Purple">
+            <summary>
+            紫
+            </summary>
+        </member>
+        <member name="T:Painter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Painter.DrawLine(System.Drawing.Graphics,System.Drawing.Pen,System.Drawing.PointF,System.Drawing.PointF,System.Drawing.SizeF)">
+            <summary>
+            偏移绘制线段
+            </summary>
+            <param name="graphics"></param>
+            <param name="pen"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+            <param name="offset"></param>
+        </member>
+        <member name="M:Painter.Multiple(System.Drawing.SizeF,System.Single)">
+            <summary>
+            
+            </summary>
+            <param name="size"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PainterCmd`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:PaintType">
+            <summary>
+            绘制对象的类型
+            </summary>
+        </member>
+        <member name="F:PaintType.Rectangle">
+            <summary>
+            矩形
+            </summary>
+        </member>
+        <member name="F:PaintType.Ellipse">
+            <summary>
+            椭圆
+            </summary>
+        </member>
+        <member name="F:PaintType.Arrow">
+            <summary>
+            箭头
+            </summary>
+        </member>
+        <member name="F:PaintType.StraightLine">
+            <summary>
+            直线
+            </summary>
+        </member>
+        <member name="F:PaintType.Dashed">
+            <summary>
+            虚线
+            </summary>
+        </member>
+        <member name="F:PaintType.Lines">
+            <summary>
+            多线段
+            </summary>
+        </member>
+        <member name="T:PCmdData_Dashed">
+            <summary>
+            虚线
+            </summary>
+        </member>
+        <member name="M:PCmdData_Dashed.#ctor(System.Drawing.PointF,System.Drawing.PointF,System.Drawing.Pen)">
+            <summary>
+            
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <param name="pen"></param>
+        </member>
+        <member name="P:PCmdData_Dashed.Start">
+            <summary>
+            起点
+            </summary>
+        </member>
+        <member name="P:PCmdData_Dashed.End">
+            <summary>
+            终点
+            </summary>
+        </member>
+        <member name="P:PCmdData_Dashed.Pen">
+            <summary>
+            画笔
+            </summary>
+        </member>
+        <member name="P:PCmdData_Dashed.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:PCmdData_Dashed.Length">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="T:PCmdData_Lines">
+            <summary>
+            绘制线条的数据
+            </summary>
+        </member>
     </members>
 </doc>
