@@ -586,6 +586,43 @@
             <param name="multipleSelect"></param>
             <returns></returns>
         </member>
+        <member name="T:HinxCor.Rendering.GDI.ScreenPainter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:HinxCor.Rendering.GDI.ScreenPainter.PenAlpha">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:HinxCor.Rendering.GDI.ScreenPainter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:HinxCor.Rendering.GDI.ScreenPainter.EndDrawSomething">
+            <summary>
+            绘制终止
+            </summary>
+        </member>
+        <member name="F:HinxCor.Rendering.GDI.ScreenPainter.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HinxCor.Rendering.GDI.ScreenPainter.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HinxCor.Rendering.GDI.ScreenPainter.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="T:HinxCor.Rendering.Text.TextAlignment">
             <summary>
             文本对其方式
@@ -819,6 +856,109 @@
             </summary>
             <param name="font"></param>
         </member>
+        <member name="T:GDIPlus.FastBitmap">
+             <summary>
+            高速bitmap
+             </summary>
+        </member>
+        <member name="M:GDIPlus.FastBitmap.#ctor(System.Drawing.Bitmap)">
+            <summary>
+            构造
+            </summary>
+            <param name="bitmap"></param>
+        </member>
+        <member name="M:GDIPlus.FastBitmap.#ctor(System.Int32,System.Int32,System.Drawing.Imaging.PixelFormat)">
+            <summary>
+            构造
+            </summary>
+            <param name="width"></param>
+            <param name="height"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:GDIPlus.FastBitmap.Clone">
+            <summary>
+            克隆FastBitmap
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GDIPlus.FastBitmap.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="M:GDIPlus.FastBitmap.Dispose(System.Boolean)">
+            <summary>
+            释放
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:GDIPlus.FastBitmap.Finalize">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="M:GDIPlus.FastBitmap.GetIntensity(System.Int32,System.Int32)">
+            <summary>
+            获取强调
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GDIPlus.FastBitmap.GetPixel(System.Int32,System.Int32)">
+            <summary>
+            获取像素
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GDIPlus.FastBitmap.Lock">
+            <summary>
+            锁定内存(只有锁定到系统内存数据之后才能操作)
+            </summary>
+        </member>
+        <member name="M:GDIPlus.FastBitmap.Save(System.String)">
+            <summary>
+            保存到本地文件
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:GDIPlus.FastBitmap.Save(System.String,System.Drawing.Imaging.ImageFormat)">
+            <summary>
+            保存到本地文件
+            </summary>
+            <param name="filename"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:GDIPlus.FastBitmap.SetPixel(System.Int32,System.Int32,System.Drawing.Color)">
+            <summary>
+            设置内存区域的颜色
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="c"></param>
+        </member>
+        <member name="M:GDIPlus.FastBitmap.Unlock">
+            <summary>
+            接触锁定,释放BMPData
+            </summary>
+        </member>
+        <member name="P:GDIPlus.FastBitmap.Bitmap">
+            <summary>
+            bmp get and set.
+            </summary>
+        </member>
+        <member name="P:GDIPlus.FastBitmap.Height">
+            <summary>
+            get height
+            </summary>
+        </member>
+        <member name="P:GDIPlus.FastBitmap.Width">
+            <summary>
+            get width
+            </summary>
+        </member>
         <member name="T:DefaultGdiPens">
             <summary>
             画笔集合
@@ -864,10 +1004,42 @@
             紫
             </summary>
         </member>
+        <member name="T:IPainterCmd">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:IPainterCmd.CouldHandle">
+            <summary>
+            是否满足绘制条件
+            </summary>
+        </member>
+        <member name="P:IPainterCmd.Type">
+            <summary>
+            绘制对象的类型
+            </summary>
+        </member>
+        <member name="P:IPainterCmd.Pen">
+            <summary>
+            绘制的画笔
+            </summary>
+        </member>
+        <member name="P:IPainterCmd.ColorAlpha">
+            <summary>
+            画笔的透明度
+            </summary>
+        </member>
         <member name="T:Painter">
             <summary>
             
             </summary>
+        </member>
+        <member name="M:Painter.Draw(System.Drawing.Graphics,IPainterCmd)">
+            <summary>
+            
+            </summary>
+            <param name="graphics"></param>
+            <param name="cmd"></param>
         </member>
         <member name="M:Painter.DrawLine(System.Drawing.Graphics,System.Drawing.Pen,System.Drawing.PointF,System.Drawing.PointF,System.Drawing.SizeF)">
             <summary>
@@ -884,6 +1056,14 @@
             
             </summary>
             <param name="size"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Painter.Multiple(System.Drawing.PointF,System.Single)">
+            <summary>
+            
+            </summary>
+            <param name="p"></param>
             <param name="value"></param>
             <returns></returns>
         </member>
@@ -928,9 +1108,104 @@
             多线段
             </summary>
         </member>
+        <member name="T:PCmdData_2p">
+            <summary>
+            所有两个点的绘制对象的类型
+            </summary>
+        </member>
+        <member name="M:PCmdData_2p.#ctor(PaintType,System.Drawing.PointF)">
+            <summary>
+            construct
+            </summary>
+            <param name="type"></param>
+            <param name="startp"></param>
+        </member>
+        <member name="P:PCmdData_2p.Start">
+            <summary>
+            起点
+            </summary>
+        </member>
+        <member name="P:PCmdData_2p.End">
+            <summary>
+            终点
+            </summary>
+        </member>
+        <member name="P:PCmdData_2p.CouldHandle">
+            <summary>
+            是否可以绘制
+            </summary>
+        </member>
+        <member name="P:PCmdData_2p.Type">
+            <summary>
+            绘制对象的类型
+            </summary>
+        </member>
+        <member name="P:PCmdData_2p.Pen">
+            <summary>
+            绘制的画笔
+            </summary>
+        </member>
+        <member name="P:PCmdData_2p.ColorAlpha">
+            <summary>
+            绘制的颜色
+            </summary>
+        </member>
+        <member name="T:PCmdData_Arrow">
+            <summary>
+            绘制arrow的命令
+            </summary>
+        </member>
+        <member name="P:PCmdData_Arrow.ColorAlpha">
+            <summary>
+            get set pen alpha
+            </summary>
+        </member>
+        <member name="P:PCmdData_Arrow.Type">
+            <summary>
+            返回arrow
+            </summary>
+        </member>
+        <member name="P:PCmdData_Arrow.Pen">
+            <summary>
+            画笔
+            </summary>
+        </member>
+        <member name="P:PCmdData_Arrow.Start">
+            <summary>
+            起始点
+            </summary>
+        </member>
+        <member name="P:PCmdData_Arrow.End">
+            <summary>
+            终止点
+            </summary>
+        </member>
+        <member name="P:PCmdData_Arrow.CouldHandle">
+            <summary>
+            是否满足绘制条件
+            </summary>
+        </member>
+        <member name="M:PCmdData_Arrow.#ctor(System.Drawing.PointF,System.Drawing.PointF)">
+            <summary>
+            construct
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+        </member>
+        <member name="M:PCmdData_Arrow.GetDrawData">
+            <summary>
+            获取绘制箭头的数组 [弃用]
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:PCmdData_Dashed">
             <summary>
             虚线
+            </summary>
+        </member>
+        <member name="P:PCmdData_Dashed.ColorAlpha">
+            <summary>
+            
             </summary>
         </member>
         <member name="M:PCmdData_Dashed.#ctor(System.Drawing.PointF,System.Drawing.PointF,System.Drawing.Pen)">
@@ -966,10 +1241,102 @@
             长度
             </summary>
         </member>
+        <member name="P:PCmdData_Dashed.CouldHandle">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:PCmdData_Lines">
             <summary>
             绘制线条的数据
             </summary>
+        </member>
+        <member name="P:PCmdData_Lines.ColorAlpha">
+            <summary>
+            画笔透明度
+            </summary>
+        </member>
+        <member name="P:PCmdData_Lines.Type">
+            <summary>
+            返回Lines
+            </summary>
+        </member>
+        <member name="P:PCmdData_Lines.Pen">
+            <summary>
+            画笔
+            </summary>
+        </member>
+        <member name="P:PCmdData_Lines.Pens">
+            <summary>
+            多段画笔
+            </summary>
+        </member>
+        <member name="P:PCmdData_Lines.Points">
+            <summary>
+            线段
+            </summary>
+        </member>
+        <member name="P:PCmdData_Lines.CouldHandle">
+            <summary>
+            是否满足绘制条件
+            </summary>
+        </member>
+        <member name="M:PCmdData_Lines.#ctor">
+            <summary>
+            construct
+            </summary>
+        </member>
+        <member name="M:PCmdData_Lines.add(System.Drawing.PointF)">
+            <summary>
+            添加线段上的点
+            </summary>
+            <param name="p"></param>
+        </member>
+        <member name="T:ScreenPainter_NOGUI">
+            <summary>
+            没有GUI的屏幕绘制工具
+            </summary>
+        </member>
+        <member name="M:ScreenPainter_NOGUI.GetMainContent">
+            <summary>
+            获取主画面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ScreenPainter_NOGUI.GetGlyph">
+            <summary>
+            获取当前笔画
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ScreenPainter_NOGUI.Undoable">
+            <summary>
+            是否可以Undo
+            </summary>
+        </member>
+        <member name="M:ScreenPainter_NOGUI.#ctor(System.Int32,System.Int32)">
+            <summary>
+            构造
+            </summary>
+            <param name="wid"></param>
+            <param name="hei"></param>
+        </member>
+        <member name="M:ScreenPainter_NOGUI.DrawGlyph">
+            <summary>
+            绘制笔画到主题内容
+            </summary>
+        </member>
+        <member name="M:ScreenPainter_NOGUI.Undo">
+            <summary>
+            返回上一次编辑状态
+            </summary>
+        </member>
+        <member name="M:ScreenPainter_NOGUI.Handle(IPainterCmd,System.Boolean)">
+            <summary>
+            绘制内容到笔画
+            </summary>
+            <param name="Cmd"></param>
+            <param name="isDown"></param>
         </member>
     </members>
 </doc>

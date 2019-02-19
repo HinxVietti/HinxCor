@@ -7,6 +7,11 @@ using System.Drawing;
 /// </summary>
 public static class Painter
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="graphics"></param>
+    /// <param name="cmd"></param>
     public static void Draw(this Graphics graphics, IPainterCmd cmd)
     {
 
@@ -76,6 +81,12 @@ public static class Painter
         return new PointF((end.X - start.X) / length, (end.Y - start.Y) / length);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="p"></param>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public static PointF Multiple(this PointF p, float value)
     {
         return new PointF(p.X * value, p.Y * value);

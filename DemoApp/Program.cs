@@ -32,52 +32,11 @@ namespace DemoApp
             //chmod +x shadowsocks.sh
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log
 
-            //string key = "HinxCor.EncrytoPass";
 
-            //using (var coder = new RC4(Encoding.UTF8.GetBytes(key)))
-            //{
-            //    OpenFileDialog open = new OpenFileDialog();
-            //    open.ShowDialog();
-            //    SaveFileDialog save = new SaveFileDialog();
-            //    save.ShowDialog();
+            var page = new 测试笔画绘制();
+            page.ShowDialog();
 
-            //    var source = File.ReadAllText(open.FileName);
-            //    var codeddata = coder.Encrypt(source);
-            //    File.WriteAllBytes(save.FileName, codeddata);
-
-            //    string res = coder.Decrypt(File.ReadAllBytes(save.FileName));
-
-            //}
-            //var g2 = 1.414213562373095;
-            //var g3 = 1.732050807568877;
-            ////Console.WriteLine(g2 * g2);
-            //Console.WriteLine(Math.Atan(1) / 2 / Math.PI * 360);
-            //Console.WriteLine(Math.Atan(g3) / 2 / Math.PI * 360);
-
-            //Console.WriteLine(Math.Atan(float.PositiveInfinity));
-
-            //Console.WriteLine(90 / (double)360 * 2 * Math.PI);
-            //HinxCor.Math.Point p = new HinxCor.Math.Point(10, 18);
-            //HinxCor.Math.Point p2 = new HinxCor.Math.Point(5, 13);
-            //var arg = Math.Atan((double)13 / 5);
-            var arg = Math.Atan((double)13 / -5);
-            Console.WriteLine(arg);
-            //Console.WriteLine(Math.Atan(13 / 5));
-            //Console.WriteLine(Math.Atan(18 / -10));
-            //Console.WriteLine(Math.Atan(13 / -5));
-            var 了 = Math.Sqrt(18 * 18 + 10 * 10);
-            Console.WriteLine(了);
-
-            Console.WriteLine(Math.Sin(arg) * 了);
-            Console.WriteLine(Math.Cos(arg) * 了);
-
-            //Console.WriteLine(p.magnitude);
-            //Console.WriteLine(p2.magnitude);
-
-            //Console.WriteLine();
-
-            //Console.WriteLine(Math.Atan(p.y / p.x)/* / 2 / Math.PI * 360*/);
-            //Console.WriteLine(Math.Atan(p2.y / p2.x)/* / 2 / Math.PI * 360*/);
+            Console.WriteLine("end");
             Console.ReadKey();
             return 0;
         }

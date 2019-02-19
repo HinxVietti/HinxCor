@@ -10,6 +10,10 @@ public class PCmdData_Dashed : IPainterCmd
     /// <summary>
     /// 
     /// </summary>
+    public int ColorAlpha { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="start"></param>
     /// <param name="end"></param>
     /// <param name="pen"></param>
@@ -42,6 +46,10 @@ public class PCmdData_Dashed : IPainterCmd
     /// 长度
     /// </summary>
     public float Length { get { return (float)new HinxCor.Math.Point(Start.X - End.X, Start.Y - End.Y).magnitude; } }
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool CouldHandle { get { return true; } }
 }
 
 

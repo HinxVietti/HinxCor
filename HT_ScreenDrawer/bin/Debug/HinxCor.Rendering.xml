@@ -586,6 +586,23 @@
             <param name="multipleSelect"></param>
             <returns></returns>
         </member>
+        <member name="F:HinxCor.Rendering.GDI.ScreenPainter.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HinxCor.Rendering.GDI.ScreenPainter.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HinxCor.Rendering.GDI.ScreenPainter.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="T:HinxCor.Rendering.Text.TextAlignment">
             <summary>
             文本对其方式
