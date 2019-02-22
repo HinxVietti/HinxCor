@@ -35,9 +35,9 @@ public class PCmdData_Lines : IPainterCmd
     /// <summary>
     /// construct
     /// </summary>
-    public PCmdData_Lines()
+    public PCmdData_Lines(Color pencolor, float pensize)
     {
-        this.Pen = new Pen(DefaultGdiColors.Purple, 5);
+        this.Pen = new Pen(pencolor, pensize);
     }
 
     /// <summary>

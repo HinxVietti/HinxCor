@@ -1,12 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 /// <summary>
 /// 画笔集合
 /// </summary>
 public class DefaultGdiPens
 {
+    /// <summary>
+    /// 多彩色样本
+    /// </summary>
+    public Pen ColorfulSimple
+    {
+        get
+        {
+            return new Pen(
+                new LinearGradientBrush(new PointF(0, 0), new PointF(300, 300), Color.Red, Color.Cyan));
+
+        }
+    }
     //public Pen Red { get; set; }
 }
 

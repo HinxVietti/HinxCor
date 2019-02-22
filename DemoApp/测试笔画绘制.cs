@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HinxCor.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,7 +38,7 @@ namespace DemoApp
 
         private bool mousedown;
         private PaintType type = PaintType.Ellipse;
-        PCmdData_Lines cmd = new PCmdData_Lines();
+        PCmdData_Lines cmd = new PCmdData_Lines(DefaultGdiColors.Indigo, 5);
         PCmdData_2p p;
 
         private void Printer_MouseMove(object sender, MouseEventArgs e)
@@ -55,14 +56,17 @@ namespace DemoApp
         {
             mousedown = false;
             SPNGUI.DrawGlyph();
+            this.printer.Visible = false;
+            //this.printer.Image = SPNGUI.GetGlyph();
             this.BackgroundImage = SPNGUI.GetMainContent();
         }
 
         private void Printer_MouseDown(object sender, MouseEventArgs e)
         {
-            cmd = new PCmdData_Lines();
+            //this.printer.Visible = true;
+            cmd = new PCmdData_Lines(DefaultGdiColors.Indigo, 5);
             cmd.add(e.Location);
-            p = new PCmdData_2p(type)
+            p = new PCmdData_2p(type, DefaultGdiColors.Indigo)
             {
                 Start = e.Location
             };
@@ -72,7 +76,17 @@ namespace DemoApp
         private void 测试笔画绘制_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((int)e.KeyChar == 27) Close();
+            if (e.KeyChar == 'z')
+            {
+                SPNGUI.Undo();
+                this.BackgroundImage = SPNGUI.GetMainContent();
+            }
 
+            if (e.KeyChar == 'c')
+            {
+                SPNGUI.Clear();
+                this.BackgroundImage = SPNGUI.GetMainContent();
+            }
         }
     }
 }

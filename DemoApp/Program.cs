@@ -31,14 +31,45 @@ namespace DemoApp
             //wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
             //chmod +x shadowsocks.sh
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log
+            new child("good");
 
-
-            var page = new 测试笔画绘制();
-            page.ShowDialog();
-
-            Console.WriteLine("end");
-            Console.ReadKey();
             return 0;
+
+        }
+
+        private abstract class parent
+        {
+            public parent(string sname)
+            {
+                Console.WriteLine("parent:" + sname);
+            }
+        }
+
+        private class child : parent
+        {
+            public child(string sname) : base(sname)
+            {
+                Console.WriteLine("Child.");
+            }
+        }
+
+
+        private static void Print<T>(T go)
+        {
+            // int all false
+
+            Console.WriteLine(go);
+            Console.WriteLine("@i+nt:" + go is int);
+            Console.WriteLine("@u+int:" + go is uint);
+            Console.WriteLine("@s+hort:" + go is short);
+            Console.WriteLine("@u+short:" + go is ushort);
+            Console.WriteLine("@l+ong:" + go is long);
+            Console.WriteLine("@u+long:" + go is ulong);
+            Console.WriteLine("@c+har:" + go is char);
+            Console.WriteLine("@s+ingle:" + go is float);
+            Console.WriteLine("@d+ouble:" + go is double);
+            Console.WriteLine("@b+ool:" + go is bool);
+            //Console.WriteLine();
         }
 
         private static void 测试For循环()

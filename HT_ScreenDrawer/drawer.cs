@@ -56,7 +56,7 @@ namespace HT_ScreenDrawer
 
             PointF p1 = new PointF(0, 0);
             PointF p2 = new PointF(100, 100);
-            //LinearGradientBrush gradientBrush = new LinearGradientBrush(p1, p2, Color.OrangeRed, Color.Blue);
+            
             //PathGradientBrush pathGradientBrush = new PathGradientBrush(new[] { new PointF(0, 0), new PointF(0, 100), new PointF(100, 100), new PointF(100, 0) });
             //pathGradientBrush.CenterColor = Color.Red;
             //pathGradientBrush.CenterPoint = new PointF(50, 50);

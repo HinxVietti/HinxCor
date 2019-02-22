@@ -8,17 +8,20 @@ using System.Drawing.Drawing2D;
 /// </summary>
 public class PCmdData_2p : IPainterCmd
 {
+
     /// <summary>
-    /// construct
+    /// 
     /// </summary>
     /// <param name="type"></param>
+    /// <param name="defColor"></param>
+    /// <param name="pensize"></param>
     /// <param name="startp"></param>
-    public PCmdData_2p(PaintType type, PointF startp = default(PointF))
+    public PCmdData_2p(PaintType type, Color defColor, float pensize = 5, PointF startp = default(PointF))
     {
         this.Start = startp;
-        ColorAlpha = 255;
+        ColorAlpha = defColor.A;
         Type = type;
-        Pen = new Pen(DefaultGdiColors.Orange, 5);
+        Pen = new Pen(defColor, pensize);
         switch (Type)
         {
             case PaintType.Rectangle:

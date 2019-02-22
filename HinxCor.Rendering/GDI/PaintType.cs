@@ -29,6 +29,18 @@ public enum PaintType
     /// <summary>
     /// 多线段
     /// </summary>
-    Lines
+    Lines,
+    /// <summary>
+    /// 
+    /// </summary>
+    Default,
+    /// <summary>
+    /// 
+    /// </summary>
+    Custom1,
+    /// <summary>
+    /// 
+    /// </summary>
+    Custom2
 }
 
