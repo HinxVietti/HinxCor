@@ -31,10 +31,23 @@ namespace DemoApp
             //wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
             //chmod +x shadowsocks.sh
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log
-            new child("good");
+            //new child("good");
+
+            //byte a = new byte();
+            //a = 255;
+            //fakeColor c = new fakeColor() { a = 0.1f, b = 0.2f, c = 0.3f };
+            //byte[] dat = new byte[3];
+            //dat[0] = 
 
             return 0;
 
+        }
+
+        private class fakeColor
+        {
+            public float a;
+            public float b;
+            public float c;
         }
 
         private abstract class parent
