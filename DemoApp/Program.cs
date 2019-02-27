@@ -37,8 +37,39 @@ namespace DemoApp
             //a = 255;
             //fakeColor c = new fakeColor() { a = 0.1f, b = 0.2f, c = 0.3f };
             //byte[] dat = new byte[3];
-            //dat[0] = 
+            //dat[0] = marxh
 
+            Bitmap bmp = new Bitmap(2000, 2000);
+            Graphics.FromImage(bmp).Clear(Color.Red);
+
+            var t = DateTime.Now;
+            for (int i = 0; i < 100; i++)
+            {
+                var lockdata = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, bmp.PixelFormat);
+                var intptr = lockdata.Scan0;
+
+                var size = lockdata.Stride * bmp.Height;
+                var buffer = new byte[size];
+                Marshal.Copy(intptr, buffer, 0, size);
+                bmp.UnlockBits(lockdata);
+            }
+            Console.WriteLine((DateTime.Now - t).TotalMilliseconds);
+
+            t = DateTime.Now;
+            for (int i = 0; i < 100; i++)
+            {
+                MemoryStream ms = new MemoryStream();
+                bmp.Save(ms, ImageFormat.Bmp);
+                ms.Position = 0;
+                var buff = new byte[ms.Length];
+                ms.Read(buff, 0, buff.Length);
+                ms.Dispose();
+            }
+            Console.WriteLine((DateTime.Now - t).TotalMilliseconds);
+
+            //Bitmap bmp2 = new Bitmap(2000, 2000);
+            //Marshal.Copy(bmp.GetHbitmap(), new[] { bmp2.GetHbitmap() }, 0, 1);
+            Console.ReadKey();
             return 0;
 
         }
