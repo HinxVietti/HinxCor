@@ -1382,5 +1382,19 @@
             </summary>
             <param name="p"></param>
         </member>
+        <member name="T:RenderingHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RenderingHelper.FastCloneBitmapTo(System.Drawing.Bitmap,System.Drawing.Bitmap,System.Drawing.Imaging.PixelFormat,System.Drawing.Point)">
+            <summary>
+            快速复制像素;使用请确保裁剪空间大于等于目标大小
+            </summary>
+            <param name="origin">图像元</param>
+            <param name="destinate">接受目标</param>
+            <param name="format">扫描的方式</param>
+            <param name="startpoint">起始点(从x,y像素开始复制)</param>
+        </member>
     </members>
 </doc>

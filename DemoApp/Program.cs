@@ -25,7 +25,7 @@ namespace DemoApp
     class Program
     {
         [STAThread]
-        static int Main(string[] args)
+        static void Main(string[] args)
         {
 
             //wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
@@ -33,45 +33,48 @@ namespace DemoApp
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log
             //new child("good");
 
-            //byte a = new byte();
-            //a = 255;
-            //fakeColor c = new fakeColor() { a = 0.1f, b = 0.2f, c = 0.3f };
-            //byte[] dat = new byte[3];
-            //dat[0] = marxh
-
-            Bitmap bmp = new Bitmap(2000, 2000);
-            Graphics.FromImage(bmp).Clear(Color.Red);
-
-            var t = DateTime.Now;
-            for (int i = 0; i < 100; i++)
-            {
-                var lockdata = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, bmp.PixelFormat);
-                var intptr = lockdata.Scan0;
-
-                var size = lockdata.Stride * bmp.Height;
-                var buffer = new byte[size];
-                Marshal.Copy(intptr, buffer, 0, size);
-                bmp.UnlockBits(lockdata);
-            }
-            Console.WriteLine((DateTime.Now - t).TotalMilliseconds);
-
-            t = DateTime.Now;
-            for (int i = 0; i < 100; i++)
-            {
-                MemoryStream ms = new MemoryStream();
-                bmp.Save(ms, ImageFormat.Bmp);
-                ms.Position = 0;
-                var buff = new byte[ms.Length];
-                ms.Read(buff, 0, buff.Length);
-                ms.Dispose();
-            }
-            Console.WriteLine((DateTime.Now - t).TotalMilliseconds);
-
-            //Bitmap bmp2 = new Bitmap(2000, 2000);
-            //Marshal.Copy(bmp.GetHbitmap(), new[] { bmp2.GetHbitmap() }, 0, 1);
+            FolderBrowserDialog d = new FolderBrowserDialog();
+            d.RootFolder = Environment.SpecialFolder.MyComputer;
+            d.ShowDialog();
+            var dira = d.SelectedPath;
+            d.ShowDialog();
+            var dirb = d.SelectedPath;
+            //new DirectoryInfo(dira).CopyTo(dirb);
+            Console.WriteLine();
+            Console.WriteLine("finished.");
             Console.ReadKey();
-            return 0;
+        }
 
+        private static void 测试苹果()
+        {
+            Fruit f = new Fruit()
+            {
+                alpe = new Apple()
+                {
+                    weight = 998
+                }
+            };
+
+            basket bsk = new basket();
+            bsk.Apple = f.alpe;
+            var ap = bsk.Apple;
+            ap.weight = 55;
+        }
+
+        private class basket
+        {
+            public Apple Apple { get; set; }
+        }
+
+        private class Fruit
+        {
+            public string Name { get; set; }
+            public Apple alpe { get; set; }
+        }
+
+        private class Apple
+        {
+            public float weight { get; set; }
         }
 
         private class fakeColor

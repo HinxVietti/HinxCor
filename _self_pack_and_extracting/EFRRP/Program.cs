@@ -45,7 +45,9 @@ namespace EFRRP
                 Windows.ExecuteCommand(batcmd);
                 Console.WriteLine("batch:" + batcmd);
                 File.Delete(csname);
-                Console.ReadKey();
+                File.Delete("data.mhx");
+                if (args.Length > 1) new FileInfo(args[0]).MoveTo(args[1]);
+                //Console.ReadKey();
             }
         }
     }

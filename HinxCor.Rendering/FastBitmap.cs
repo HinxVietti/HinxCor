@@ -154,7 +154,8 @@ namespace GDIPlus
             }
             if (this.bmpData.PixelFormat == PixelFormat.Format24bppRgb)
             {
-                byte* numPtr2 = (byte*)((((int)this.bmpData.Scan0) + (y * this.bmpData.Stride)) + (x * 3));
+                var res = ((((int)this.bmpData.Scan0) + (y * this.bmpData.Stride)) + (x * 3));
+                byte* numPtr2 = (byte*)res;
                 numPtr2[0] = c.B;
                 numPtr2[1] = c.G;
                 numPtr2[2] = c.R;
