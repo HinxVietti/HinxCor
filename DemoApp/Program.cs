@@ -33,15 +33,30 @@ namespace DemoApp
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log
             //new child("good");
 
-            FolderBrowserDialog d = new FolderBrowserDialog();
-            d.RootFolder = Environment.SpecialFolder.MyComputer;
-            d.ShowDialog();
-            var dira = d.SelectedPath;
-            d.ShowDialog();
-            var dirb = d.SelectedPath;
-            //new DirectoryInfo(dira).CopyTo(dirb);
-            Console.WriteLine();
-            Console.WriteLine("finished.");
+            //Win32.CopyMemory();
+
+            byte[] bits = new byte[] { 0, 1, 255, 1 };
+            string str = HinxCor.Convert.ToByteString(bits);
+
+
+            Apple p = new Apple();
+            p.weight = 4396;
+
+            var bit_p = HinxCor.Convert.ToByteArray(p);
+            var string_p = HinxCor.Convert.ToByteString(bit_p);
+            var bit_p_2 = HinxCor.Convert.StringToByteArray(string_p);
+            var obj_p = HinxCor.Convert.ToObject(bit_p_2);
+            var p2 = (Apple)obj_p;
+
+            //FolderBrowserDialog d = new FolderBrowserDialog();
+            //d.RootFolder = Environment.SpecialFolder.MyComputer;
+            //d.ShowDialog();
+            //var dira = d.SelectedPath;
+            //d.ShowDialog();
+            //var dirb = d.SelectedPath;
+            ////new DirectoryInfo(dira).CopyTo(dirb);
+            //Console.WriteLine();
+            //Console.WriteLine("finished.");
             Console.ReadKey();
         }
 
@@ -72,6 +87,7 @@ namespace DemoApp
             public Apple alpe { get; set; }
         }
 
+        [Serializable]
         private class Apple
         {
             public float weight { get; set; }
