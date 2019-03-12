@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ApplicationLauncher
+namespace OtherWindowStateController
 {
     static class Program
     {
@@ -13,7 +16,7 @@ namespace ApplicationLauncher
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Loadout());
+            Application.Run(new 窗体工具());
         }
     }
 }

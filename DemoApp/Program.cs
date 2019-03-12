@@ -35,28 +35,72 @@ namespace DemoApp
 
             //Win32.CopyMemory();
 
-            byte[] bits = new byte[] { 0, 1, 255, 1 };
-            string str = HinxCor.Convert.ToByteString(bits);
+            //byte[] bits = new byte[] { 0, 1, 255, 1 };
+            //string str = HinxCor.Convert.ToByteString(bits);
 
 
-            Apple p = new Apple();
-            p.weight = 4396;
+            //Apple p = new Apple();
+            //p.weight = 4396;
 
-            var bit_p = HinxCor.Convert.ToByteArray(p);
-            var string_p = HinxCor.Convert.ToByteString(bit_p);
-            var bit_p_2 = HinxCor.Convert.StringToByteArray(string_p);
-            var obj_p = HinxCor.Convert.ToObject(bit_p_2);
-            var p2 = (Apple)obj_p;
+            //var bit_p = HinxCor.Convert.ToByteArray(p);
+            //var string_p = HinxCor.Convert.ToByteString(bit_p);
+            //var bit_p_2 = HinxCor.Convert.StringToByteArray(string_p);
+            //var obj_p = HinxCor.Convert.ToObject(bit_p_2);
+            //var p2 = (Apple)obj_p;
 
-            //FolderBrowserDialog d = new FolderBrowserDialog();
-            //d.RootFolder = Environment.SpecialFolder.MyComputer;
-            //d.ShowDialog();
-            //var dira = d.SelectedPath;
-            //d.ShowDialog();
-            //var dirb = d.SelectedPath;
-            ////new DirectoryInfo(dira).CopyTo(dirb);
-            //Console.WriteLine();
-            //Console.WriteLine("finished.");
+            ////FolderBrowserDialog d = new FolderBrowserDialog();
+            ////d.RootFolder = Environment.SpecialFolder.MyComputer;
+            ////d.ShowDialog();
+            ////var dira = d.SelectedPath;
+            ////d.ShowDialog();
+            ////var dirb = d.SelectedPath;
+            //////new DirectoryInfo(dira).CopyTo(dirb);
+            ////Console.WriteLine();
+            ////Console.WriteLine("finished.");
+            //Console.ReadKey();
+
+            TestAsync();
+
+        }
+
+        /// <summary>
+        /// 测试
+        /// </summary>
+        private static void TestAsync()
+        {
+            var ao = new AsyncOperator();
+            AsyncOperate aop = new AsyncOperate(ao);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+         
+
+            aop.Start();
+            var THR = new Thread(() =>
+            {
+                for (int i = 0; i < 1000; i++)
+                {
+                    //ao.process = i / 100f;
+                    Thread.Sleep(1000);
+                }
+            })
+            {
+                IsBackground = true
+            };
+            THR.Start();
+            while (!aop.isDone)
+            {
+                //Console.Clear();
+                Console.SetCursorPosition(0, 0);
+                Console.Write((aop.progress * 100).ToString("F") + "%");
+                Thread.Sleep(10);
+            }
+
+            Console.SetCursorPosition(0, 5);
+            //Console.WriteLine("Start..");
             Console.ReadKey();
         }
 
