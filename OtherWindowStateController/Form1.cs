@@ -15,6 +15,7 @@ namespace OtherWindowStateController
     public partial class 窗体工具 : Form
     {
         IntPtr toapply;
+
         public 窗体工具()
         {
             InitializeComponent();
@@ -46,6 +47,27 @@ namespace OtherWindowStateController
         {
             this.textBox1.Text = toapply.ToString();
             this.label1.Text = this.textBox1.Text;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            this.toapply = new IntPtr(Convert.ToInt32(this.textBox1.Text));
+            Display();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ShowWindow(toapply, WindowShowStyle.ShowMinimized);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ShowWindow(toapply, WindowShowStyle.Maximize);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            ShowWindow(toapply, WindowShowStyle.Restore);
         }
 
         #region Hide
@@ -150,25 +172,5 @@ namespace OtherWindowStateController
         }
         #endregion
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            this.toapply = new IntPtr(Convert.ToInt32(this.textBox1.Text));
-            Display();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            ShowWindow(toapply, WindowShowStyle.ShowMinimized);
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            ShowWindow(toapply, WindowShowStyle.Maximize);
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            ShowWindow(toapply, WindowShowStyle.Restore);
-        }
     }
 }

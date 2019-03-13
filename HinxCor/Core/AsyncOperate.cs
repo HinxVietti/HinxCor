@@ -29,7 +29,9 @@ namespace HinxCor
                 _logs.Add(HLog);
             };
         }
-
+        /// <summary>
+        /// 启动AO
+        /// </summary>
         public void Start()
         {
             if (hasStart) return;
@@ -72,17 +74,39 @@ namespace HinxCor
             completed = null;
             Log = this + " is release.";
         }
-
+        /// <summary>
+        /// Main THR
+        /// </summary>
         protected Thread THR;
+        /// <summary>
+        /// UPDATE FUNC(更新数据)
+        /// </summary>
         protected Action LogUpdate;
         private bool hasStart = false;
         private int timerout = 100;
+        /// <summary>
+        /// 是否已经结束
+        /// </summary>
         public bool isDone { get; protected set; }
+        /// <summary>
+        /// 进度
+        /// </summary>
         public float progress { get; protected set; }
+        /// <summary>
+        /// 当前日志
+        /// </summary>
         public string Log { get; protected set; }
-
+        /// <summary>
+        /// 日志列表
+        /// </summary>
         protected List<FormerLog> _logs = new List<FormerLog>();
+        /// <summary>
+        /// 日志列表
+        /// </summary>
         public FormerLog[] Logs { get { return _logs.ToArray(); } }
+        /// <summary>
+        /// 当前日志
+        /// </summary>
         public FormerLog HLog { get; protected set; }
 
         /// <summary>

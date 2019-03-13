@@ -12,6 +12,11 @@ namespace HinxCor
     /// </summary>
     public static class Convert
     {
+        /// <summary>
+        /// 将Byte[]转为string
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
         public static string ToByteString(byte[] array)
         {
             StringBuilder sb = new StringBuilder();
@@ -21,7 +26,12 @@ namespace HinxCor
             }
             return sb.ToString();
         }
-
+        /// <summary>
+        /// string 2 byte[]
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="ignoreholdlength"></param>
+        /// <returns></returns>
         public static byte[] StringToByteArray(string source, bool ignoreholdlength = false)
         {
             if (ignoreholdlength && source.Length % 2 != 0) return null;
@@ -31,7 +41,12 @@ namespace HinxCor
 
             return bits;
         }
-
+        /// <summary>
+        /// obj to byte[] , obj mast mark as Serilable
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static byte[] ToByteArray<T>(T obj)
         {
             return ToByteArray((object)obj);

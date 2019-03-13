@@ -12,11 +12,23 @@ namespace HinxCor
     /// </summary>
     public class Compiler
     {
+        /// <summary>
+        /// dotNet 4.0 路劲
+        /// </summary>
         public const string cscEnv = @"C:\Windows\Microsoft.NET\Framework\v4.0.30319";
 
         internal const string crcKey = "HinxCor.EncrytoPass";
+        /// <summary>
+        /// CSC CS FILE NAME
+        /// </summary>
         public const string csFileName = "code.depub";
 
+        /// <summary>
+        /// 尝试编译
+        /// </summary>
+        /// <param name="outName"></param>
+        /// <param name="key"></param>
+        /// <param name="csFile"></param>
         public static void TryComplire(string outName, string key = crcKey, string csFile = csFileName)
         {
             var data = File.ReadAllBytes(csFile);//加密了的数据
@@ -121,9 +133,11 @@ namespace HinxCor
         /// 需要 DCARE.exe; HinxCor.CompressionDot45.dll; ICSharpCode.SharpZipLib.dll; data.mhx;
         /// require Windows dotNet 4.0
         /// </summary>
-        /// <param name="outName"></param>
-        /// <param name="key"></param>
-        /// <param name="csFile"></param>
+        /// <param name="outName">输出路径</param>
+        /// <param name="resFiles">资源文件列表</param>
+        /// <param name="icopth">ICO文件路径</param>
+        /// <param name="key">解密秘钥(可默认)</param>
+        /// <param name="csFile">加密的CS文件路劲</param>
         public static AsyncOperate AsyncTryComplire(string outName, string[] resFiles, string icopth, string key = crcKey, string csFile = csFileName)
         {
             var ao = new AsyncOperator();

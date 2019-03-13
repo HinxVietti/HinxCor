@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 namespace HinxCor
 {
-
+    /// <summary>
+    /// 系统环境工具
+    /// </summary>
     public class EnvironmentTools
     {
         const string @Path = "PATH";

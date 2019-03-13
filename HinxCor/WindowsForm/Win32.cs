@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-public class Win32
+//[Obsolete("Using H.Win32 Instead.", true)]
+
+internal class _Win32
 {
     public enum Bool
 
@@ -13,9 +15,6 @@ public class Win32
         True
 
     };
-
-
-
 
 
     [StructLayout(LayoutKind.Sequential)]

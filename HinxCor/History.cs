@@ -2,13 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// 操作历史记录
+/// </summary>
 public class History
 {
+    /// <summary>
+    /// 可以重做
+    /// </summary>
     public bool Redoable { get { return !(CurrentState != null && CurrentState.NextState != null); } }
+    /// <summary>
+    /// 可以后退
+    /// </summary>
     public bool Undoable { get { return !(CurrentState != null && CurrentState.PrevState != null); } }
 
     #region Declarations
-
+    /// <summary>
+    /// 记录action
+    /// </summary>
     public delegate void RecordableAction();
 
     internal class State
@@ -146,6 +157,11 @@ public class History
 
     #region Public methods
 
+    /// <summary>
+    /// 记录一个步骤
+    /// </summary>
+    /// <param name="act"></param>
+    /// <param name="undo"></param>
     public static void Record(RecordableAction act, RecordableAction undo)
     {
         lock (Lock)

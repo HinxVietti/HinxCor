@@ -4,7 +4,9 @@ using System.Collections.Generic;
 namespace HinxCor.Math
 {
     using static System.Math;
-
+    /// <summary>
+    /// 直线
+    /// </summary>
     public class Line
     {
         /// <summary>
@@ -27,25 +29,39 @@ namespace HinxCor.Math
         /// </summary>
         public bool ParallelX { get { return K == 0; } }
 
-
+        /// <summary>
+        /// 构造
+        /// </summary>
+        /// <param name="k"></param>
         public Line(double k)
         {
             this.K = k;
             b = 0;
         }
 
+        /// <summary>
+        /// 过0 P构造
+        /// </summary>
+        /// <param name="p"></param>
         public Line(Point p)
         {
             this.K = p.y / p.x;
         }
-
+        /// <summary>
+        ///  kb构造
+        /// </summary>
+        /// <param name="k"></param>
+        /// <param name="b"></param>
         public Line(double k, double b)
         {
             this.K = k;
             this.b = b;
         }
-
-
+        /// <summary>
+        /// 过两点构造
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
         public Line(Point a, Point b)
         {
             this.K = (a.y - b.y) / (a.x - b.x);
@@ -65,7 +81,11 @@ namespace HinxCor.Math
 
         }
 
-
+        /// <summary>
+        /// 获取相交的点
+        /// </summary>
+        /// <param name="line"></param>
+        /// <returns></returns>
         public Point Cross(Line line)
         {
             Point p = new Point();
@@ -75,6 +95,11 @@ namespace HinxCor.Math
             return p;
         }
 
+        /// <summary>
+        /// 线到点p的距离
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public double DistenceTo(Point p)
         {
             if (ParallelX)

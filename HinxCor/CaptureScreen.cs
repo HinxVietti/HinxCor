@@ -5,7 +5,9 @@ using System.Runtime.InteropServices;
 
 namespace HinxCor
 {
-
+    /// <summary>
+    /// GDI截屏
+    /// </summary>
     public class ScreenCapture
     {
         /// <summary>
