@@ -1,0 +1,1 @@
+_ffpixable.exe -f:D:\\3.jpg -width:25 -height:25

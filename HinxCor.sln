@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationLauncher", "Appl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtherWindowStateController", "OtherWindowStateController\OtherWindowStateController.csproj", "{EA26430C-7AF6-4152-9523-0BD5F6AE6A74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_ffpixable", "_ffpixable\_ffpixable.csproj", "{70F95E64-70B6-40DE-81E7-6FFE51A2DEDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{EA26430C-7AF6-4152-9523-0BD5F6AE6A74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA26430C-7AF6-4152-9523-0BD5F6AE6A74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA26430C-7AF6-4152-9523-0BD5F6AE6A74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70F95E64-70B6-40DE-81E7-6FFE51A2DEDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70F95E64-70B6-40DE-81E7-6FFE51A2DEDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70F95E64-70B6-40DE-81E7-6FFE51A2DEDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70F95E64-70B6-40DE-81E7-6FFE51A2DEDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
