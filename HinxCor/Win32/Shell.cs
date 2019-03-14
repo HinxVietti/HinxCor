@@ -8,6 +8,7 @@ using RECT = System.Drawing.Rectangle;
 
 namespace HinxCor.Win32
 {
+#pragma warning disable
     public struct DRAGINFO
     {
         public int uSize;
@@ -190,4 +191,5 @@ namespace HinxCor.Win32
         public const int SHGNLI_PIDL = 0x1;
         public const int SHGNLI_PREFIXNAME = 0x2;
     }
+#pragma warning restore
 }

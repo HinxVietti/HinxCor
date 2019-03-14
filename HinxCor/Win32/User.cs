@@ -12,6 +12,7 @@ using DEVMODE = HinxCor.Win32.DEVMODEW;//added
 
 namespace HinxCor.Win32
 {
+#pragma warning disable
     public struct CBTACTIVATESTRUCT
     {
         public int fMouse;
@@ -2462,4 +2463,6 @@ namespace HinxCor.Win32
         public const string SZDDESYS_TOPIC = "System";
         public const string SZDDE_ITEM_ITEMLIST = "TopicItemList";
     }
+
+#pragma warning restore
 }

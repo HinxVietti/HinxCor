@@ -54,6 +54,10 @@ namespace HinxCor.Win32
     public enum DefaultButtons
     {
         /// <summary>
+        /// 有且仅能在HinxCor中调用,请注意其他程序集忽略此项目
+        /// </summary>
+        INSIDE_ZERO = 0,
+        /// <summary>
         /// 显示终止,重试,忽略三个按钮
         /// </summary>
         AbortRetryIgnore = (int)MessageBox.MB_ABORTRETRYIGNORE,
@@ -178,12 +182,6 @@ namespace HinxCor.Win32
     /// </summary>
     public static class MessageBox
     {
-        static void Test()
-        {
-            System.Windows.Forms.MessageBox.Show
-        }
-
-
 
         #region KEYS
         //KEYS
@@ -329,55 +327,380 @@ namespace HinxCor.Win32
         //RETURN
 
 
-        public static DialogResult Show(string text) { }
-        public static DialogResult Show(string text, string caption) { }
-        public static DialogResult Show(string text, string caption, DefaultButtons buttons) { }
-        public static DialogResult Show(string text, string caption, DefaultButtons buttons, DefaultICON icon) { }
-        public static DialogResult Show(string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton) { }
-        public static DialogResult Show(string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton, MessageBoxOptions options) { }
-        public static DialogResult Show(string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton, MessageBoxOptions options, bool displayHelpButton) { }
-        public static DialogResult ShowTopMost(string text) { }
-        public static DialogResult ShowTopMost(string text, string caption) { }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult Show(string text)
+        {
+            return Show(text, "Message");
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult Show(string text, string caption)
+        {
+            return Show(text, caption, 0);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult Show(string text, string caption, DefaultButtons buttons)
+        {
+            return Show(text, caption, buttons, 0);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult Show(string text, string caption, DefaultButtons buttons, DefaultICON icon)
+        {
+            return Show(text, caption, buttons, icon, 0);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <param name="defaultButton">默认选择的按钮(注意有无第四项)</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult Show(string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton)
+        {
+            return Show(text, caption, buttons, icon, defaultButton, 0);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <param name="defaultButton">默认选择的按钮(注意有无第四项)</param>
+        /// <param name="options">信息盒子选项</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult Show(string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton, MessageBoxOptions options)
+        {
+            return Show(text, caption, buttons, icon, defaultButton, options, false);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <param name="defaultButton">默认选择的按钮(注意有无第四项)</param>
+        /// <param name="options">信息盒子选项</param>
+        /// <param name="displayHelpButton">是否显示帮助按钮</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult Show(string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton, MessageBoxOptions options, bool displayHelpButton)
+        {
+            return (DialogResult)User32.MessageBox(User32.GetForegroundWindow(), text, caption, GetCMD((LNG)buttons, (LNG)icon, (LNG)defaultButton, (LNG)options, displayHelpButton ? MB_HELP : 0));
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult ShowTopMost(string text)
+        {
+            return ShowTopMost(text, "Message");
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult ShowTopMost(string text, string caption)
+        {
+            return ShowTopMost(text, caption, 0);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
         public static DialogResult ShowTopMost(string text, string caption, DefaultButtons buttons)
         {
             return ShowTopMost(text, caption, buttons, 0);
         }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
         public static DialogResult ShowTopMost(string text, string caption, DefaultButtons buttons, DefaultICON icon)
         {
             return ShowTopMost(text, caption, buttons, icon, 0);
         }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <param name="defaultButton">默认选择的按钮(注意有无第四项)</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
         public static DialogResult ShowTopMost(string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton)
         {
             return ShowTopMost(text, caption, buttons, icon, defaultButton, 0);
         }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <param name="defaultButton">默认选择的按钮(注意有无第四项)</param>
+        /// <param name="options">信息盒子选项</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
         public static DialogResult ShowTopMost(string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton, MessageBoxOptions options)
         {
             return ShowTopMost(text, caption, buttons, icon, defaultButton, options, false);
         }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <param name="defaultButton">默认选择的按钮(注意有无第四项)</param>
+        /// <param name="options">信息盒子选项</param>
+        /// <param name="displayHelpButton">是否显示帮助按钮</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
         public static DialogResult ShowTopMost(string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton, MessageBoxOptions options, bool displayHelpButton)
         {
-            return (DialogResult)User32.MessageBox(User32.GetForegroundWindow(), text, caption, GetCMD((LNG)buttons, (LNG)icon, (LNG)defaultButton, (LNG)options, displayHelpButton ? MB_HELP : 0));
+            return (DialogResult)User32.MessageBox(User32.GetForegroundWindow(), text, caption, GetCMD((LNG)buttons, (LNG)icon, (LNG)defaultButton, (LNG)options, MB_TOPMOST, displayHelpButton ? MB_HELP : 0));
         }
-
-        public static DialogResult Show(IntPtr handle, string text) { }
-        public static DialogResult Show(IntPtr handle, string text, string caption) { }
-        public static DialogResult Show(IntPtr handle, string text, string caption, DefaultButtons buttons) { }
-        public static DialogResult Show(IntPtr handle, string text, string caption, DefaultButtons buttons, DefaultICON icon) { }
-        public static DialogResult Show(IntPtr handle, string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton) { }
-        public static DialogResult Show(IntPtr handle, string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton, MessageBoxOptions options) { }
-        public static DialogResult Show(IntPtr handle, string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton, MessageBoxOptions options, bool displayHelpButton) { }
-        public static DialogResult ShowTopMost(IntPtr handle, string text) { }
-        public static DialogResult ShowTopMost(IntPtr handle, string text, string caption) { }
-        public static DialogResult ShowTopMost(IntPtr handle, string text, string caption, DefaultButtons buttons) { }
-        public static DialogResult ShowTopMost(IntPtr handle, string text, string caption, DefaultButtons buttons, DefaultICON icon) { }
-        public static DialogResult ShowTopMost(IntPtr handle, string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton) { }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult Show(IntPtr handle, string text)
+        {
+            return Show(handle, text, "Message");
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult Show(IntPtr handle, string text, string caption)
+        {
+            return Show(handle, text, caption, DefaultButtons.INSIDE_ZERO);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult Show(IntPtr handle, string text, string caption, DefaultButtons buttons)
+        {
+            return Show(handle, text, caption, buttons, 0);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult Show(IntPtr handle, string text, string caption, DefaultButtons buttons, DefaultICON icon)
+        {
+            return Show(handle, text, caption, buttons, icon, 0);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <param name="defaultButton">默认选择的按钮(注意有无第四项)</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult Show(IntPtr handle, string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton)
+        {
+            return Show(handle, text, caption, buttons, icon, defaultButton, 0);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <param name="defaultButton">默认选择的按钮(注意有无第四项)</param>
+        /// <param name="options">信息盒子选项</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult Show(IntPtr handle, string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton, MessageBoxOptions options)
+        {
+            return Show(handle, text, caption, buttons, icon, defaultButton, options, false);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <param name="defaultButton">默认选择的按钮(注意有无第四项)</param>
+        /// <param name="options">信息盒子选项</param>
+        /// <param name="displayHelpButton">是否显示帮助按钮</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult Show(IntPtr handle, string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton, MessageBoxOptions options, bool displayHelpButton)
+        {
+            return (DialogResult)User32.MessageBox(handle, text, caption, GetCMD((LNG)buttons, (LNG)icon, (LNG)defaultButton, (LNG)options, displayHelpButton ? MB_HELP : 0));
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult ShowTopMost(IntPtr handle, string text)
+        {
+            return ShowTopMost(handle, text, "Message");
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult ShowTopMost(IntPtr handle, string text, string caption)
+        {
+            return ShowTopMost(handle, text, caption, 0);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult ShowTopMost(IntPtr handle, string text, string caption, DefaultButtons buttons)
+        {
+            return ShowTopMost(handle, text, caption, buttons, 0);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult ShowTopMost(IntPtr handle, string text, string caption, DefaultButtons buttons, DefaultICON icon)
+        {
+            return ShowTopMost(handle, text, caption, buttons, icon, 0);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <param name="defaultButton">默认选择的按钮(注意有无第四项)</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult ShowTopMost(IntPtr handle, string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton)
+        {
+            return ShowTopMost(handle, text, caption, buttons, icon, defaultButton, 0);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <param name="defaultButton">默认选择的按钮(注意有无第四项)</param>
+        /// <param name="options">信息盒子选项</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
         public static DialogResult ShowTopMost(IntPtr handle, string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton, MessageBoxOptions options)
         {
             return ShowTopMost(handle, text, caption, buttons, icon, defaultButton, options, false);
         }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="buttons">窗体提供的按钮选项,用户选择结果将返回</param>
+        /// <param name="icon">信息盒子的提示图标(信息类型)</param>
+        /// <param name="defaultButton">默认选择的按钮(注意有无第四项)</param>
+        /// <param name="options">信息盒子选项</param>
+        /// <param name="displayHelpButton">是否显示帮助按钮</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
         public static DialogResult ShowTopMost(IntPtr handle, string text, string caption, DefaultButtons buttons, DefaultICON icon, DefaultSelectedButton defaultButton, MessageBoxOptions options, bool displayHelpButton)
         {
-            return (DialogResult)User32.MessageBox(handle, text, caption, GetCMD((LNG)buttons, (LNG)icon, (LNG)defaultButton, (LNG)options, displayHelpButton ? MB_HELP : 0));
+            return (DialogResult)User32.MessageBox(handle, text, caption, GetCMD((LNG)buttons, (LNG)icon, (LNG)defaultButton, (LNG)options, MB_TOPMOST, displayHelpButton ? MB_HELP : 0));
+        }
+
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="MB_CMDS">窗体命令,0 为空,可以自主选择命令组拼,注意不能重复使用相同组内容</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static int Show(IntPtr handle, string text, string caption, LNG MB_CMDS)
+        {
+            return User32.MessageBox(handle, text, caption, (int)MB_CMDS);
+        }
+        /// <summary>
+        /// 显示一个信息盒子, 阻断当前线程
+        /// </summary>
+        /// <param name="handle">载体窗口句柄</param>
+        /// <param name="text">需要显示的Text主体内容</param>
+        /// <param name="caption">标题</param>
+        /// <param name="MB_CMDS">窗体命令,0 为空,可以自主选择命令组拼,注意不能重复使用相同组内容</param>
+        /// <returns>窗体返回结果(用户点击的按钮)</returns>
+        public static DialogResult HShow(IntPtr handle, string text, string caption, int MB_CMDS)
+        {
+            return (DialogResult)Show(handle, text, caption, MB_CMDS);
         }
 
         private static int GetCMD(params LNG[] cmds)

@@ -6,6 +6,7 @@ using System.Text;
 
 namespace HinxCor.Win32
 {
+#pragma warning disable
     /// <summary>
     /// 此结构是API的DEVMODE结构在联合里的一个匿名结构
     /// </summary>
@@ -119,7 +120,7 @@ namespace HinxCor.Win32
 
 
     #region UNICODE
-    
+
     /// <summary>
     /// 此结构是API的DEVMODE结构的Unicode版本，匿名结构由Anonymity结构代替
     /// </summary>
@@ -193,6 +194,8 @@ namespace HinxCor.Win32
 
         //*/size=224==64+160
     };
-    
+
     #endregion UNICODE
+
+#pragma warning restore
 }
