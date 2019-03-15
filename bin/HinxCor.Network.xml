@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HinxCor.Network</name>
+    </assembly>
+    <members>
+        <member name="M:HinxCor.Network.Program.GetHvtImgUrls(System.String)">
+            <summary> 
+            取得HTML中所有图片的 URL。 
+            </summary> 
+            <param name="sHtmlText">HTML代码</param> 
+            <returns>图片的URL列表</returns> 
+        </member>
+    </members>
+</doc>

@@ -18,6 +18,7 @@ using System.Text.RegularExpressions;
 using HinxCor.Compression.net45;
 using System.Diagnostics;
 using HinxCor;
+using System.Collections.Generic;
 
 namespace DemoApp
 {
@@ -32,35 +33,82 @@ namespace DemoApp
             //chmod +x shadowsocks.sh
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log
             //new child("good");
+            FolderBrowserDialog f = new FolderBrowserDialog();
+            f.RootFolder = Environment.SpecialFolder.MyComputer;
+            f.ShowDialog();
+            var dir = f.SelectedPath;
+            var files = GetFilesAndDirs(new DirectoryInfo(dir));
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
 
-            //Win32.CopyMemory();
+            var ao = new AsyncOperator();
+            var ap = new AsyncOperate(ao);
+            ap.Start();
+            Action<string> log = str =>
+            {
+                ao.log = str;
+                //Console.SetCursorPosition(0, 1);
+                //Console.WriteLine(str);
+            };
+            Action<float> p = str =>
+            {
+                ao.process = str;
+                //Console.SetCursorPosition(0, 0);
+                //Console.WriteLine((str * 100).ToString("F") + "%");
+            };
+            bool finished = false;
+            Action<bool> state = b =>
+            {
+                ao.isdone = b;
+                finished = b;
+            };
+            Action<Exception> handle = e =>
+            {
+                Console.SetCursorPosition(0, 3);
+                Console.WriteLine(e.ToString());
+            };
 
-            //byte[] bits = new byte[] { 0, 1, 255, 1 };
-            //string str = HinxCor.Convert.ToByteString(bits);
+            SaveFileDialog save = new SaveFileDialog();
+            save.Filter = "zip文件|*.zip";
+            save.ShowDialog();
+            var r = new Thread(() =>
+            {
+                ZipHelper.ASyncCompressFilesAndFolder(p, log, state, handle, files, save.FileName, 9, "", "测试创建的zip文件,密码为123");
+            })
+            {
+                IsBackground = true
+            };
 
+            r.Start();
 
-            //Apple p = new Apple();
-            //p.weight = 4396;
+            while (ap.isDone == false)
+            {
+                Console.Clear();
+                Console.WriteLine(ap.isDone);
+                Console.WriteLine((ap.progress * 100).ToString("F") + "%");
+                Console.WriteLine(ap.Log);
+                Thread.Sleep(50);
+            }
+            Console.Clear();
+            Console.WriteLine(ap.isDone);
+            Console.WriteLine((ap.progress * 100).ToString("F") + "%");
+            Console.WriteLine(ap.Log);
 
-            //var bit_p = HinxCor.Convert.ToByteArray(p);
-            //var string_p = HinxCor.Convert.ToByteString(bit_p);
-            //var bit_p_2 = HinxCor.Convert.StringToByteArray(string_p);
-            //var obj_p = HinxCor.Convert.ToObject(bit_p_2);
-            //var p2 = (Apple)obj_p;
+            Console.SetCursorPosition(0, 4);
+            Console.WriteLine("FINISHED");
+            Console.ReadKey();
 
-            ////FolderBrowserDialog d = new FolderBrowserDialog();
-            ////d.RootFolder = Environment.SpecialFolder.MyComputer;
-            ////d.ShowDialog();
-            ////var dira = d.SelectedPath;
-            ////d.ShowDialog();
-            ////var dirb = d.SelectedPath;
-            //////new DirectoryInfo(dira).CopyTo(dirb);
-            ////Console.WriteLine();
-            ////Console.WriteLine("finished.");
-            //Console.ReadKey();
+        }
 
-            TestAsync();
-
+        public static string[] GetFilesAndDirs(DirectoryInfo dir)
+        {
+            List<string> cols = new List<string>();
+            cols.AddRange(Directory.GetFiles(dir.FullName));
+            cols.AddRange(Directory.GetDirectories(dir.FullName));
+            return cols.ToArray();
         }
 
         /// <summary>
@@ -76,7 +124,7 @@ namespace DemoApp
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
-         
+
 
             aop.Start();
             var THR = new Thread(() =>

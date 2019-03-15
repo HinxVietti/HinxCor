@@ -1,5 +1,4 @@
 ﻿using SharpFont;
-using SharpFont.Gdi;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -111,7 +110,7 @@ namespace HinxCor.Drawing
         {
             _size = size;
             if (FontFace != null)
-                FontFace.SetCharSize(0, size, 0, 96);
+                FontFace.SetCharSize(0, (int)size, 0, 96);
         }
 
         #endregion // Setters
@@ -214,7 +213,8 @@ namespace HinxCor.Drawing
                 // The metrics below are for the glyph loaded in the slot.
                 float gAdvanceX = (float)face.Glyph.Advance.X; // same as the advance in metrics
                 float gBearingX = (float)face.Glyph.Metrics.HorizontalBearingX;
-                float gWidth = face.Glyph.Metrics.Width.ToSingle();
+                //float gWidth = face.Glyph.Metrics.Width.ToSingle();
+                float gWidth = face.Glyph.Metrics.Width;
                 var rc = new DebugChar(c, gAdvanceX, gBearingX, gWidth);
                 #endregion
                 #region Underrun

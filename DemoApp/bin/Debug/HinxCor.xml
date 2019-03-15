@@ -154,22 +154,22 @@
             任务完成时执行,无论是失败还是成功, 可以通过读取传入的AO 对象读取状态和日志
             </summary>
         </member>
-        <member name="T:HinxCor.Compiler">
+        <member name="T:HinxCor.Compiler.Compiler">
             <summary>
             require Windows dotNet 4.0
             </summary>
         </member>
-        <member name="F:HinxCor.Compiler.cscEnv">
+        <member name="F:HinxCor.Compiler.Compiler.cscEnv">
             <summary>
             dotNet 4.0 路劲
             </summary>
         </member>
-        <member name="F:HinxCor.Compiler.csFileName">
+        <member name="F:HinxCor.Compiler.Compiler.csFileName">
             <summary>
             CSC CS FILE NAME
             </summary>
         </member>
-        <member name="M:HinxCor.Compiler.TryComplire(System.String,System.String,System.String)">
+        <member name="M:HinxCor.Compiler.Compiler.TryComplire(System.String,System.String,System.String)">
             <summary>
             尝试编译
             </summary>
@@ -177,17 +177,18 @@
             <param name="key"></param>
             <param name="csFile"></param>
         </member>
-        <member name="M:HinxCor.Compiler.AsyncTryComplire(System.String,System.String,System.String)">
+        <member name="M:HinxCor.Compiler.Compiler.AsyncTryComplire(System.String,System.Action{System.Exception},System.String,System.String,System.String)">
             <summary>
-            自解压程序; dCare 需要 dll1,dll2,data,mhx
-            需要 DCARE.exe; HinxCor.CompressionDot45.dll; ICSharpCode.SharpZipLib.dll; data.mhx;
+            自解压程序; 
+            需要 DCARE.exe; 需要 HinxCor.CompressionDot45.dll;需要 ICSharpCode.SharpZipLib.dll;需要 data.mhx;
+            需要 code.depub 和 icon
             require Windows dotNet 4.0
             </summary>
             <param name="outName"></param>
             <param name="key"></param>
             <param name="csFile"></param>
         </member>
-        <member name="M:HinxCor.Compiler.AsyncTryComplire(System.String,System.String[],System.String,System.String,System.String)">
+        <member name="M:HinxCor.Compiler.Compiler.AsyncTryComplire(System.String,System.String[],System.String,System.String,System.String)">
             <summary>
             自解压程序; dCare 需要 dll1,dll2,data,mhx
             需要 DCARE.exe; HinxCor.CompressionDot45.dll; ICSharpCode.SharpZipLib.dll; data.mhx;
@@ -198,6 +199,24 @@
             <param name="icopth">ICO文件路径</param>
             <param name="key">解密秘钥(可默认)</param>
             <param name="csFile">加密的CS文件路劲</param>
+        </member>
+        <member name="T:HinxCor.Compiler.CompilerHelper">
+            <summary>
+            编译辅助
+            </summary>
+        </member>
+        <member name="M:HinxCor.Compiler.CompilerHelper.Build_MHX_DATA(System.String[])">
+            <summary>
+            打包加密MHX数据
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:HinxCor.Compiler.CompilerHelper.ASyncBuild_MHX_DATA(System.String[],System.Action{System.Exception})">
+            <summary>
+            异步加密打包 MHX 包,传入Files
+            </summary>
+            <param name="files">文件+文件夹</param>
+            <returns></returns>
         </member>
         <member name="T:HinxCor.FormerLog">
             <summary>
@@ -2070,6 +2089,40 @@
             获取进度
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:LogClip">
+            <summary>
+            日志片段
+            </summary>
+        </member>
+        <member name="P:LogClip.Process">
+            <summary>
+            进度
+            </summary>
+        </member>
+        <member name="P:LogClip.Log">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="P:LogClip.LogType">
+            <summary>
+            日志类型 0-normal , 1-warning , 2-error , 3-exception
+            </summary>
+        </member>
+        <member name="P:LogClip.State">
+            <summary>
+            是否完成
+            </summary>
+        </member>
+        <member name="M:LogClip.#ctor(System.Single,System.String,System.Int32,System.Boolean)">
+            <summary>
+            t [0,4]
+            </summary>
+            <param name="p"></param>
+            <param name="l"></param>
+            <param name="t"></param>
+            <param name="s"></param>
         </member>
         <member name="T:History">
             <summary>

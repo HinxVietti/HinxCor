@@ -40,13 +40,14 @@ namespace HinxCor
                 while (isDone == false)
                 {
                     LogUpdate();
+                    Thread.Sleep(timerout);
                 }
+                isDone = true;
                 if (completed != null)
                 {
                     completed.Invoke(this);
                     completed = null;
                 }
-                Thread.Sleep(timerout);
             })
             {
                 IsBackground = true
@@ -60,7 +61,7 @@ namespace HinxCor
         /// </summary>
         ~AsyncOperate()
         {
-            if (THR.IsAlive == true)
+            if (THR != null && THR.IsAlive == true)
                 THR.Abort();
             if (completed != null)
             {

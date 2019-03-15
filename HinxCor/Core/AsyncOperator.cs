@@ -1,6 +1,4 @@
 ﻿using HinxCor;
-using System;
-using System.Collections.Generic;
 
 /// <summary>
 /// 异步工具
@@ -10,19 +8,19 @@ public class AsyncOperator : IAsyncOperator
     /// <summary>
     /// 是否完成
     /// </summary>
-    public bool isdone { get; internal set; }
+    public bool isdone { get; set; }
     /// <summary>
     /// 日志
     /// </summary>
-    public string log { get; internal set; }
+    public string log { get; set; }
     /// <summary>
     /// 进度
     /// </summary>
-    public float process { get; internal set; }
+    public float process { get; set; }
     /// <summary>
     /// 格式日志
     /// </summary>
-    public FormerLog hlog { get; internal set; }
+    public FormerLog hlog { get; set; }
 
     /// <summary>
     /// 构造
@@ -38,6 +36,16 @@ public class AsyncOperator : IAsyncOperator
         };
         hlog.AppendLine(log);
     }
+
+    public void SetClip(LogClip p)
+    {
+        this.log = p.Log;
+        this.process = p.Process;
+        this.isdone = p.State;
+        this.hlog = new FormerLog((FormerLog.LogType)p.LogType, p.Log);
+
+    }
+
     /// <summary>
     /// 获取Log
     /// </summary>
@@ -73,3 +81,51 @@ public class AsyncOperator : IAsyncOperator
     }
 }
 
+/// <summary>
+/// 日志片段
+/// </summary>
+public struct LogClip
+{
+    /// <summary>
+    /// 进度
+    /// </summary>
+    public float Process { get; set; }
+    /// <summary>
+    /// 日志
+    /// </summary>
+    public string Log { get; set; }
+    /// <summary>
+    /// 日志类型 0-normal , 1-warning , 2-error , 3-exception
+    /// </summary>
+    public int LogType { get; set; }
+    /// <summary>
+    /// 是否完成
+    /// </summary>
+    public bool State { get; set; }
+
+    /// <summary>
+    /// t [0,4]
+    /// </summary>
+    /// <param name="p"></param>
+    /// <param name="l"></param>
+    /// <param name="t"></param>
+    /// <param name="s"></param>
+    public LogClip(float p, string l, int t, bool s)
+    {
+        Process = p;
+        Log = l;
+        LogType = t;
+        State = s;
+    }
+
+    public static LogClip Create(float process, string log, int logt = 1)
+    {
+        return new LogClip(process, log, logt, false);
+    }
+
+    public static LogClip Finished(string log = "finished", int logt = 1, float process = 1)
+    {
+        return new LogClip(process, log, logt, true);
+    }
+
+}

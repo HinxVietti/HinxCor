@@ -6,8 +6,14 @@ using System.Text;
 
 namespace HinxCor.Compression.net45
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ZipHelper
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public enum CompressionLevel
         {
             ///
@@ -34,6 +40,254 @@ namespace HinxCor.Compression.net45
 
         }
 
+        /// <summary>
+        /// 异步创建压缩文件
+        /// </summary>
+        /// <param name="sync_process"></param>
+        /// <param name="sync_log"></param>
+        /// <param name="sync_state"></param>
+        /// <param name="onError"></param>
+        /// <param name="files">传入的文件夹内容或者文件内容</param>
+        /// <param name="zipFile"></param>
+        /// <param name="compressionLevel"></param>
+        /// <param name="passwd"></param>
+        /// <param name="comment"></param>
+        public static void ASyncCompressFilesAndFolder(Action<float> sync_process, Action<string> sync_log, Action<bool> sync_state, Action<Exception> onError, string[] files, string zipFile, int compressionLevel = 5, string passwd = "", string comment = "runable achive file.. By.HinxCor.EncrytoPass")
+        {
+            sync_process(0);
+            sync_state(false);
+            sync_log("开始查找文件");
+
+            var dict = new Dictionary<string, string>(); // key 是 entry名字 value 是 file全名
+
+            Action<DirectoryInfo, int> CollectDirFiles = null;
+            //将所有dir作为root entry 收集起来
+            Action<DirectoryInfo> CollectDirFilesAsRoot = rootdirinfo =>
+            {
+                var trim = rootdirinfo.FullName.Length - rootdirinfo.Name.Length;
+                CollectDirFiles(rootdirinfo, trim);
+            };
+
+            CollectDirFiles = (dir, trim) =>
+            {
+                var dirs = dir.GetDirectories();
+                var ffs = dir.GetFiles();
+                for (int i = 0; i < dirs.Length; i++)
+                    CollectDirFiles(dirs[i], trim);
+                for (int i = 0; i < ffs.Length; i++)
+                    dict.Add(ffs[i].FullName.Remove(0, trim), ffs[i].FullName);
+            };
+
+            List<string> toc_files = new List<string>(); //收集到的所有文件
+            List<string> toc_dirs = new List<string>();  //收集到的所有文件夹
+
+            //files 分拣 - file or dir
+            sync_process(0.05f);
+            sync_log("开始分拣");
+            foreach (var its in files)
+            {
+                if (Directory.Exists(its)) toc_dirs.Add(its);
+                else if (File.Exists(its)) toc_files.Add(its);
+                else
+                {
+                    onError(new Exception(its + " is not an file or folder.."));
+                    return;
+                }
+            }
+            sync_log("分拣完成");
+            sync_process(0.1f);
+            sync_log("开始收集所有文件");
+
+            //步骤计数器
+            int index = 0;
+
+            foreach (var ffile in toc_files)
+            {
+                var f = new FileInfo(ffile);
+                dict.Add(f.Name, f.FullName);
+            }
+
+            foreach (var dir in toc_dirs)
+            {
+                index++;
+                CollectDirFilesAsRoot(new DirectoryInfo(dir));
+                sync_process(0.1f + 0.1f * index / toc_dirs.Count);// 0.1+0.1(max) = 0.2(max) 
+            }
+
+            //FastZip
+
+            //如果要输出的文件已经存在了就删除它
+            if (File.Exists(zipFile)) File.Delete(zipFile);
+
+            //收集所有大小
+            sync_log("开始计算文件大小");
+            long size = 0;
+            foreach (var f in dict)
+                using (var fs = new FileStream(f.Value, FileMode.Open))
+                {
+                    size += fs.Length;
+                }
+            sync_process(0.3f);
+            sync_log("计算完成,准备打包数据");
+
+            long writeSize = 0;
+            int buffSize = 2048;
+            int readSize = 0;
+            byte[] buffer = new byte[buffSize];
+            using (ZipOutputStream outstr = new ZipOutputStream(new FileStream(zipFile, FileMode.CreateNew)))
+            {
+                outstr.Password = passwd;
+                //ZipEntryFactory factory = new ZipEntryFactory();
+                outstr.SetLevel(compressionLevel);
+                //k entry name v full name
+                foreach (var kvp in dict)
+                {
+                    //var entry = factory.MakeFileEntry(kvp.Value);
+                    var entry = new ZipEntry(kvp.Key);
+                    outstr.PutNextEntry(entry);
+                    sync_log("packing:" + kvp.Value);
+                    //写入data
+                    using (FileStream fs = new FileStream(kvp.Value, FileMode.Open))
+                    {
+                        do
+                        {
+                            readSize = fs.Read(buffer, 0, buffSize);// 0 是buffer的offset
+                            outstr.Write(buffer, 0, readSize);
+                            writeSize += readSize;
+                            sync_process(0.3f + 0.7f * writeSize / size);
+                        } while (readSize > 0);
+                    }
+                }
+            }
+            sync_state(true);
+            sync_process(1);
+            sync_log("finished..success.");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sync_p"></param>
+        /// <param name="sync_log"></param>
+        /// <param name="sync_state"></param>
+        /// <param name="args"></param>
+        /// <param name="zipFile"></param>
+        /// <param name="compressionLevel"></param>
+        /// <param name="passwd"></param>
+        /// <param name="comment"></param>
+        [Obsolete("参数不达标,弃用", true)]
+        public static void ASyncCompressFilesAndFolder(Action<float> sync_p, Action<string> sync_log, Action<bool> sync_state, string[] args, string zipFile, CompressionLevel compressionLevel = CompressionLevel.Stored, string passwd = "", string comment = "runable achive file.. By.HinxCor.EncrytoPass")
+        {
+            sync_p(0);
+            sync_state(false);
+            sync_log("开始转换文件");
+
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+
+            Action<DirectoryInfo, int> CollectDirFiles = null;
+            Action<DirectoryInfo> CollectDirFilesAsRoot = rootdirinfo =>
+            {
+                var trim = rootdirinfo.FullName.Length - rootdirinfo.Name.Length;
+                CollectDirFiles(rootdirinfo, trim);
+            };
+
+            CollectDirFiles = (dir, trim) =>
+            {
+                var dirs = dir.GetDirectories();
+                var files = dir.GetFiles();
+                for (int i = 0; i < dirs.Length; i++)
+                    CollectDirFiles(dirs[i], trim);
+                for (int i = 0; i < files.Length; i++)
+                    dict.Add(files[i].FullName.Remove(0, trim), files[i].FullName);
+            };
+
+            //分拣
+            string logname = "extracting.log";
+            StringBuilder log;
+            List<string> ffs = new List<string>();
+            List<string> fdirs = new List<string>();
+            for (int i = 0; i < args.Length; i++)
+                if (File.Exists(args[i])) ffs.Add(args[i]);
+                else if (Directory.Exists(args[i])) fdirs.Add(args[i]);
+                else
+                {
+                    string nlr = string.Format("File {0} was not regular file or folder, add to pack fail.", args[i]);
+                    if (File.Exists(logname))
+                    {
+                        log = new StringBuilder(File.ReadAllText(logname));
+                        log.AppendLine(nlr);
+                        File.WriteAllText(logname, log.ToString());
+                    }
+                    else File.WriteAllText(logname, nlr);
+                }
+
+
+
+            foreach (var ffile in ffs)
+            {
+                FileInfo f = new FileInfo(ffile);
+                dict.Add(f.Name, f.FullName);
+            }
+
+            foreach (var dir in fdirs)
+                CollectDirFilesAsRoot(new DirectoryInfo(dir));
+
+            sync_p(0.2f);
+            sync_log("分拣完成");
+            ZipFile zip = ZipFile.Create(zipFile);
+            if (!string.IsNullOrEmpty(passwd))
+                zip.Password = passwd;
+
+            zip.BeginUpdate();
+            zip.SetComment(comment);
+            zip.CommitUpdate();
+
+            var clevel = getfromLevel(compressionLevel);
+            int index = 0;
+            foreach (var item in dict)
+            {
+                zip.BeginUpdate();
+                index++;
+                sync_p(0.2f + index * 0.8f / dict.Count);
+                sync_log("add.." + item.Value);
+                try
+                {
+                    zip.Add(new private_static_res(item.Value), item.Key, clevel);
+                    //zip.CommitUpdate();
+                }
+                catch (Exception e)
+                {
+                    string nlr = "ERROR IN COMPRESSION: " + e;
+                    if (File.Exists(logname))
+                    {
+                        log = new StringBuilder(File.ReadAllText(logname));
+                        log.AppendLine(nlr);
+                        File.WriteAllText(logname, log.ToString());
+                    }
+                    else File.WriteAllText(logname, nlr);
+                }
+                zip.CommitUpdate();
+            }
+            zip.Close();
+            //}
+            //sync_log("END+ERROR:" + e.ToString());
+            //sync_state(true);
+            //sync(LogClip.Finished(, 2));
+
+            sync_log("finished.");
+            sync_state(true);
+            sync_p(1);
+            //sync(LogClip.Finished());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="zipFile"></param>
+        /// <param name="compressionLevel"></param>
+        /// <param name="passwd"></param>
+        /// <param name="comment"></param>
         public static void CompressFilesAndFolder(string[] args, string zipFile, CompressionLevel compressionLevel = CompressionLevel.Stored, string passwd = "", string comment = "runable achive file.. By.HinxCor.EncrytoPass")
         {
 
@@ -116,6 +370,23 @@ namespace HinxCor.Compression.net45
             zip.Close();
         }
 
+        private static int getlvfromLevel(CompressionLevel level)
+        {
+            switch (level)
+            {
+                case CompressionLevel.Stored:
+                    return 5;
+                case CompressionLevel.Deflated:
+                    return 2;
+                case CompressionLevel.Deflate64:
+                    return 6;
+                case CompressionLevel.BZip2:
+                    return 7;
+                case CompressionLevel.WinZipAES:
+                    return 9;
+            }
+            return 5;
+        }
         private static CompressionMethod getfromLevel(CompressionLevel level)
         {
             switch (level)
@@ -134,6 +405,9 @@ namespace HinxCor.Compression.net45
             throw new Exception(level + " could not convert to " + nameof(CompressionMethod));
         }
 
+        /// <summary>
+        /// 静态文件资源
+        /// </summary>
         private class private_static_res : IStaticDataSource
         {
             private string pth;
