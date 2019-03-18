@@ -32,7 +32,14 @@ namespace DemoApp
             //wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
             //chmod +x shadowsocks.sh
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log
-            //new child("good");
+
+            int index = -1;
+
+            string str = System.Convert.ToString(index, 16);
+        }
+
+        private static void 异步单线测试打包文件夹()
+        {
             FolderBrowserDialog f = new FolderBrowserDialog();
             f.RootFolder = Environment.SpecialFolder.MyComputer;
             f.ShowDialog();

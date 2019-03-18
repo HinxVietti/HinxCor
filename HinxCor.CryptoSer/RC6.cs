@@ -10,15 +10,7 @@ namespace HinxCor.CryptoSer
     /// </summary>
     public class RC6
     {
-        /// <summary>
-        /// 对称加解密算法RC6的C#实现
-        /// 公开维普网_朱明海先生未公布的源码
-        /// 程序完善设计者:四川威远_老耙子 先生
-        /// 2010-11-28
-        /// 本程序只提供了明文长度32的算法。
-        /// 如有需要，请与本人联系。
-        /// Mail:chscwyyg@163.com 电话:0832-8229211
-        /// </summary>
+      
         private string m_sEncryptionKey;                                             //密码方法通过KEY属性返回值
         /// <summary>
         /// 加密解密字符串返回值

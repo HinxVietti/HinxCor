@@ -39,6 +39,9 @@
     <AssemblyOriginatorKeyFile>HinxCor.Crypt.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.4.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.4\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -52,14 +55,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ARC4.cs" />
-    <Compile Include="dmrc6.cs" />
+    <Compile Include="Obsolute\dmrc6.cs" />
+    <Compile Include="Obsolute\HLCrypto.cs" />
+    <Compile Include="Obsolute\HLYCrypto.cs" />
+    <Compile Include="Interface\IAesCryptoUtil.cs" />
+    <Compile Include="Interface\IBytesUtil.cs" />
+    <Compile Include="Interface\IDesCryptoUtil.cs" />
+    <Compile Include="Interface\IMd5CryptoUtil.cs" />
+    <Compile Include="Impl\AesCryptoUtil.cs" />
+    <Compile Include="Impl\BytesUtil.cs" />
+    <Compile Include="Impl\DesCryptoUtil.cs" />
+    <Compile Include="Impl\Md5CryptoUtil.cs" />
+    <Compile Include="Impl\RsaCryptoUtil.cs" />
+    <Compile Include="Impl\RsaPkcs8CryptoUtil.cs" />
+    <Compile Include="Impl\SaltUtil.cs" />
+    <Compile Include="Impl\Sha1CryptoUtil.cs" />
+    <Compile Include="Interface\IRsaCryptoUtil.cs" />
+    <Compile Include="Interface\ISaltUtil.cs" />
+    <Compile Include="Interface\ISha1CryptoUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RC6.cs" />
-    <Compile Include="TExeExtReader.cs" />
+    <Compile Include="Impl\RsaKey.cs" />
+    <Compile Include="Impl\SaltSetting.cs" />
+    <Compile Include="Obsolute\TExeExtReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="HinxCor.Crypt.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
