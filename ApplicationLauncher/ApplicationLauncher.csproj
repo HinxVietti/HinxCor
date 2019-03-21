@@ -91,6 +91,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HinxCor.Network\HinxCor.Network.csproj">
+      <Project>{88ea3892-4a76-4e38-8f2e-340c9f052315}</Project>
+      <Name>HinxCor.Network</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HinxCor\HinxCor.csproj">
       <Project>{A5109C8C-BF97-4E53-AB77-CF9CD6D8405C}</Project>
       <Name>HinxCor</Name>

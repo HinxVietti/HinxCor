@@ -81,6 +81,16 @@ namespace Lemony.SystemInfo
         }
         #endregion
 
+        private void Unblock()
+        {
+            Process CurrentProcess = Process.GetCurrentProcess();
+            CurrentProcess.Id.ToString();//PID
+            var a = ((Double)(CurrentProcess.TotalProcessorTime.TotalMilliseconds - CurrentProcess.UserProcessorTime.TotalMilliseconds)).ToString();//CPU
+            var b = (CurrentProcess.WorkingSet64 / 1024 / 1024).ToString() + "M (" + (CurrentProcess.WorkingSet64 / 1024).ToString() + "KB)";//占用内存
+            var c = CurrentProcess.Threads.Count.ToString();//线程 
+        }
+
+
         #region CPU占用率 
         ///  
         /// 获取CPU占用率 
@@ -155,11 +165,6 @@ namespace Lemony.SystemInfo
             return drives;
         }
 
-        Process CurrentProcess = Process.GetCurrentProcess();
-        CurrentProcess.Id.ToString();//PID
-((Double)(CurrentProcess.TotalProcessorTime.TotalMilliseconds-CurrentProcess.UserProcessorTime.TotalMilliseconds)).ToString();//CPU
-        (CurrentProcess.WorkingSet64 / 1024 / 1024).ToString() + "M (" + (CurrentProcess.WorkingSet64 / 1024).ToString() + "KB)";//占用内存
-CurrentProcess.Threads.Count.ToString();//线程 
         ///  
         /// 获取特定分区信息 
         ///  

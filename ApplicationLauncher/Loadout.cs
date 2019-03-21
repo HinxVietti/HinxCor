@@ -1,8 +1,12 @@
-﻿using HinxCor.Wins.Forms;
+﻿using HinxCor.Network;
+using HinxCor.Wins.Forms;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
@@ -15,10 +19,28 @@ namespace ApplicationLauncher
         public Loadout()
         {
             InitializeComponent();
+            precheck();
             CenterToScreen();
             StartRunableThread();
         }
 
+        private void precheck()
+        {
+            int port = 21591;
+            int index = 0;
+            while (NetworkEnv.IsPortUsed(port))
+            {
+                index++;
+                Random random = new Random(DateTime.Now.Millisecond % 9999);
+                port = random.Next(40000) + 5535;
+                Thread.Sleep(10);
+
+                if (index > 100) HinxCor.Win32.MessageBox.ShowTopMost("多次尝试查找端口未果");
+                this.Close();
+            }
+
+            client = new UdpClient(port);
+        }
 
         private void StartRunableThread()
         {
@@ -91,9 +113,13 @@ namespace ApplicationLauncher
             thr.Start();
         }
 
+        UdpClient client;
+        //TcpClient client;
 
         private unsafe void Entry()
         {
+            var closef = new Vfunc(Close);
+
             string EndName = "~startok.mr";
             while (true)
             {
@@ -107,9 +133,7 @@ namespace ApplicationLauncher
                 }
             }
 
-            var closef = new Vfunc(Close);
             Invoke(closef);
         }
-
     }
 }
