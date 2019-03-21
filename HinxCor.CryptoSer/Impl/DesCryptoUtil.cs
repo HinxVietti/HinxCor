@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Crypto.Client.Impl
+namespace HinxCor.CryptoSer
 {
     /// <summary>
     /// DES加密

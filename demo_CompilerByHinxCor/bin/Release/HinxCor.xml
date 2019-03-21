@@ -177,7 +177,7 @@
             <param name="key"></param>
             <param name="csFile"></param>
         </member>
-        <member name="M:HinxCor.Compiler.Compiler.AsyncTryComplire(System.String,System.String,System.String,System.String)">
+        <member name="M:HinxCor.Compiler.Compiler.AsyncTryComplire(System.String,System.Action{System.Exception},System.String,System.String,System.String)">
             <summary>
             自解压程序; 
             需要 DCARE.exe; 需要 HinxCor.CompressionDot45.dll;需要 ICSharpCode.SharpZipLib.dll;需要 data.mhx;
@@ -211,7 +211,7 @@
             </summary>
             <param name="args"></param>
         </member>
-        <member name="M:HinxCor.Compiler.CompilerHelper.ASyncBuild_MHX_DATA(System.String[])">
+        <member name="M:HinxCor.Compiler.CompilerHelper.ASyncBuild_MHX_DATA(System.String[],System.Action{System.Exception})">
             <summary>
             异步加密打包 MHX 包,传入Files
             </summary>

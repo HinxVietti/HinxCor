@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace Crypto.Client.Impl
+namespace HinxCor.CryptoSer
 {
     /// <summary>
     /// 字节工具包

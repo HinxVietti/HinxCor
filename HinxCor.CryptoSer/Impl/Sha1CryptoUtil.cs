@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace Crypto.Client.Impl
+namespace HinxCor.CryptoSer
 {
     /// <summary>
     /// SHA1单项加密

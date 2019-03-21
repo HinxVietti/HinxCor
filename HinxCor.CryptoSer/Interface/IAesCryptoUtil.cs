@@ -1,4 +1,4 @@
-﻿namespace Crypto.Client
+﻿namespace HinxCor.CryptoSer
 {
     /// <summary>
     /// AES工具包

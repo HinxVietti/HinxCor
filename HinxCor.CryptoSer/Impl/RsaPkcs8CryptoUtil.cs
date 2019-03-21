@@ -6,7 +6,7 @@ using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.OpenSsl;
 using Org.BouncyCastle.Security;
 
-namespace Crypto.Client.Impl
+namespace HinxCor.CryptoSer
 {
     /// <summary>
     /// RSA PKCS8 加密

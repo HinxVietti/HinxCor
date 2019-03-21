@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace Crypto.Client.Impl
+namespace HinxCor.CryptoSer
 {
     /// <summary>
     /// RSA加密

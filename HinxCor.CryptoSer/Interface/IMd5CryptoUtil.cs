@@ -1,4 +1,4 @@
-﻿namespace Crypto.Client
+﻿namespace HinxCor.CryptoSer
 {
     /// <summary>
     /// 加密为MD5 不可逆加密,数据校验
