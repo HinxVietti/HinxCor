@@ -1621,12 +1621,32 @@
             windows 辅助工具
             </summary>
         </member>
-        <member name="M:HinxCor.Windows.ExecuteCommand(System.String,System.Boolean)">
+        <member name="M:HinxCor.Windows.ExecuteCommandConsole(System.String)">
             <summary>
-            dos 执行 batcher cmd
+            dos执行batcher命令
             </summary>
-            <param name="command"></param>
-            <param name="hidden"></param>
+            <param name="command">bat命令</param>
+        </member>
+        <member name="M:HinxCor.Windows.ExecuteCommand(System.String,System.Int32@)">
+            <summary>
+            dos执行batcher命令
+            </summary>
+            <param name="command">bat命令</param>
+            <param name="exitcode"></param>
+        </member>
+        <member name="M:HinxCor.Windows.ExecuteCommand(System.String,CommandExitInfo@)">
+            <summary>
+            dos执行batcher命令
+            </summary>
+            <param name="command">bat命令</param>
+            <param name="exif">INFO</param>
+        </member>
+        <member name="M:HinxCor.Windows.ExecuteCommand(System.String)">
+            <summary>
+            dos执行batcher命令
+            </summary>
+            <param name="command">bat命令</param>
+            <returns>CMD INFO</returns>
         </member>
         <member name="M:HinxCor.Windows.OpenInExplorer(System.String)">
             <summary>
@@ -2211,6 +2231,59 @@
             <param name="max"></param>
             <param name="value"></param>
             <returns></returns>
+        </member>
+        <member name="T:Lemony.SystemInfo.SystemInfo">
+             
+            系统信息类 - 获取CPU、内存、磁盘、进程信息 
+             
+        </member>
+        <member name="M:Lemony.SystemInfo.SystemInfo.#ctor">
+             
+            构造函数，初始化计数器等 
+             
+        </member>
+        <member name="P:Lemony.SystemInfo.SystemInfo.ProcessorCount">
+             
+            获取CPU个数 
+             
+        </member>
+        <member name="P:Lemony.SystemInfo.SystemInfo.CpuLoad">
+             
+            获取CPU占用率 
+             
+        </member>
+        <member name="P:Lemony.SystemInfo.SystemInfo.MemoryAvailable">
+             
+            获取可用内存 
+             
+        </member>
+        <member name="P:Lemony.SystemInfo.SystemInfo.PhysicalMemory">
+             
+            获取物理内存 
+             
+        </member>
+        <member name="M:Lemony.SystemInfo.SystemInfo.GetProcessInfo">
+             
+            获得进程列表 
+             
+        </member>
+        <member name="M:Lemony.SystemInfo.SystemInfo.GetProcessInfo(System.String)">
+             
+            获得特定进程信息 
+             
+            进程名称 
+        </member>
+        <member name="M:Lemony.SystemInfo.SystemInfo.EndProcess(System.Int32)">
+             
+            结束指定进程 
+             
+            进程的 Process ID 
+        </member>
+        <member name="M:Lemony.SystemInfo.SystemInfo.FindAllApps(System.Int32)">
+             
+            查找所有应用程序标题 
+             
+            应用程序标题范型 
         </member>
         <member name="T:UidGenerator">
             <summary>

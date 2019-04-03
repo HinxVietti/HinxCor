@@ -11,11 +11,10 @@ namespace HinxCor
     public static class Windows
     {
         /// <summary>
-        /// dos 执行 batcher cmd
+        /// dos执行batcher命令
         /// </summary>
-        /// <param name="command"></param>
-        /// <param name="hidden"></param>
-        public static void ExecuteCommand(string command, bool hidden = true)
+        /// <param name="command">bat命令</param>
+        public static void ExecuteCommandConsole(string command)
         {
             int exitCode;
             ProcessStartInfo processInfo;
@@ -41,7 +40,82 @@ namespace HinxCor
             Console.WriteLine("output>>" + (String.IsNullOrEmpty(output) ? "(none)" : output));
             Console.WriteLine("error>>" + (String.IsNullOrEmpty(error) ? "(none)" : error));
             Console.WriteLine("ExitCode: " + exitCode.ToString(), "ExecuteCommand");
+
             process.Close();
+        }
+
+        /// <summary>
+        /// dos执行batcher命令
+        /// </summary>
+        /// <param name="command">bat命令</param>
+        /// <param name="exitcode"></param>
+        public static void ExecuteCommand(string command, out int exitcode)
+        {
+            ProcessStartInfo processInfo;
+            Process process;
+
+            processInfo = new ProcessStartInfo("cmd.exe", "/c " + command);
+            processInfo.CreateNoWindow = true;
+            processInfo.UseShellExecute = false;
+            // *** Redirect the output ***
+            processInfo.RedirectStandardError = true;
+            processInfo.RedirectStandardOutput = true;
+
+            process = Process.Start(processInfo);
+            process.WaitForExit();
+
+            // *** Read the streams ***
+            // Warning: This approach can lead to deadlocks, see Edit #2
+            string output = process.StandardOutput.ReadToEnd();
+            string error = process.StandardError.ReadToEnd();
+
+            exitcode = process.ExitCode;
+
+            process.Close();
+        }
+        /// <summary>
+        /// dos执行batcher命令
+        /// </summary>
+        /// <param name="command">bat命令</param>
+        /// <param name="exif">INFO</param>
+        public static void ExecuteCommand(string command, out CommandExitInfo exif)
+        {
+            exif = ExecuteCommand(command);
+        }
+        /// <summary>
+        /// dos执行batcher命令
+        /// </summary>
+        /// <param name="command">bat命令</param>
+        /// <returns>CMD INFO</returns>
+        public static CommandExitInfo ExecuteCommand(string command)
+        {
+            var exif = new CommandExitInfo(0);
+
+            ProcessStartInfo processInfo;
+            Process process;
+
+            processInfo = new ProcessStartInfo("cmd.exe", "/c " + command);
+            processInfo.CreateNoWindow = true;
+            processInfo.UseShellExecute = false;
+            // *** Redirect the output ***
+            processInfo.RedirectStandardError = true;
+            processInfo.RedirectStandardOutput = true;
+
+            process = Process.Start(processInfo);
+            process.WaitForExit();
+
+            // *** Read the streams ***
+            // Warning: This approach can lead to deadlocks, see Edit #2
+            exif.ExitCode = process.ExitCode;
+            exif.Error = process.StandardError.ReadToEnd();
+            exif.Output = process.StandardOutput.ReadToEnd();
+
+            //Console.WriteLine("output>>" + (String.IsNullOrEmpty(output) ? "(none)" : output));
+            //Console.WriteLine("error>>" + (String.IsNullOrEmpty(error) ? "(none)" : error));
+            //Console.WriteLine("ExitCode: " + exitcode.ToString(), "ExecuteCommand");
+
+            process.Close();
+            return exif;
         }
 
 
@@ -212,7 +286,7 @@ namespace HinxCor
         /// 
         /// </summary>
         /// <returns></returns>
-        [Obsolete("try another way please",true)]
+        [Obsolete("try another way please", true)]
         public static string SelectFolderIgnoreException()
         {
             return io_cmd("SelectFolder").Split('#')[1];

@@ -36,7 +36,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>HinxCor.Crypt.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.4.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -80,7 +81,6 @@
     <Compile Include="Obsolute\TExeExtReader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="HinxCor.Crypt.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

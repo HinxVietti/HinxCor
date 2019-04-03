@@ -144,47 +144,48 @@ namespace Lemony.SystemInfo
         }
         #endregion
 
-        #region 获得分区信息 
-        ///  
-        /// 获取分区信息 
-        ///  
-        public List GetLogicalDrives()
-        {
-            List drives = new List();
-            ManagementClass diskClass = new ManagementClass("Win32_LogicalDisk");
-            ManagementObjectCollection disks = diskClass.GetInstances();
-            foreach (ManagementObject disk in disks)
-            {
-                // DriveType.Fixed 为固定磁盘(硬盘) 
-                if (int.Parse(disk["DriveType"].ToString()) == (int)DriveType.Fixed)
-                {
+        //#region 获得分区信息 
+        /////  
+        ///// 获取分区信息 
+        /////  
+        //public List GetLogicalDrives()
+        //{
+        //    List drives = new List();
+        //    ManagementClass diskClass = new ManagementClass("Win32_LogicalDisk");
+        //    ManagementObjectCollection disks = diskClass.GetInstances();
+        //    foreach (ManagementObject disk in disks)
+        //    {
+        //        // DriveType.Fixed 为固定磁盘(硬盘) 
+        //        if (int.Parse(disk["DriveType"].ToString()) == (int)DriveType.Fixed)
+        //        {
 
-                    drives.Add(new DiskInfo(disk["Name"].ToString(), long.Parse(disk["Size"].ToString()), long.Parse(disk["FreeSpace"].ToString())));
-                }
-            }
-            return drives;
-        }
+        //            drives.Add(new DiskInfo(disk["Name"].ToString(), long.Parse(disk["Size"].ToString()), long.Parse(disk["FreeSpace"].ToString())));
+        //        }
+        //    }
+        //    return drives;
+        //}
 
-        ///  
-        /// 获取特定分区信息 
-        ///  
-        /// 盘符 
-        public List GetLogicalDrives(char DriverID)
-        {
-            System.IO.dr
-            List drives = new List();
-            WqlObjectQuery wmiquery = new WqlObjectQuery("SELECT * FROM Win32_LogicalDisk WHERE DeviceID = ’" + DriverID + ":’");
-            ManagementObjectSearcher wmifind = new ManagementObjectSearcher(wmiquery);
-            foreach (ManagementObject disk in wmifind.Get())
-            {
-                if (int.Parse(disk["DriveType"].ToString()) == (int)DriveType.Fixed)
-                {
-                    drives.Add(new DiskInfo(disk["Name"].ToString(), long.Parse(disk["Size"].ToString()), long.Parse(disk["FreeSpace"].ToString())));
-                }
-            }
-            return drives;
-        }
-        #endregion
+        /////  
+        ///// 获取特定分区信息 
+        /////  
+        ///// 盘符 
+        //public List GetLogicalDrives(char DriverID)
+        //{
+        //    //System.IO.DriveInfo
+        //    //System.IO.dr
+        //    List drives = new List();
+        //    WqlObjectQuery wmiquery = new WqlObjectQuery("SELECT * FROM Win32_LogicalDisk WHERE DeviceID = ’" + DriverID + ":’");
+        //    ManagementObjectSearcher wmifind = new ManagementObjectSearcher(wmiquery);
+        //    foreach (ManagementObject disk in wmifind.Get())
+        //    {
+        //        if (int.Parse(disk["DriveType"].ToString()) == (int)DriveType.Fixed)
+        //        {
+        //            drives.Add(new DiskInfo(disk["Name"].ToString(), long.Parse(disk["Size"].ToString()), long.Parse(disk["FreeSpace"].ToString())));
+        //        }
+        //    }
+        //    return drives;
+        //}
+        //#endregion
 
         #region 获得进程列表 
         ///  

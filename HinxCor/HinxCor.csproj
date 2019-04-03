@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CaptureScreen.cs" />
+    <Compile Include="Collections\ArrayHelper.cs" />
     <Compile Include="Convert.cs" />
     <Compile Include="Core\AsyncOperate.cs" />
     <Compile Include="Core\AsyncOperator.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Math\Line.cs" />
     <Compile Include="Math\Point.cs" />
     <Compile Include="Math\Point3D.cs" />
+    <Compile Include="Module\CommandExitInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemInfo.cs" />
     <Compile Include="UidGenerator.cs" />

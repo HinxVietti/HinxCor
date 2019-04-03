@@ -111,7 +111,12 @@ namespace HinxCor.Compiler
                         ao.log = "编译中.";
                         ao.log = "编译中..";
                         ao.log = "编译中...";
-                        Windows.ExecuteCommand(batcmd);
+                        var res = Windows.ExecuteCommand(batcmd);
+                        if (res.hasError)
+                        {
+                            throw new Exception(res.Error);
+                        }
+
                         ao.log = "编译结束";
                         ao.process = 0.80f;
 

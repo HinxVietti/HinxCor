@@ -33,10 +33,23 @@ namespace DemoApp
             //chmod +x shadowsocks.sh
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log
 
-            int index = -1;
+            List<Apple> apples = new List<Apple>();
+            for (int i = 0; i < 25; i++)
+            {
+                apples.Add(new Apple()
+                {
+                    weight = i % 3 == 0 ? 1 : -1
+                });
+            }
 
-            string str = System.Convert.ToString(index, 16);
+            for (int i = 0; i < apples.Count; i++)
+            {
+                if (apples[i].weight < 0)
+                    apples.Remove(apples[i]);
+            }
         }
+
+
 
         private static void 异步单线测试打包文件夹()
         {
@@ -403,7 +416,7 @@ namespace DemoApp
         {
             Console.WriteLine("开始测试");
             string str =
-@"---------------------------------------------------------
+    @"---------------------------------------------------------
 ---------------------------------------------------------
 ---------------------------------------------------------
 ---------------------------------------------------------
