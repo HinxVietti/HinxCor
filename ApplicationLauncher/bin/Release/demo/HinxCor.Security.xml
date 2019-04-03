@@ -1,0 +1,767 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HinxCor.Security</name>
+    </assembly>
+    <members>
+        <member name="T:HinxCor.Security.RC4">
+             <summary>
+            RC4加密算法;
+            Please enter your massage supported Encoring. Default is UTF-8
+             </summary>
+        </member>
+        <member name="M:HinxCor.Security.RC4.#ctor">
+            <summary>
+             实例化
+            </summary>
+        </member>
+        <member name="M:HinxCor.Security.RC4.#ctor(System.Text.Encoding)">
+            <summary>
+             实例化
+            </summary>
+            <param name="encoding">编码</param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.#ctor(System.String)">
+            <summary>
+             实例化
+            </summary>
+            <param name="keyg">秘钥</param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.#ctor(System.Text.Encoding,System.String)">
+            <summary>
+             实例化
+            </summary>
+            <param name="encoding">编码</param>
+            <param name="keyg">秘钥</param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.Encrypt(System.String)">
+            <summary>
+            加密字符串
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Security.RC4.Decrypt(System.Byte[])">
+            <summary>
+            解密为字符串
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Security.RC4.#ctor(HinxCor.Security.RC4.ByteArray)">
+            <summary>
+            Construct
+            </summary>
+            <param name="key">Keygen</param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.getPoolSize">
+            <summary>
+            PSize
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Security.RC4.init(HinxCor.Security.RC4.ByteArray)">
+            <summary>
+            INIT
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.next">
+            <summary>
+            NEXT
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Security.RC4.getBlockSize">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Security.RC4.encrypt(HinxCor.Security.RC4.ByteArray)">
+            <summary>
+            加密C2C
+            </summary>
+            <param name="block"></param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.Decrypt(HinxCor.Security.RC4.ByteArray)">
+            <summary>
+            解密C2C
+            </summary>
+            <param name="block"></param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.toString">
+            <summary>
+            STR
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Security.RC4.Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:HinxCor.Security.RC4.ByteArray">
+            <summary>
+            诡异的字节数组
+            </summary>
+        </member>
+        <member name="M:HinxCor.Security.RC4.ByteArray.op_Implicit(System.Byte[])~HinxCor.Security.RC4.ByteArray">
+            <summary>
+            隐式转换byte[]为ByteArray
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:HinxCor.Security.RC4.ByteArray.op_Implicit(HinxCor.Security.RC4.ByteArray)~System.Byte[]">
+            <summary>
+            隐式转换ByteArray为byte[]
+            </summary>
+            <param name="array"></param>
+        </member>
+        <member name="F:HinxCor.CryptoSer.demo.RC6.m_sEncryptionKey">
+            <summary>
+            对称加解密算法RC6的C#实现
+            公开维普网_朱明海先生未公布的源码
+            程序完善设计者:四川威远_老耙子 先生
+            2010-11-28
+            本程序只提供了明文长度32的算法。
+            如有需要，请与本人联系。
+            Mail:chscwyyg@163.com 电话:0832-8229211
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.demo.RC6.ROTL(System.UInt32,System.UInt32,System.Int32)">
+             <summary>
+             左位移运算函数
+             </summary>
+             <param name="x"></param>
+             <param name="y"></param>
+             <param name="w"></param>
+             <returns></returns>
+            
+        </member>
+        <member name="M:HinxCor.CryptoSer.demo.RC6.ROTR(System.UInt32,System.UInt32,System.Int32)">
+            <summary>
+            右位移运算函数
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="w"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.demo.RC6.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.demo.RC6.#ctor(System.Int32)">
+            <summary>
+            构造函数可输入加密向量
+            </summary>
+            <param name="iv"></param>
+        </member>
+        <member name="P:HinxCor.CryptoSer.demo.RC6.KEY">
+            <summary>
+            定义一个属性，通过属性输入用户密钥并返回
+            存储到m_sEncryptionKey
+            </summary>
+        </member>
+        <member name="P:HinxCor.CryptoSer.demo.RC6.IV">
+            <summary>
+            加密向量选择
+            128方式IV=16
+            192方法IV=24
+            256方法IV=32
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.demo.RC6._IV">
+            <summary>
+            加密向量验证函数
+            有错误返回最小或最大的向量设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.demo.RC6.String_Unicode">
+            <summary>
+            string类型Unicode字符集转为字节流char[];
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.demo.RC6.KeySteup">
+             <summary>
+             初始化函数用户密钥
+             通过KeySteup函数扩展并混合密钥
+             </summary>
+            
+        </member>
+        <member name="M:HinxCor.CryptoSer.demo.RC6.Encrypt(System.String,System.String)">
+            <summary>
+            加密函数
+            </summary>
+            <param name="str">加密的明文</param>
+            <param name="prssword">返回的密文</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.demo.RC6.Decrypt(System.String,System.String)">
+            <summary>
+            解密函数
+            </summary>
+            <param name="str">解密的密文</param>
+            <param name="prssword">解密后的明文</param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.HLCrypto">
+            <summary>
+            包装的DES加密工具
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.HLCrypto.GetDescryptor">
+            <summary>
+            生成DES
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.HLCrypto.EncryptText(System.String,System.String)">
+            <summary>
+            加密内容
+            </summary>
+            <param name="text"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.IAesCryptoUtil">
+            <summary>
+            AES工具包
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IAesCryptoUtil.Encrypt(System.Byte[])">
+            <summary>
+            加密明文
+            </summary>
+            <param name="plainBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IAesCryptoUtil.Decrypt(System.Byte[])">
+            <summary>
+            解密密文
+            </summary>
+            <param name="encryptedBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.IBytesUtil">
+            <summary>
+            字节工具包
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IBytesUtil.FromString(System.String)">
+            <summary>
+            string2byteArray
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IBytesUtil.FromBase64(System.String)">
+            <summary>
+            base64-2-byteArray
+            </summary>
+            <param name="base64Text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IBytesUtil.ToString(System.Byte[])">
+            <summary>
+            ByteArray2String
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IBytesUtil.ToBase64(System.Byte[])">
+            <summary>
+            ByteArray2Base64
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IBytesUtil.ToHex(System.Byte[])">
+            <summary>
+            byteArray2HexString
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IBytesUtil.Combine(System.Byte[][])">
+            <summary>
+            combline byteArray
+            </summary>
+            <param name="arrays"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.IDesCryptoUtil">
+            <summary>
+            DES加密接口
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IDesCryptoUtil.Encrypt(System.Byte[])">
+            <summary>
+            加密明文
+            </summary>
+            <param name="plainBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IDesCryptoUtil.Decrypt(System.Byte[])">
+            <summary>
+            解密密文
+            </summary>
+            <param name="encryptedBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.IMd5CryptoUtil">
+            <summary>
+            加密为MD5 不可逆加密,数据校验
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IMd5CryptoUtil.Encrypt(System.Byte[])">
+            <summary>
+            ByteArray
+            </summary>
+            <param name="plainBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.AesCryptoUtil">
+            <summary>
+            AES加密
+            </summary>
+        </member>
+        <member name="F:HinxCor.CryptoSer.AesCryptoUtil.SystemKeyPart">
+            <summary>
+            系统秘钥,长度应该为16,若非请用方法补充到16位或者到网站随机生成;
+            You can use tool to generate the string on https://www.random.org/strings/ or other website.
+            </summary>
+        </member>
+        <member name="F:HinxCor.CryptoSer.AesCryptoUtil.UserKeyPart">
+            <summary>
+            用户自己的秘钥,长度为4-16
+            </summary>
+        </member>
+        <member name="F:HinxCor.CryptoSer.AesCryptoUtil.Key">
+            <summary>
+            组合秘钥,(用户自己的秘钥会自己补充到16位)
+            </summary>
+        </member>
+        <member name="F:HinxCor.CryptoSer.AesCryptoUtil.Iv">
+            <summary>
+            The Initialization Vector;
+            长度必须为16;
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.AesCryptoUtil.Encrypt(System.Byte[])">
+            <summary>
+            加密明文
+            </summary>
+            <param name="plainBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.AesCryptoUtil.Decrypt(System.Byte[])">
+            <summary>
+            解密密文
+            </summary>
+            <param name="encryptedBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.BytesUtil">
+            <summary>
+            字节工具包
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.BytesUtil.FromString(System.String)">
+            <summary>
+            字符串转为byte[]; 编码utf-8
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.BytesUtil.FromBase64(System.String)">
+            <summary>
+            base64 到 byte[];
+            Convert.fromBase64
+            </summary>
+            <param name="base64Text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.BytesUtil.ToString(System.Byte[])">
+            <summary>
+            byte[] 到字符串 utf-8
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.BytesUtil.ToBase64(System.Byte[])">
+            <summary>
+            byte[] 到字符串 base64
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.BytesUtil.ToHex(System.Byte[])">
+            <summary>
+            byte到HexString
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.BytesUtil.Combine(System.Byte[][])">
+            <summary>
+            字节组拼
+            </summary>
+            <param name="arrays"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.DesCryptoUtil">
+            <summary>
+            DES加密
+            </summary>
+        </member>
+        <member name="F:HinxCor.CryptoSer.DesCryptoUtil.Key">
+            <summary>
+            秘钥长度8位;
+            https://www.random.org/strings/
+            </summary>
+        </member>
+        <member name="F:HinxCor.CryptoSer.DesCryptoUtil.Iv">
+            <summary>
+            IV长度8位;
+            https://www.random.org/strings/
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.DesCryptoUtil.Encrypt(System.Byte[])">
+            <summary>
+            加密
+            </summary>
+            <param name="plainBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.DesCryptoUtil.Decrypt(System.Byte[])">
+            <summary>
+            解密
+            </summary>
+            <param name="encryptedBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.Md5CryptoUtil">
+            <summary>
+            MD5单项加密
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.Md5CryptoUtil.Encrypt(System.Byte[])">
+            <summary>
+            MD5加密
+            </summary>
+            <param name="plainBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.RsaCryptoUtil">
+            <summary>
+            RSA加密
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RsaCryptoUtil.GenerateKeys">
+            <summary>
+            生成秘钥
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RsaCryptoUtil.Sign(System.Byte[],System.String)">
+            <summary>
+            签名
+            </summary>
+            <param name="bytes"></param>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RsaCryptoUtil.Verify(System.Byte[],System.Byte[],System.String)">
+            <summary>
+            检验
+            </summary>
+            <param name="bytes"></param>
+            <param name="signature"></param>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RsaCryptoUtil.Encrypt(System.Byte[],System.String)">
+            <summary>
+            加密
+            </summary>
+            <param name="plainBytes"></param>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RsaCryptoUtil.Decrypt(System.Byte[],System.String)">
+            <summary>
+            解密
+            </summary>
+            <param name="encryptedBytes"></param>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.RsaPkcs8CryptoUtil">
+            <summary>
+            RSA PKCS8 加密
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RsaPkcs8CryptoUtil.GenerateKeys">
+            <summary>
+            生成秘钥
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RsaPkcs8CryptoUtil.Sign(System.Byte[],System.String)">
+            <summary>
+            签名
+            </summary>
+            <param name="bytes"></param>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RsaPkcs8CryptoUtil.Verify(System.Byte[],System.Byte[],System.String)">
+            <summary>
+            校验
+            </summary>
+            <param name="bytes"></param>
+            <param name="signature"></param>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RsaPkcs8CryptoUtil.Encrypt(System.Byte[],System.String)">
+            <summary>
+            加密
+            </summary>
+            <param name="plainBytes"></param>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RsaPkcs8CryptoUtil.Decrypt(System.Byte[],System.String)">
+            <summary>
+            解密
+            </summary>
+            <param name="encryptedBytes"></param>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.SaltUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.SaltUtil.GenerateSalt(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="size"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.Sha1CryptoUtil">
+            <summary>
+            SHA1单项加密
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.Sha1CryptoUtil.Encrypt(System.Byte[])">
+            <summary>
+            SHA1单向加密
+            </summary>
+            <param name="plainBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.IRsaCryptoUtil">
+            <summary>
+            RSA加密; 
+            验证方式, 使用私钥加明文生成签名, 然后使用签名和密文加公钥验证
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IRsaCryptoUtil.GenerateKeys">
+            <summary>
+            生成密匙
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IRsaCryptoUtil.Sign(System.Byte[],System.String)">
+            <summary>
+            签名
+            </summary>
+            <param name="bytes"></param>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IRsaCryptoUtil.Verify(System.Byte[],System.Byte[],System.String)">
+            <summary>
+            验证
+            </summary>
+            <param name="bytes"></param>
+            <param name="signature"></param>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IRsaCryptoUtil.Encrypt(System.Byte[],System.String)">
+            <summary>
+            加密
+            </summary>
+            <param name="plainBytes"></param>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.IRsaCryptoUtil.Decrypt(System.Byte[],System.String)">
+            <summary>
+            解密
+            </summary>
+            <param name="encryptedBytes"></param>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.ISaltUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.ISaltUtil.GenerateSalt(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="size"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.ISha1CryptoUtil">
+            <summary>
+            SHA1加密
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.ISha1CryptoUtil.Encrypt(System.Byte[])">
+            <summary>
+            加密
+            </summary>
+            <param name="plainBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.RC6">
+            <summary>
+            山寨rc6 算法
+            </summary>
+        </member>
+        <member name="F:HinxCor.CryptoSer.RC6.m_sCryptedText">
+            <summary>
+            加密解密字符串返回值
+            </summary>
+        </member>
+        <member name="F:HinxCor.CryptoSer.RC6.Enc_default">
+            <summary>
+            编码方式
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.ROTL(System.UInt32,System.UInt32,System.Int32)">
+             <summary>
+             左位移运算函数
+             </summary>
+             <param name="x"></param>
+             <param name="y"></param>
+             <param name="w"></param>
+             <returns></returns>
+            
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.ROTR(System.UInt32,System.UInt32,System.Int32)">
+            <summary>
+            右位移运算函数
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="w"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.#ctor(System.Int32)">
+            <summary>
+            构造函数可输入加密向量
+            </summary>
+            <param name="iv"></param>
+        </member>
+        <member name="P:HinxCor.CryptoSer.RC6.KEY">
+            <summary>
+            定义一个属性，通过属性输入用户密钥并返回
+            存储到m_sEncryptionKey
+            </summary>
+        </member>
+        <member name="P:HinxCor.CryptoSer.RC6.IV">
+            <summary>
+            加密向量选择
+            128方式IV=16
+            192方法IV=24
+            256方法IV=32
+            </summary>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6._IV">
+            <summary>
+            加密向量验证函数
+            有错误返回最小或最大的向量设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.String_Unicode">
+            <summary>
+            string类型Unicode字符集转为字节流char[];
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.KeySteup">
+             <summary>
+             初始化函数用户密钥
+             通过KeySteup函数扩展并混合密钥
+             </summary>
+            
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.Encrypt(System.String,System.String)">
+            <summary>
+            加密函数
+            </summary>
+            <param name="str">加密的明文</param>
+            <param name="prssword">返回的密文</param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.CryptoSer.RC6.Decrypt(System.String,System.String)">
+            <summary>
+            解密函数
+            </summary>
+            <param name="str">解密的密文</param>
+            <param name="prssword">解密后的明文</param>
+            <returns></returns>
+        </member>
+        <member name="T:HinxCor.CryptoSer.RsaKey">
+            <summary>
+            RSA
+            </summary>
+        </member>
+        <member name="P:HinxCor.CryptoSer.RsaKey.Private">
+            <summary>
+            私有部分 --内部解析内容
+            </summary>
+        </member>
+        <member name="P:HinxCor.CryptoSer.RsaKey.Public">
+            <summary>
+            共有部分 --发布出去的内容
+            </summary>
+        </member>
+        <member name="T:HinxCor.CryptoSer.SaltSetting">
+            <summary>
+            盐析
+            </summary>
+        </member>
+        <member name="P:HinxCor.CryptoSer.SaltSetting.HeadSize">
+            <summary>
+            头部大小 --3
+            </summary>
+        </member>
+        <member name="P:HinxCor.CryptoSer.SaltSetting.TailSize">
+            <summary>
+            尾部大小 --3
+            </summary>
+        </member>
+    </members>
+</doc>

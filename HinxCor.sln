@@ -33,6 +33,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "demo_CompilerByHinxCor", "d
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoSharpFont", "DemoSharpFont\DemoSharpFont.csproj", "{6482AE3C-EB5F-44E3-BAAD-FC8AFDA5D957}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_UDPClientServer", "_UDPClientServer\_UDPClientServer.csproj", "{EF5868FE-6294-4AF1-96F0-02614326B7D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_UDPTextSender", "_UDPTextSender\_UDPTextSender.csproj", "{09D9607C-D09E-45F3-85C2-9760474819BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_printargs", "_printargs\_printargs.csproj", "{50FDCD0D-0B2F-4B9D-8C41-0779BA67087F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +105,18 @@ Global
 		{6482AE3C-EB5F-44E3-BAAD-FC8AFDA5D957}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6482AE3C-EB5F-44E3-BAAD-FC8AFDA5D957}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6482AE3C-EB5F-44E3-BAAD-FC8AFDA5D957}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF5868FE-6294-4AF1-96F0-02614326B7D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF5868FE-6294-4AF1-96F0-02614326B7D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF5868FE-6294-4AF1-96F0-02614326B7D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF5868FE-6294-4AF1-96F0-02614326B7D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09D9607C-D09E-45F3-85C2-9760474819BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09D9607C-D09E-45F3-85C2-9760474819BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09D9607C-D09E-45F3-85C2-9760474819BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09D9607C-D09E-45F3-85C2-9760474819BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50FDCD0D-0B2F-4B9D-8C41-0779BA67087F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50FDCD0D-0B2F-4B9D-8C41-0779BA67087F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50FDCD0D-0B2F-4B9D-8C41-0779BA67087F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50FDCD0D-0B2F-4B9D-8C41-0779BA67087F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

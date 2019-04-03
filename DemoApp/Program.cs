@@ -19,6 +19,8 @@ using HinxCor.Compression.net45;
 using System.Diagnostics;
 using HinxCor;
 using System.Collections.Generic;
+using HinxCor.Serialize;
+using HinxCor.IO;
 
 namespace DemoApp
 {
@@ -31,25 +33,79 @@ namespace DemoApp
 
             //wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
             //chmod +x shadowsocks.sh
-            //./shadowsocks.sh 2>&1 | tee shadowsocks.log
+            //./shadowsocks.sh 2>&1 | tee shadowsocks.log   
 
-            List<Apple> apples = new List<Apple>();
-            for (int i = 0; i < 25; i++)
-            {
-                apples.Add(new Apple()
-                {
-                    weight = i % 3 == 0 ? 1 : -1
-                });
-            }
+            //测试BundleFile();
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "配置文件|*.ini";
+            openFile.ShowDialog();
+            var e1 = new TxtFileEntry(openFile.FileName);
+            openFile.Filter = "LoadOut|*.png";
+            openFile.ShowDialog();
+            var e2 = new PNGFileEntry(openFile.FileName);
 
-            for (int i = 0; i < apples.Count; i++)
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.Filter = "BundleAsset|ALProfiles";
+            saveFile.ShowDialog();
+            FileStream fs = new FileStream(saveFile.FileName, FileMode.CreateNew);
+            using (BundleFile bf = new BundleFile(fs))
             {
-                if (apples[i].weight < 0)
-                    apples.Remove(apples[i]);
+                bf.StartPush();
+                bf.PushEntry(e1);
+                bf.PushEntry(e2);
             }
+            Windows.OpenInExplorer(new FileInfo(saveFile.FileName).Directory.FullName);
         }
 
 
+        private static void 测试BundleFile()
+        {
+            //if (File.Exists("sample.txt"))
+            //    File.WriteAllText("sample.txt", "sample.txt 吴亦凡 SKR SKR SKR SKR SKR SKR SKR SKR SKR SKR SKR SKR SKR SKR SKR SKR SKR SKR SKR SKR");
+
+            //MemoryStream ms = new MemoryStream();
+            //FileStream fs = new FileStream("sava.data", FileMode.CreateNew);
+
+            FileStream fs = new FileStream("sava.data", FileMode.Open);
+            BundleFile bf = new BundleFile(fs);
+
+            //bf.PushEntry(new StringEntry("Hello,Im Hinx1"));
+            //bf.PushEntry(new TxtFileEntry("sample.txt"));
+            //bf.PushEntry(new PNGFileEntry("sample.png"));
+
+            bf.StartPop();
+            var outse1 = bf.PopEntry() as StringEntry;
+            var outse2 = bf.PopEntry() as TxtFileEntry;
+            var outse3 = bf.PopEntry() as PNGFileEntry;
+            string str = outse2.GetText();
+            var pic = outse3.GetImage();
+            pic.Save("save31.jpg");
+        }
+
+        private static string sizeString(ulong size)
+        {
+            ulong kb = 1024;
+            var b = size % 8;
+            var k = size / 8 % kb;
+            var m = size / 8 / kb % kb;
+            var g = size / 8 / kb / kb % kb;
+            var t = size / 8 / kb / kb / kb;
+            return string.Format("{0} T {1} G {2} M {3} K {4}", t, g, m, k, b);
+        }
+
+        private static void 测试arg()
+        {
+            List<string> argus = new List<string>();
+            argus.Add("arg1");
+            argus.Add("arg2");
+            argus.Add("arg3");
+            argus.Add("arg4");
+            argus.Add("arg5");
+            argus.Add("arg6");
+
+            string resd = Arguments.PackArguments(argus);
+            Console.WriteLine(resd);
+        }
 
         private static void 异步单线测试打包文件夹()
         {

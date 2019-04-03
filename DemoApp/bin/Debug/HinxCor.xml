@@ -485,6 +485,11 @@
             <param name="dat"></param>
             <param name="offset"></param>
         </member>
+        <member name="T:HinxCor.IO.BundleFile">
+            <summary>
+            专注文件读写的bundle
+            </summary>
+        </member>
         <member name="T:HinxCor.IO.IBitConvertable`1">
             <summary>
             interface
@@ -923,6 +928,49 @@
             
             </summary>
             <param name="p"></param>
+        </member>
+        <member name="M:HinxCor.Serialize.Arguments.GetKeyValuePare(System.String)">
+            <summary>
+            获取键值对,按照第一个':'切割
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Serialize.Arguments.CreateFrom(System.String)">
+            <summary>
+            从文本获取args
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Serialize.Arguments.PackArguments(System.Collections.Generic.List{System.String})">
+            <summary>
+            包装args
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Serialize.Arguments.PackArguments(System.String[])">
+            <summary>
+            包装args
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Serialize.Arguments.AddArgument(System.Collections.Generic.KeyValuePair{System.String,System.String})">
+            <summary>
+            0(Normal)  -1(exist)  -2(error)
+            </summary>
+            <param name="kvp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Serialize.Arguments.AddArgument(System.String,System.String)">
+            <summary>
+            0(Normal)  -1(exist)  -2(error)
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
         </member>
         <member name="T:HinxCor.Win32.DialogResult">
             <summary>
@@ -2056,6 +2104,33 @@
             <param name="bitmap"></param>
             <param name="opacity"></param>
         </member>
+        <member name="M:ArrayHelper.GetArrayWhere``1(``0[],System.Func{``0,System.Boolean})">
+            <summary>
+            返回满足condition的数组
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="array"></param>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArrayHelper.RemoveWhere``1(System.Collections.Generic.List{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            移除满足condition的对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ts"></param>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArrayHelper.RemoveWhere``1(System.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            移除那些不达标(满足condition)的对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="cs"></param>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsyncOperator">
             <summary>
             异步工具
@@ -2231,6 +2306,17 @@
             <param name="max"></param>
             <param name="value"></param>
             <returns></returns>
+        </member>
+        <member name="T:UncompressedFileBundle">
+            <summary>
+            请不要添加超过2G大小的内容,数据写在内存流中
+            <para>理论支持最大240G的文件,但是我估计没哪个人才用这个打包200多G的单个文件吧;</para>
+            </summary>
+        </member>
+        <member name="F:UncompressedFileBundle.BufferSize">
+            <summary>
+            单步写入数量
+            </summary>
         </member>
         <member name="T:Lemony.SystemInfo.SystemInfo">
              

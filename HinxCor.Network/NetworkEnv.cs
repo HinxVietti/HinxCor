@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Net.Sockets;
 
 namespace HinxCor.Network
 {
@@ -11,6 +12,7 @@ namespace HinxCor.Network
     /// </summary>
     public class NetworkEnv
     {
+        private static readonly IPEndPoint DefaultLoopbackEndpoint = new IPEndPoint(IPAddress.Loopback, port: 0);
         /// <summary>
         /// 全局IP信息
         /// </summary>
@@ -41,6 +43,34 @@ namespace HinxCor.Network
 
             return false;
         }
+
+
+        /// <summary>
+        /// 获取一个可用的端口
+        /// </summary>
+        /// <returns></returns>
+        public static int GetAvailableTcpPort()
+        {
+            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            {
+                socket.Bind(DefaultLoopbackEndpoint);
+                return ((IPEndPoint)socket.LocalEndPoint).Port;
+            }
+        }
+
+        /// <summary>
+        /// 获取一个可用的端口
+        /// </summary>
+        /// <returns></returns>
+        public static int GetAvailableUdpPort()
+        {
+            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
+            {
+                socket.Bind(DefaultLoopbackEndpoint);
+                return ((IPEndPoint)socket.LocalEndPoint).Port;
+            }
+        }
+
     }
 }
 

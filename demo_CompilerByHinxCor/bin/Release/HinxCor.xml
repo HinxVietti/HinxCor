@@ -924,6 +924,42 @@
             </summary>
             <param name="p"></param>
         </member>
+        <member name="M:HinxCor.Serialize.Arguments.GetKeyValuePare(System.String)">
+            <summary>
+            获取键值对,按照第一个':'切割
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Serialize.Arguments.PackArguments(System.Collections.Generic.List{System.String})">
+            <summary>
+            包装args
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Serialize.Arguments.PackArguments(System.String[])">
+            <summary>
+            包装args
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Serialize.Arguments.AddArgument(System.Collections.Generic.KeyValuePair{System.String,System.String})">
+            <summary>
+            0(Normal)  -1(exist)  -2(error)
+            </summary>
+            <param name="kvp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.Serialize.Arguments.AddArgument(System.String,System.String)">
+            <summary>
+            0(Normal)  -1(exist)  -2(error)
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
         <member name="T:HinxCor.Win32.DialogResult">
             <summary>
             窗体返回结果
@@ -1621,12 +1657,32 @@
             windows 辅助工具
             </summary>
         </member>
-        <member name="M:HinxCor.Windows.ExecuteCommand(System.String,System.Boolean)">
+        <member name="M:HinxCor.Windows.ExecuteCommandConsole(System.String)">
             <summary>
-            dos 执行 batcher cmd
+            dos执行batcher命令
             </summary>
-            <param name="command"></param>
-            <param name="hidden"></param>
+            <param name="command">bat命令</param>
+        </member>
+        <member name="M:HinxCor.Windows.ExecuteCommand(System.String,System.Int32@)">
+            <summary>
+            dos执行batcher命令
+            </summary>
+            <param name="command">bat命令</param>
+            <param name="exitcode"></param>
+        </member>
+        <member name="M:HinxCor.Windows.ExecuteCommand(System.String,CommandExitInfo@)">
+            <summary>
+            dos执行batcher命令
+            </summary>
+            <param name="command">bat命令</param>
+            <param name="exif">INFO</param>
+        </member>
+        <member name="M:HinxCor.Windows.ExecuteCommand(System.String)">
+            <summary>
+            dos执行batcher命令
+            </summary>
+            <param name="command">bat命令</param>
+            <returns>CMD INFO</returns>
         </member>
         <member name="M:HinxCor.Windows.OpenInExplorer(System.String)">
             <summary>
@@ -2036,6 +2092,33 @@
             <param name="bitmap"></param>
             <param name="opacity"></param>
         </member>
+        <member name="M:ArrayHelper.GetArrayWhere``1(``0[],System.Func{``0,System.Boolean})">
+            <summary>
+            返回满足condition的数组
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="array"></param>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArrayHelper.RemoveWhere``1(System.Collections.Generic.List{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            移除满足condition的对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ts"></param>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArrayHelper.RemoveWhere``1(System.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            移除那些不达标(满足condition)的对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="cs"></param>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
         <member name="T:AsyncOperator">
             <summary>
             异步工具
@@ -2211,6 +2294,70 @@
             <param name="max"></param>
             <param name="value"></param>
             <returns></returns>
+        </member>
+        <member name="T:UncompressedFileBundle">
+            <summary>
+            请不要添加超过2G大小的内容,数据写在内存流中
+            <para>理论支持最大240G的文件,但是我估计没哪个人才用这个打包200多G的单个文件吧;</para>
+            </summary>
+        </member>
+        <member name="F:UncompressedFileBundle.BufferSize">
+            <summary>
+            单步写入数量
+            </summary>
+        </member>
+        <member name="T:Lemony.SystemInfo.SystemInfo">
+             
+            系统信息类 - 获取CPU、内存、磁盘、进程信息 
+             
+        </member>
+        <member name="M:Lemony.SystemInfo.SystemInfo.#ctor">
+             
+            构造函数，初始化计数器等 
+             
+        </member>
+        <member name="P:Lemony.SystemInfo.SystemInfo.ProcessorCount">
+             
+            获取CPU个数 
+             
+        </member>
+        <member name="P:Lemony.SystemInfo.SystemInfo.CpuLoad">
+             
+            获取CPU占用率 
+             
+        </member>
+        <member name="P:Lemony.SystemInfo.SystemInfo.MemoryAvailable">
+             
+            获取可用内存 
+             
+        </member>
+        <member name="P:Lemony.SystemInfo.SystemInfo.PhysicalMemory">
+             
+            获取物理内存 
+             
+        </member>
+        <member name="M:Lemony.SystemInfo.SystemInfo.GetProcessInfo">
+             
+            获得进程列表 
+             
+        </member>
+        <member name="M:Lemony.SystemInfo.SystemInfo.GetProcessInfo(System.String)">
+             
+            获得特定进程信息 
+             
+            进程名称 
+        </member>
+        <member name="M:Lemony.SystemInfo.SystemInfo.EndProcess(System.Int32)">
+             
+            结束指定进程 
+             
+            进程的 Process ID 
+        </member>
+        <member name="M:Lemony.SystemInfo.SystemInfo.FindAllApps(System.Int32)">
+             
+            查找所有应用程序标题 
+             
+            应用程序标题范型 
         </member>
         <member name="T:UidGenerator">
             <summary>
