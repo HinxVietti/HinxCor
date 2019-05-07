@@ -101,5 +101,16 @@
             <param name="destinateDir"></param>
             <param name="password"></param>
         </member>
+        <member name="M:HinxCor.Compression.net45.ZipHelper.AsyncUnCompressionFile(System.Action{System.Single},System.Action,System.String,System.Action{System.Exception},System.String,System.String)">
+            <summary>
+            解压到文件夹
+            </summary>
+            <param name="progress"></param>
+            <param name="isdone"></param>
+            <param name="fileName"></param>
+            <param name="onerror"></param>
+            <param name="destinateDir"></param>
+            <param name="password"></param>
+        </member>
     </members>
 </doc>

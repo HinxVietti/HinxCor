@@ -17,7 +17,17 @@ namespace HinxCor.IO
             this.data = data;
         }
 
-        public string @object { get { return Encoding.UTF8.GetString(data); } private set { data = Encoding.UTF8.GetBytes(value); } }
+        public string @object
+        {
+            get
+            {
+                return Encoding.UTF8.GetString(data);
+            }
+            private set
+            {
+                data = Encoding.UTF8.GetBytes(value);
+            }
+        }
 
         public BundleType DataType { get { return BundleType.Text; } }
 

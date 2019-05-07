@@ -74,9 +74,17 @@ namespace HinxCor.Rendering.Text
         {
             get
             {
-                return new Font(this.fontName, this.FontSize, this.FontStyle);
+                try
+                {
+                    return new Font(this.fontName, this.FontSize, this.FontStyle);
+                }
+                catch
+                {
+                    return new Font("微软雅黑", this.FontSize, this.FontStyle);
+                }
             }
         }
+
         private Bitmap bmp;
         /// <summary>
         /// 虚拟的Graphic

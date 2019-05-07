@@ -485,9 +485,85 @@
             <param name="dat"></param>
             <param name="offset"></param>
         </member>
+        <member name="T:HinxCor.IO.DoubleEntry">
+            <summary>
+            entry of bundle file
+            </summary>
+        </member>
+        <member name="T:HinxCor.IO.ByteArrayEntry">
+            <summary>
+            可以读写的文件Entry
+            </summary>
+        </member>
+        <member name="T:HinxCor.IO.FloatEntry">
+            <summary>
+            entry of bundle file
+            </summary>
+        </member>
+        <member name="T:HinxCor.IO.Int32Entry">
+            <summary>
+            entry of bundle file
+            </summary>
+        </member>
         <member name="T:HinxCor.IO.BundleFile">
             <summary>
-            专注文件读写的bundle
+            专注文件读写的bundle;
+            <para>如果使用string构造,将开启文件流,在释放对象的时候,写入对象数据</para>
+            <para>如果使用流打开的话即仅仅读取数据到内存</para>
+            <para>开始任意Pop 或者push操作的时候请先调用其Start方法,结束后调用End方法</para>
+            </summary>
+        </member>
+        <member name="M:HinxCor.IO.BundleFile.RegisterDataEntry(HinxCor.IO.BundleType,System.Type)">
+            <summary>
+            制定包含byte[]构造的对象类型
+            </summary>
+            <param name="type"></param>
+            <param name="entry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.IO.BundleFile.RegisterDataEntry``1(HinxCor.IO.IDataEntry{``0})">
+            <summary>
+            制定包含使用byte[] 构造的对象实例
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entry"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.IO.BundleFile.#ctor(System.String)">
+            <summary>
+            打开或者创建FileStream
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:HinxCor.IO.BundleFile.CreateFrom(System.IO.Stream)">
+            <summary>
+            打开或者创建Stream
+            </summary>
+            <param name="sourceStream"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.IO.BundleFile.CreateFrom(System.String)">
+            <summary>
+            打开或者创建FileStream
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.IO.BundleFile.CopyTo(System.IO.Stream)">
+            <summary>
+            将数据复制到流
+            </summary>
+            <param name="destinateStream"></param>
+        </member>
+        <member name="M:HinxCor.IO.BundleFile.PopEntry">
+            <summary>
+            int32 , float , double , text , png , string 能够直接返回Entry
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HinxCor.IO.BundleFile.StartPop">
+            <summary>
+            开始Pop内容
             </summary>
         </member>
         <member name="T:HinxCor.IO.IBitConvertable`1">
@@ -2318,6 +2394,16 @@
             单步写入数量
             </summary>
         </member>
+        <member name="M:IniFile.Read``1(System.String,``0@,System.Func{System.String,``0},System.String)">
+            <summary>
+            read config and set source value
+            </summary>
+            <typeparam name="T">the property type</typeparam>
+            <param name="Key">this key in ini file </param>
+            <param name="obj">this property to set</param>
+            <param name="converter">how to convet string to value </param>
+            <param name="section">this parm in the ini file</param>
+        </member>
         <member name="T:Lemony.SystemInfo.SystemInfo">
              
             系统信息类 - 获取CPU、内存、磁盘、进程信息 
@@ -2435,6 +2521,30 @@
             </summary>
             <param name="guid"></param>
             <param name="subL"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PerceivedType">
+            <summary>
+            感知类型
+            </summary>
+        </member>
+        <member name="M:WindowsRegistry.OpenOrCreate(Microsoft.Win32.RegistryKey,System.String)">
+            <summary>
+            打开或者创建name子集
+            </summary>
+            <param name="root"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WindowsRegistry.RegisterDefaultApp(System.String,System.String,PerceivedType,System.String,System.String)">
+            <summary>
+            -1 拓展名不合法(false), 1 不含感知类型(true) ,2 不含默认打开路径(true), 3 不含 CT(true) , 0  normal true
+            </summary>
+            <param name="extensionName"></param>
+            <param name="iconpath"></param>
+            <param name="type"></param>
+            <param name="defaultappName"></param>
+            <param name="contentType"></param>
             <returns></returns>
         </member>
         <member name="T:WinformHelper">

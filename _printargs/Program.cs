@@ -9,6 +9,12 @@ namespace _printargs
     {
         static void Main(string[] args)
         {
+            if (args.Length == 0)
+            {
+                Console.WriteLine("无ARG");
+                Console.ReadKey();
+                return;
+            }
             var arg = new HinxCor.Serialize.Arguments(args);
             Console.WriteLine(arg);
             Console.ReadKey();

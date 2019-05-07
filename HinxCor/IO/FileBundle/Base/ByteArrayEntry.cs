@@ -4,6 +4,9 @@ using System.IO;
 
 namespace HinxCor.IO
 {
+    /// <summary>
+    /// 可以读写的文件Entry
+    /// </summary>
     public abstract class ByteArrayEntry : IDataEntry<byte[]>
     {
         public byte[] @object { get; protected set; }

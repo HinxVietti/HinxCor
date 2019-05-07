@@ -84,7 +84,7 @@ namespace HinxCor.Win32
         /// <summary>
         /// 显示 是 否 和取消 三个按钮
         /// </summary>
-        YesNoCancel = (int)MessageBox.MB_YESNO
+        YesNoCancel = (int)MessageBox.MB_YESNOCANCEL
     }
 
     /// <summary>

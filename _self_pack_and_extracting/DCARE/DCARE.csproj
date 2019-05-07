@@ -38,9 +38,12 @@
     <ApplicationIcon>icon2.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,11 +51,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtractingBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtractingBox.Designer.cs">
+      <DependentUpon>ExtractingBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HinxCor.CompressionDot45\HinxCor.CompressionDot45.csproj">
+    <ProjectReference Include="..\..\HinxCor.CompressionDot45\HinxCor.CompressionDot45.csproj">
       <Project>{22a03dc6-efb8-4289-961e-4317ba25c1d1}</Project>
       <Name>HinxCor.CompressionDot45</Name>
     </ProjectReference>
@@ -62,6 +71,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ExtractingBox.resx">
+      <DependentUpon>ExtractingBox.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

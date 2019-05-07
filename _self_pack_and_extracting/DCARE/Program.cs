@@ -3,11 +3,13 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace DCARE
 {
     class Program
     {
+        [STAThread]
         static int Main(string[] args)
         {
             string passwd = "F41E6-F565-41F1F-C1DR5-6QW";
@@ -15,7 +17,34 @@ namespace DCARE
             string folderName = "~rundata_" + rm.Next(0, 9999);
             try
             {
-                ZipHelper.UnCompressionFile("data.mhx", folderName, passwd);
+                var win = new ExtractingBox();
+                new Thread(() => { Application.Run(win); }) { IsBackground = true }.Start();
+
+                int contine = 0;
+                //ZipHelper.UnCompressionFile("data.mhx", folderName, passwd);
+                Action<float> on_Progress = progress =>
+                {
+                    win.SetValue(progress);
+                };
+                Action on_Finished = () =>
+                {
+                    contine = 1;
+                };
+                Action<Exception> on_Error = e =>
+                {
+                    contine = -1;
+                };
+                new Thread(() =>
+                {
+                    ZipHelper.AsyncUnCompressionFile(on_Progress, on_Finished, "data.mhx", on_Error, folderName, passwd);
+                })
+                {
+                    IsBackground = true
+                }.Start();
+                while (contine == 0) Thread.Sleep(100);
+                win.DoClose();
+                if (contine == -1) return -11;//解压出错
+
             }
             catch
             {
@@ -26,7 +55,6 @@ namespace DCARE
             dir.Attributes = FileAttributes.Hidden;
             var exes = dir.GetFiles("*.exe");
             if (exes.Length < 1) return -2;
-
 
             string exename = "";
             for (int i = 0; i < exels.Length; i++)
@@ -40,7 +68,7 @@ namespace DCARE
                 }
 
             exename = exes[0].Name;
-        exe:
+            exe:
             FileInfo exefile = new FileInfo(folderName + @"\" + exename);
             ProcessStartInfo startinfo = new ProcessStartInfo(exefile.FullName);
             startinfo.WorkingDirectory = exefile.DirectoryName;
@@ -68,5 +96,73 @@ namespace DCARE
                 files[i].Delete();
             dir.Delete();
         }
+
+
+        /*Test Code
+           [STAThread]
+        static void Main()
+        {
+            var win = new ExtractingBox();
+            new Thread(() =>
+            {
+                Application.Run(win);
+            })
+            {
+                IsBackground = true
+            }.Start();
+
+            int index = 1000;
+            while (index > 0)
+            {
+                Console.WriteLine(index);
+                Thread.Sleep(100);
+                index--;
+                win.SetValue((index % 100) / 100f);
+            }
+
+        }
+
+
+        [STAThread]
+        static void Main2(string[] args)
+        {
+            if (args.Length > 1)
+            {
+                ZipHelper.CompressFilesAndFolder(args, "decare.mhx");
+            }
+            else
+            {
+                Random rm = new Random((int)DateTime.Now.ToFileTimeUtc());
+                string folderName = "~rundata_" + rm.Next(0, 9999);
+                ZipHelper.UnCompressionFile(args[0], folderName);
+            }
+
+            //var win = new ExtractingBox();
+            //win.Show();
+            //int contine = 0;
+            ////ZipHelper.UnCompressionFile("data.mhx", folderName, passwd);
+            //Action<float> on_Progress = progress =>
+            //{
+            //    //win.progress = progress;
+            //    Console.WriteLine(progress);
+            //    //win.SetValue(progress);
+            //};
+            //Action on_Finished = () =>
+            //{
+            //    contine = 1;
+            //};
+            //Action<Exception> on_Error = e =>
+            //{
+            //    Console.WriteLine("ERROR:\n" + e);
+            //};
+            ////OpenFileDialog openf = new OpenFileDialog();
+            ////openf.ShowDialog();
+            //new Thread(() =>
+            //{
+            //    ZipHelper.AsyncUnCompressionFile(on_Progress, on_Finished, args[0] , on_Error, folderName);
+            //}).Start();
+            //while (contine == 0) Thread.Sleep(100);
+        }
+         */
     }
 }

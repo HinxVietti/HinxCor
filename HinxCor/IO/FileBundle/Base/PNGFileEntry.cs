@@ -20,8 +20,9 @@ namespace HinxCor.IO
         {
             var ms = new MemoryStream(data);
             return Image.FromStream(ms);
-
         }
+
+
     }
 }
 

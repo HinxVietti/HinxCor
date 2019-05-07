@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace HinxCor.Compression.net45
 {
@@ -535,6 +536,75 @@ namespace HinxCor.Compression.net45
                     fs.Close();
                 }
             }
+        }
+
+        /// <summary>
+        /// 解压到文件夹
+        /// </summary>
+        /// <param name="progress"></param>
+        /// <param name="isdone"></param>
+        /// <param name="fileName"></param>
+        /// <param name="onerror"></param>
+        /// <param name="destinateDir"></param>
+        /// <param name="password"></param>
+        public static void AsyncUnCompressionFile(Action<float> progress, Action isdone, string fileName, Action<Exception> onerror = null, string destinateDir = "", string password = "")
+        {
+
+            FileInfo zipFile = new FileInfo(fileName);
+            if (zipFile.Exists == false)
+            {
+                var e = new FileNotFoundException("找不到压缩文件:" + zipFile.FullName);
+                if (onerror != null)
+                {
+                    onerror(e);
+                    return;
+                }
+                throw e;
+            }
+
+            try
+            {
+                ZipFile file = new ZipFile(fileName);
+                string estName = string.IsNullOrEmpty(destinateDir) ? "ExtractData\\" : destinateDir;
+                if (estName.EndsWith("\\") == false) estName += "\\";
+
+                if (!string.IsNullOrEmpty(password))
+                    file.Password = password;
+
+                int index = 0;
+
+                foreach (ZipEntry entery in file)
+                {
+                    index++;
+                    progress(index * 1f / file.Count);
+                    if (entery != null)
+                    {
+                        string fname = estName + entery.Name;
+                        FileInfo f = new FileInfo(fname);
+                        if (!f.Directory.Exists)
+                            f.Directory.Create();
+                        using (var fs = f.Create())
+                        {
+                            using (var stream = file.GetInputStream(entery))
+                            {
+                                stream.CopyTo(fs);
+                                fs.Flush();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                if (onerror != null)
+                {
+                    onerror(e);
+                    return;
+                }
+                throw e;
+            }
+
+            isdone();
         }
 
     }

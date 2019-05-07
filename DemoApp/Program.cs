@@ -14,17 +14,20 @@ using LitJson;
 using HinxCor.Security;
 using GDIPlus;
 using HinxCor.Rendering.Text;
-using System.Text.RegularExpressions;
 using HinxCor.Compression.net45;
-using System.Diagnostics;
 using HinxCor;
 using System.Collections.Generic;
 using HinxCor.Serialize;
 using HinxCor.IO;
+using System.Net;
+using Microsoft.Win32;
+using Test;
+using System.Text.RegularExpressions;
 
 namespace DemoApp
 {
 #pragma warning disable
+
     class Program
     {
         [STAThread]
@@ -36,6 +39,347 @@ namespace DemoApp
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log   
 
             //测试BundleFile();
+            //设置路径到缓存然后新建文件打开文件夹();
+            //爬网络素材资源();
+            //加密自解压程序源码();
+            //解密自解压程序源码();
+
+            //测试注册表2();
+            //测试文本格式化();
+            //测试SQL();
+
+            var res = HinxCor.Win32.MessageBox.ShowTopMost("Message", "titile", HinxCor.Win32.DefaultButtons.YesNoCancel);
+            Console.WriteLine(res);
+            Console.ReadKey();
+        }
+
+        private static void 测试SQL()
+        {
+            testSql.TestConnection();
+        }
+
+        private static void 测试文本格式化()
+        {
+            TMP_InputField inputField = new TMP_InputField()
+            {
+                text = "123456789",
+                selectionStringAnchorPosition = 3,
+                selectionStringFocusPosition = 5
+            };
+
+            DivideStringFormat.Apply("size", inputField, "5");
+            DivideStringFormat.Apply("size", inputField, "5");
+
+        }
+
+        //#region Tag Test
+
+        //private static void Test()
+        //{
+        //    string txt = "<size=12.5ffffffffffffffffffk>normal</size>";
+
+        //    bool res = IsStringSpecialAFullTag(txt, out Tag sti);
+        //    if (res) txt = RemoveSpecialTag(txt);
+        //    //Console.WriteLine(res + "#" + sti.GetHeader());
+        //    Console.WriteLine(txt);
+        //    Console.ReadKey();
+        //}
+
+        //private static string RemoveSpecialTag(string txt)
+        //{
+        //    int lastIndex = txt.LastIndexOf("</");
+        //    txt = txt.Remove(lastIndex, txt.Length - lastIndex);
+        //    int findex = txt.IndexOf('>');
+        //    txt = txt.Remove(0, findex + 1);
+        //    return txt;
+        //}
+
+        //public static bool IsStringSpecialAFullTag(string v, out Tag fullTag1)
+        //{
+        //    string HP = @"^<[.a-zA-Z0-9=]*>";
+        //    Regex Header = new Regex(HP);
+        //    string FP = @"<[/a-zA-Z]*>$";
+        //    Regex Footer = new Regex(FP);
+        //    fullTag1 = null;
+
+        //    if (Header.IsMatch(v) && Footer.IsMatch(v))
+        //    {
+        //        var hM = Tag.From(Header.Match(v).ToString());
+        //        var fM = Tag.From(Footer.Match(v).ToString());
+        //        if (hM.TagName.Equals(fM.TagName))
+        //        {
+        //            fullTag1 = hM;
+        //            return true;
+        //        }
+        //        return false;
+        //    }
+        //    return false;
+        //}
+
+
+        //public enum TagType
+        //{
+        //    Head,
+        //    Full,
+        //    Foot
+        //}
+
+        //public class Tag
+        //{
+        //    public TagType Type { get; set; }
+
+        //    public string TagName { get; set; }
+
+        //    public object Value { get; set; }
+
+        //    public Tag()
+        //    {
+        //        Type = TagType.Full;
+        //        TagName = string.Empty;
+        //        Value = string.Empty;
+        //    }
+
+        //    public Tag(string tgname)
+        //    {
+        //        Type = TagType.Full;
+        //        TagName = tgname;
+        //        Value = string.Empty;
+        //    }
+        //    public Tag(string tgname, object tgvalue)
+        //    {
+        //        Type = TagType.Full;
+        //        TagName = tgname;
+        //        Value = tgvalue;
+        //    }
+
+        //    public Tag Clone()
+        //    {
+        //        return new Tag()
+        //        {
+        //            TagName = TagName,
+        //            Type = Type,
+        //            Value = Value
+        //        };
+        //    }
+
+        //    public string GetHeader()
+        //    {
+        //        return string.Format("<{0}{1}>", TagName, GetValueString(Value));
+        //    }
+
+        //    public string GetFooter()
+        //    {
+        //        return string.Format("</{0}>", TagName);
+        //    }
+
+        //    public static string GetValueString(object value)
+        //    {
+        //        //if (value == null) return string.Empty;
+        //        //string str = value.ToString();
+        //        //if (string.IsNullOrEmpty(str) || string.IsNullOrWhiteSpace(str))
+        //        //    return string.Empty;
+        //        //return "=" + str;
+
+        //        return value == null ?
+        //            string.Empty :
+        //            (string.IsNullOrEmpty(value.ToString()) ?
+        //                string.Empty :
+        //                ("=" + value.ToString()));
+        //    }
+
+        //    public static Tag From(string v)
+        //    {
+        //        Tag tag = new Tag();
+
+        //        if (v.Contains("="))
+        //        {
+        //            tag.Type = TagType.Head;
+        //            int stIndex = v.IndexOf('=');
+        //            var tmp = v;
+        //            v = v.Remove(stIndex, v.Length - stIndex);
+        //            v = v.Remove(0, 1);
+        //            tag.TagName = v;
+        //            tmp = tmp.Remove(0, stIndex + 1);
+        //            tmp = tmp.Remove(tmp.Length - 1, 1);
+        //            tag.Value = tmp;
+        //            return tag;
+        //        }
+        //        if (v[1] == '/')
+        //        {
+        //            tag.Type = TagType.Foot;
+        //            v = v.Remove(0, 2);
+        //            v = v.Remove(v.Length - 1, 1);
+        //            tag.TagName = v;
+        //            return tag;
+        //        }
+        //        v = v.Remove(v.Length - 1, 1);
+        //        tag.TagName = v.Remove(0, 1);
+        //        tag.Type = TagType.Head;
+        //        return tag;
+        //    }
+
+
+        //    public static Tag Combine(Tag head, Tag foot)
+        //    {
+        //        if (head.Type != TagType.Head) return null;
+        //        if (foot.Type != TagType.Foot) return null;
+        //        if (head.TagName.Equals(foot.TagName) == false) return null;
+        //        return new Tag()
+        //        {
+        //            TagName = head.TagName,
+        //            Type = TagType.Full,
+        //            Value = head.Value
+        //        };
+        //    }
+        //}
+
+
+
+        //public static MatchCollection ScanTag(string v)
+        //{
+        //    //string tagPattern = @"<[\w]*>";
+        //    string tagPattern = @"<[a-zA-Z.0-9_=/]*>";
+        //    var Colle = Regex.Matches(v, tagPattern);
+        //    return Colle;
+        //}
+
+        //#endregion
+
+        private static void 测试注册表2()
+        {
+            int res = WindowsRegistry.RegisterDefaultApp(".fsv3", "D:\\fsv.ico", PerceivedType.vision_mod, "D:\\1\\main.exe %1", WindowsRegistry.ContentType.XComponentText);
+            Console.WriteLine(res);
+            Console.ReadKey();
+        }
+
+        private static void 测试注册表()
+        {
+            var kroot = Registry.ClassesRoot;
+            var fsv = kroot.OpenSubKey(".fsv3", true);
+            if (fsv != null)
+                fsv.SetValue("测试键", "测试数值");
+            else
+            {
+                fsv = kroot.CreateSubKey(".fsv3");
+                fsv.SetValue("测试键_新建", "测试数值_新建");
+            }
+        }
+
+        static WebClient client;
+
+        private static void 爬网络素材资源()
+        {
+            //http://www.animiz.cn/client/resource/hand-painted
+
+            // string jsonURL = @"http://www.animiz.cn/client/resource/hand-painted?search=&pagesize=30&page=1&catid=3";
+            client = new WebClient();
+
+            for (int catid = 1; catid < 30; catid++)
+            {
+                int page = 0;
+                nextpage: page++;
+                Console.WriteLine();
+                Console.WriteLine("开始下载Part:" + page + ",CID: " + catid);
+                string jsonRequest = string.Format(@"http://www.animiz.cn/client/resource/hand-painted?search=&pagesize=60&page={1}&catid={0}", catid, page);
+                var json = client.DownloadString(jsonRequest);
+                var res = LitJson.JsonMapper.ToObject<ImageList>(json);
+                if (res.data.Length > 0 && page < 10)
+                {
+                    for (int i = 0; i < res.data.Length; i++)
+                        DownLoadImageItem(res.data[i]);
+                    goto nextpage;
+                }
+            }
+            Console.WriteLine("FINIEHED");
+            Console.ReadKey();
+        }
+
+        private static void DownLoadImageItem(ImageItem imageItem)
+        {
+            string folderName = "Download/" + imageItem.title + "/";
+            if (!Directory.Exists(folderName)) Directory.CreateDirectory(folderName);
+            //FileInfo f = new FileInfo(imageItem.thumbnail);
+            string fname = imageItem.thumbnail.Remove(0, imageItem.thumbnail.LastIndexOf('/'));
+
+            client.DownloadFile(imageItem.thumbnail, folderName + fname);
+            Console.WriteLine("下载...: " + imageItem.thumbnail);
+            client.DownloadFile(imageItem.url, folderName + fname + ".svg");
+            Console.WriteLine("下载...:" + imageItem.url);
+        }
+
+        private class ImageList
+        {
+            public object status { get; set; }
+            public accessitem[] access { get; set; }
+            public ImageItem[] data { get; set; }
+
+        }
+
+        private class accessitem
+        {
+            public object access { get; set; }
+            public string type { get; set; }
+        }
+
+        private class ImageItem
+        {
+            public string title { get; set; }
+            public string url { get; set; }
+            public string thumbnail { get; set; }
+            public string access { get; set; }
+        }
+
+
+
+
+
+        private static void 加密自解压程序源码()
+        {
+            OpenFileDialog openf = new OpenFileDialog();
+            openf.Filter = "CS FILE|*.cs";
+            openf.ShowDialog();
+            string key = "HinxCor.EncrytoPass";
+            var data = File.ReadAllText(openf.FileName);
+            using (var rc4 = new RC4(Encoding.UTF8.GetBytes(key)))
+            {
+                var encoded = rc4.Encrypt(data);
+                SaveFileDialog savef = new SaveFileDialog();
+                savef.Filter = "ENCRYPTED FILE|code.depub";
+                savef.ShowDialog();
+                File.WriteAllBytes(savef.FileName, encoded);
+            }
+        }
+
+        private static void 设置路径到缓存然后新建文件打开文件夹()
+        {
+            string workdir = Path.GetTempPath() + "\\_self_pack_and_extracting";
+            if (!Directory.Exists(workdir)) Directory.CreateDirectory(workdir);
+            Environment.CurrentDirectory = workdir;
+
+            File.Create("GG");
+            FileInfo f = new FileInfo("GG");
+            Windows.OpenInExplorer(f.Directory.FullName);
+        }
+
+        private static void 解密自解压程序源码()
+        {
+            OpenFileDialog openf = new OpenFileDialog();
+            openf.ShowDialog();
+            var data = File.ReadAllBytes(openf.FileName);
+
+            string key = "HinxCor.EncrytoPass";
+
+            using (var rc4 = new RC4(Encoding.UTF8.GetBytes(key)))
+            {
+                string decoded = rc4.Decrypt(data);
+                SaveFileDialog savef = new SaveFileDialog();
+                savef.Filter = "CS FILE|*.cs";
+                savef.ShowDialog();
+                File.WriteAllText(savef.FileName, decoded);
+            }
+        }
+        private static void 程序启动器资源打包()
+        {
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Filter = "配置文件|*.ini";
             openFile.ShowDialog();
@@ -56,7 +400,6 @@ namespace DemoApp
             }
             Windows.OpenInExplorer(new FileInfo(saveFile.FileName).Directory.FullName);
         }
-
 
         private static void 测试BundleFile()
         {
