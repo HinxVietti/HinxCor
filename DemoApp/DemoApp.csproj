@@ -129,10 +129,6 @@
       <Project>{5efa8522-5472-4ffb-927c-ee083ae18f27}</Project>
       <Name>HinxCor.Rendering</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HinxCor.SQL\HinxCor.SQL.csproj">
-      <Project>{7b1a8d21-f97f-469b-af84-e7c5fedaba41}</Project>
-      <Name>HinxCor.SQL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HinxCor\HinxCor.csproj">
       <Project>{A5109C8C-BF97-4E53-AB77-CF9CD6D8405C}</Project>
       <Name>HinxCor</Name>

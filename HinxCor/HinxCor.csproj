@@ -96,6 +96,9 @@
     <Compile Include="WindowsForm\EmptyForm.Designer.cs">
       <DependentUpon>EmptyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WindowsForm\HybridTransparentBorder.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="WindowsForm\MessageBox.cs" />
     <Compile Include="WindowsForm\TransparencyForm.cs">
       <SubType>Form</SubType>

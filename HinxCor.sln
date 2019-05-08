@@ -43,8 +43,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCARE", "_self_pack_and_ext
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_fast_fetch_imagesfrom_amizez", "_fast_fetch_imagesfrom_amizez\_fast_fetch_imagesfrom_amizez.csproj", "{0C4BBE0D-DD2B-4103-82C2-87D8006D0F5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HinxCor.SQL", "HinxCor.SQL\HinxCor.SQL.csproj", "{7B1A8D21-F97F-469B-AF84-E7C5FEDABA41}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoCrc", "DemoCrc\DemoCrc.csproj", "{8E5B9AF6-1669-434D-AF58-51ED00BE5C70}"
 EndProject
 Global
@@ -133,10 +131,6 @@ Global
 		{0C4BBE0D-DD2B-4103-82C2-87D8006D0F5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C4BBE0D-DD2B-4103-82C2-87D8006D0F5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C4BBE0D-DD2B-4103-82C2-87D8006D0F5A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B1A8D21-F97F-469B-AF84-E7C5FEDABA41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B1A8D21-F97F-469B-AF84-E7C5FEDABA41}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B1A8D21-F97F-469B-AF84-E7C5FEDABA41}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B1A8D21-F97F-469B-AF84-E7C5FEDABA41}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8E5B9AF6-1669-434D-AF58-51ED00BE5C70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E5B9AF6-1669-434D-AF58-51ED00BE5C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E5B9AF6-1669-434D-AF58-51ED00BE5C70}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -64,7 +64,7 @@ namespace ApplicationLauncher
                 else
                 {
                     File.WriteAllText("log.txt", "Progarm not start cause app not found:" + exefile);
-                    Close();
+                    //Close();
                 }
             }
 

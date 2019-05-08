@@ -13,7 +13,8 @@ namespace ApplicationLauncher
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Loadout());
+            //Application.Run(new Loadout());
+            Application.Run(new HybridTransparentBorder());
         }
     }
 }

@@ -48,14 +48,20 @@ namespace DemoApp
             //测试文本格式化();
             //测试SQL();
 
-            var res = HinxCor.Win32.MessageBox.ShowTopMost("Message", "titile", HinxCor.Win32.DefaultButtons.YesNoCancel);
-            Console.WriteLine(res);
+            //var res = HinxCor.Win32.MessageBox.ShowTopMost("Message", "titile", HinxCor.Win32.DefaultButtons.YesNoCancel);
+            //Console.WriteLine(res);
+            //Console.ReadKey();
+
+            OpenFileDialog open = new OpenFileDialog();
+            open.ShowDialog();
+            var r = new HybridTransparentBorder(/*Image.FromFile(open.FileName)*/);
+            r.Show();
             Console.ReadKey();
         }
 
         private static void 测试SQL()
         {
-            testSql.TestConnection();
+            //testSql.TestConnection();
         }
 
         private static void 测试文本格式化()
@@ -277,7 +283,7 @@ namespace DemoApp
             for (int catid = 1; catid < 30; catid++)
             {
                 int page = 0;
-                nextpage: page++;
+            nextpage: page++;
                 Console.WriteLine();
                 Console.WriteLine("开始下载Part:" + page + ",CID: " + catid);
                 string jsonRequest = string.Format(@"http://www.animiz.cn/client/resource/hand-painted?search=&pagesize=60&page={1}&catid={0}", catid, page);
