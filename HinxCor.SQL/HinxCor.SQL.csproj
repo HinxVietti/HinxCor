@@ -51,7 +51,6 @@
     <Compile Include="SQLite\SqliteHelper.cs" />
     <Compile Include="Test\testSql.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

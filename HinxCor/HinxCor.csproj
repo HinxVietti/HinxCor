@@ -82,11 +82,12 @@
     <Compile Include="Serialize\INI.cs" />
     <Compile Include="SystemInfo.cs" />
     <Compile Include="UidGenerator.cs" />
-    <Compile Include="Win32\Kernel.cs" />
+    <Compile Include="Win32\Core\Kernel.cs" />
     <Compile Include="Win32\MessageBox.cs" />
-    <Compile Include="Win32\Shell.cs" />
-    <Compile Include="Win32\Struct.cs" />
-    <Compile Include="Win32\User.cs" />
+    <Compile Include="Win32\Core\Shell.cs" />
+    <Compile Include="Win32\Core\Struct.cs" />
+    <Compile Include="Win32\Core\User.cs" />
+    <Compile Include="Win32\WindowsCat.cs" />
     <Compile Include="Win32\WindowsRegistry.cs" />
     <Compile Include="Windows.cs" />
     <Compile Include="WindowsForm\EmptyForm.cs">

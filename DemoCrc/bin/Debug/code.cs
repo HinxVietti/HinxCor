@@ -1,0 +1,1 @@
+using System; class App                            {                                        static void Main(string[] args)      {                                        Console.WriteLine("成功：02");        Console.ReadKey();                 }                                  }                                      

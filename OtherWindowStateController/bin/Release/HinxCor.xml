@@ -1732,6 +1732,32 @@
             此结构是API的DEVMODE结构的Unicode版本，匿名结构由Anonymity结构代替
             </summary>
         </member>
+        <member name="M:HinxCor.Win32.User32.SetWindowLong(System.IntPtr,System.Int32,System.Int32)">
+            <summary>
+            更改指定窗口的属性。该函数还将指定偏移量处的32位（长）值设置到额外的窗口内存中。
+            </summary>
+            <param name="hwnd">窗口的句柄，以及窗口所属的类。</param>
+            <param name="nIndex">要设置的值的基于零的偏移量。有效值在零到额外窗口内存字节数的范围内，减去整数的大小。要设置任何其他值，请指定以下值之一。</param>
+            <param name="dwNewLong">替代数值</param>
+            <returns>如果函数成功，则返回值是指定32位整数的前一个值。
+            <para> 如果函数失败，返回值为零。要获取扩展错误信息，请调用GetLastError。</para>
+            <para>如果指定的32位整数的前一个值为零，并且函数成功，则返回值为零，但函数不清除最后一个错误信息。</para>
+            <para> 这使得很难确定成功或失败。要解决此问题，您应该在调用setWindowLong之前用0调用setLastError来清除最后的错误信息。</para>
+            <para>然后，函数失败将由返回值零和非零的GetLastError结果指示。</para></returns>
+        </member>
+        <member name="M:HinxCor.Win32.User32.SetWindowPos(System.IntPtr,System.IntPtr,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="hwnd"></param>
+            <param name="hwndInsertAfter">底层(HWND)1;     非顶层-(HWND)-2;     顶层-(HWND)0;     最顶层 (HWND)-1</param>
+            <param name="x">左边</param>
+            <param name="y">上边</param>
+            <param name="cx">宽度</param>
+            <param name="cy">高度</param>
+            <param name="wFlags">找SWP_开头的属性</param>
+            <returns></returns>
+        </member>
         <member name="M:HinxCor.Win32.User32.ShowWindow(System.IntPtr,System.Int32)">
             <summary>
             0 close;1 normal , 2 mini 3 max
@@ -1739,6 +1765,186 @@
             <param name="hwnd"></param>
             <param name="nCmdShow"></param>
             <returns></returns>
+        </member>
+        <member name="F:HinxCor.Win32.User32.DWL_DLGPROC">
+            <summary>
+            设置对话框过程的新地址。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.DWL_MSGRESULT">
+            <summary>
+            设置在对话框过程中处理的消息的返回值。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.DWL_USER">
+            <summary>
+            设置应用程序专用的新额外信息，如句柄或指针。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.GWL_EXSTYLE">
+            <summary>
+            设置新的扩展窗口样式。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.GWL_HINSTANCE">
+            <summary>
+            设置新的应用程序实例句柄。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.GWL_HWNDPARENT">
+            <summary>
+            设置子窗口的新标识符。窗口不能是顶级窗口。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.GWL_ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.GWL_STYLE">
+            <summary>
+            设置新的窗体样式
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.GWL_USERDATA">
+            <summary>
+            设置与窗口关联的用户数据。此数据供创建窗口的应用程序使用。其值最初为零。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.GWL_WNDPROC">
+            <summary>
+            为窗口过程设置新地址。
+            如果窗口与调用线程不属于同一进程，则无法更改此属性。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.SWP_ASYNCWINDOWPOS">
+            <summary>
+            如果调用线程和拥有该窗口的线程连接到不同的输入队列，则系统将请求发送到拥有该窗口的线程。这可以防止调用线程在其他线程处理请求时阻止其执行。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.SWP_DEFERERASE">
+            <summary>
+            阻止生成wm_syncpaint消息。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.SWP_DRAWFRAME">
+            <summary>
+            围绕窗口绘制框架（在窗口的类描述中定义）。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.SWP_FRAMECHANGED">
+            <summary>
+            应用使用StWistWOWLUN函数设置的新框架样式。向窗口发送wm_ccalcSize消息，即使窗口的大小没有更改。如果未指定此标志，则仅在更改窗口大小时发送wm nccalcSize。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.SWP_HIDEWINDOW">
+            <summary>
+            影藏窗口
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.SWP_NOACTIVATE">
+            <summary>
+            不激活窗口。如果未设置此标志，则窗口被激活并移动到最顶层或非最顶层组的顶部（取决于HWNDSPITCHFTER参数的设置）。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.SWP_NOCOPYBITS">
+            <summary>
+            丢弃工作区的全部内容。如果未指定此标志，则在调整窗口大小或重新定位后，客户端区域的有效内容将被保存并复制回客户端区域。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.SWP_NOMOVE">
+            <summary>
+            保留当前位置（忽略X和Y参数）。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.SWP_NOOWNERZORDER">
+            <summary>
+            不会更改所有者窗口在z顺序中的位置。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.SWP_NOSENDCHANGING">
+            <summary>
+             阻止窗口接收wm_windowposchanging消息。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.SWP_NOREDRAW">
+            <summary>
+            不重新绘制更改。如果设置了此标志，则不会进行任何类型的重新绘制。这适用于客户机区域、非客户机区域（包括标题栏和滚动条）以及由于移动窗口而未覆盖的父窗口的任何部分。设置此标志后，应用程序必须显式地使窗口和父窗口中需要重新绘制的任何部分失效或重新绘制。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.SWP_NOREPOSITION">
+            <summary>
+            阻止窗口接收wm_windowposchanging消息。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.SWP_NOSIZE">
+            <summary>
+            保留当前大小（忽略cx和cy参数）。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.SWP_NOZORDER">
+            <summary>
+            保留当前Z顺序（忽略hwndinsertafter参数）。
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.SWP_SHOWWINDOW">
+            <summary>
+            Displays the window. 
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.WS_Normal_Display">
+            <summary>
+            默认有边框和标题栏
+            </summary>
+        </member>
+        <member name="F:HinxCor.Win32.User32.WS_Normal_None">
+            <summary>
+            默认无边框无标题栏
+            </summary>
+        </member>
+        <member name="M:HinxCor.Win32.WindowsCat.SetSizeAndMidCenter(System.Int32,System.Int32)">
+            <summary>
+            重设大小并且居中
+            </summary>
+            <param name="wid"></param>
+            <param name="hei"></param>
+        </member>
+        <member name="M:HinxCor.Win32.WindowsCat.SetSize(System.Int32,System.Int32)">
+            <summary>
+            重新设置窗口大小
+            </summary>
+            <param name="wid"></param>
+            <param name="hei"></param>
+        </member>
+        <member name="M:HinxCor.Win32.WindowsCat.MidCenter">
+            <summary>
+            居中屏幕
+            </summary>
+        </member>
+        <member name="M:HinxCor.Win32.WindowsCat.Normalize">
+            <summary>
+            普通窗口化
+            </summary>
+        </member>
+        <member name="M:HinxCor.Win32.WindowsCat.FullWorkScreen">
+            <summary>
+            工作区全屏
+            </summary>
+        </member>
+        <member name="M:HinxCor.Win32.WindowsCat.RealFullScreen">
+            <summary>
+            设置真全屏
+            </summary>
+        </member>
+        <member name="M:HinxCor.Win32.WindowsCat.SetNoFrame">
+            <summary>
+            把窗体设为无边框模式
+            </summary>
+        </member>
+        <member name="M:HinxCor.Win32.WindowsCat.SetNormal">
+            <summary>
+            把窗体设为Resize窗体模式
+            </summary>
         </member>
         <member name="T:HinxCor.Windows">
             <summary>

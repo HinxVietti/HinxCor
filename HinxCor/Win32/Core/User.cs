@@ -866,8 +866,30 @@ namespace HinxCor.Win32
         [DllImport("user32")] public static extern int SetUserObjectInformation(HANDLE hObj, int nIndex, IntPtr pvInfo, int nLength);
         [DllImport("user32")] public static extern int SetUserObjectSecurity(HANDLE hObj, ref int pSIRequested, ref SECURITY_DESCRIPTOR pSd);
         [DllImport("user32")] public static extern int SetWindowContextHelpId(HWND hwnd, int dw);
+        /// <summary>
+        /// 更改指定窗口的属性。该函数还将指定偏移量处的32位（长）值设置到额外的窗口内存中。
+        /// </summary>
+        /// <param name="hwnd">窗口的句柄，以及窗口所属的类。</param>
+        /// <param name="nIndex">要设置的值的基于零的偏移量。有效值在零到额外窗口内存字节数的范围内，减去整数的大小。要设置任何其他值，请指定以下值之一。</param>
+        /// <param name="dwNewLong">替代数值</param>
+        /// <returns>如果函数成功，则返回值是指定32位整数的前一个值。
+        /// <para> 如果函数失败，返回值为零。要获取扩展错误信息，请调用GetLastError。</para>
+        /// <para>如果指定的32位整数的前一个值为零，并且函数成功，则返回值为零，但函数不清除最后一个错误信息。</para>
+        /// <para> 这使得很难确定成功或失败。要解决此问题，您应该在调用setWindowLong之前用0调用setLastError来清除最后的错误信息。</para>
+        /// <para>然后，函数失败将由返回值零和非零的GetLastError结果指示。</para></returns>
         [DllImport("user32")] public static extern int SetWindowLong(HWND hwnd, int nIndex, int dwNewLong);
         [DllImport("user32")] public static extern int SetWindowPlacement(HWND hwnd, ref WINDOWPLACEMENT lpwndpl);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hwnd"></param>
+        /// <param name="hwndInsertAfter">底层(HWND)1;     非顶层-(HWND)-2;     顶层-(HWND)0;     最顶层 (HWND)-1</param>
+        /// <param name="x">左边</param>
+        /// <param name="y">上边</param>
+        /// <param name="cx">宽度</param>
+        /// <param name="cy">高度</param>
+        /// <param name="wFlags">找SWP_开头的属性</param>
+        /// <returns></returns>
         [DllImport("user32")] public static extern int SetWindowPos(HWND hwnd, HWND hwndInsertAfter, int x, int y, int cx, int cy, int wFlags);
         [DllImport("user32")] public static extern int SetWindowRgn(HWND hwnd, HANDLE hRgn, int bRedraw);
         [DllImport("user32")] public static extern int SetWindowText(HWND hwnd, string lpString);
@@ -1261,8 +1283,17 @@ namespace HinxCor.Win32
         public const int DT_VCENTER = 0x4;
         public const int DT_WORDBREAK = 0x10;
         public const int DT_WORD_ELLIPSIS = 0x40000;
+        /// <summary>
+        /// 设置对话框过程的新地址。
+        /// </summary>
         public const int DWL_DLGPROC = 4;
+        /// <summary>
+        /// 设置在对话框过程中处理的消息的返回值。
+        /// </summary>
         public const int DWL_MSGRESULT = 0;
+        /// <summary>
+        /// 设置应用程序专用的新额外信息，如句柄或指针。
+        /// </summary>
         public const int DWL_USER = 8;
         public const int EC_DISABLE = ST_BLOCKED;
         public const int EC_ENABLEALL = 0;
@@ -1390,12 +1421,34 @@ namespace HinxCor.Win32
         public const int GCL_STYLE = (-26);
         public const int GCL_WNDPROC = (-24);
         public const int GCW_ATOM = (-32);
+        /// <summary>
+        /// 设置新的扩展窗口样式。
+        /// </summary>
         public const int GWL_EXSTYLE = (-20);
+        /// <summary>
+        /// 设置新的应用程序实例句柄。
+        /// </summary>
         public const int GWL_HINSTANCE = (-6);
+        /// <summary>
+        /// 设置子窗口的新标识符。窗口不能是顶级窗口。
+        /// </summary>
         public const int GWL_HWNDPARENT = (-8);
+        /// <summary>
+        /// 
+        /// </summary>
         public const int GWL_ID = (-12);
+        /// <summary>
+        /// 设置新的窗体样式
+        /// </summary>
         public const int GWL_STYLE = (-16);
+        /// <summary>
+        /// 设置与窗口关联的用户数据。此数据供创建窗口的应用程序使用。其值最初为零。
+        /// </summary>
         public const int GWL_USERDATA = (-21);
+        /// <summary>
+        /// 为窗口过程设置新地址。
+        /// 如果窗口与调用线程不属于同一进程，则无法更改此属性。
+        /// </summary>
         public const int GWL_WNDPROC = (-4);
         public const int GW_CHILD = 5;
         public const int GW_HWNDFIRST = 0;
@@ -2048,17 +2101,65 @@ namespace HinxCor.Win32
         public const int ST_ISLOCAL = 0x4;
         public const int ST_ISSELF = 0x100;
         public const int ST_TERMINATED = 0x20;
+        /// <summary>
+        /// 如果调用线程和拥有该窗口的线程连接到不同的输入队列，则系统将请求发送到拥有该窗口的线程。这可以防止调用线程在其他线程处理请求时阻止其执行。
+        /// </summary>
+        public const int SWP_ASYNCWINDOWPOS = 0x4000;
+        /// <summary>
+        /// 阻止生成wm_syncpaint消息。
+        /// </summary>
+        public const int SWP_DEFERERASE = 0x2000;
+        /// <summary>
+        /// 围绕窗口绘制框架（在窗口的类描述中定义）。
+        /// </summary>
         public const int SWP_DRAWFRAME = SWP_FRAMECHANGED;
+        /// <summary>
+        /// 应用使用StWistWOWLUN函数设置的新框架样式。向窗口发送wm_ccalcSize消息，即使窗口的大小没有更改。如果未指定此标志，则仅在更改窗口大小时发送wm nccalcSize。
+        /// </summary>
         public const int SWP_FRAMECHANGED = 0x20;
+        /// <summary>
+        /// 影藏窗口
+        /// </summary>
         public const int SWP_HIDEWINDOW = 0x80;
+        /// <summary>
+        /// 不激活窗口。如果未设置此标志，则窗口被激活并移动到最顶层或非最顶层组的顶部（取决于HWNDSPITCHFTER参数的设置）。
+        /// </summary>
         public const int SWP_NOACTIVATE = 0x10;
+        /// <summary>
+        /// 丢弃工作区的全部内容。如果未指定此标志，则在调整窗口大小或重新定位后，客户端区域的有效内容将被保存并复制回客户端区域。
+        /// </summary>
         public const int SWP_NOCOPYBITS = 0x100;
+        /// <summary>
+        /// 保留当前位置（忽略X和Y参数）。
+        /// </summary>
         public const int SWP_NOMOVE = 0x2;
+        /// <summary>
+        /// 不会更改所有者窗口在z顺序中的位置。
+        /// </summary>
         public const int SWP_NOOWNERZORDER = 0x200;
+        /// <summary>
+        ///  阻止窗口接收wm_windowposchanging消息。
+        /// </summary>
+        public const int SWP_NOSENDCHANGING = 0x400;
+        /// <summary>
+        /// 不重新绘制更改。如果设置了此标志，则不会进行任何类型的重新绘制。这适用于客户机区域、非客户机区域（包括标题栏和滚动条）以及由于移动窗口而未覆盖的父窗口的任何部分。设置此标志后，应用程序必须显式地使窗口和父窗口中需要重新绘制的任何部分失效或重新绘制。
+        /// </summary>
         public const int SWP_NOREDRAW = 0x8;
+        /// <summary>
+        /// 阻止窗口接收wm_windowposchanging消息。
+        /// </summary>
         public const int SWP_NOREPOSITION = SWP_NOOWNERZORDER;
+        /// <summary>
+        /// 保留当前大小（忽略cx和cy参数）。
+        /// </summary>
         public const int SWP_NOSIZE = 0x1;
+        /// <summary>
+        /// 保留当前Z顺序（忽略hwndinsertafter参数）。
+        /// </summary>
         public const int SWP_NOZORDER = 0x4;
+        /// <summary>
+        /// Displays the window. 
+        /// </summary>
         public const int SWP_SHOWWINDOW = 0x40;
         public const int SW_ERASE = 0x4;
         public const int SW_HIDE = 0;
@@ -2371,6 +2472,14 @@ namespace HinxCor.Win32
         public const int WPF_RESTORETOMAXIMIZED = 0x2;
         public const int WPF_SETMINPOSITION = 0x1;
         public const int WRITE = 1;
+        /// <summary>
+        /// 默认有边框和标题栏
+        /// </summary>
+        public const int WS_Normal_Display = 0x16cf0000;
+        /// <summary>
+        /// 默认无边框无标题栏
+        /// </summary>
+        public const int WS_Normal_None = 0x16010000;
         public const int WS_BORDER = 0x800000;
         public const int WS_CAPTION = 0xC00000;
         public const int WS_CHILD = 0x40000000;

@@ -1,24 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
+using HinxCor.Win32;
 
 namespace OtherWindowStateController
 {
+    using System.Drawing;
+    using static User32;
+
     public partial class 窗体工具 : Form
     {
-        IntPtr toapply;
+        IntPtr toapply { get { return cat.Handle; } set { cat = new WindowsCat(value); } }
 
         public 窗体工具()
         {
             InitializeComponent();
+            TopMost = true;
             this.textBox1.KeyPress += txtbox1_KeyPress;
         }
 
@@ -36,6 +35,13 @@ namespace OtherWindowStateController
             Display();
         }
 
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Thread.Sleep(1000);
+            toapply = GetForegroundWindow();
+            Display();
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -69,6 +75,9 @@ namespace OtherWindowStateController
         {
             ShowWindow(toapply, WindowShowStyle.Restore);
         }
+
+
+
 
         #region Hide
 
@@ -172,5 +181,85 @@ namespace OtherWindowStateController
         }
         #endregion
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //SetWindowLong(toapply,GWL_STYLE,WS_POPUP);
+            //var sty = GetWindowLong(toapply, GWL_STYLE);//获取当前得样式
+            //sty &= ~WS_BORDER;
+            //sty &= ~WS_THICKFRAME;
+            var sr = 0x16010000;
+
+            //0x10000000
+            SetWindowLong(toapply, GWL_STYLE, sr);//回去设置属性
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //var sty = GetWindowLong(toapply, GWL_STYLE);//获取当前得样式
+            var sr = 0x16cf0000;
+            SetWindowLong(toapply, GWL_STYLE, sr);//回去设置属性
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            SetWindowPos(toapply, new IntPtr(-1), int.Parse(x.Text), int.Parse(y.Text), int.Parse(w.Text), int.Parse(h.Text), SWP_SHOWWINDOW);
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            Size OutTaskBarSize = new Size(SystemInformation.WorkingArea.Width, SystemInformation.WorkingArea.Height);
+
+            Size ScreenSize = new Size(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height);
+
+            Size TaskBarSize;
+
+            TaskBarSize = new Size(
+                            (ScreenSize.Width - (ScreenSize.Width - OutTaskBarSize.Width)),
+                            (ScreenSize.Height - OutTaskBarSize.Height)
+                            );
+
+            System.Windows.Forms.MessageBox.Show("任务栏大小：" + TaskBarSize.Width + "," + TaskBarSize.Height);
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //当前的屏幕除任务栏外的工作域大小
+            string currentScreenSize_OutTaskBar = SystemInformation.WorkingArea.Width.ToString() + "," + SystemInformation.WorkingArea.Height.ToString();
+            System.Windows.Forms.MessageBox.Show("当前的屏幕除任务栏外的工作域大小为:" + currentScreenSize_OutTaskBar);
+
+            //当前的屏幕包括任务栏的工作域大小
+            string currentScreenSize = Screen.PrimaryScreen.Bounds.Width.ToString() + "," + System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height.ToString();
+            System.Windows.Forms.MessageBox.Show("当前的屏幕包括任务栏的工作域大小为:" + currentScreenSize);
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            cat.SetFullWorkScreen();
+            //SetWindowLong(toapply, GWL_STYLE, WS_Normal_None);
+            //SetWindowPos(toapply, new IntPtr(-1), 0, 0, SystemInformation.WorkingArea.Width, SystemInformation.WorkingArea.Height, SWP_SHOWWINDOW);
+        }
+
+        WindowsCat cat;
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+             new WindowsCat(toapply);
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            cat.Normalize();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            cat.RealFullScreen();
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            cat.SetSizeAndMidCenter(int.Parse(w.Text), int.Parse(h.Text));
+        }
     }
 }
