@@ -23,6 +23,7 @@ using System.Net;
 using Microsoft.Win32;
 using Test;
 using System.Text.RegularExpressions;
+using HinxCor.WindowsForm;
 
 namespace DemoApp
 {
@@ -52,10 +53,13 @@ namespace DemoApp
             //Console.WriteLine(res);
             //Console.ReadKey();
 
-            OpenFileDialog open = new OpenFileDialog();
-            open.ShowDialog();
-            var r = new HybridTransparentBorder(/*Image.FromFile(open.FileName)*/);
-            r.Show();
+            //OpenFileDialog open = new OpenFileDialog();
+            //open.ShowDialog();
+            //var r = new HybridTransparentBorder(/*Image.FromFile(open.FileName)*/);
+            //r.Show();
+            //Console.ReadKey();
+            var Col = new PickColorDialogBase();
+            Console.WriteLine(Col.ShowAndBlock());
             Console.ReadKey();
         }
 
@@ -283,7 +287,7 @@ namespace DemoApp
             for (int catid = 1; catid < 30; catid++)
             {
                 int page = 0;
-            nextpage: page++;
+                nextpage: page++;
                 Console.WriteLine();
                 Console.WriteLine("开始下载Part:" + page + ",CID: " + catid);
                 string jsonRequest = string.Format(@"http://www.animiz.cn/client/resource/hand-painted?search=&pagesize=60&page={1}&catid={0}", catid, page);

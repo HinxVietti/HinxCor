@@ -244,7 +244,7 @@ namespace OtherWindowStateController
 
         private void button14_Click(object sender, EventArgs e)
         {
-             new WindowsCat(toapply);
+            new WindowsCat(toapply);
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -260,6 +260,21 @@ namespace OtherWindowStateController
         private void button17_Click(object sender, EventArgs e)
         {
             cat.SetSizeAndMidCenter(int.Parse(w.Text), int.Parse(h.Text));
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            this.textBox2.Text = GetWindowLong(toapply, GWL_STYLE).ToString();
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            this.textBox2.Text = GetWindowLong(toapply, GWL_EXSTYLE).ToString();
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            this.textBox3.Text = GetWindowLong(toapply, GWL_HWNDPARENT).ToString();
         }
     }
 }

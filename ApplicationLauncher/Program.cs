@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace ApplicationLauncher
@@ -11,10 +12,13 @@ namespace ApplicationLauncher
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Loadout());
-            Application.Run(new HybridTransparentBorder());
+            ProcessStartInfo info = new ProcessStartInfo();
+            info.FileName = "Focusky Vision 2019.exe";
+            Process.Start(info);
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            ////Application.Run(new Loadout());
+            //Application.Run(new HybridTransparentBorder());
         }
     }
 }

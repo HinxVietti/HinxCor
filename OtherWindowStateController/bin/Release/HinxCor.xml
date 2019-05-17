@@ -2753,6 +2753,23 @@
             <param name="contentType"></param>
             <returns></returns>
         </member>
+        <member name="F:HybridTransparentBorder.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HybridTransparentBorder.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HybridTransparentBorder.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="T:WinformHelper">
             <summary>
             窗体辅助工具
