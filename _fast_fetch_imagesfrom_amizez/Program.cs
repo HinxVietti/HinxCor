@@ -92,9 +92,9 @@ namespace _fast_fetch_imagesfrom_amizez
             string fname = imageItem.title + "--" + imageItem.thumbnail.Remove(0, imageItem.thumbnail.LastIndexOf('/') + 2);
             //FileInfo desfile = new FileInfo(folderName + fname);
             //if (desfile.Directory.Exists == false) desfile.Directory.Create();
-            client.DownloadFile(imageItem.thumbnail, folderName + fname);
+            //client.DownloadFile(imageItem.thumbnail, folderName + fname);
             Console.WriteLine("下载...: " + imageItem.thumbnail);
-            client.DownloadFile(imageItem.url, folderName + fname + ".svg");
+            //client.DownloadFile(imageItem.url, folderName + fname + ".svg");
             Console.WriteLine("下载...:" + imageItem.url);
         }
 

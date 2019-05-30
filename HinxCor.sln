@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_fast_fetch_imagesfrom_amiz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoCrc", "DemoCrc\DemoCrc.csproj", "{8E5B9AF6-1669-434D-AF58-51ED00BE5C70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_demo_login_register_to_animz", "_demo_login_register_to_animz\_demo_login_register_to_animz.csproj", "{0C6B19F3-B719-417A-95D0-75F3FA528AAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,10 @@ Global
 		{8E5B9AF6-1669-434D-AF58-51ED00BE5C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E5B9AF6-1669-434D-AF58-51ED00BE5C70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E5B9AF6-1669-434D-AF58-51ED00BE5C70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C6B19F3-B719-417A-95D0-75F3FA528AAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C6B19F3-B719-417A-95D0-75F3FA528AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C6B19F3-B719-417A-95D0-75F3FA528AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C6B19F3-B719-417A-95D0-75F3FA528AAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
