@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>0</WarningLevel>
-    <DocumentationFile>D:\Git_SourceCode\HinxCor\bin\HinxCor.xml</DocumentationFile>
+    <DocumentationFile>..\bin\HinxCor.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -72,6 +72,7 @@
     <Compile Include="IO\IBitConvertable.cs" />
     <Compile Include="IO\FileBundle\IFileBundle.cs" />
     <Compile Include="IO\FileBundle\UncompressedFileBundle.cs" />
+    <Compile Include="IO\StringFiles\StringFile.cs" />
     <Compile Include="Math\HMath.cs" />
     <Compile Include="Math\Line.cs" />
     <Compile Include="Math\Point.cs" />
@@ -95,6 +96,12 @@
     <Compile Include="Win32\WindowsCat.cs" />
     <Compile Include="Win32\WindowsRegistry.cs" />
     <Compile Include="Windows.cs" />
+    <Compile Include="WindowsForm\ApplicationLoadout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WindowsForm\ApplicationLoadout.Designer.cs">
+      <DependentUpon>ApplicationLoadout.cs</DependentUpon>
+    </Compile>
     <Compile Include="WindowsForm\EmptyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +110,12 @@
     </Compile>
     <Compile Include="WindowsForm\HybridTransparentBorder.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WindowsForm\Logtar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WindowsForm\Logtar.Designer.cs">
+      <DependentUpon>Logtar.cs</DependentUpon>
     </Compile>
     <Compile Include="WindowsForm\MessageBox.cs" />
     <Compile Include="WindowsForm\PickColorDialog.cs">
@@ -138,8 +151,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="WindowsForm\ApplicationLoadout.resx">
+      <DependentUpon>ApplicationLoadout.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WindowsForm\EmptyForm.resx">
       <DependentUpon>EmptyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WindowsForm\HybridTransparentBorder.resx">
+      <DependentUpon>HybridTransparentBorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WindowsForm\Logtar.resx">
+      <DependentUpon>Logtar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WindowsForm\PickColorDialog.resx">
       <DependentUpon>PickColorDialog.cs</DependentUpon>

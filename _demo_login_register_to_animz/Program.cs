@@ -12,13 +12,13 @@ namespace _demo_login_register_to_animz
         static void Main()
         {
 
-            MobianoAccount ac = new MobianoAccount();
-            ac.Register((d, a) =>
-            {
-                Console.WriteLine(d + "\t" + a);
-            }, "free_v_02focusky.com.cn", "wancai");
+            //MobianoAccount ac = new MobianoAccount();
+            //ac.Register((d, a) =>
+            //{
+            //    Console.WriteLine(d + "\t" + a);
+            //}, "free_v_02focusky.com.cn", "wancai");
 
-            Console.ReadKey();
+            //Console.ReadKey();
         }
 
         static void Main_99(string[] args)

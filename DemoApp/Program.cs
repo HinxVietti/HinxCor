@@ -22,7 +22,6 @@ using HinxCor.IO;
 using System.Net;
 using Microsoft.Win32;
 using Test;
-using System.Text.RegularExpressions;
 using HinxCor.WindowsForm;
 
 namespace DemoApp
@@ -58,9 +57,81 @@ namespace DemoApp
             //var r = new HybridTransparentBorder(/*Image.FromFile(open.FileName)*/);
             //r.Show();
             //Console.ReadKey();
-            var Col = new PickColorDialogBase();
-            Console.WriteLine(Col.ShowAndBlock());
+            //var Col = new PickColorDialogBase();
+            //Console.WriteLine(Col.ShowAndBlock());
+
+            //var dat =  System.Convert.FromBase64String(StringFile._SPLIT_STRING);
+
+            //string ssr = "123456789" + StringFile._SPLIT_STRING + "abcdef";
+            //var regs = Regex.Split(ssr, StringFile._SPLIT_STRING);
+            //测试StringFile();
+            //程序启动器资源打包();
+            //测试启动界面();
+            生成空白图像();
+            //Console.ReadKey();
+        }
+
+        private static void 生成空白图像()
+        {
+            Bitmap bmp = new Bitmap(1000, 1000);
+            var g = Graphics.FromImage(bmp);
+            g.Clear(Color.White);
+            g.Flush();
+            g.Dispose();
+
+            var ms = new MemoryStream();
+            bmp.Save(ms, ImageFormat.Png);
+            ms.Position = 0;
+            byte[] pngdat = ms.ToArray();
+            var str = System.Convert.ToBase64String(pngdat);
+            Console.WriteLine(str);
+            File.WriteAllText("1.txt", str);
             Console.ReadKey();
+        }
+
+        private static void 测试启动界面()
+        {
+
+            OpenFileDialog open = new OpenFileDialog();
+            open.Filter = "png图像|*.png";
+            open.ShowDialog();
+            Image img = Image.FromFile(open.FileName);
+
+            var loadout = new ApplicationLoadout(img);
+            loadout.Show();
+            loadout.CenterScreen();
+
+            //while (Console.ReadKey().Key != ConsoleKey.Escape)
+            //{
+            //    loadout.SetLog(DateTime.Now);
+            //}
+
+            Console.ReadKey();
+        }
+
+        private static void 测试StringFile()
+        {
+            //Console.WriteLine(BitConverter.GetBytes(0).Length);
+
+            //OpenFileDialog open = new OpenFileDialog();
+            //StringFile sf = new StringFile();
+            //open.Filter = "png图像|*.png";
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    open.ShowDialog();
+            //    var fileName = open.FileName;
+            //    sf.Add(fileName);
+            //}
+            ////Console.WriteLine(sf);
+            //File.WriteAllText("FIR.SF", sf.ToString());
+
+            string txt = File.ReadAllText("FIR.SF");
+            var sf = new StringFile(txt);
+            for (int i = 0; i < 5; i++)
+            {
+                var dat = sf[i];
+                File.WriteAllBytes(string.Format("PNG_{0}.png", i + 1), dat);
+            }
         }
 
         private static void 测试SQL()

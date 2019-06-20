@@ -2108,6 +2108,23 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="F:HinxCor.WindowsForm.ApplicationLoadout.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.ApplicationLoadout.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HinxCor.WindowsForm.ApplicationLoadout.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="T:HinxCor.WindowsForm.EmptyForm">
             <summary>
             一个空的窗体
@@ -2130,6 +2147,23 @@
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
         <member name="M:HinxCor.WindowsForm.EmptyForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:HinxCor.WindowsForm.Logtar.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.Logtar.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HinxCor.WindowsForm.Logtar.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
@@ -2649,6 +2683,26 @@
             <summary>
             单步写入数量
             </summary>
+        </member>
+        <member name="M:StringFile.#ctor(System.String,System.Boolean)">
+            <summary>
+            Add Plain will not generate byte array
+            </summary>
+            <param name="txt"></param>
+            <param name="plain"></param>
+        </member>
+        <member name="M:StringFile.AddPlain(System.String,System.String)">
+            <summary>
+            仅仅添加外部b64数据
+            </summary>
+            <param name="item"></param>
+            <param name="b64data"></param>
+        </member>
+        <member name="M:StringFile.ToString">
+            <summary>
+            将数据变为B64的KVP
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:IniFile.Read``1(System.String,``0@,System.Func{System.String,``0},System.String)">
             <summary>
