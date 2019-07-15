@@ -93,6 +93,8 @@
     <Compile Include="Win32\Core\Shell.cs" />
     <Compile Include="Win32\Core\Struct.cs" />
     <Compile Include="Win32\Core\User.cs" />
+    <Compile Include="Win32\WinAPI.cs" />
+    <Compile Include="Win32\WinAPIHelper.cs" />
     <Compile Include="Win32\WindowsCat.cs" />
     <Compile Include="Win32\WindowsRegistry.cs" />
     <Compile Include="Windows.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="WindowsForm\ApplicationLoadout.Designer.cs">
       <DependentUpon>ApplicationLoadout.cs</DependentUpon>
     </Compile>
+    <Compile Include="WindowsForm\CommonDelegate.cs" />
     <Compile Include="WindowsForm\EmptyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +121,7 @@
       <DependentUpon>Logtar.cs</DependentUpon>
     </Compile>
     <Compile Include="WindowsForm\MessageBox.cs" />
+    <Compile Include="WindowsForm\MessageUtility.cs" />
     <Compile Include="WindowsForm\PickColorDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +133,18 @@
     </Compile>
     <Compile Include="WindowsForm\PickColorDialogBase.Designer.cs">
       <DependentUpon>PickColorDialogBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WindowsForm\Progressbar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WindowsForm\Progressbar.Designer.cs">
+      <DependentUpon>Progressbar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WindowsForm\PureMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WindowsForm\PureMessage.Designer.cs">
+      <DependentUpon>PureMessage.cs</DependentUpon>
     </Compile>
     <Compile Include="WindowsForm\TransparencyForm.cs">
       <SubType>Form</SubType>
@@ -168,6 +184,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WindowsForm\PickColorDialogBase.resx">
       <DependentUpon>PickColorDialogBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WindowsForm\Progressbar.resx">
+      <DependentUpon>Progressbar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WindowsForm\PureMessage.resx">
+      <DependentUpon>PureMessage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

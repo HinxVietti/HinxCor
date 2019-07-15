@@ -23,6 +23,7 @@ using System.Net;
 using Microsoft.Win32;
 using Test;
 using HinxCor.WindowsForm;
+using System.Text.RegularExpressions;
 
 namespace DemoApp
 {
@@ -33,6 +34,7 @@ namespace DemoApp
         [STAThread]
         static void Main(string[] args)
         {
+
 
             //wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
             //chmod +x shadowsocks.sh
@@ -67,9 +69,226 @@ namespace DemoApp
             //测试StringFile();
             //程序启动器资源打包();
             //测试启动界面();
-            生成空白图像();
-            //Console.ReadKey();
+            //生成空白图像();
+            //测试计算文集唯一ID();
+
+            //\u6CB3\u6D41,\u6CB3\u5E8A,\u7EFF\u8272,\u6CB3\u9053
+
+
+            //var t = DateTime.Now;
+
+            //while (true)
+            //{
+            //    var tsp = DateTime.Now - t;
+            //    var ms = (float)(tsp.TotalMilliseconds / 10f);
+            //    MessageUtility.ShowProgressbar(DateTime.Now.ToString() + "##\t##" + ms, ms/1000);
+            //    if (tsp.TotalSeconds > 10)
+            //    {
+            //        break;
+            //    }
+            //};
+
+            //Application.Run(new Form5());
+
+            //MessageUtility.ClearProgressBar();
+
+            Bitmap bmp = null;
+
+            测试转换图片(bmp);
         }
+
+        [DllImport("xis.dll")]
+        public static extern unsafe int* FWImageBaseFunction(int function_index, int*[] argv, ulong[] num_arg, void*[] result);
+
+        public struct BitmapData
+        {
+            public uint width;
+            public uint height;
+            public uint hasAlpha;
+            public uint isPremultiplied;
+            public uint lineStride32;
+            public uint isLnvertedY;
+            public unsafe uint* bit32;
+            public int Process;//0-1000
+            public int state;
+            public unsafe void* notification;
+            public unsafe void* currentCtx;
+        }
+
+
+        private unsafe static void 测试转换图片(Bitmap bitmap)
+        {
+            BitmapData bmp = new BitmapData();
+            var pointer = bitmap.GetHbitmap();
+            bmp.bit32 = (uint*)pointer;
+
+            void* vid = &bmp;
+            var res = img_fast_scale(vid, 1, 1);
+
+            unsafe
+            {
+                int tempLength = 2048;
+                void* tempData = res;
+                byte[] data = new byte[tempLength];
+                using (UnmanagedMemoryStream tempUMS = new UnmanagedMemoryStream((byte*)tempData, tempLength))
+                {
+                    tempUMS.Read(data, 0, data.Length);
+                }
+            }
+            //var resolvedBMP = *res;
+        }
+
+
+        static unsafe void* img_fast_scale(void* bitmap, float scaleX, float scaleY)
+        {
+            int*[] argv = new int*[10];
+
+            argv[0] = (int*)bitmap;//
+            ulong[] num_arg = new ulong[10];
+            num_arg[0] = (ulong)(scaleX * 1000);
+            num_arg[1] = (ulong)(scaleY * 1000);
+            void*[] res = new void*[10];
+            var flag = FWImageBaseFunction(1, argv, num_arg, res);
+            return res[0];
+        }
+
+
+        public const string uni = "\u5730\u5F62,\u7EFF\u8272,\u571F\u5730,\u7070\u8272";
+
+        /// <summary>
+        /// Unicode编码
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string EnUnicode(string str)
+        {
+            StringBuilder strResult = new StringBuilder();
+            if (!string.IsNullOrEmpty(str))
+            {
+                for (int i = 0; i < str.Length; i++)
+                {
+                    strResult.Append("\\u");
+                    strResult.Append(((int)str[i]).ToString("x"));
+                }
+            }
+            return strResult.ToString();
+        }
+
+        /// <summary>
+        /// Unicode解码
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string DeUnicode(string str)
+        {
+            //最直接的方法Regex.Unescape(str);
+            Regex reg = new Regex(@"(?i)\\[uU]([0-9a-f]{4})");
+            return reg.Replace(str, delegate (Match m) { return ((char)System.Convert.ToInt32(m.Groups[1].Value, 16)).ToString(); });
+        }
+
+        private static void 测试计算文集唯一ID()
+        {
+            start:
+            OpenFileDialog openf = new OpenFileDialog();
+            openf.ShowDialog();
+            var res = WinAPIHelper.GetUnipueFileID(openf.FileName);
+            Console.WriteLine(string.Format("{0}:\t\t{1}", res, openf.FileName));
+            var k = Console.ReadKey();
+            if (k.Key != ConsoleKey.Escape)
+                goto start;
+        }
+
+
+        #region 测试文件
+
+        //public class WinAPI
+        //{
+        //    [DllImport("ntdll.dll", SetLastError = true)]
+        //    public static extern IntPtr NtQueryInformationFile(IntPtr fileHandle, ref IO_STATUS_BLOCK IoStatusBlock, IntPtr pInfoBlock, uint length, FILE_INFORMATION_CLASS fileInformation);
+
+        //    public struct IO_STATUS_BLOCK
+        //    {
+        //        uint status;
+        //        ulong information;
+        //    }
+        //    public struct _FILE_INTERNAL_INFORMATION
+        //    {
+        //        public ulong IndexNumber;
+        //    }
+
+        //    // Abbreviated, there are more values than shown
+        //    public enum FILE_INFORMATION_CLASS
+        //    {
+        //        FileDirectoryInformation = 1,     // 1
+        //        FileFullDirectoryInformation,     // 2
+        //        FileBothDirectoryInformation,     // 3
+        //        FileBasicInformation,         // 4
+        //        FileStandardInformation,      // 5
+        //        FileInternalInformation      // 6
+        //    }
+
+        //    [DllImport("kernel32.dll", SetLastError = true)]
+        //    public static extern bool GetFileInformationByHandle(IntPtr hFile, out BY_HANDLE_FILE_INFORMATION lpFileInformation);
+
+        //    public struct BY_HANDLE_FILE_INFORMATION
+        //    {
+        //        public uint FileAttributes;
+        //        public FILETIME CreationTime;
+        //        public FILETIME LastAccessTime;
+        //        public FILETIME LastWriteTime;
+        //        public uint VolumeSerialNumber;
+        //        public uint FileSizeHigh;
+        //        public uint FileSizeLow;
+        //        public uint NumberOfLinks;
+        //        public uint FileIndexHigh;
+        //        public uint FileIndexLow;
+        //    }
+        //}
+
+        //public class Test
+        //{
+        //    public ulong ApproachA()
+        //    {
+        //        WinAPI.IO_STATUS_BLOCK iostatus = new WinAPI.IO_STATUS_BLOCK();
+
+        //        WinAPI._FILE_INTERNAL_INFORMATION objectIDInfo = new WinAPI._FILE_INTERNAL_INFORMATION();
+
+        //        int structSize = Marshal.SizeOf(objectIDInfo);
+
+        //        FileInfo fi = new FileInfo(@"C:\Temp\testfile.txt");
+        //        FileStream fs = fi.Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+
+        //        IntPtr res = WinAPI.NtQueryInformationFile(fs.Handle, ref iostatus, memPtr, (uint)structSize, WinAPI.FILE_INFORMATION_CLASS.FileInternalInformation);
+
+        //        objectIDInfo = (WinAPI._FILE_INTERNAL_INFORMATION)Marshal.PtrToStructure(memPtr, typeof(WinAPI._FILE_INTERNAL_INFORMATION));
+
+        //        fs.Close();
+
+        //        Marshal.FreeHGlobal(memPtr);
+
+        //        return objectIDInfo.IndexNumber;
+
+        //    }
+
+        //    public ulong ApproachB()
+        //    {
+        //        WinAPI.BY_HANDLE_FILE_INFORMATION objectFileInfo = new WinAPI.BY_HANDLE_FILE_INFORMATION();
+
+        //        FileInfo fi = new FileInfo(@"C:\Temp\testfile.txt");
+        //        FileStream fs = fi.Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+
+        //        WinAPI.GetFileInformationByHandle(fs.Handle, out objectFileInfo);
+
+        //        fs.Close();
+
+        //        ulong fileIndex = ((ulong)objectFileInfo.FileIndexHigh << 32) + (ulong)objectFileInfo.FileIndexLow;
+
+        //        return fileIndex;
+        //    }
+        //}
+
+        #endregion
+
 
         private static void 生成空白图像()
         {
