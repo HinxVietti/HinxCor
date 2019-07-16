@@ -24,6 +24,8 @@ using Microsoft.Win32;
 using Test;
 using HinxCor.WindowsForm;
 using System.Text.RegularExpressions;
+using nQuant;
+using System.Threading.Tasks;
 
 namespace DemoApp
 {
@@ -35,66 +37,95 @@ namespace DemoApp
         static void Main(string[] args)
         {
 
-
             //wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
             //chmod +x shadowsocks.sh
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log   
 
-            //测试BundleFile();
-            //设置路径到缓存然后新建文件打开文件夹();
-            //爬网络素材资源();
-            //加密自解压程序源码();
-            //解密自解压程序源码();
+            //测试Task();
+            测试Task2();
 
-            //测试注册表2();
-            //测试文本格式化();
-            //测试SQL();
+        }
 
-            //var res = HinxCor.Win32.MessageBox.ShowTopMost("Message", "titile", HinxCor.Win32.DefaultButtons.YesNoCancel);
-            //Console.WriteLine(res);
-            //Console.ReadKey();
+        private static void 测试Task2()
+        {
+            //和直接调用一样
+            //Console.WriteLine("start");
+            //var res = taskFunc2();//此处task已经开始执行了
+            //Console.WriteLine(DateTime.Now);
+            //Thread.Sleep(1000);
+            //Console.WriteLine(DateTime.Now);
+            //Console.WriteLine(res.Result);//此处主线程开始等待结果
+            //Console.WriteLine("End");
 
-            //OpenFileDialog open = new OpenFileDialog();
-            //open.ShowDialog();
-            //var r = new HybridTransparentBorder(/*Image.FromFile(open.FileName)*/);
-            //r.Show();
-            //Console.ReadKey();
-            //var Col = new PickColorDialogBase();
-            //Console.WriteLine(Col.ShowAndBlock());
+            //异步
+            Console.WriteLine("start");
+            var res = taskFunc2();//此处task已经开始执行了
+            Console.WriteLine(DateTime.Now);
+            Thread.Sleep(1000);
+            Console.WriteLine(DateTime.Now);
+            //Console.WriteLine(res.Result/*.GetAwaiter().GetResult()*/);//此处主线程开始等待结果
+            Console.WriteLine(res.GetAwaiter().GetResult());//此处主线程开始等待结果
+            Console.WriteLine("End");
 
-            //var dat =  System.Convert.FromBase64String(StringFile._SPLIT_STRING);
-
-            //string ssr = "123456789" + StringFile._SPLIT_STRING + "abcdef";
-            //var regs = Regex.Split(ssr, StringFile._SPLIT_STRING);
-            //测试StringFile();
-            //程序启动器资源打包();
-            //测试启动界面();
-            //生成空白图像();
-            //测试计算文集唯一ID();
-
-            //\u6CB3\u6D41,\u6CB3\u5E8A,\u7EFF\u8272,\u6CB3\u9053
+            Console.ReadKey();
+        }
 
 
-            //var t = DateTime.Now;
 
-            //while (true)
-            //{
-            //    var tsp = DateTime.Now - t;
-            //    var ms = (float)(tsp.TotalMilliseconds / 10f);
-            //    MessageUtility.ShowProgressbar(DateTime.Now.ToString() + "##\t##" + ms, ms/1000);
-            //    if (tsp.TotalSeconds > 10)
-            //    {
-            //        break;
-            //    }
-            //};
+        private static void 测试Task()
+        {
+            Console.WriteLine("start");
+            var res = Task.Run<string>(new Func<string>(taskFunc));//此处task已经开始执行了
+            Console.WriteLine(DateTime.Now);
+            Thread.Sleep(1000);
+            Console.WriteLine(DateTime.Now);
+            Console.WriteLine(res.Result);//此处主线程开始等待结果
+            Console.WriteLine("End");
+            Console.ReadKey();
 
-            //Application.Run(new Form5());
+        }
 
-            //MessageUtility.ClearProgressBar();
+        private static string taskFunc()
+        {
+            Console.WriteLine("task in");
+            Thread.Sleep(2000);
+            return "task return";
+        }
 
-            Bitmap bmp = null;
+        private async static Task<string> taskFunc2()
+        {
+            //Console.WriteLine("task in");
+            //Thread.Sleep(2000);
+            //return "task return";
+            return await Task.Run(() =>
+            {
+                Console.WriteLine("task in");
+                Thread.Sleep(2000);
+                return "task return";
+            });
+        }
 
-            测试转换图片(bmp);
+
+
+        /// <summary>
+        /// get thumbnail or optimize
+        /// </summary>
+        private static void mm()
+        {
+            OpenFileDialog openf = new OpenFileDialog();
+            openf.Filter = "|*.jpg;*.png";
+            openf.ShowDialog();
+            var dat = ThumbnailTools.GetLocalImageThumbnailStream(openf.FileName, size: 1920);
+
+            string outName = openf.FileName + " s.png";
+            //File.WriteAllBytes(outName, dat);
+
+            Bitmap bmp = new Bitmap(dat);
+            var quantizer = new WuQuantizer();
+            using (var quantized = quantizer.QuantizeImage(bmp))
+            {
+                quantized.Save(outName, ImageFormat.Png);
+            }
         }
 
         [DllImport("xis.dll")]
@@ -135,6 +166,7 @@ namespace DemoApp
                     tempUMS.Read(data, 0, data.Length);
                 }
             }
+
             //var resolvedBMP = *res;
         }
 
@@ -678,6 +710,7 @@ namespace DemoApp
                 File.WriteAllText(savef.FileName, decoded);
             }
         }
+
         private static void 程序启动器资源打包()
         {
             OpenFileDialog openFile = new OpenFileDialog();

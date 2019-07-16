@@ -1,25 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using ThumbnailSharp;
 
 public static class ThumbnailTools
 {
-    public enum Format
-    {
-        Jpeg = 0,
-        Bmp = 1,
-        Png = 2,
-        Gif = 3,
-        Tiff = 4,
-    }
-
-    //public static implicit operator ThumbnailSharp.Format(Format f)
-    //{
-    //    return ThumbnailSharp.Format.Bmp;
-    //}
-
+  
     /// <summary>
     /// 获取缩略图
     /// </summary>
@@ -58,7 +44,7 @@ public static class ThumbnailTools
         return await new ThumbnailCreator().CreateThumbnailBytesAsync(
              thumbnailSize: size,
              urlAddress: new Uri(url, kind),
-             imageFormat: (ThumbnailSharp.Format)format);
+             imageFormat: format);
     }
 
     /// <summary>
@@ -74,7 +60,7 @@ public static class ThumbnailTools
         return await new ThumbnailCreator().CreateThumbnailStreamAsync(
              thumbnailSize: size,
              urlAddress: new Uri(url, kind),
-             imageFormat: (ThumbnailSharp.Format)format);
+             imageFormat: format);
     }
 
     /// <summary>
@@ -89,7 +75,7 @@ public static class ThumbnailTools
         return new ThumbnailCreator().CreateThumbnailBytes(
                 thumbnailSize: size,
                 imageFileLocation: fileName,
-                imageFormat: (ThumbnailSharp.Format)format);
+                imageFormat: format);
     }
 
     /// <summary>
@@ -104,7 +90,7 @@ public static class ThumbnailTools
         return new ThumbnailCreator().CreateThumbnailStream(
                 thumbnailSize: size,
                 imageFileLocation: fileName,
-                imageFormat: (ThumbnailSharp.Format)format);
+                imageFormat: format);
     }
 
     /// <summary>
@@ -119,7 +105,7 @@ public static class ThumbnailTools
         return new ThumbnailCreator().CreateThumbnailBytes(
                  thumbnailSize: size,
                  imageStream: stream,
-                 imageFormat: (ThumbnailSharp.Format)format);
+                 imageFormat: format);
     }
 
     /// <summary>
@@ -134,7 +120,7 @@ public static class ThumbnailTools
         return new ThumbnailCreator().CreateThumbnailStream(
                 thumbnailSize: size,
                 imageStream: stream,
-                imageFormat: (ThumbnailSharp.Format)format);
+                imageFormat: format);
     }
 
     /// <summary>
@@ -149,7 +135,7 @@ public static class ThumbnailTools
         return new ThumbnailCreator().CreateThumbnailBytes(
                  thumbnailSize: size,
                  imageBytes: data,
-                 imageFormat: (ThumbnailSharp.Format)format);
+                 imageFormat: format);
     }
 
     /// <summary>
@@ -164,7 +150,7 @@ public static class ThumbnailTools
         return new ThumbnailCreator().CreateThumbnailStream(
                 thumbnailSize: size,
                 imageBytes: data,
-                imageFormat: (ThumbnailSharp.Format)format);
+                imageFormat: format);
     }
 
 

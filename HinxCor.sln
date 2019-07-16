@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_demo_thumbnailcsharp", "_d
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HinxCor.Thumbnail", "HinxCor.Thumbnail\HinxCor.Thumbnail.csproj", "{0EE80F21-DF08-4E2B-A35C-F3B0758EE002}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HinxCor.Image", "HinxCor.pThumb\HinxCor.Image.csproj", "{198BFC3B-F7DC-4C0C-9933-633DE4D6B122}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,10 @@ Global
 		{0EE80F21-DF08-4E2B-A35C-F3B0758EE002}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EE80F21-DF08-4E2B-A35C-F3B0758EE002}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EE80F21-DF08-4E2B-A35C-F3B0758EE002}.Release|Any CPU.Build.0 = Release|Any CPU
+		{198BFC3B-F7DC-4C0C-9933-633DE4D6B122}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{198BFC3B-F7DC-4C0C-9933-633DE4D6B122}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{198BFC3B-F7DC-4C0C-9933-633DE4D6B122}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{198BFC3B-F7DC-4C0C-9933-633DE4D6B122}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
