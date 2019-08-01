@@ -151,6 +151,10 @@
       <Project>{0ee80f21-df08-4e2b-a35c-f3b0758ee002}</Project>
       <Name>HinxCor.Thumbnail</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HinxCor.VectorTime\HinxCor.VectorTime.csproj">
+      <Project>{1b1782cd-1dfe-4817-adf6-60eed0213747}</Project>
+      <Name>HinxCor.VectorTime</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HinxCor\HinxCor.csproj">
       <Project>{A5109C8C-BF97-4E53-AB77-CF9CD6D8405C}</Project>
       <Name>HinxCor</Name>

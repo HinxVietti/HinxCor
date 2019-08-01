@@ -199,6 +199,7 @@ namespace ThumbnailSharp
             }
             return result;
         }
+
         private async Task<byte[]> GetImageBytesFromUrl(Uri urlAddress)
         {
             byte[] buffer = null;

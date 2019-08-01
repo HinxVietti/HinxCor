@@ -5,7 +5,6 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
-//using HinxCor.Drawing;
 using System.Drawing.Text;
 using System.Drawing.Drawing2D;
 using HinxCor.Rendering;
@@ -26,6 +25,7 @@ using HinxCor.WindowsForm;
 using System.Text.RegularExpressions;
 using nQuant;
 using System.Threading.Tasks;
+using SStack = HinxCor.VectorTime.FABLE_STACK<string>;
 
 namespace DemoApp
 {
@@ -36,14 +36,109 @@ namespace DemoApp
         [STAThread]
         static void Main(string[] args)
         {
-
             //wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
             //chmod +x shadowsocks.sh
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log   
 
-            //测试Task();
-            测试Task2();
 
+            TimeLine t = new TimeLine();
+
+            t.FramePerSecond = 120;
+
+            Action<object> OutTime = s =>
+            {
+                Console.WriteLine(string.Format("{0}, 时间：{1}", s, DateTime.Now));
+            };
+
+            t[1].Add(() => { Console.WriteLine("Begain"); });
+            //t[1].Add(() => { Console.WriteLine("Begain"); });
+            //t[60].Add(() => OutTime(0));
+            //t[60].Add(() => OutTime(1));
+            //t[60].Add(() => OutTime(2));
+            //t[60].Add(() => OutTime(3));
+            //t[160].Add(() => OutTime(3));
+            //t[260].Add(() => OutTime(26));
+            //t[360].Add(() => OutTime(26));
+            //t[720].Add(() => OutTime(26));
+            //t[260].Add(() => OutTime(26));
+            //t[260].Add(() => OutTime(26));
+            //t[260].Add(() => OutTime(26));
+            //t[260].Add(() => OutTime(26));
+            //t[260].Add(() => OutTime(26));
+            //t[260].Add(() => OutTime(26));
+            //t[260].Add(() => OutTime(26));
+            //t[260].Add(() => OutTime(26));
+            //t[260].Add(() => OutTime(26));
+            //t[260].Add(() => OutTime(26));
+            //t[260].Add(() => OutTime(26));
+            //t[260].Add(() => OutTime(26));
+            //t[60].Add(() => OutTime("1S"));
+
+            t[720].Add(() => { Console.WriteLine("end"); });
+
+            bool isdone = false;
+            var t1 = DateTime.Now;
+            t.Run(() =>
+            {
+                Console.WriteLine((DateTime.Now - t1).TotalMilliseconds);
+                isdone = true;
+                Console.WriteLine("Task exist");
+            });
+
+            while (!isdone)
+                Thread.Sleep(10);
+
+
+            Console.ReadKey();
+
+        }
+
+
+
+        private static void 测试S_STACK()
+        {
+
+
+            var stack = new SStack(64);
+
+            int index = 0;
+            while (stack.isFull == false)
+            {
+                index++;
+                stack.Add(index + " : " + DateTime.Now.Ticks.ToString());
+            }
+
+            // stack.DeleteAll(match: new matchIndex());
+
+            //try
+            //{
+            //    stack.Delete(match: new matchIndex());
+            //}
+            //catch (SABLE_STACK.NothingDeleteException e)
+            //{
+            //    Console.WriteLine("ERROR:" + e.ToString());
+            //    Console.ReadKey();
+            //}
+
+            for (int i = 0; i < stack.Length; i++)
+                Console.WriteLine(stack[i]);
+
+            Console.ReadKey();
+        }
+
+        private class matchIndex : IMatch<string>
+        {
+            public bool match(string m)
+            {
+                try
+                {
+                    return int.Parse(m) % 2 == 0;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
         }
 
         private static void 测试Task2()

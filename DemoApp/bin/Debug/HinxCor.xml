@@ -2436,6 +2436,13 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="M:HinxCor.WindowsForm.PickColorDialogBase.GetLocation(System.Drawing.Point)">
+            <summary>
+            获取提示组建的位置
+            </summary>
+            <param name="location"></param>
+            <returns></returns>
+        </member>
         <member name="F:HinxCor.WindowsForm.PickColorDialogBase.components">
             <summary>
             Required designer variable.

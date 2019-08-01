@@ -29,7 +29,6 @@ namespace HinxCor.WindowsForm
 
         private void PickColorDialog_MouseMove(object sender, MouseEventArgs e)
         {
-
             if (e.Location.X > 100 && e.Location.Y > 100)
             {
                 this.button1.Text = string.Format("e:{0},{1}", e.Location.X, e.Location.Y);

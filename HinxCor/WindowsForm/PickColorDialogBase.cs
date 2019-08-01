@@ -23,30 +23,14 @@ namespace HinxCor.WindowsForm
         {
             InitializeComponent();
             this.BackgroundImage = new ScreenCapture().CaptureScreen();
-            //MouseMove += PickColorDialogBase_MouseMove;
             MouseDown += PickColorDialogBase_MouseDown;
             MaxWid = Screen.PrimaryScreen.Bounds.Width;
             MaxHei = Screen.PrimaryScreen.Bounds.Height;
-            Load += PickColorDialogBase_Load;
+            MouseMove += PickColorDialogBase_MouseMove1;
 
         }
-        Thread pickColor;
-        private void PickColorDialogBase_Load(object sender, EventArgs e)
-        {
-            SyncScreen Worker = PickColorDialogBase_MouseMove;
-            pickColor = new Thread(() =>
-           {
-               while (true)
-               {
-                   this.Invoke(Worker, Cursor.Position);
-                   Thread.Sleep(20);
-               }
-           })
-            {
-                IsBackground = true
-            };
-            pickColor.Start();
-        }
+
+        private void PickColorDialogBase_MouseMove1(object sender, MouseEventArgs e) => PickColorDialogBase_MouseMove(e.Location);
 
         private void PickColorDialogBase_MouseMove(Point e)
         {
@@ -65,6 +49,11 @@ namespace HinxCor.WindowsForm
 
         readonly Size offset = new Size(20, 15);
 
+        /// <summary>
+        /// 获取提示组建的位置
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
         private Point GetLocation(Point location)
         {
             if (location.X > MaxWid - 50)
@@ -80,8 +69,8 @@ namespace HinxCor.WindowsForm
 
         private void PickColorDialogBase_MouseDown(object sender, MouseEventArgs e)
         {
+            this.TopMost = false;
             color = ((Bitmap)this.BackgroundImage).GetPixel(e.Location.X, e.Location.Y);
-            pickColor.Abort();
             this.Close();
         }
 
