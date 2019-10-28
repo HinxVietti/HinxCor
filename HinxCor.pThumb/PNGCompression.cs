@@ -1,10 +1,9 @@
 ﻿using nQuant;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 
+#pragma warning disable
 public static class PNGCompression
 {
     private static WuQuantizer singleton;

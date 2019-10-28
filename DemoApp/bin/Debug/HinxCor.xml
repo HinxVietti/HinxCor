@@ -2760,6 +2760,26 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Config.Flush">
+            <summary>
+            将所有配置属性写入本地
+            </summary>
+        </member>
+        <member name="M:Config.AsyncFlush(System.Action)">
+            <summary>
+            将所有配置异步属性写入本地
+            </summary>
+        </member>
+        <member name="F:ConfigFile.configFileName">
+            <summary>
+            ***请勿获取此项
+            </summary>
+        </member>
+        <member name="M:ConfigFile.Flush">
+            <summary>
+            将当前配置的属性写入本地
+            </summary>
+        </member>
         <member name="M:IniFile.Read``1(System.String,``0@,System.Func{System.String,``0},System.String)">
             <summary>
             read config and set source value

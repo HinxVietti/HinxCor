@@ -85,6 +85,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Serialize\Arguments.cs" />
+    <Compile Include="Serialize\Config.cs" />
     <Compile Include="Serialize\INI.cs" />
     <Compile Include="SystemInfo.cs" />
     <Compile Include="UidGenerator.cs" />

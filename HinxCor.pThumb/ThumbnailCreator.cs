@@ -36,12 +36,27 @@ namespace ThumbnailSharp
     /// </summary>
     public enum Format
     {
+        /// <summary>
+        /// jpg
+        /// </summary>
         Jpeg,
+        /// <summary>
+        /// bmp
+        /// </summary>
         Bmp,
+        /// <summary>
+        /// png
+        /// </summary>
         Png,
+        /// <summary>
+        /// gif
+        /// </summary>
         Gif,
+        /// <summary>
+        /// tiff
+        /// </summary>
         Tiff
-       
+
     }
     /// <summary>
     /// Thumbnail class that holds various methods to create an image thumbnail.
@@ -171,7 +186,7 @@ namespace ThumbnailSharp
         }
         private ImageFormat GetImageFormat(Format format)
         {
-            switch(format)
+            switch (format)
             {
                 case Format.Jpeg:
                     return ImageFormat.Jpeg;
@@ -327,7 +342,7 @@ namespace ThumbnailSharp
         {
             if (imageStream == null)
                 throw new ArgumentNullException(nameof(imageStream), "'imageStream' cannot be null");
-           
+
             Stream stream = CreateThumbnailStream(thumbnailSize, imageStream, imageFormat);
             if (stream != null)
             {
@@ -376,7 +391,7 @@ namespace ThumbnailSharp
                 throw new ArgumentNullException(nameof(urlAddress), "'urlAddress' cannot be null");
             Stream result = null;
             Stream stream = await GetImageStreamFromUrl(urlAddress);
-            if(stream!=null)
+            if (stream != null)
             {
                 result = CreateThumbnailStream(thumbnailSize, stream, imageFormat);
             }
@@ -398,7 +413,7 @@ namespace ThumbnailSharp
                 throw new ArgumentNullException(nameof(urlAddress), "'urlAddress' cannot be null");
             byte[] result = null;
             byte[] imageBytes = await GetImageBytesFromUrl(urlAddress);
-            if(imageBytes!=null)
+            if (imageBytes != null)
             {
                 result = CreateThumbnailBytes(thumbnailSize, imageBytes, imageFormat);
             }

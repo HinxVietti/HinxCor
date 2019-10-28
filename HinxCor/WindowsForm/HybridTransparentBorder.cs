@@ -36,7 +36,7 @@ public partial class HybridTransparentBorder : TransparencyForm
         this.Size = Display.Image.Size;
         var bitmap = (Bitmap)Display.Image;
         SetBitmap(bitmap, 255);
-        TopMost = true;
+        //TopMost = true;
         CenterToScreen();
 
     }

@@ -3,9 +3,12 @@ using System.IO;
 using System.Threading.Tasks;
 using ThumbnailSharp;
 
+/// <summary>
+/// 缩略图获取工具
+/// </summary>
 public static class ThumbnailTools
 {
-  
+
     /// <summary>
     /// 获取缩略图
     /// </summary>

@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace nQuant
 {
+#pragma warning disable
     public abstract class WuQuantizerBase
     {
         protected const int Alpha = 3;

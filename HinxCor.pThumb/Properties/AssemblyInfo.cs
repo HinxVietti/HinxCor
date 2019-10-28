@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("WONDER IDEA TECHNIC LIMITED")]
 [assembly: AssemblyProduct("HinxCor.pThumb")]
 [assembly: AssemblyCopyright("Copyright ©HinxVietti  2019")]
-[assembly: AssemblyTrademark("CORMA")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("CORMA")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型

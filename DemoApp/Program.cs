@@ -26,6 +26,9 @@ using System.Text.RegularExpressions;
 using nQuant;
 using System.Threading.Tasks;
 using SStack = HinxCor.VectorTime.FABLE_STACK<string>;
+using HinxCor.AudioPlayer;
+using GroovyCodecs;
+//using WMPLib;
 
 namespace DemoApp
 {
@@ -33,14 +36,258 @@ namespace DemoApp
 
     class Program
     {
+        private const string webUrlExpression = "^(https?://(www.)?[-a-zA-Z0-9@:%._+~#=]{1,256}.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*))$" +
+            "";
+        //private const string webUrlExpression = @"^(http|https|ftp)\://|[a-zA-Z0-9\-\.]+\.[a-zA-Z](:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*[^\.\,\)\(\s]$";
         [STAThread]
         static void Main(string[] args)
+        {
+           
+
+
+
+        }
+
+        private static void bytesTest()
+        {
+            string text = "中国制造,世界第一. China No 1";
+            var bdat = Encoding.UTF8.GetBytes(text);
+
+            File.WriteAllBytes("0.txt", bdat);
+            var cdat = new byte[bdat.Length + 1];
+            bdat.CopyTo(cdat, 1);
+            cdat[0] = 255;
+            File.WriteAllBytes("1.txt", cdat);
+            Console.ReadKey();
+        }
+
+        private static void ReadManifestTest()
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.ShowDialog();
+            string fileName = open.FileName;
+            var xtxt = File.ReadAllText(fileName);
+            // xtxt = xtxt.Replace(':', '\n');
+            var txts = Regex.Split(xtxt, "\n");
+
+            var dict = new Dictionary<string, List<string>>();
+
+            string key = string.Empty;
+
+            string p1 = "    ";
+            string p2 = "  ";
+            string p3 = "- ";
+
+
+            for (int i = 0; i < txts.Length; i++)
+            {
+                var item = txts[i];
+                if (item.StartsWith(p1)) continue;
+                if (item.StartsWith(p2)) continue;
+                if (item.StartsWith(p3)) continue;
+                txts[i] = Regex.Replace(item, ": ", "\n" + p3);
+            }
+            var lst = new List<string>();
+            for (int i = 0; i < txts.Length; i++)
+                lst.AddRange(Regex.Split(txts[i], "\n"));
+            txts = lst.ToArray();
+            foreach (var item in txts)
+            {
+                if (string.IsNullOrWhiteSpace(item)) continue;
+                if (item.StartsWith(p1))
+                {
+                    dict[key].Add(Regex.Replace(item, p1, string.Empty));
+                    //value
+                }
+                else if (item.StartsWith(p2))
+                {
+                    dict[key].Add(Regex.Replace(item, p2, string.Empty));
+                    //value
+                }
+                else if (item.StartsWith(p3))
+                {
+                    dict[key].Add(Regex.Replace(item, p3, string.Empty));
+                    //value
+                }
+                else
+                {
+                    key = item;
+                    if (!dict.ContainsKey(key))
+                        dict.Add(key, new List<string>());
+                    //key
+                }
+
+            }
+
+            Console.WriteLine(dict.Count);
+            foreach (var kvp in dict)
+            {
+                Console.WriteLine("key\t" + kvp.Key);
+                foreach (var item in kvp.Value)
+                {
+                    if (!string.IsNullOrEmpty(item) && !string.IsNullOrWhiteSpace(item))
+                        Console.WriteLine(string.Format("v:----  {0}", item));
+                }
+            }
+            Console.ReadKey();
+        }
+
+
+
+        /// <summary>
+        /// 检查依赖项目
+        /// </summary>
+        private static void CheckDependence1()
+        {
+            FolderBrowserDialog openf = new FolderBrowserDialog();
+            openf.RootFolder = Environment.SpecialFolder.MyComputer;
+            openf.ShowDialog();
+            string dir = openf.SelectedPath;
+
+            DirectoryInfo directoryInfo = new DirectoryInfo(dir);
+            var ms = directoryInfo.GetFiles("*.manifest");
+            List<string> s1 = new List<string>();
+            List<string> s2 = new List<string>();
+            List<string> s3 = new List<string>();
+
+            foreach (var file in ms)
+            {
+                string fname = file.FullName;
+                string txt = File.ReadAllText(fname);
+                if (txt.Contains(dep1))
+                    s1.Add(file.Name.Remove(file.Name.LastIndexOf('.')));
+                else if (txt.Contains(dep2))
+                    s2.Add(file.Name.Remove(file.Name.LastIndexOf('.')));
+                else
+                    s3.Add(file.Name.Remove(file.Name.LastIndexOf('.')));
+            }
+            string outname = dir + "/log.txt";
+            File.AppendAllText(outname, "vegetation_dependence\n");
+            File.AppendAllLines(outname, s1);
+            File.AppendAllText(outname, "\n");
+            File.AppendAllText(outname, "grassplane_dependence\n");
+            File.AppendAllLines(outname, s2);
+            File.AppendAllText(outname, "\n");
+            File.AppendAllText(outname, "NONE\n");
+            File.AppendAllLines(outname, s3);
+            File.AppendAllText(outname, "\n");
+            Console.WriteLine(string.Format("ALL:{0},S1 {1}, S2 {2}, S3 {3}", ms.Length, s1.Count, s2.Count, s3.Count));
+            Console.ReadKey();
+        }
+
+        static string dep1 = @"D:/Git_SourceCode/vision-3d/Master/VisionAssetBuilder Standard/AssetBundles/StandaloneWindows/vegetation_dependence";
+        static string dep2 = @"D:/Git_SourceCode/vision-3d/Master/VisionAssetBuilder Standard/AssetBundles/StandaloneWindows/grassplane_dependence";
+
+        //WMPLib.WindowsMediaPlayer Player;
+
+        //private void PlayFile(String url)
+        //{
+        //    Player = new WMPLib.WindowsMediaPlayer();
+        //    Player.PlayStateChange += Player_PlayStateChange;
+        //    Player.URL = url;
+        //    Player.controls.play();
+        //}
+
+        //private void Player_PlayStateChange(int NewState)
+        //{
+        //    if ((WMPLib.WMPPlayState)NewState == WMPLib.WMPPlayState.wmppsStopped)
+        //    {
+        //        //Actions on stop
+        //    }
+        //}
+
+
+        private static void MatchURL()
+        {
+            while (true)
+            {
+                string info = Console.ReadLine();
+                if (info.Equals("quit")) break;
+                Console.WriteLine(Regex.IsMatch(info, webUrlExpression));
+                Console.WriteLine();
+            }
+
+            Console.WriteLine();
+            Console.ReadKey();
+        }
+
+        private static void changeMathod()
         {
             //wget –no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
             //chmod +x shadowsocks.sh
             //./shadowsocks.sh 2>&1 | tee shadowsocks.log   
 
+            //Console.ReadKey();
 
+            //List<creature> creatures = new List<creature>() {
+
+            //    new creature(){ isMan = false,Name = "1"},
+            //    new creature(){ isMan = true,Name = "2"},
+            //    new creature(){ isMan = false,Name = "3"},
+            //    new creature(){ isMan = true,Name = "4"},
+            //    new creature(){ isMan = false,Name = "5"},
+            //    new creature(){ isMan = false,Name = "6"},
+
+            //};
+
+            //creatures.RemoveAll(c => c.isMan);
+            //Console.WriteLine(creatures.Count);
+            //Console.ReadKey();
+
+
+            //
+
+            ///////////////////////////////////////////////////////////////////////
+
+            int[] array = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+            //int start;
+            //int end;
+            //InsertInto(array, 3, 0, 3 < 0);
+
+            MoveItemIndex(array, 0, 2);
+
+            foreach (var item in array)
+                Console.Write(item + " ");
+        }
+
+        private static void MoveItemIndex<T>(T[] Array, int Startindex, int step)
+        {
+            T temp = Array[Startindex];
+
+            //bool moveleft = Startindex > endIndex;
+            var stepL = step / Math.Abs(step);
+            while (step != 0)
+            {
+                Array[Startindex] = Array[Startindex += stepL];
+                step -= stepL;
+            }
+
+            Array[Startindex] = temp;
+        }
+
+
+        private static void InsertInto<T>(T[] array, int index, T go, bool moveLeft = false)
+        {
+            if (moveLeft)
+                for (int i = 0; i < index; i++)
+                    array[i] = array[i + 1];
+            else
+                for (int i = array.Length - 1; i > index; i--)
+                    array[i] = array[i - 1];
+
+            array[index] = go;
+        }
+
+
+        private class creature
+        {
+            public bool isMan;
+            public string Name { get; set; }
+        }
+
+
+        private static void 测试TimeLine()
+        {
             TimeLine t = new TimeLine();
 
             t.FramePerSecond = 120;
@@ -51,6 +298,7 @@ namespace DemoApp
             };
 
             t[1].Add(() => { Console.WriteLine("Begain"); });
+
             //t[1].Add(() => { Console.WriteLine("Begain"); });
             //t[60].Add(() => OutTime(0));
             //t[60].Add(() => OutTime(1));
@@ -90,10 +338,7 @@ namespace DemoApp
 
 
             Console.ReadKey();
-
         }
-
-
 
         private static void 测试S_STACK()
         {

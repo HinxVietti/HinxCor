@@ -4,6 +4,9 @@ using System.Drawing.Imaging;
 
 namespace nQuant
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class WuQuantizer : WuQuantizerBase, IWuQuantizer
     {
         private static IEnumerable<byte[]> indexedPixels(ImageBuffer image, Pixel[] lookups, int alphaThreshold, int maxColors, PaletteColorHistory[] paletteHistogram)
