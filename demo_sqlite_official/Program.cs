@@ -8,6 +8,8 @@ namespace demo_SQLite_official
 {
     class Program
     {
+        static string cs = "URI=file:test.db";
+
         [STAThread]
         static void Main(string[] args)
         {
@@ -29,11 +31,11 @@ namespace demo_SQLite_official
             //TestP();
             //TestQ();
             //TestR();
-            TestS();
+            //TestS();
 
             //TestT();
             //TestU();
-            //TestV();
+            TestV();
             //TestW();
             //TestX();
             //TestY();
@@ -44,8 +46,77 @@ namespace demo_SQLite_official
             Console.ReadKey();
         }
 
+        static byte[] passwd = new byte[] { 125, 207, 231, 077, 070, 117, 207, 37, 65, 124 };
 
-        
+        /// <summary>
+        /// 数据库加密
+        /// </summary>
+        private static void TestV()
+        {
+            using (SQLiteConnection con = new SQLiteConnection(cs))
+            {
+                con.Open();
+                con.ChangePassword(passwd);
+                con.Close();
+            }
+            Console.WriteLine("Encrypted");
+        }
+
+
+        /// <summary>
+        /// 测试Update 数据; view 只差不改
+        /// </summary>
+        static void TestU()
+        {
+            using (SQLiteConnection con = new SQLiteConnection(cs))
+            {
+                con.Open();
+
+                //string query = "update Cars " +
+                //    "set Price = Price + 1000 " +
+                //    "where Price < 100000;";
+                string query = "update ExpCars " +
+                    "set Price = Price + 1000 ";
+                using (var cmd = new SQLiteCommand(query, con))
+                {
+                    var count = cmd.ExecuteNonQuery();
+                    Console.WriteLine(string.Format("有{0}辆车, 涨价了1000", count));
+                }
+
+                con.Close();
+            }
+        }
+
+
+        /// <summary>
+        /// 测试查询视图
+        /// </summary>
+        static void TestT()
+        {
+            string cs = "URI=file:test.db";
+
+            using (SQLiteConnection con = new SQLiteConnection(cs))
+            {
+                con.Open();
+
+                string query = "Select * from ExpCars";
+                using (var cmd = new SQLiteCommand(query, con))
+                {
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Console.WriteLine(reader.GetInt32(0) + " "
+                              + reader.GetString(1) + " " + reader.GetInt32(2));
+                        }
+                    }
+
+                }
+                con.Close();
+            }
+        }
+
+        #region 官方例子
 
         /// <summary>
         /// RockBack
@@ -847,7 +918,7 @@ namespace demo_SQLite_official
 
         }
 
-
+        #endregion
 
     }
 }
