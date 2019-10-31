@@ -26,8 +26,8 @@ using System.Text.RegularExpressions;
 using nQuant;
 using System.Threading.Tasks;
 using SStack = HinxCor.VectorTime.FABLE_STACK<string>;
-using HinxCor.AudioPlayer;
-using GroovyCodecs;
+using Vision.RRRP;
+
 //using WMPLib;
 
 namespace DemoApp
@@ -42,10 +42,50 @@ namespace DemoApp
         [STAThread]
         static void Main(string[] args)
         {
-           
+            //var tag1 = new Tags(Console.ReadLine());
+            //var tag2 = new Tags(Console.ReadLine());
+            //var tag3 = tag1 + tag2;
+            //Console.WriteLine(tag3);
+            //Console.ReadKey();
+            GenerateFB();
+        }
+
+        private static void GenerateFB()
+        {
+            var openf = new FolderBrowserDialog();
+            openf.RootFolder = Environment.SpecialFolder.MyComputer;
+            openf.ShowDialog();
+
+            string roodir = openf.SelectedPath;
+            var dir = new DirectoryInfo(roodir);
+            var files = dir.GetFiles("*", SearchOption.AllDirectories);
+            Console.WriteLine(files.Length);
+
+            OpenFileDialog openfile = new OpenFileDialog();
+            openfile.Filter = "|*.json";
+            openfile.ShowDialog();
+            var json_o = File.ReadAllText(openfile.FileName);
+            var oldversion = LitJson.JsonMapper.ToObject<RemoteResourceData>(json_o);
+
+            var rrrp = RemoteResourceRequestProtocol.GenerateRRRPD_v1(new List<FileInfo>(files), out var missingFiles, oldversion, string.Empty, roodir);
+            string json = LitJson.JsonMapper.ToJson(rrrp);
 
 
+            SaveFileDialog savef = new SaveFileDialog();
+            savef.Filter = "|*.json";
+            savef.ShowDialog();
+            var saveName = savef.FileName;
+            File.WriteAllText(saveName, json);
+            Console.WriteLine("Missing Files");
+            foreach (var miss in missingFiles)
+            {
+                Console.WriteLine(miss.FullName);
+            }
 
+            Console.WriteLine();
+            Console.WriteLine("Any key esc.");
+            Console.ReadKey();
+            //Windows.OpenInExplorer(new FileInfo(saveName).Directory.FullName);
         }
 
         private static void bytesTest()
