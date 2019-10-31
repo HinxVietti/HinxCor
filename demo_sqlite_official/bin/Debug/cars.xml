@@ -1,0 +1,28 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <Cars>
+    <Id>3</Id>
+    <Name>Skoda</Name>
+    <Price>9000</Price>
+  </Cars>
+  <Cars>
+    <Id>4</Id>
+    <Name>Volvo</Name>
+    <Price>29000</Price>
+  </Cars>
+  <Cars>
+    <Id>6</Id>
+    <Name>Citroen</Name>
+    <Price>21000</Price>
+  </Cars>
+  <Cars>
+    <Id>8</Id>
+    <Name>Volkswagen</Name>
+    <Price>21600</Price>
+  </Cars>
+  <Cars>
+    <Id>9</Id>
+    <Name>BMW</Name>
+    <Price>36600</Price>
+  </Cars>
+</NewDataSet>
