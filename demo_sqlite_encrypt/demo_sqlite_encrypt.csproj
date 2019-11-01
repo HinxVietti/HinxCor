@@ -45,6 +45,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HinxCor.SQLite.net35\HinxCor.SQLite.net35.csproj">
+      <Project>{76ecbf2b-6211-4394-b966-4fdae92a73fa}</Project>
+      <Name>HinxCor.SQLite.net35</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SQLitePCLRaw.lib.sqlcipher.windows.1.1.13\build\net35\SQLitePCLRaw.lib.sqlcipher.windows.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.sqlcipher.windows.1.1.13\build\net35\SQLitePCLRaw.lib.sqlcipher.windows.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

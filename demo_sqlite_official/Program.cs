@@ -35,8 +35,8 @@ namespace demo_SQLite_official
 
             //TestT();
             //TestU();
-            TestV();
-            //TestW();
+            //TestV();
+            TestW();
             //TestX();
             //TestY();
             //TestZ();
@@ -45,6 +45,22 @@ namespace demo_SQLite_official
             Console.WriteLine("Finished");
             Console.ReadKey();
         }
+
+
+        /// <summary>
+        /// 使用Conn创建新的数据
+        /// </summary>
+        private static void TestW()
+        {
+            string con_str = string.Format("Data Source=sqlnew.db;New=true");
+            var conn = new SQLiteConnection(con_str);
+            conn.SetPassword("123");
+            conn.Open();
+            conn.Close();
+            conn.Dispose();
+        }
+
+
 
         static byte[] passwd = new byte[] { 125, 207, 231, 077, 070, 117, 207, 37, 65, 124 };
 
@@ -55,6 +71,7 @@ namespace demo_SQLite_official
         {
             using (SQLiteConnection con = new SQLiteConnection(cs))
             {
+                con.SetPassword(passwd);
                 con.Open();
                 con.ChangePassword(passwd);
                 con.Close();

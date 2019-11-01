@@ -47,6 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\IDAO.cs" />
+    <Compile Include="Module\hData.cs" />
+    <Compile Include="Module\hHeader.cs" />
+    <Compile Include="Module\hCondition.cs" />
+    <Compile Include="Module\hFilter.cs" />
+    <Compile Include="Module\hParm.cs" />
+    <Compile Include="Module\hResult.cs" />
+    <Compile Include="Module\hRow.cs" />
+    <Compile Include="Module\hTable.cs" />
+    <Compile Include="SQLiteDao.cs" />
     <Compile Include="SQLiteUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

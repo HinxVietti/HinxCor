@@ -1,173 +1,180 @@
-﻿using System.IO;
-using System.Security.Cryptography;
-using System.Text;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.OpenSsl;
-using Org.BouncyCastle.Security;
+﻿//using System.IO;
+//using System.Security.Cryptography;
+//using System.Text;
+//using Org.BouncyCastle.Crypto;
+//using Org.BouncyCastle.Crypto.Parameters;
+//using Org.BouncyCastle.OpenSsl;
+//using Org.BouncyCastle.Security;
 
-namespace HinxCor.CryptoSer
-{
-    /// <summary>
-    /// RSA PKCS8 加密
-    /// </summary>
-    public class RsaPkcs8CryptoUtil : IRsaCryptoUtil
-    {
-        /// <summary>
-        /// 生成秘钥
-        /// </summary>
-        /// <returns></returns>
-        public RsaKey GenerateKeys()
-        {
-            using (var rsa = new RSACryptoServiceProvider())
-            {
-                var keyPair = DotNetUtilities.GetRsaKeyPair(rsa);
+/*******************************************************************
+ * RSA 非对称可逆加密
+ * 此处注释原因:没有需要两步校验内容
+ * 公钥:对外开放,给别人加密
+ * 私钥:解密内容,给自己看,用于解密别人加密的内容
+ * *************************************************************************/
 
-                var key = new RsaKey
-                {
-                    Private = GeneratePrivateKey(keyPair.Private),
-                    Public = GeneratePublicKey(keyPair.Public)
-                };
+//namespace HinxCor.CryptoSer
+//{
+//    /// <summary>
+//    /// RSA PKCS8 加密
+//    /// </summary>
+//    public class RsaPkcs8CryptoUtil : IRsaCryptoUtil
+//    {
+//        /// <summary>
+//        /// 生成秘钥
+//        /// </summary>
+//        /// <returns></returns>
+//        public RsaKey GenerateKeys()
+//        {
+//            using (var rsa = new RSACryptoServiceProvider())
+//            {
+//                var keyPair = DotNetUtilities.GetRsaKeyPair(rsa);
 
-                return key;
-            }
-        }
+//                var key = new RsaKey
+//                {
+//                    Private = GeneratePrivateKey(keyPair.Private),
+//                    Public = GeneratePublicKey(keyPair.Public)
+//                };
 
-        /// <summary>
-        /// 签名
-        /// </summary>
-        /// <param name="bytes"></param>
-        /// <param name="privateKey"></param>
-        /// <returns></returns>
-        public byte[] Sign(byte[] bytes, string privateKey)
-        {
-            using (var rsa = new RSACryptoServiceProvider())
-            {
-                var key = ParsePrivateKey(privateKey);
-                rsa.ImportParameters(key);
-                var signature = rsa.SignData(bytes, new MD5CryptoServiceProvider());
-                return signature;
-            }
-        }
+//                return key;
+//            }
+//        }
 
-        /// <summary>
-        /// 校验
-        /// </summary>
-        /// <param name="bytes"></param>
-        /// <param name="signature"></param>
-        /// <param name="publicKey"></param>
-        /// <returns></returns>
-        public bool Verify(byte[] bytes, byte[] signature, string publicKey)
-        {
-            using (var rsa = new RSACryptoServiceProvider())
-            {
-                var key = ParsePublicKey(publicKey);
-                rsa.ImportParameters(key);
-                return rsa.VerifyData(bytes, new MD5CryptoServiceProvider(), signature);
-            }
-        }
+//        /// <summary>
+//        /// 签名
+//        /// </summary>
+//        /// <param name="bytes"></param>
+//        /// <param name="privateKey"></param>
+//        /// <returns></returns>
+//        public byte[] Sign(byte[] bytes, string privateKey)
+//        {
+//            using (var rsa = new RSACryptoServiceProvider())
+//            {
+//                var key = ParsePrivateKey(privateKey);
+//                rsa.ImportParameters(key);
+//                var signature = rsa.SignData(bytes, new MD5CryptoServiceProvider());
+//                return signature;
+//            }
+//        }
 
-        /// <summary>
-        /// 加密
-        /// </summary>
-        /// <param name="plainBytes"></param>
-        /// <param name="publicKey"></param>
-        /// <returns></returns>
-        public byte[] Encrypt(byte[] plainBytes, string publicKey)
-        {
-            using (var rsa = new RSACryptoServiceProvider())
-            {
-                var key = ParsePublicKey(publicKey);
-                rsa.ImportParameters(key);
-                var encryptedBytes = rsa.Encrypt(plainBytes, false);
-                return encryptedBytes;
-            }
-        }
+//        /// <summary>
+//        /// 校验
+//        /// </summary>
+//        /// <param name="bytes"></param>
+//        /// <param name="signature"></param>
+//        /// <param name="publicKey"></param>
+//        /// <returns></returns>
+//        public bool Verify(byte[] bytes, byte[] signature, string publicKey)
+//        {
+//            using (var rsa = new RSACryptoServiceProvider())
+//            {
+//                var key = ParsePublicKey(publicKey);
+//                rsa.ImportParameters(key);
+//                return rsa.VerifyData(bytes, new MD5CryptoServiceProvider(), signature);
+//            }
+//        }
 
-        /// <summary>
-        /// 解密
-        /// </summary>
-        /// <param name="encryptedBytes"></param>
-        /// <param name="privateKey"></param>
-        /// <returns></returns>
-        public byte[] Decrypt(byte[] encryptedBytes, string privateKey)
-        {
-            using (var rsa = new RSACryptoServiceProvider())
-            {
-                var key = ParsePrivateKey(privateKey);
-                rsa.ImportParameters(key);
-                var decryptedBytes = rsa.Decrypt(encryptedBytes, false);
-                return decryptedBytes;
-            }
-        }
+//        /// <summary>
+//        /// 加密
+//        /// </summary>
+//        /// <param name="plainBytes"></param>
+//        /// <param name="publicKey"></param>
+//        /// <returns></returns>
+//        public byte[] Encrypt(byte[] plainBytes, string publicKey)
+//        {
+//            using (var rsa = new RSACryptoServiceProvider())
+//            {
+//                var key = ParsePublicKey(publicKey);
+//                rsa.ImportParameters(key);
+//                var encryptedBytes = rsa.Encrypt(plainBytes, false);
+//                return encryptedBytes;
+//            }
+//        }
 
-        private static string GeneratePrivateKey(AsymmetricKeyParameter key)
-        {
-            var builder = new StringBuilder();
+//        /// <summary>
+//        /// 解密
+//        /// </summary>
+//        /// <param name="encryptedBytes"></param>
+//        /// <param name="privateKey"></param>
+//        /// <returns></returns>
+//        public byte[] Decrypt(byte[] encryptedBytes, string privateKey)
+//        {
+//            using (var rsa = new RSACryptoServiceProvider())
+//            {
+//                var key = ParsePrivateKey(privateKey);
+//                rsa.ImportParameters(key);
+//                var decryptedBytes = rsa.Decrypt(encryptedBytes, false);
+//                return decryptedBytes;
+//            }
+//        }
 
-            using (var writer = new StringWriter(builder))
-            {
-                var pkcs8Gen = new Pkcs8Generator(key);
-                var pemObj = pkcs8Gen.Generate();
+//        private static string GeneratePrivateKey(AsymmetricKeyParameter key)
+//        {
+//            var builder = new StringBuilder();
 
-                var pemWriter = new PemWriter(writer);
-                pemWriter.WriteObject(pemObj);
-            }
+//            using (var writer = new StringWriter(builder))
+//            {
+//                var pkcs8Gen = new Pkcs8Generator(key);
+//                var pemObj = pkcs8Gen.Generate();
 
-            return builder.ToString();
-        }
+//                var pemWriter = new PemWriter(writer);
+//                pemWriter.WriteObject(pemObj);
+//            }
 
-        private static string GeneratePublicKey(AsymmetricKeyParameter key)
-        {
-            var builder = new StringBuilder();
+//            return builder.ToString();
+//        }
 
-            using (var writer = new StringWriter(builder))
-            {
-                var pemWriter = new PemWriter(writer);
-                pemWriter.WriteObject(key);
-            }
+//        private static string GeneratePublicKey(AsymmetricKeyParameter key)
+//        {
+//            var builder = new StringBuilder();
 
-            return builder.ToString();
-        }
+//            using (var writer = new StringWriter(builder))
+//            {
+//                var pemWriter = new PemWriter(writer);
+//                pemWriter.WriteObject(key);
+//            }
 
-        private static RSAParameters ParsePrivateKey(string privateKey)
-        {
-            using (var reader = new StringReader(privateKey))
-            {
-                var pemReader = new PemReader(reader);
-                var key = (RsaPrivateCrtKeyParameters)pemReader.ReadObject();
+//            return builder.ToString();
+//        }
 
-                var parameter = new RSAParameters
-                {
-                    Modulus = key.Modulus.ToByteArrayUnsigned(),
-                    Exponent = key.PublicExponent.ToByteArrayUnsigned(),
-                    D = key.Exponent.ToByteArrayUnsigned(),
-                    P = key.P.ToByteArrayUnsigned(),
-                    Q = key.Q.ToByteArrayUnsigned(),
-                    DP = key.DP.ToByteArrayUnsigned(),
-                    DQ = key.DQ.ToByteArrayUnsigned(),
-                    InverseQ = key.QInv.ToByteArrayUnsigned()
-                };
+//        private static RSAParameters ParsePrivateKey(string privateKey)
+//        {
+//            using (var reader = new StringReader(privateKey))
+//            {
+//                var pemReader = new PemReader(reader);
+//                var key = (RsaPrivateCrtKeyParameters)pemReader.ReadObject();
 
-                return parameter;
-            }
-        }
+//                var parameter = new RSAParameters
+//                {
+//                    Modulus = key.Modulus.ToByteArrayUnsigned(),
+//                    Exponent = key.PublicExponent.ToByteArrayUnsigned(),
+//                    D = key.Exponent.ToByteArrayUnsigned(),
+//                    P = key.P.ToByteArrayUnsigned(),
+//                    Q = key.Q.ToByteArrayUnsigned(),
+//                    DP = key.DP.ToByteArrayUnsigned(),
+//                    DQ = key.DQ.ToByteArrayUnsigned(),
+//                    InverseQ = key.QInv.ToByteArrayUnsigned()
+//                };
 
-        private static RSAParameters ParsePublicKey(string publicKey)
-        {
-            using (var reader = new StringReader(publicKey))
-            {
-                var pemReader = new PemReader(reader);
-                var key = (RsaKeyParameters)pemReader.ReadObject();
+//                return parameter;
+//            }
+//        }
 
-                var parameter = new RSAParameters
-                {
-                    Modulus = key.Modulus.ToByteArrayUnsigned(),
-                    Exponent = key.Exponent.ToByteArrayUnsigned()
-                };
+//        private static RSAParameters ParsePublicKey(string publicKey)
+//        {
+//            using (var reader = new StringReader(publicKey))
+//            {
+//                var pemReader = new PemReader(reader);
+//                var key = (RsaKeyParameters)pemReader.ReadObject();
 
-                return parameter;
-            }
-        }
-    }
-}
+//                var parameter = new RSAParameters
+//                {
+//                    Modulus = key.Modulus.ToByteArrayUnsigned(),
+//                    Exponent = key.Exponent.ToByteArrayUnsigned()
+//                };
+
+//                return parameter;
+//            }
+//        }
+//    }
+//}
