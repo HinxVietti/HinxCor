@@ -27,6 +27,7 @@ using nQuant;
 using System.Threading.Tasks;
 using SStack = HinxCor.VectorTime.FABLE_STACK<string>;
 using Vision.RRRP;
+using HinxCor.SVG;
 
 //using WMPLib;
 
@@ -42,12 +43,194 @@ namespace DemoApp
         [STAThread]
         static void Main(string[] args)
         {
-            //var tag1 = new Tags(Console.ReadLine());
-            //var tag2 = new Tags(Console.ReadLine());
-            //var tag3 = tag1 + tag2;
-            //Console.WriteLine(tag3);
-            //Console.ReadKey();
-            GenerateFB();
+
+            var wid = 98;
+            var hei = 98;
+
+            float z = 0;
+            float x1 = 0.1f * wid;
+            float x2 = 0.9f * wid;
+            float x3 = wid;
+
+            float y1 = 0.1f * hei;
+            float y2 = 0.9f * hei;
+            float y3 = hei;
+
+            var pathString = string.Format("<path d=\"M {1} {0} L {3} {0} Q {5} {0} {5} {2} L {5} {4} Q {5} {6} {3} {6} L {1} {6} Q {0} {6} {0} {4} L {0} {2} Q {0} {0} {1} {0} {7}\">", z, x1, y1, x2, y2, x3, y3, "{0}");
+            Console.WriteLine(pathString);
+            try
+            {
+                string log = string.Format("<g transform=\"translate({0} {0})\">{1}</g>",
+                   10 / 2, pathString);
+                log = string.Format(log, "styles");
+                Console.WriteLine(log);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            Console.ReadKey();
+        }
+
+
+
+        private static void SavePNG_2()
+        {
+            OpenFileDialog openf = new OpenFileDialog();
+            openf.ShowDialog();
+            string xml = File.ReadAllText(openf.FileName);
+
+            var t = System.DateTime.Now;
+            //SavePNG_1(xml);
+            SVGUtil.ReadSvg(xml, data =>
+            {
+                File.WriteAllBytes("data", data);
+                var tspan2 = System.DateTime.Now - t;
+                Console.WriteLine("POT: " + tspan2.TotalMilliseconds);
+            });
+            var tspan = System.DateTime.Now - t;
+            Console.WriteLine("PUSH: " + tspan.TotalMilliseconds);
+            Console.ReadKey();
+        }
+
+        private static void SavePNG_1(string xml)
+        {
+            Bitmap bmp = null;
+            bmp = SVGUtil.ReadSvg(xml);
+            var ms = new MemoryStream();
+            bmp.Save(ms, ImageFormat.Png);
+            ms.Position = 0;
+            var bdata = ms.ToArray();
+            File.WriteAllBytes("data", bdata);
+        }
+
+        private static void 批量生产Json()
+        {
+            OpenFileDialog openIamges = new OpenFileDialog();
+            openIamges.Multiselect = true;
+            openIamges.ShowDialog();
+            var imgs = new List<string>(openIamges.FileNames);
+            imgs.RemoveAll(name => name.EndsWith("_thumb.png"));
+            Console.WriteLine(imgs.Count);
+            var req = new request();
+            req.status = 1;
+            req.data = new guitem[imgs.Count];
+            for (int i = 0; i < imgs.Count; i++)
+            {
+                var inf = new FileInfo(imgs[i]);
+                req.data[i] = new guitem()
+                {
+                    access = inf.Length > 204800 ? "1,2,3" : "",
+                    thumbnail = string.Format("{0}{1}{2}", "http://files.animiz.cn/client/fsvision/picture/", "191120/Test/", inf.Name.Remove(inf.Name.Length - 4) + "_thumb.png"),
+                    title = inf.Name,
+                    url = string.Format("{0}{1}{2}", "http://files.animiz.cn/client/fsvision/picture/", "191120/Test/", inf.Name),
+                    watermark = inf.Length > 204800 ? "http://files.animiz.cn/web/images/icons/animiz_vip1_flag01_42x42.png" : "",
+                };
+            }
+            string json = LitJson.JsonMapper.ToJson(req);
+            SaveFileDialog savejson = new SaveFileDialog();
+            savejson.ShowDialog();
+            File.WriteAllText(savejson.FileName, json);
+            Windows.OpenInExplorer(new FileInfo(savejson.FileName).Directory.FullName);
+        }
+
+        private static void 获取选取文件的缩略图()
+        {
+            OpenFileDialog openIamges = new OpenFileDialog();
+            openIamges.Multiselect = true;
+            openIamges.ShowDialog();
+
+            var imgs = openIamges.FileNames;
+
+            foreach (var imgFileName in imgs)
+            {
+                var img = Image.FromFile(imgFileName);
+                //int wid = CalculateWidth(img.Size, 1, 72);
+                CalculateSize(img.Size, 72, 72, out var x, out var y);
+                img.Dispose();
+                var thumdat = ThumbnailTools.GetByteArrayThumbnailData(File.ReadAllBytes(imgFileName), (uint)(x > y ? x : y), ThumbnailTools.Format.Png);
+
+                string outputName = imgFileName.Remove(imgFileName.Length - 4) + "_thumb.png";
+                File.WriteAllBytes(outputName, thumdat);
+                Console.WriteLine(outputName);
+            }
+            Console.WriteLine("Finished");
+            Console.ReadKey();
+        }
+
+        private static void CalculateSize(SizeF size, float nedx, float nedy, out int x, out int y)
+        {
+            CalculateSize(size.Width, size.Height, nedx, nedy, out x, out y);
+        }
+
+        private static void CalculateSize(float orix, float oriy, float nedx, float nedy, out int x, out int y)
+        {
+            x = (int)nedx;
+            y = (int)nedy;
+
+            if (orix / oriy > nedx / nedy)
+            {
+                //太宽。
+                x = (int)(orix / oriy * nedy);
+            }
+            else
+            {
+                y = (int)(oriy / orix * nedx);
+            }
+            Console.WriteLine(string.Format("\t\t{0}x{1},--{2}x{3}", orix, oriy, x, y));
+        }
+
+        private static int CalculateWidth(Size size, double xpy, int minix = 72)
+        {
+            var sizef = new SizeF(size);
+            var xpy2 = sizef.Width / sizef.Height;
+            if (xpy2 > xpy)
+            {
+                //太宽了，根据Y生成X返回，此时Y = 需要的Y。
+                var neededY = minix / xpy;
+                return (int)(neededY * xpy2);
+            }
+            else
+            {
+                //太高了，直接返回宽度就i好了，高度裁切
+                return minix;
+            }
+
+        }
+
+        private static void 尝试从新的地址下载Json文件()
+        {
+            string weburl = @"http://www.focusky.com.cn/client/resource/fsvs-picture?page=1&pagesize=20";
+            using (var client = new WebClient())
+            {
+                string json = client.DownloadString(weburl);
+                var request = LitJson.JsonMapper.ToObject<request>(json);
+                foreach (var item in request.data)
+                {
+                    Console.WriteLine(LitJson.JsonMapper.ToJson(item));
+                }
+            }
+
+            Console.WriteLine("Emd");
+            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// 测试请求资源的解析类型
+        /// </summary>
+        public class request
+        {
+            public int status { get; set; }
+            public guitem[] data { get; set; }
+        }
+
+        public class guitem
+        {
+            public string title { get; set; }
+            public string url { get; set; }
+            public string thumbnail { get; set; }
+            public string access { get; set; }
+            public string watermark { get; set; }
         }
 
         private static void GenerateFB()
@@ -600,7 +783,7 @@ namespace DemoApp
 
         private static void 测试计算文集唯一ID()
         {
-            start:
+        start:
             OpenFileDialog openf = new OpenFileDialog();
             openf.ShowDialog();
             var res = WinAPIHelper.GetUnipueFileID(openf.FileName);
@@ -989,7 +1172,7 @@ namespace DemoApp
             for (int catid = 1; catid < 30; catid++)
             {
                 int page = 0;
-                nextpage: page++;
+            nextpage: page++;
                 Console.WriteLine();
                 Console.WriteLine("开始下载Part:" + page + ",CID: " + catid);
                 string jsonRequest = string.Format(@"http://www.animiz.cn/client/resource/hand-painted?search=&pagesize=60&page={1}&catid={0}", catid, page);

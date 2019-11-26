@@ -2125,6 +2125,33 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:HinxCor.WindowsForm.ApplicationStartPage">
+            <summary>
+            可以显示日志的载入窗口
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.ApplicationStartPage.SetImage">
+            <summary>
+            从ALProfile读取
+            </summary>
+        </member>
+        <member name="F:HinxCor.WindowsForm.ApplicationStartPage.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.ApplicationStartPage.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HinxCor.WindowsForm.ApplicationStartPage.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="T:HinxCor.WindowsForm.EmptyForm">
             <summary>
             一个空的窗体

@@ -25,6 +25,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,8 +36,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
   <PropertyGroup>
-    <ApplicationManifest>app1.manifest</ApplicationManifest>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GroovyCodecs.Mp3, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -139,8 +142,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="app1.manifest" />
+    <None Include="app.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +164,10 @@
     <ProjectReference Include="..\HinxCor.Rendering\HinxCor.Rendering.csproj">
       <Project>{5efa8522-5472-4ffb-927c-ee083ae18f27}</Project>
       <Name>HinxCor.Rendering</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HinxCor.SVG\HinxCor.SVG.csproj">
+      <Project>{4B4BF921-40CA-4DDC-9715-B9A96A920768}</Project>
+      <Name>HinxCor.SVG</Name>
     </ProjectReference>
     <ProjectReference Include="..\HinxCor.Thumbnail\HinxCor.Thumbnail.csproj">
       <Project>{0ee80f21-df08-4e2b-a35c-f3b0758ee002}</Project>

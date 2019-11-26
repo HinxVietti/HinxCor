@@ -105,6 +105,12 @@
     <Compile Include="WindowsForm\ApplicationLoadout.Designer.cs">
       <DependentUpon>ApplicationLoadout.cs</DependentUpon>
     </Compile>
+    <Compile Include="WindowsForm\ApplicationStartPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WindowsForm\ApplicationStartPage.Designer.cs">
+      <DependentUpon>ApplicationStartPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="WindowsForm\CommonDelegate.cs" />
     <Compile Include="WindowsForm\EmptyForm.cs">
       <SubType>Form</SubType>
@@ -147,6 +153,7 @@
     <Compile Include="WindowsForm\PureMessage.Designer.cs">
       <DependentUpon>PureMessage.cs</DependentUpon>
     </Compile>
+    <Compile Include="WindowsForm\StartUpUtility.cs" />
     <Compile Include="WindowsForm\TransparencyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WindowsForm\ApplicationLoadout.resx">
       <DependentUpon>ApplicationLoadout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WindowsForm\ApplicationStartPage.resx">
+      <DependentUpon>ApplicationStartPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WindowsForm\EmptyForm.resx">
       <DependentUpon>EmptyForm.cs</DependentUpon>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
@@ -36,11 +37,15 @@ namespace demo_SQLite_official
             //TestT();
             //TestU();
             //TestV();
-            TestW();
+            //TestW();
             //TestX();
             //TestY();
             //TestZ();
+            string str = "123";
+            string str2 = "123";
 
+            var lst = new List<string>(new[] { str });
+            Console.WriteLine(lst.Contains(str2));
             Console.WriteLine();
             Console.WriteLine("Finished");
             Console.ReadKey();
@@ -127,7 +132,6 @@ namespace demo_SQLite_official
                               + reader.GetString(1) + " " + reader.GetInt32(2));
                         }
                     }
-
                 }
                 con.Close();
             }
