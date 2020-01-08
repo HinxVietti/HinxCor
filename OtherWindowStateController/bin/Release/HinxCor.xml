@@ -1005,6 +1005,22 @@
             </summary>
             <param name="p"></param>
         </member>
+        <member name="T:HinxCor.Properties.Resources">
+            <summary>
+              一个强类型的资源类，用于查找本地化的字符串等。
+            </summary>
+        </member>
+        <member name="P:HinxCor.Properties.Resources.ResourceManager">
+            <summary>
+              返回此类使用的缓存的 ResourceManager 实例。
+            </summary>
+        </member>
+        <member name="P:HinxCor.Properties.Resources.Culture">
+            <summary>
+              重写当前线程的 CurrentUICulture 属性
+              重写当前线程的 CurrentUICulture 属性。
+            </summary>
+        </member>
         <member name="M:HinxCor.Serialize.Arguments.GetKeyValuePare(System.String)">
             <summary>
             获取键值对,按照第一个':'切割
@@ -2092,6 +2108,50 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="F:HinxCor.WindowsForm.ApplicationLoadout.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.ApplicationLoadout.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HinxCor.WindowsForm.ApplicationLoadout.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:HinxCor.WindowsForm.ApplicationStartPage">
+            <summary>
+            可以显示日志的载入窗口
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.ApplicationStartPage.SetImage">
+            <summary>
+            从ALProfile读取
+            </summary>
+        </member>
+        <member name="F:HinxCor.WindowsForm.ApplicationStartPage.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.ApplicationStartPage.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HinxCor.WindowsForm.ApplicationStartPage.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="T:HinxCor.WindowsForm.EmptyForm">
             <summary>
             一个空的窗体
@@ -2114,6 +2174,23 @@
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
         <member name="M:HinxCor.WindowsForm.EmptyForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:HinxCor.WindowsForm.Logtar.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.Logtar.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HinxCor.WindowsForm.Logtar.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
@@ -2369,6 +2446,96 @@
             </summary>
             <returns>Form</returns>
         </member>
+        <member name="F:HinxCor.WindowsForm.PickColorDialog.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.PickColorDialog.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HinxCor.WindowsForm.PickColorDialog.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.PickColorDialogBase.GetLocation(System.Drawing.Point)">
+            <summary>
+            获取提示组建的位置
+            </summary>
+            <param name="location"></param>
+            <returns></returns>
+        </member>
+        <member name="F:HinxCor.WindowsForm.PickColorDialogBase.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.PickColorDialogBase.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HinxCor.WindowsForm.PickColorDialogBase.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:HinxCor.WindowsForm.Progressbar.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.Progressbar.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HinxCor.WindowsForm.Progressbar.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.PureMessage.Clear">
+            <summary>
+            关闭操作
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.PureMessage.MidCenter">
+            <summary>
+            居中屏幕
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.PureMessage.CenterParent">
+            <summary>
+            居中到父级窗口
+            </summary>
+        </member>
+        <member name="F:HinxCor.WindowsForm.PureMessage.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:HinxCor.WindowsForm.PureMessage.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:HinxCor.WindowsForm.PureMessage.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="T:HinxCor.Wins.Forms.TransparencyForm">
             <summary>
             透明窗口
@@ -2600,6 +2767,46 @@
             单步写入数量
             </summary>
         </member>
+        <member name="M:StringFile.#ctor(System.String,System.Boolean)">
+            <summary>
+            Add Plain will not generate byte array
+            </summary>
+            <param name="txt"></param>
+            <param name="plain"></param>
+        </member>
+        <member name="M:StringFile.AddPlain(System.String,System.String)">
+            <summary>
+            仅仅添加外部b64数据
+            </summary>
+            <param name="item"></param>
+            <param name="b64data"></param>
+        </member>
+        <member name="M:StringFile.ToString">
+            <summary>
+            将数据变为B64的KVP
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Config.Flush">
+            <summary>
+            将所有配置属性写入本地
+            </summary>
+        </member>
+        <member name="M:Config.AsyncFlush(System.Action)">
+            <summary>
+            将所有配置异步属性写入本地
+            </summary>
+        </member>
+        <member name="F:ConfigFile.configFileName">
+            <summary>
+            ***请勿获取此项
+            </summary>
+        </member>
+        <member name="M:ConfigFile.Flush">
+            <summary>
+            将当前配置的属性写入本地
+            </summary>
+        </member>
         <member name="M:IniFile.Read``1(System.String,``0@,System.Func{System.String,``0},System.String)">
             <summary>
             read config and set source value
@@ -2729,6 +2936,13 @@
             <param name="subL"></param>
             <returns></returns>
         </member>
+        <member name="M:WinAPIHelper.GetUnipueFileID(System.String)">
+            <summary>
+            获取文件的唯一标识
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
         <member name="T:PerceivedType">
             <summary>
             感知类型
@@ -2768,6 +2982,11 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:MessageUtility.Clear">
+            <summary>
+            关闭信息盒子
             </summary>
         </member>
         <member name="T:WinformHelper">

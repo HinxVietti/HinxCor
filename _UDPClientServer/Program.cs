@@ -13,7 +13,6 @@ namespace _UDPClientServer
         static void Main(string[] args)
         {
             int port = NetworkEnv.GetAvailableUdpPort();
-
             client = new UdpClient(port);
             //client = new UdpClient();
 

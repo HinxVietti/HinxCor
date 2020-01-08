@@ -11,9 +11,13 @@ namespace _UDPTextSender
         static void Main(string[] args)
         {
             client = new UdpClient();
-
+        input:
+            Console.WriteLine("请输入目标端口：");
+            string port = Console.ReadLine();
+            if (!int.TryParse(port, out int _port))
+                goto input;
             string input = string.Empty;
-            IPEndPoint to = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 52695);
+            IPEndPoint to = new IPEndPoint(IPAddress.Parse("127.0.0.1"), _port);
             do
             {
                 input = Console.ReadLine();

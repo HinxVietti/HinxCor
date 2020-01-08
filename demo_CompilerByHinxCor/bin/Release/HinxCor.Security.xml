@@ -4,6 +4,45 @@
         <name>HinxCor.Security</name>
     </assembly>
     <members>
+        <member name="T:NanaCodeUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:NanaCodeUtil.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="pwd"></param>
+        </member>
+        <member name="M:NanaCodeUtil.Decode(System.Byte[],ICodePwdProvider)">
+            <summary>
+            
+            </summary>
+            <param name="plain"></param>
+            <param name="codePwd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NanaCodeUtil.Encode(System.Byte[],ICodePwdProvider)">
+            <summary>
+            
+            </summary>
+            <param name="plain"></param>
+            <param name="codePwd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NanaCodeUtil.GetBytesPwd">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NanaCodeUtil.GetStringPwd">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:HinxCor.Security.RC4">
              <summary>
             RC4加密算法;
@@ -501,50 +540,6 @@
             <param name="privateKey"></param>
             <returns></returns>
         </member>
-        <member name="T:HinxCor.CryptoSer.RsaPkcs8CryptoUtil">
-            <summary>
-            RSA PKCS8 加密
-            </summary>
-        </member>
-        <member name="M:HinxCor.CryptoSer.RsaPkcs8CryptoUtil.GenerateKeys">
-            <summary>
-            生成秘钥
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:HinxCor.CryptoSer.RsaPkcs8CryptoUtil.Sign(System.Byte[],System.String)">
-            <summary>
-            签名
-            </summary>
-            <param name="bytes"></param>
-            <param name="privateKey"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HinxCor.CryptoSer.RsaPkcs8CryptoUtil.Verify(System.Byte[],System.Byte[],System.String)">
-            <summary>
-            校验
-            </summary>
-            <param name="bytes"></param>
-            <param name="signature"></param>
-            <param name="publicKey"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HinxCor.CryptoSer.RsaPkcs8CryptoUtil.Encrypt(System.Byte[],System.String)">
-            <summary>
-            加密
-            </summary>
-            <param name="plainBytes"></param>
-            <param name="publicKey"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HinxCor.CryptoSer.RsaPkcs8CryptoUtil.Decrypt(System.Byte[],System.String)">
-            <summary>
-            解密
-            </summary>
-            <param name="encryptedBytes"></param>
-            <param name="privateKey"></param>
-            <returns></returns>
-        </member>
         <member name="T:HinxCor.CryptoSer.SaltUtil">
             <summary>
             
@@ -762,6 +757,71 @@
             <summary>
             尾部大小 --3
             </summary>
+        </member>
+        <member name="T:IBytesDecode">
+            <summary>
+            byte array decode
+            </summary>
+        </member>
+        <member name="M:IBytesDecode.Decode(System.Byte[],ICodePwdProvider)">
+            <summary>
+            decode
+            </summary>
+            <param name="plain"></param>
+            <param name="codePwd"></param>
+            <returns></returns>
+        </member>
+        <member name="T:IBytesEncode">
+            <summary>
+            byte array encode
+            </summary>
+        </member>
+        <member name="M:IBytesEncode.Encode(System.Byte[],ICodePwdProvider)">
+            <summary>
+            encode
+            </summary>
+            <param name="plain"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ICodePwdProvider">
+            <summary>
+            提供密码
+            </summary>
+        </member>
+        <member name="M:ICodePwdProvider.GetStringPwd">
+            <summary>
+            获取密码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ICodePwdProvider.GetBytesPwd">
+            <summary>
+            获取密码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NanaCode">
+            <summary>
+            加密解密内容
+            </summary>
+        </member>
+        <member name="M:NanaCode.PushCode(System.Byte[],IBytesEncode,ICodePwdProvider)">
+            <summary>
+            加密内容
+            </summary>
+            <param name="source"></param>
+            <param name="encoder"></param>
+            <param name="codePwd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NanaCode.RequestCode(System.Byte[],IBytesDecode,ICodePwdProvider)">
+            <summary>
+            提取内容
+            </summary>
+            <param name="encoded"></param>
+            <param name="decoder"></param>
+            <param name="codePwd"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

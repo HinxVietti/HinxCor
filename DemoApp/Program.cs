@@ -28,6 +28,7 @@ using System.Threading.Tasks;
 using SStack = HinxCor.VectorTime.FABLE_STACK<string>;
 using Vision.RRRP;
 using HinxCor.SVG;
+using System.Xml;
 
 //using WMPLib;
 
@@ -43,7 +44,30 @@ namespace DemoApp
         [STAThread]
         static void Main(string[] args)
         {
+            string pathString = "M 0 192 L 116 168 L 29 48 L 203 144 L 232 48 L 290 134.4 L 377 0 L 371.2 115.19999999999999 L 452.40000000000003 105.6 L 417.59999999999997 168 L 551 187.20000000000002 L 435 240 L 580 288 L 423.4 278.4 L 452.40000000000003 384 L 359.6 297.6 L 348 422.4 L 290 307.2 L 232 480 L 203 316.8 L 145 384 L 168.2 292.8 L 0 297.6 L 116 264 Z";
+            List<float> Values = new List<float>();
+            var valueStrs = pathString.Split(' ');
+            for (int i = 0; i < valueStrs.Length; i++)
+            {
+                if (float.TryParse(valueStrs[i], out var value))
+                    Values.Add(value);
+            }
 
+            var res = Values.ToArray();
+
+            for (int i = 0; i < res.Length; i++)
+            {
+                if (i % 2 == 0)
+                    Console.WriteLine(string.Format("No {0},\t[ {1} \t {2} ]", i / 2 + 1, res[i], res[i + 1]));
+            }
+            Console.ReadKey();
+        }
+
+
+
+
+        private static void TestFormatXMLSVG()
+        {
             var wid = 98;
             var hei = 98;
 
@@ -71,8 +95,6 @@ namespace DemoApp
             }
             Console.ReadKey();
         }
-
-
 
         private static void SavePNG_2()
         {
