@@ -122,7 +122,7 @@ namespace HinxCor.InterProcessCommunication
             return client.Send(cmd);
         }
 
-        public string SendCmd(string cmd, string[] args)
+        public string SendCmd(string cmd,params string[] args)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(cmd);

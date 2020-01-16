@@ -49,12 +49,6 @@
     <Compile Include="CaptureScreen.cs" />
     <Compile Include="Collections\ArrayHelper.cs" />
     <Compile Include="Convert.cs" />
-    <Compile Include="Core\AsyncOperate.cs" />
-    <Compile Include="Core\AsyncOperator.cs" />
-    <Compile Include="Core\Compiler.cs" />
-    <Compile Include="Core\CompilerHelper.cs" />
-    <Compile Include="Core\FormerLog.cs" />
-    <Compile Include="Core\IAsyncOperator.cs" />
     <Compile Include="EnvironmentTools.cs" />
     <Compile Include="History.cs" />
     <Compile Include="IO\BitConvertable.cs" />
@@ -159,16 +153,6 @@
     </Compile>
     <Compile Include="WindowsForm\Win32.cs" />
     <Compile Include="WindowsForm\WinformHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HinxCor.CompressionDot45\HinxCor.CompressionDot45.csproj">
-      <Project>{22a03dc6-efb8-4289-961e-4317ba25c1d1}</Project>
-      <Name>HinxCor.CompressionDot45</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HinxCor.CryptoSer\HinxCor.CryptoSer.csproj">
-      <Project>{370930C9-8D54-4284-8E7B-4497CBDE4927}</Project>
-      <Name>HinxCor.CryptoSer</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

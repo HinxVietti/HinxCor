@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -12,6 +13,8 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LitJson;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace ConsoleApplication
 {
@@ -28,9 +31,165 @@ namespace ConsoleApplication
         [STAThread]
         static void Main(string[] args)
         {
+            string zipName = "testZip";
 
-           
+            Console.WriteLine("请输入CMD");
+            Console.WriteLine("1.添加文件、\n2.查看列表 ");
 
+
+            string cmd = Console.ReadLine();
+
+            switch (cmd)
+            {
+                case "1":
+                    OpenFileDialog dlg = new OpenFileDialog();
+                    if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        using (ZipFile zip = new ZipFile(zipName))
+                        {
+                            zip.BeginUpdate();
+                            zip.Add(dlg.FileName);
+                           // zip.CommitUpdate();
+                        }
+                    }
+                    //using (ZipOutputStream zip = new ZipOutputStream(new FileStream(zipName, FileMode.OpenOrCreate)))
+                    //{
+                    //    OpenFileDialog dlg = new OpenFileDialog();
+                    //    if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    //    {
+                    //        var cfile = new FileInfo(dlg.FileName);
+                    //        var entry = new ZipEntry(cfile.Name);
+                    //        zip.PutNextEntry(entry);
+                    //        long writeSize = 0;
+                    //        int buffSize = 2048;
+                    //        int readSize = 0;
+                    //        byte[] buffer = new byte[buffSize];
+                    //        using (FileStream fs = new FileStream(cfile.FullName, FileMode.Open))
+                    //        {
+                    //            do
+                    //            {
+                    //                readSize = fs.Read(buffer, 0, buffSize);// 0 是buffer的offset
+                    //                zip.Write(buffer, 0, readSize);
+                    //                writeSize += readSize;
+                    //                //sync_process(0.3f + 0.7f * writeSize / size);
+                    //            } while (readSize > 0);
+                    //        }
+                    //        zip.Flush();
+                    //    }
+                    //}
+                    break;
+                case "2":
+                    ZipFile zipFile = new ZipFile(zipName);
+                    for (int i = 0; i < zipFile.Count; i++)
+                    {
+                        Console.WriteLine(zipFile[i].Name);
+                    }
+                    break;
+                default:
+                    break;
+            }
+            Console.WriteLine("end.");
+            Console.ReadKey();
+        }
+
+
+
+
+
+
+
+
+
+        private static void dlgTest()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.ShowDialog();
+            List<string> words = new List<string>();
+            string txt = File.ReadAllText(dlg.FileName);
+
+            txt.Replace('\r', ' ');
+            var ls = txt.Split('\n', '、', ' ', '\r');
+
+            //var ls = File.ReadAllLines(dlg.FileName);
+            for (int i = 0; i < ls.Length; i++)
+            {
+                string ss = ls[i];
+                if (string.IsNullOrEmpty(ss))
+                    continue;
+
+                var arg = ss.Split('|');
+                ss = arg[0];
+                ss.Trim();
+                if (!string.IsNullOrEmpty(ss) && !string.IsNullOrWhiteSpace(ss))
+                    if (!words.Contains(ss))
+                        words.Add(ss);
+            }
+            File.WriteAllLines("save", words.ToArray());
+            Console.WriteLine("finished");
+            Console.ReadKey();
+        }
+
+        private static void TaskTest()
+        {
+            //Task myTask = Task.Factory.StartNew(GetFile);
+            Task myTask = new Task(GetFile);
+            Console.WriteLine("RunSynchronously");
+            myTask.RunSynchronously();
+            //myTask.Wait(); // wait for myTask to complete
+            Console.WriteLine("Main thread/");
+
+            for (int i = 0; i < m_WordArray.Length; i++)
+                Console.Write(m_WordArray[i]);
+            Console.WriteLine();
+            Console.WriteLine("new end of frame.");
+        }
+
+        static string[] m_WordArray;
+
+        internal static async void GetFile()
+        {
+            Stream stream = null;
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.InitialDirectory = @"C:\";
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    if ((stream = dialog.OpenFile()) != null)
+                    {
+                        using (stream)
+                        {
+                            using (StreamReader reader = new StreamReader(stream))
+                            {
+                                string temp = reader.ReadToEnd();
+                                m_WordArray = temp.Replace
+                                    ("\r", string.Empty).Replace("\n", " ")
+                                .Replace("\"", string.Empty).Split(' ').ToArray<string>();
+                                // Console.Read();
+                            }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Windows.Forms.MessageBox.Show(e.ToString());
+                }
+            }
+        }
+
+        private static string GetFile(string filter = "")
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            if (!string.IsNullOrEmpty(filter))
+                dlg.Filter = filter;
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                return dlg.FileName;
+            //return string.Empty;
+            return "Not select any file.";
+        }
+
+        private static void ProcessGetFiles()
+        {
             var port = NetworkEnv.GetAvailableUdpPort();
             UnicClient client = null;
             Process p = null;
@@ -55,8 +214,8 @@ namespace ConsoleApplication
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "FileBrowser.exe";
             startInfo.Arguments = getOpenFileArgs(true, "|*.png;*.jpg", port);
-             p = Process.Start(startInfo);
-            
+            p = Process.Start(startInfo);
+
 
             //TestOpenFile();
             Console.WriteLine("line1");
@@ -65,7 +224,6 @@ namespace ConsoleApplication
             client.Dispose();
             Console.WriteLine("finished");
         }
-
 
         private static string getOpenFileArgs(bool multipleSelect, string filter, int port)
         {

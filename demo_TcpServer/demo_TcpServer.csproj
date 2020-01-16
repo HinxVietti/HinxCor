@@ -53,5 +53,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HinxCor.InterProcessCommunication\HinxCor.InterProcessCommunication.csproj">
+      <Project>{19eb2b86-650e-449b-830f-4e667c7fb835}</Project>
+      <Name>HinxCor.InterProcessCommunication</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
