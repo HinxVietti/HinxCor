@@ -388,6 +388,7 @@ namespace HinxCor.Compression.net45
             }
             return 5;
         }
+
         private static CompressionMethod getfromLevel(CompressionLevel level)
         {
             switch (level)

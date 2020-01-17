@@ -14,7 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LitJson;
-using ICSharpCode.SharpZipLib.Zip;
+using Ionic.Zip;
 
 namespace ConsoleApplication
 {
@@ -31,74 +31,76 @@ namespace ConsoleApplication
         [STAThread]
         static void Main(string[] args)
         {
-            string zipName = "testZip";
+            ZipFile.DefaultEncoding = Encoding.UTF8;
+            string zipName = "save.zip";
+            ZipFile zips = new ZipFile(zipName);
 
-            Console.WriteLine("请输入CMD");
-            Console.WriteLine("1.添加文件、\n2.查看列表 ");
-
-
+        CMD: Console.WriteLine("1=add file, 2=displayNames; 3=clear names");
+            Console.Write("请输入：");
             string cmd = Console.ReadLine();
-
             switch (cmd)
             {
                 case "1":
                     OpenFileDialog dlg = new OpenFileDialog();
                     if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        using (ZipFile zip = new ZipFile(zipName))
-                        {
-                            zip.BeginUpdate();
-                            zip.Add(dlg.FileName);
-                           // zip.CommitUpdate();
-                        }
+                        var ets = zips.AddFile(dlg.FileName);
+                        ets.FileName = inname(new FileInfo(dlg.FileName).Name);
+                        Console.WriteLine("Add file:" + ets.FileName);
                     }
-                    //using (ZipOutputStream zip = new ZipOutputStream(new FileStream(zipName, FileMode.OpenOrCreate)))
-                    //{
-                    //    OpenFileDialog dlg = new OpenFileDialog();
-                    //    if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    //    {
-                    //        var cfile = new FileInfo(dlg.FileName);
-                    //        var entry = new ZipEntry(cfile.Name);
-                    //        zip.PutNextEntry(entry);
-                    //        long writeSize = 0;
-                    //        int buffSize = 2048;
-                    //        int readSize = 0;
-                    //        byte[] buffer = new byte[buffSize];
-                    //        using (FileStream fs = new FileStream(cfile.FullName, FileMode.Open))
-                    //        {
-                    //            do
-                    //            {
-                    //                readSize = fs.Read(buffer, 0, buffSize);// 0 是buffer的offset
-                    //                zip.Write(buffer, 0, readSize);
-                    //                writeSize += readSize;
-                    //                //sync_process(0.3f + 0.7f * writeSize / size);
-                    //            } while (readSize > 0);
-                    //        }
-                    //        zip.Flush();
-                    //    }
-                    //}
-                    break;
+                    Console.WriteLine();
+                    goto CMD;
                 case "2":
-                    ZipFile zipFile = new ZipFile(zipName);
-                    for (int i = 0; i < zipFile.Count; i++)
+                    var ns = zips.EntryFileNames;
+                    foreach (var name in ns)
                     {
-                        Console.WriteLine(zipFile[i].Name);
+                        Console.WriteLine(outname(name));
                     }
-                    break;
+                    Console.WriteLine();
+                    goto CMD;
+                case "3":
+                    var entrys = new List<ZipEntry>(zips.Entries);
+                    for (int i = 0; i < entrys.Count; i++)
+                    {
+                        var entry = entrys[i];
+                        string ename = entry.FileName;
+                        entry.FileName = new FileInfo(ename).Name;
+                    }
+                    Console.WriteLine("Clear finished,");
+                    goto CMD;
+                case "4":
+                    SaveFileDialog saveFile = new SaveFileDialog();
+                    if (saveFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        zips.SaveSelfExtractor(saveFile.FileName, SelfExtractorFlavor.ConsoleApplication);
+                    }
+
+
+                    Console.WriteLine("Clear finished,");
+                    goto CMD;
                 default:
                     break;
             }
-            Console.WriteLine("end.");
+            zips.SaveProgress += Zips_SaveProgress;
+            zips.Save();
+            Console.WriteLine();
+            Console.WriteLine("Finished .");
             Console.ReadKey();
         }
 
+        private static string inname(string source)
+        {
+            return System.Web.HttpUtility.UrlEncode(source);
+        }
+        private static string outname(string source)
+        {
+            return System.Web.HttpUtility.UrlDecode(source);
+        }
 
-
-
-
-
-
-
+        private static void Zips_SaveProgress(object sender, SaveProgressEventArgs e)
+        {
+            Console.Write(".");
+        }
 
         private static void dlgTest()
         {
@@ -128,6 +130,7 @@ namespace ConsoleApplication
             Console.WriteLine("finished");
             Console.ReadKey();
         }
+
 
         private static void TaskTest()
         {
