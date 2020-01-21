@@ -14,6 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LitJson;
+//using ICSharpCode.SharpZipLib.Zip;
 using Ionic.Zip;
 
 namespace ConsoleApplication
@@ -31,7 +32,7 @@ namespace ConsoleApplication
         [STAThread]
         static void Main(string[] args)
         {
-            ZipFile.DefaultEncoding = Encoding.UTF8;
+            //ZipFile.DefaultEncoding = Encoding.UTF8;
             string zipName = "save.zip";
             ZipFile zips = new ZipFile(zipName);
 
@@ -44,6 +45,7 @@ namespace ConsoleApplication
                     OpenFileDialog dlg = new OpenFileDialog();
                     if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
+                        //zips.Add(dlg.FileName);
                         var ets = zips.AddFile(dlg.FileName);
                         ets.FileName = inname(new FileInfo(dlg.FileName).Name);
                         Console.WriteLine("Add file:" + ets.FileName);
