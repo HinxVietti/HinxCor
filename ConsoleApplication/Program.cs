@@ -16,6 +16,10 @@ using System.Windows.Forms;
 using LitJson;
 //using ICSharpCode.SharpZipLib.Zip;
 using Ionic.Zip;
+using IronPython.Hosting;
+using NetMQ.Sockets;
+using NetMQ;
+using Microsoft.Win32;
 
 namespace ConsoleApplication
 {
@@ -29,10 +33,145 @@ namespace ConsoleApplication
 
         delegate void act();
 
+        public static string passwd = "cVYAzGYSkmfK4M6UK1CoebMsEPB0KAkD";
+
         [STAThread]
         static void Main(string[] args)
         {
-            //ZipFile.DefaultEncoding = Encoding.UTF8;
+            if (args != null)
+            {
+                foreach (var item in args)
+                {
+                    Console.WriteLine(item);
+                }
+                Console.WriteLine("--->  finished");
+                Console.WriteLine();
+            }
+
+            //string FileName = "txt";
+            //string txt = File.ReadAllText(FileName);
+            //txt = Regex.Replace(txt, "[《》{}（）() ]", string.Empty);
+            //txt = Regex.Replace(txt, "\n\n", "\n");
+            //File.WriteAllText(FileName, txt);
+            ////HinxCor.Windows.OpenInExplorer
+            //var words = Regex.Split(txt, System.Environment.NewLine);
+            //var words_clear = new List<string>();
+            //for (int i = 0; i < words.Length; i++)
+            //{
+            //    if (!words_clear.Contains(words[i]))
+            //        words_clear.Add(words[i]);
+            //}
+            //File.WriteAllLines(FileName + "_clear", words_clear);
+
+            //RegisterRightClick(0);
+            UnRegisterRightClick();
+            Console.WriteLine("Finished.");
+            Console.ReadKey();
+        }
+
+
+        static string titleTxt = "右键测试<-";
+
+        private static void UnRegisterRightClick()
+        {
+            RegistryKey shell = Registry.ClassesRoot.OpenSubKey("*", true).OpenSubKey("shell", true);
+            if (shell != null) shell.DeleteSubKeyTree(titleTxt);
+
+            shell = Registry.ClassesRoot.OpenSubKey("directory", true).OpenSubKey("shell", true);
+            if (shell != null) shell.DeleteSubKeyTree(titleTxt);
+
+            shell.Close();
+
+            System.Windows.Forms.MessageBox.Show("反注册成功!", "提示");
+        }
+
+        private static void RegisterRightClick(int index)
+        {
+            if (titleTxt.Length == 0) return;
+
+            // 注册到文件
+            if (/*this.ckRegToFile.Checked*/ true)
+            {
+                RegistryKey shell = Registry.ClassesRoot.OpenSubKey("*.pdb", true).OpenSubKey("shell", true);
+                if (shell == null) shell = Registry.ClassesRoot.OpenSubKey("*.pdb", true).CreateSubKey("shell");
+                RegistryKey custome = shell.CreateSubKey(titleTxt);
+                RegistryKey cmd = custome.CreateSubKey("command");
+                cmd.SetValue("", Application.ExecutablePath + " %1");
+                cmd.Close();
+                custome.Close();
+                shell.Close();
+            }
+
+            // 注册到文件夹
+            if (/*this.ckRegToDir.Checked*/ true)
+            {
+                RegistryKey shell = Registry.ClassesRoot.OpenSubKey("directory", true).OpenSubKey("shell", true);
+                if (shell == null) shell = Registry.ClassesRoot.OpenSubKey("directory", true).CreateSubKey("shell");
+                RegistryKey custome = shell.CreateSubKey(titleTxt);
+                RegistryKey cmd = custome.CreateSubKey("command");
+                cmd.SetValue("", Application.ExecutablePath + " %1");
+                cmd.Close();
+                custome.Close();
+                shell.Close();
+            }
+        }
+
+
+        private class foregroundWindow : IWin32Window
+        {
+            public IntPtr Handle { get; private set; }
+
+            internal static foregroundWindow current
+            {
+                get
+                {
+                    return new foregroundWindow()
+                    {
+                        Handle = User32.GetForegroundWindow()
+                    };
+                }
+            }
+        }
+
+        private static void TestNetMq()
+        {
+            using (var server = new ResponseSocket())
+            {
+                server.Bind("tcp://*:5555");
+                string msg = server.ReceiveFrameString();
+                Console.WriteLine("From Client: {0}", msg);
+                server.SendFrame("World");
+            }
+        }
+
+        private static void NewMethod()
+        {
+            OpenFileDialog openf = new OpenFileDialog();
+            openf.Filter = "|*.fsv";
+            openf.ShowDialog();
+            ZipFile zip = new ZipFile(openf.FileName);
+            zip.Password = passwd;
+            foreach (var entry in zip.Entries)
+            {
+                if (entry.FileName.EndsWith(".mf"))
+                {
+                    var ms = new MemoryStream();
+                    entry.Extract(ms);
+                    ms.Position = 0;
+                    var data = ms.ToArray();
+                    var content = Encoding.UTF8.GetString(data);
+                    Console.WriteLine(System.Web.HttpUtility.UrlDecode(entry.FileName));
+                    Console.WriteLine(content);
+                    Console.WriteLine();
+                }
+            }
+
+            Console.WriteLine("finished. any key esc.");
+            Console.ReadKey();
+        }
+
+        private static void zipTest()
+        {
             string zipName = "save.zip";
             ZipFile zips = new ZipFile(zipName);
 

@@ -14,7 +14,7 @@ namespace Webview
         [STAThread]
         static void Main(string[] args)
         {
-            if (args == null || args.Length == 0) args = new string[] { "http://www.baidu.com" };
+            if (args == null || args.Length == 0) args = new string[] { "http://wancaiinfo.com" };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new HomePage(args[0]));

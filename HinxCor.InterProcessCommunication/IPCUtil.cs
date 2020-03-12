@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using ZetaIpc.Runtime.Client;
 using ZetaIpc.Runtime.Server;
 
@@ -59,20 +57,22 @@ namespace HinxCor.InterProcessCommunication
 
         private void Server_ReceivedRequest(object sender, ReceivedRequestEventArgs e)
         {
+            var req = new DataStruct.ReceivedRequestEventArgs(e);
             for (int i = 0; i < handles.Count; i++)
             {
-                var e1 = e;
+                var req1 = req;
                 try
                 {
-                    e = handles[i].HandleRequest(e);
+                    req = handles[i].HandleRequest(req);
                 }
                 catch (Exception ee)
                 {
-                    e = e1;
+                    req = req1;
                     errorHandler?.HandleExcep(ee);
                 }
             }
-            e.Handled = true;
+            req.Handled = true;
+            e = req.GetRequest();
         }
 
 
@@ -88,7 +88,7 @@ namespace HinxCor.InterProcessCommunication
         {
             if (!ExistCmdHandler(handler))
                 return false;
-            handles.Remove(handler);
+            handles.Remove(handler); 
             return true;
         }
 

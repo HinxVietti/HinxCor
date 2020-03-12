@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataStruct\ReceivedRequestEventArgs.cs" />
     <Compile Include="Interface\IExceptionHandler.cs" />
     <Compile Include="Interface\IIPCClient.cs" />
     <Compile Include="Interface\IIPCServer.cs" />

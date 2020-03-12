@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using ZetaIpc.Runtime.Server;
+//using ZetaIpc.Runtime.Server;
+using HinxCor.InterProcessCommunication.DataStruct;
 
 public interface ICmdHandler
 {

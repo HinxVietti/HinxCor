@@ -97,7 +97,7 @@ namespace HinxCor.Serialize
         {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < args.Length; i++)
-                sb.Append(string.Format("\"{0}\" ", args[i]));
+                sb.Append(string.Format("\"{0}\" ", args[i])); 
             if (args.Length > 0) sb.Remove(sb.Length - 1, 1);
             return sb.ToString();
         }
@@ -218,8 +218,7 @@ namespace HinxCor.Serialize
         {
             return (IEnumerator)argscollect;
         }
-
-
+        
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

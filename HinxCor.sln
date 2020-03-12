@@ -61,8 +61,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HinxCor.VectorTime", "HinxC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_demo_bigFileGenerator", "_demo_bigFileGenerator\_demo_bigFileGenerator.csproj", "{EE06224B-0DFA-4E90-870E-300F12283BDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramRunner", "ProgramRunner\ProgramRunner.csproj", "{DDEB26ED-306C-48D4-A3FE-80623CC5E0EC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgsDebuger", "ArgsDebuger\ArgsDebuger.csproj", "{B68A08FF-9D6E-4AD7-9D76-EDED88B913F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HinxCor.AudioPlayer", "HinxCor.AudioPlayer\HinxCor.AudioPlayer.csproj", "{6A15CF7A-0935-4D1E-9AC7-C0CD531C9FC0}"
@@ -112,6 +110,20 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webview", "Webview\Webview.csproj", "{E87009E0-800F-4EC4-A2B9-7CDFDD0F6ABE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HinxCor.Compiler", "HinxCor.Compiler\HinxCor.Compiler.csproj", "{19BBDAD4-77D1-4006-96E8-6C5B9ED80AE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotFSVFileExtra", "dotFSVFileExtra\dotFSVFileExtra.csproj", "{94CB9E39-9D5A-4BF6-BF25-4115E01854F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramRunner", "ProgramRunner\ProgramRunner.csproj", "{DDEB26ED-306C-48D4-A3FE-80623CC5E0EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vision3D", "Vision3D\Vision3D.csproj", "{8B52F96E-C9C4-4D79-B114-C169424346CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_demo_NetherenumIPC", "_demo_NetherenumIPC\_demo_NetherenumIPC.csproj", "{CD0E3E0B-71C0-4491-8032-4AFA390A7337}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_demo_NetMQ_Client", "_demo_NetMQ_Client\_demo_NetMQ_Client.csproj", "{A4F63E93-BA0B-4C06-8ADD-38CD8810BE1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_demo_NetMQ_Server", "_demo_NetMQ_Server\_demo_NetMQ_Server.csproj", "{14AF8BD3-4CB0-4839-B30E-36D4AFAC7D9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HinxCor.FFmpeg", "HinxCor.FFmpeg\HinxCor.FFmpeg.csproj", "{61B39C56-9935-4743-B807-D17FB590756F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -235,10 +247,6 @@ Global
 		{EE06224B-0DFA-4E90-870E-300F12283BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE06224B-0DFA-4E90-870E-300F12283BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE06224B-0DFA-4E90-870E-300F12283BDA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DDEB26ED-306C-48D4-A3FE-80623CC5E0EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DDEB26ED-306C-48D4-A3FE-80623CC5E0EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DDEB26ED-306C-48D4-A3FE-80623CC5E0EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DDEB26ED-306C-48D4-A3FE-80623CC5E0EC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B68A08FF-9D6E-4AD7-9D76-EDED88B913F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B68A08FF-9D6E-4AD7-9D76-EDED88B913F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B68A08FF-9D6E-4AD7-9D76-EDED88B913F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -339,6 +347,34 @@ Global
 		{19BBDAD4-77D1-4006-96E8-6C5B9ED80AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19BBDAD4-77D1-4006-96E8-6C5B9ED80AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19BBDAD4-77D1-4006-96E8-6C5B9ED80AE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94CB9E39-9D5A-4BF6-BF25-4115E01854F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94CB9E39-9D5A-4BF6-BF25-4115E01854F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94CB9E39-9D5A-4BF6-BF25-4115E01854F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94CB9E39-9D5A-4BF6-BF25-4115E01854F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDEB26ED-306C-48D4-A3FE-80623CC5E0EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDEB26ED-306C-48D4-A3FE-80623CC5E0EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDEB26ED-306C-48D4-A3FE-80623CC5E0EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDEB26ED-306C-48D4-A3FE-80623CC5E0EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B52F96E-C9C4-4D79-B114-C169424346CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B52F96E-C9C4-4D79-B114-C169424346CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B52F96E-C9C4-4D79-B114-C169424346CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B52F96E-C9C4-4D79-B114-C169424346CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD0E3E0B-71C0-4491-8032-4AFA390A7337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD0E3E0B-71C0-4491-8032-4AFA390A7337}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD0E3E0B-71C0-4491-8032-4AFA390A7337}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD0E3E0B-71C0-4491-8032-4AFA390A7337}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4F63E93-BA0B-4C06-8ADD-38CD8810BE1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4F63E93-BA0B-4C06-8ADD-38CD8810BE1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4F63E93-BA0B-4C06-8ADD-38CD8810BE1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4F63E93-BA0B-4C06-8ADD-38CD8810BE1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14AF8BD3-4CB0-4839-B30E-36D4AFAC7D9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14AF8BD3-4CB0-4839-B30E-36D4AFAC7D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14AF8BD3-4CB0-4839-B30E-36D4AFAC7D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14AF8BD3-4CB0-4839-B30E-36D4AFAC7D9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61B39C56-9935-4743-B807-D17FB590756F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61B39C56-9935-4743-B807-D17FB590756F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61B39C56-9935-4743-B807-D17FB590756F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61B39C56-9935-4743-B807-D17FB590756F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

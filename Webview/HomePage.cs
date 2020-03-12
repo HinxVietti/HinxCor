@@ -18,6 +18,7 @@ namespace Webview
             InitializeComponent();
             this.web.DocumentCompleted += Web_DocumentCompleted;
             this.web.Navigate(url);
+            this.TopMost = true;
             //Message msg = new Message();
             //WndProc(ref msg);
         }
