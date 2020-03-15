@@ -38,15 +38,22 @@ namespace ConsoleApplication
         [STAThread]
         static void Main(string[] args)
         {
-            if (args != null)
-            {
-                foreach (var item in args)
-                {
-                    Console.WriteLine(item);
-                }
-                Console.WriteLine("--->  finished");
-                Console.WriteLine();
-            }
+         var p =   Process.Start("to1080p","-v");
+            Console.ReadKey();
+            return;
+
+            //  args = Registry.CurrentUser.GetSubKeyNames();
+            //if (args != null && args.Length > 0)
+            //{
+            //    foreach (var item in args)
+            //    {
+            //        Console.WriteLine(item);
+            //    }
+            //    Console.WriteLine("--->  finished");
+            //    Console.WriteLine();
+            //    Console.ReadKey();
+            //    //  return;
+            //}
 
             //string FileName = "txt";
             //string txt = File.ReadAllText(FileName);
@@ -63,14 +70,14 @@ namespace ConsoleApplication
             //}
             //File.WriteAllLines(FileName + "_clear", words_clear);
 
-            //RegisterRightClick(0);
-            UnRegisterRightClick();
+            RegisterRightClick(0);
+            //UnRegisterRightClick();
             Console.WriteLine("Finished.");
             Console.ReadKey();
         }
 
 
-        static string titleTxt = "右键测试<-";
+        static string titleTxt = "-->右键测试<-\\1080";
 
         private static void UnRegisterRightClick()
         {
@@ -92,18 +99,29 @@ namespace ConsoleApplication
             // 注册到文件
             if (/*this.ckRegToFile.Checked*/ true)
             {
-                RegistryKey shell = Registry.ClassesRoot.OpenSubKey("*.pdb", true).OpenSubKey("shell", true);
-                if (shell == null) shell = Registry.ClassesRoot.OpenSubKey("*.pdb", true).CreateSubKey("shell");
-                RegistryKey custome = shell.CreateSubKey(titleTxt);
+                string destiType = "*";
+                //var ns = new List<string>(Registry.ClassesRoot.GetSubKeyNames());
+                RegistryKey pdbKey = Registry.ClassesRoot.OpenSubKey(destiType, true);
+                //if (ns.Contains(destiType) == false)
+                if (pdbKey == null)
+                    pdbKey = Registry.ClassesRoot.CreateSubKey(destiType);
+                pdbKey.SetValue("Icon", GetIconPath(), RegistryValueKind.ExpandString);
+
+                RegistryKey shell = pdbKey.OpenSubKey("shell", true);
+                if (shell == null) shell = pdbKey.CreateSubKey("shell");
+
+                RegistryKey custome = shell.CreateSubKey("转换为1080P");
                 RegistryKey cmd = custome.CreateSubKey("command");
-                cmd.SetValue("", Application.ExecutablePath + " %1");
+                cmd.SetValue("", "to1080p" + " %1");
+                Console.WriteLine(string.Format("Key:{0}", Application.ExecutablePath));
                 cmd.Close();
                 custome.Close();
                 shell.Close();
+                pdbKey.Close();
             }
 
             // 注册到文件夹
-            if (/*this.ckRegToDir.Checked*/ true)
+            if (/*this.ckRegToDir.Checked*/ false)
             {
                 RegistryKey shell = Registry.ClassesRoot.OpenSubKey("directory", true).OpenSubKey("shell", true);
                 if (shell == null) shell = Registry.ClassesRoot.OpenSubKey("directory", true).CreateSubKey("shell");
@@ -114,8 +132,16 @@ namespace ConsoleApplication
                 custome.Close();
                 shell.Close();
             }
+            Console.WriteLine("Reg key Finished.");
         }
 
+        private static object GetIconPath()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "ico file|*.ico";
+            while (dlg.ShowDialog() != System.Windows.Forms.DialogResult.OK) ;
+            return dlg.FileName;
+        }
 
         private class foregroundWindow : IWin32Window
         {
