@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29905.134
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HinxCor.Drawing", "HinxCor.Drawing\HinxCor.Drawing.csproj", "{8633C550-7DB0-4DCC-A92B-547B5D2B765F}"
 EndProject
@@ -128,6 +128,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video.ConvertT", "Video.ConvertT\Video.ConvertT.csproj", "{F225E929-A90C-483F-A251-BC5C2218A783}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUploadAssistant", "_demo_AddIconAndRegRightClickItems\FileUploadAssistant.csproj", "{EFF8402F-E599-44EE-8677-0C83DAEB1DA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetWorkProxySetting", "NetWorkProxySetting\NetWorkProxySetting.csproj", "{CD942EB1-8ED6-4B4D-897D-1BC78F1D2B93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMoveFileApp", "AutoMoveFileApp\AutoMoveFileApp.csproj", "{EBD137AB-3931-481A-AD7E-2907A1B5D1D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dot_eot2ttf", "dot_eot2ttf\dot_eot2ttf.csproj", "{67332A51-4005-4130-A47A-0343CE505928}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HinxCor.Serialization", "HinxCor.Serialization\HinxCor.Serialization.csproj", "{65ADEF7A-5220-4002-ACD6-C9383A8E9EFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -387,6 +395,22 @@ Global
 		{EFF8402F-E599-44EE-8677-0C83DAEB1DA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFF8402F-E599-44EE-8677-0C83DAEB1DA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFF8402F-E599-44EE-8677-0C83DAEB1DA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD942EB1-8ED6-4B4D-897D-1BC78F1D2B93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD942EB1-8ED6-4B4D-897D-1BC78F1D2B93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD942EB1-8ED6-4B4D-897D-1BC78F1D2B93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD942EB1-8ED6-4B4D-897D-1BC78F1D2B93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBD137AB-3931-481A-AD7E-2907A1B5D1D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBD137AB-3931-481A-AD7E-2907A1B5D1D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBD137AB-3931-481A-AD7E-2907A1B5D1D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBD137AB-3931-481A-AD7E-2907A1B5D1D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67332A51-4005-4130-A47A-0343CE505928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67332A51-4005-4130-A47A-0343CE505928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67332A51-4005-4130-A47A-0343CE505928}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67332A51-4005-4130-A47A-0343CE505928}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65ADEF7A-5220-4002-ACD6-C9383A8E9EFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65ADEF7A-5220-4002-ACD6-C9383A8E9EFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65ADEF7A-5220-4002-ACD6-C9383A8E9EFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65ADEF7A-5220-4002-ACD6-C9383A8E9EFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

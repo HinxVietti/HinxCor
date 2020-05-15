@@ -18,10 +18,36 @@ namespace Webview
             InitializeComponent();
             this.web.DocumentCompleted += Web_DocumentCompleted;
             this.web.Navigate(url);
-            this.TopMost = true;
+            this.TextChanged += HomePage_TextChanged;
+            //this.TopMost = true;
             //Message msg = new Message();
             //WndProc(ref msg);
         }
+
+        private void HomePage_TextChanged(object sender, EventArgs e)
+        {
+            this.TitleLabel.Text = this.Text;
+        }
+
+
+        private void MoveWindow(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        #region  win32 method
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
 
 
         [DllImport("User32.dll", CharSet = CharSet.Auto)]
@@ -47,10 +73,16 @@ namespace Webview
             }
         }
 
+        #endregion
 
         private void Web_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             this.Text = web.DocumentTitle;
+        }
+        
+        private void closepic_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

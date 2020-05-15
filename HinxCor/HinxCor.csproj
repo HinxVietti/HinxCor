@@ -50,6 +50,8 @@
     <Compile Include="Collections\ArrayHelper.cs" />
     <Compile Include="Convert.cs" />
     <Compile Include="EnvironmentTools.cs" />
+    <Compile Include="FileAssociation\Core\AutoRegistryKey.cs" />
+    <Compile Include="FileAssociation\Core\RegistryUtil.cs" />
     <Compile Include="History.cs" />
     <Compile Include="IO\BitConvertable.cs" />
     <Compile Include="IO\FileBundle\Base\DoubleEntry.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="SystemInfo.cs" />
     <Compile Include="UidGenerator.cs" />
     <Compile Include="Win32\Core\Kernel.cs" />
+    <Compile Include="Win32\FileAccess\FileAssociation.cs" />
     <Compile Include="Win32\MessageBox.cs" />
     <Compile Include="Win32\Core\Shell.cs" />
     <Compile Include="Win32\Core\Struct.cs" />

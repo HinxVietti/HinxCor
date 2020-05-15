@@ -71,6 +71,9 @@
     <Reference Include="NetMQ, Version=4.0.0.207, Culture=neutral, PublicKeyToken=a6decef4ddc58b3a, processorArchitecture=MSIL">
       <HintPath>..\packages\NetMQ.4.0.0.207\lib\net40\NetMQ.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
@@ -82,6 +85,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="TestGetString">
+      <HintPath>..\TestGetString\bin\Debug\netstandard1.4\TestGetString.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -89,7 +95,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="app.manifest" />
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +109,14 @@
       <Project>{88EA3892-4A76-4E38-8F2E-340C9F052315}</Project>
       <Name>HinxCor.Network</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HinxCor.Serialization\HinxCor.Serialization.csproj">
+      <Project>{65ADEF7A-5220-4002-ACD6-C9383A8E9EFD}</Project>
+      <Name>HinxCor.Serialization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HinxCor.SVG\HinxCor.SVG.csproj">
+      <Project>{4b4bf921-40ca-4ddc-9715-b9a96a920768}</Project>
+      <Name>HinxCor.SVG</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HinxCor.udpunicast\HinxCor.udpunicast.csproj">
       <Project>{c687ba04-f277-45b9-a3eb-cfb4dbb27c3f}</Project>
       <Name>HinxCor.udpunicast</Name>
@@ -110,5 +126,6 @@
       <Name>HinxCor</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -82,7 +82,7 @@ public sealed class UidGenerator
         }
         var r = rom.Next(0xFFFFF);
         var rrx = System.Convert.ToString(r, 16);
-        return string.Format("{0}-{1}-{2}", guid.Remove(5), System.Convert.ToString(t, 16).Insert(10, "-").Insert(5, "-"), rrx);
+        return string.Format("{0}-{1}-{2}", guid.Length > 5 ? guid.Remove(5) : guid, System.Convert.ToString(t, 16).Insert(10, "-").Insert(5, "-"), rrx);
     }
 
     /// <summary>
@@ -119,6 +119,7 @@ public sealed class UidGenerator
     public static string GetShortId(string guid, int subL)
     {
         if (string.IsNullOrEmpty(guid)) guid = "0000000000000000000000000000000000";
+        if (guid.Length <= 5) guid += "0000000000000000000000000000000000";
         subL += 3;
         return guid.Remove(5) + "-" + GetId().Substring(subL);
     }

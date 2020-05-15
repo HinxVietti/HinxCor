@@ -20,9 +20,37 @@ using IronPython.Hosting;
 using NetMQ.Sockets;
 using NetMQ;
 using Microsoft.Win32;
+using System.Security.Cryptography;
+using System.Collections;
+using HinxCor.Serialization;
+
+class ssr
+{
+    public string name = "RRE";
+}
 
 namespace ConsoleApplication
 {
+    class girl
+    {
+        public class man
+        {
+            public string name = "lili";
+            [ARWIgnore]
+            public int age = 23;
+            public int sex = 26;
+            public bool ddd { get; } = false;
+
+            public string location { get; set; } = "127.0.0.1";
+
+            public man(string name)
+            {
+                this.name = name;
+            }
+        }
+
+    }
+
     class Program
     {
         static string source = "Assets/city-prefabs/23-12-1125-19 \u690D\u88AB \u704C\u6728.prefab";
@@ -35,57 +63,441 @@ namespace ConsoleApplication
 
         public static string passwd = "cVYAzGYSkmfK4M6UK1CoebMsEPB0KAkD";
 
+
         [STAThread]
         static void Main(string[] args)
         {
-         var p =   Process.Start("to1080p","-v");
+            var lst = new List<int>(new[] { 1 });
+
+            lst.Insert(2, 3);
+
+
+            Console.WriteLine(lst);
+            //a a = new a();
+            //string json = JsonMapper.ToJson(a);
+            //var b = JsonMapper.ToObject<b>(json);
+            Console.WriteLine("end");
             Console.ReadKey();
-            return;
 
-            //  args = Registry.CurrentUser.GetSubKeyNames();
-            //if (args != null && args.Length > 0)
-            //{
-            //    foreach (var item in args)
-            //    {
-            //        Console.WriteLine(item);
-            //    }
-            //    Console.WriteLine("--->  finished");
-            //    Console.WriteLine();
-            //    Console.ReadKey();
-            //    //  return;
-            //}
-
-            //string FileName = "txt";
-            //string txt = File.ReadAllText(FileName);
-            //txt = Regex.Replace(txt, "[《》{}（）() ]", string.Empty);
-            //txt = Regex.Replace(txt, "\n\n", "\n");
-            //File.WriteAllText(FileName, txt);
-            ////HinxCor.Windows.OpenInExplorer
-            //var words = Regex.Split(txt, System.Environment.NewLine);
-            //var words_clear = new List<string>();
-            //for (int i = 0; i < words.Length; i++)
-            //{
-            //    if (!words_clear.Contains(words[i]))
-            //        words_clear.Add(words[i]);
-            //}
-            //File.WriteAllLines(FileName + "_clear", words_clear);
-
-            RegisterRightClick(0);
-            //UnRegisterRightClick();
-            Console.WriteLine("Finished.");
-            Console.ReadKey();
         }
 
+
+        private class a
+        {
+
+            public string sa;
+            public string sb;
+            public bool C { get; } = true;
+        }
+
+        private class b
+        {
+
+            public string sa;
+            public string sb;
+            public bool C
+            {
+                set
+                {
+                    Console.WriteLine(value);
+                }
+            }
+
+        }
+
+
+
+
+        // Simple business object.
+        public class Person
+        {
+            public Person(string fName, string lName)
+            {
+                this.firstName = fName;
+                this.lastName = lName;
+            }
+
+            public string firstName;
+            public string lastName;
+        }
+
+        // Collection of Person objects. This class
+        // implements IEnumerable so that it can be used
+        // with ForEach syntax.
+        public class People : IEnumerable
+        {
+            private Person[] _people;
+            public People(Person[] pArray)
+            {
+                _people = new Person[pArray.Length];
+
+                for (int i = 0; i < pArray.Length; i++)
+                {
+                    _people[i] = pArray[i];
+                }
+            }
+
+            // Implementation for the GetEnumerator method.
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return (IEnumerator)GetEnumerator();
+            }
+
+            public PeopleEnum GetEnumerator()
+            {
+                return new PeopleEnum(_people);
+            }
+        }
+
+        // When you implement IEnumerable, you must also implement IEnumerator.
+        public class PeopleEnum : IEnumerator
+        {
+            public Person[] _people;
+
+            // Enumerators are positioned before the first element
+            // until the first MoveNext() call.
+            int position = -1;
+
+            public PeopleEnum(Person[] list)
+            {
+                _people = list;
+            }
+
+            public bool MoveNext()
+            {
+                position++;
+                return (position < _people.Length);
+            }
+
+            public void Reset()
+            {
+                position = -1;
+            }
+
+            object IEnumerator.Current
+            {
+                get
+                {
+                    return Current;
+                }
+            }
+
+            public Person Current
+            {
+                get
+                {
+                    try
+                    {
+                        return _people[position];
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        throw new InvalidOperationException();
+                    }
+                }
+            }
+        }
+
+
+        private class testEnumerator : ICollection<string>, IEnumerator
+        {
+            private List<string> source;
+
+            public testEnumerator(params string[] args)
+            {
+                this.source = new List<string>();
+                source.AddRange(args);
+            }
+
+            public int Count => source.Count;
+
+            public bool IsReadOnly => false;
+
+            public object Current => source[index];
+
+            private int index = 0;
+
+            public void Add(string item) => source.Add(item);
+
+            public void Clear() => source.Clear();
+
+            public bool Contains(string item) => source.Contains(item);
+
+            public void CopyTo(string[] array, int arrayIndex) => source.CopyTo(array, arrayIndex);
+
+            public IEnumerator<string> GetEnumerator() => source.GetEnumerator();
+
+            public bool MoveNext()
+            {
+                index++;
+                return index < source.Count;
+            }
+
+            public bool Remove(string item) => source.Remove(item);
+
+            public void Reset()
+            {
+                index = 0;
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return this;
+            }
+        }
+
+
+        static string CalculateMD5(string filename)
+        {
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(filename))
+                {
+                    var hash = md5.ComputeHash(stream);
+                    return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+                }
+            }
+        }
+
+        private static void GenerateBigFile()
+        {
+            FileStream fs = new FileStream("438.kk", FileMode.CreateNew);
+
+            var array = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+
+            //Console.WriteLine('_' + i);
+            int gig = 1;
+
+            for (int i = 0; i < 1024 * gig / 8; i++)//8G
+            {
+                for (int j = 0; j < 1024; j++)//8m
+                {
+                    for (int k = 0; k < 1024; k++)//8k
+                    {
+                        fs.Write(array, 0, 8);//8b
+                    }
+                }
+                Console.SetCursorPosition(0, 0);
+                Console.Write(string.Format("{0} MBytes", i * 8));
+            }
+            Console.WriteLine();
+            Console.WriteLine("done, flush wait.");
+            fs.FlushAsync().Wait();
+            Console.WriteLine("Finished");
+        }
+
+        private static void startp1()
+        {
+            string exeName = "MixingAudio.exe";
+            Console.WriteLine("开始添加音频 ESC:开始合成）");
+            var clips = new List<_M_AudioClip>();
+            OpenFileDialog mp3dlg = new OpenFileDialog();
+            mp3dlg.Filter = "|*.mp3";
+            while (Console.ReadKey().Key != ConsoleKey.Escape)
+            {
+                if (mp3dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    var audioClip = new _M_AudioClip();
+                    audioClip.url = mp3dlg.FileName;
+                    Console.WriteLine("请输入时间");
+                    while (!float.TryParse(Console.ReadLine(), out audioClip.start_time))
+                        Console.WriteLine("无法获取到输入的时间，请重试");
+                    clips.Add(audioClip);
+                    Console.WriteLine("Add:" + audioClip.url);
+                }
+                else
+                    Console.WriteLine("Cancel openfile , esc end add audio file");
+            }
+            Console.WriteLine("开始合成");
+
+            string cfgFile = "audiocfg";
+            StringBuilder sb = new StringBuilder();
+            foreach (var audioClip in clips)
+                sb.Append(audioClip.ToString());
+            File.WriteAllText(cfgFile, sb.ToString());
+
+            string saveFile = "mixMp3.mp3";
+
+            //string cmd = " --ws=\"%cd%\audio\" --txt=\"%cd%\\audio\\config.txt\" --fwid=\"fw-123456789-1\" --af=\"%cd%\test-1.mp3\"";
+            string cmd = " --ws=\"%cd%\audio\" --txt=\"{0}\" --fwid=\"fw-123456789-1\" --af=\"{1}\"";
+            cmd = string.Format(cmd, cfgFile, saveFile);
+
+            ProcessStartInfo startp = new ProcessStartInfo();
+            startp.UseShellExecute = false;
+            startp.RedirectStandardOutput = true;
+            startp.RedirectStandardError = true;
+            startp.FileName = exeName;
+            startp.Arguments = cmd;
+            //var p = new Process();
+            //p.StartInfo = startp;
+            //p.output
+            var p = Process.Start(startp);
+            Task.Run(() =>
+            {
+                while (p.HasExited == false)
+                    Console.WriteLine(p.StandardOutput.ReadLine());
+            });
+
+            Task.Run(() =>
+            {
+                while (p.HasExited == false)
+                    Console.WriteLine(p.StandardError.ReadLine());
+            });
+
+
+            Console.WriteLine("Prepared.");
+            Console.WriteLine();
+
+            while (p.HasExited == false)
+                Thread.Sleep(10);
+            Console.WriteLine("Finished");
+
+            var openf = new FileInfo(saveFile);
+            HinxCor.Windows.OpenInExplorer(openf.FullName);
+        }
+
+        private class mAudio
+        {
+            public string fileName;
+
+            public override string ToString()
+            {
+                //return "url=app-storage:/475EDFFA11EEC94156351E17F7EDA27E.mp3|start_time=0.0000|end_time=4.9680|offset=0.0000|duration=4.9680|volume=1|speed=1;";
+                return string.Format("url={0}|start_time=0.0000|end_time=-1|offset=0.0000|duration=-1|volume=1|speed=1;");
+            }
+        }
+
+        private class _M_AudioClip
+        {
+            public string url;      // 路径
+            public float start_time = 0;// 秒
+            public float end_time = -1;  // 秒
+            public float offset = 0;    // 秒
+            public float duration = 30;  // 秒
+            public float fade_in = -1;   // 秒
+            public float fade_out = -1;  // 秒
+            public float volume = 1;    // 0~1 
+            public float speed = 1;     // 1
+            public int loop = -1;        // -1 或者 0 
+
+            public override string ToString()
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(string.Format("{0}=\"{1}\"|", nameof(url), url));
+                sb.Append(string.Format("{0}={1}|", nameof(start_time), start_time));
+                sb.Append(string.Format("{0}={1}|", nameof(end_time), end_time));
+                sb.Append(string.Format("{0}={1}|", nameof(offset), offset));
+                sb.Append(string.Format("{0}={1}|", nameof(duration), duration));
+                //sb.Append(string.Format("{0}={1}|", nameof(fade_in), fade_in));
+                //sb.Append(string.Format("{0}={1}|", nameof(fade_out), fade_out));
+                sb.Append(string.Format("{0}={1}|", nameof(volume), volume));
+                sb.Append(string.Format("{0}={1}|", nameof(speed), speed));
+                sb.Append(string.Format("{0}={1};", nameof(loop), loop));
+
+                //sb.Append(nameof(start_time) + "=" + start_time);
+                //sb.Append('|');
+                //sb.Append(nameof(end_time) + "=" + end_time);
+                //sb.Append('|');
+                //sb.Append(nameof(offset) + "=" + offset);
+                //sb.Append('|');
+                //sb.Append(nameof(duration) + "=" + duration);
+                //sb.Append('|');
+                //sb.Append(nameof(fade_in) + "=" + fade_in);
+                //sb.Append('|');
+                //sb.Append(nameof(fade_out) + "=" + fade_out);
+                //sb.Append('|');
+                //sb.Append(nameof(volume) + "=" + volume);
+                //sb.Append('|');
+                //sb.Append(nameof(speed) + "=" + speed);
+                //sb.Append('|');
+                //sb.Append(nameof(loop) + "=" + loop);
+                //sb.Append(';');
+                return sb.ToString();
+
+                //return string.Format("{0}=");
+            }
+        }
+
+        private static void AudioMixingCustom()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "|*.mp4";
+            dlg.ShowDialog();
+            string videoFile = dlg.FileName;
+            dlg.Filter = "|*.mp3";
+            dlg.ShowDialog();
+            string audioFile = dlg.FileName;
+
+            SaveFileDialog sdlg = new SaveFileDialog();
+            //            sdlg.Filter 
+            sdlg.ShowDialog();
+            string saveFile = sdlg.FileName;
+
+
+            string cmd = "ffmpeg -i \"{0}\" -i \"{1}\" -c:v copy -filter_complex \"[0:a]aformat = fltp:44100:stereo,apad[0a];[1] aformat=fltp:44100:stereo,volume=1.5[1a];[0a] [1a] amerge[a]\" -map 0:v -map \"[a]\" -ac 2 \"{2}\"";
+            cmd = "ffmpeg.exe -i {0} -i {1} -filter_complex \"[1:0]volume = 0.5[a1];[0:a] [a1] amix=inputs=2:duration=first\" -map 0:v:0 {2}";
+            cmd = string.Format(cmd, videoFile, audioFile, saveFile);
+            Console.WriteLine(cmd);
+            HinxCor.Windows.ExecuteCommand(cmd);
+        }
+
+        // Return True if the internet settings has ProxyEnable = true.
+        private static bool IsInternetProxyEnabled()
+        {
+            //Registry.CurrentUser.OpenSubKey
+            RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings");
+            string[] keys = key.GetValueNames();
+            bool result = (int)key.GetValue("ProxyEnable", 0) != 0;
+            key.Close();
+
+            return result;
+        }
+
+
+        private static void SetInternetProxyEnabled(bool value)
+        {
+            RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", true);
+            string[] keys = key.GetValueNames();
+            key.SetValue("ProxyEnable", value ? 1 : 0);
+            key.Close();
+        }
+
+
+        private static void OpenSvgAndSaveToPng()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "svg file|*.svg";
+            dlg.ShowDialog();
+            string xml = File.ReadAllText(dlg.FileName);
+            var pngData = HinxCor.SVG.SVGUtil.SVG2Png(xml);
+
+            SaveFileDialog sdlg = new SaveFileDialog();
+            sdlg.Filter = "png图像|*.png";
+            sdlg.ShowDialog();
+            File.WriteAllBytes(sdlg.FileName, pngData);
+            HinxCor.Windows.OpenInExplorer(sdlg.FileName);
+        }
+
+        static int[] grans = new[] { 1, 2, 3, 4, 3, 2, 1, 4, 3, 13, 13, 13, 13, 23 };
+        static int gran = 0;
+
+        private static void HandleRef(ref int i)
+        {
+            gran++;
+            i = grans[gran];
+        }
 
         static string titleTxt = "-->右键测试<-\\1080";
 
         private static void UnRegisterRightClick()
         {
             RegistryKey shell = Registry.ClassesRoot.OpenSubKey("*", true).OpenSubKey("shell", true);
-            if (shell != null) shell.DeleteSubKeyTree(titleTxt);
+            if (shell != null)
+                shell.DeleteSubKeyTree(titleTxt);
 
             shell = Registry.ClassesRoot.OpenSubKey("directory", true).OpenSubKey("shell", true);
-            if (shell != null) shell.DeleteSubKeyTree(titleTxt);
+            if (shell != null)
+                shell.DeleteSubKeyTree(titleTxt);
 
             shell.Close();
 
@@ -94,7 +506,8 @@ namespace ConsoleApplication
 
         private static void RegisterRightClick(int index)
         {
-            if (titleTxt.Length == 0) return;
+            if (titleTxt.Length == 0)
+                return;
 
             // 注册到文件
             if (/*this.ckRegToFile.Checked*/ true)
@@ -108,7 +521,8 @@ namespace ConsoleApplication
                 pdbKey.SetValue("Icon", GetIconPath(), RegistryValueKind.ExpandString);
 
                 RegistryKey shell = pdbKey.OpenSubKey("shell", true);
-                if (shell == null) shell = pdbKey.CreateSubKey("shell");
+                if (shell == null)
+                    shell = pdbKey.CreateSubKey("shell");
 
                 RegistryKey custome = shell.CreateSubKey("转换为1080P");
                 RegistryKey cmd = custome.CreateSubKey("command");
@@ -124,7 +538,8 @@ namespace ConsoleApplication
             if (/*this.ckRegToDir.Checked*/ false)
             {
                 RegistryKey shell = Registry.ClassesRoot.OpenSubKey("directory", true).OpenSubKey("shell", true);
-                if (shell == null) shell = Registry.ClassesRoot.OpenSubKey("directory", true).CreateSubKey("shell");
+                if (shell == null)
+                    shell = Registry.ClassesRoot.OpenSubKey("directory", true).CreateSubKey("shell");
                 RegistryKey custome = shell.CreateSubKey(titleTxt);
                 RegistryKey cmd = custome.CreateSubKey("command");
                 cmd.SetValue("", Application.ExecutablePath + " %1");
@@ -139,7 +554,8 @@ namespace ConsoleApplication
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Filter = "ico file|*.ico";
-            while (dlg.ShowDialog() != System.Windows.Forms.DialogResult.OK) ;
+            while (dlg.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                ;
             return dlg.FileName;
         }
 
@@ -201,7 +617,8 @@ namespace ConsoleApplication
             string zipName = "save.zip";
             ZipFile zips = new ZipFile(zipName);
 
-        CMD: Console.WriteLine("1=add file, 2=displayNames; 3=clear names");
+        CMD:
+            Console.WriteLine("1=add file, 2=displayNames; 3=clear names");
             Console.Write("请输入：");
             string cmd = Console.ReadLine();
             switch (cmd)

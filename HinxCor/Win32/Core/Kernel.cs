@@ -58,6 +58,7 @@ namespace HinxCor.Win32
         public int cbInQue;
         public int cbOutQue;
     }
+
     public struct DCB
     {
         public int DCBlength;
